@@ -7,9 +7,14 @@ import Footer from '@/components/layout/Footer'
 import SectionTitle from '@/components/ui/SectionTitle'
 import { Mail, Phone, MapPin } from 'lucide-react'
 
+// --- 加入這行修復快取問題 ---
+export const dynamic = 'force-dynamic' 
+// -----------------------
+
 export default async function ContactPage() {
-  // 從 Payload 抓取後台填寫的資料
   const payload = await getPayload({ config: configPromise })
+  
+  // 建議加上 draft: false 確保只抓取已發布的內容
   const contactData = await payload.findGlobal({
     slug: 'contact',
   })
