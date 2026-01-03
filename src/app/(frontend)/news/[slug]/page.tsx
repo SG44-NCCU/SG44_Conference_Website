@@ -1,3 +1,6 @@
+export const revalidate = 60 // 每 60 秒更新內容 (例如改錯字後，1分鐘後前台會變)
+export const dynamicParams = true // 允許訪問部署時還不存在的新文章
+
 import { getPayload } from 'payload'
 import configPromise from '@payload-config'
 import { notFound } from 'next/navigation'
