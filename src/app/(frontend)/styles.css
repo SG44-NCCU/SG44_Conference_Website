@@ -1,33 +1,33 @@
 @import "tailwindcss";
 
-/* 1. 設定 Tailwind v4 的掃描路徑與變數 */
+/* 1. 設定 Tailwind v4 的變數 */
 @theme {
   --color-sg-green: #5F7161;
   --color-sg-light: #869D85;
+
+  /* 👇 關鍵修改：重新定義 font-sans */
+  /* 意思：優先使用 --font-noto，如果沒有才用系統字體 */
+  --font-sans: var(--font-noto), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
-/* 2. 重置基礎樣式，確保背景是白的，文字是深色的 */
+/* 2. 重置基礎樣式 */
 @layer base {
   html {
-    /* 移除原本的黑底，改為白底 */
     background-color: white;
-    color: #1c1917; /* stone-900 */
+    color: #1c1917;
     scroll-behavior: smooth;
+    /* 👇 強制全站預設使用這個字體 */
+    font-family: var(--font-sans);
   }
 
   body {
-    /* 移除 Payload 預設的 height: 100% 限制，避免捲軸消失 */
     height: auto;
     min-height: 100vh;
     margin: 0;
-    font-family: system-ui, -apple-system, sans-serif;
+    /* 這裡原本的 font-family 刪掉，讓它繼承 html 的設定即可 */
   }
 
-  /* 移除 Payload 對 h1, p 的強制樣式，讓 Tailwind 控制 */
   h1, h2, h3, h4, h5, h6, p {
     margin: 0;
   }
 }
-
-/* 3. 如果你之後還需要原本 Payload 那個特殊的 .home 樣式，
-   可以保留在下面，但通常在 Next.js 首頁裡我們用 Tailwind 寫就好 */
