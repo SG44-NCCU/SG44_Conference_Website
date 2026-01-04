@@ -16,7 +16,6 @@ import { Registrations } from './collections/Registrations' // ✨ 新增：報�
 // 2. 引入 Globals (全域設定)
 import { Contact } from './globals/Contact'
 import { Transport } from './globals/Transport' // ✨ 新增：交通
-import { Transport } from './globals/會場' // ✨ 新增：交通
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -41,8 +40,7 @@ export default buildConfig({
   // 4. 註冊所有的 Globals
   globals: [
     Contact,
-    Transport,
-    會場, // 交通資訊放這裡
+    Transport, // 交通資訊放這裡
   ],
 
   editor: lexicalEditor(),
