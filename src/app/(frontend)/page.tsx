@@ -4,6 +4,7 @@ import Navbar from '@/components/layout/Navbar'
 import Hero from '@/components/sections/home/Hero'
 import NewsSection from '@/components/sections/home/NewsSection'
 import TimelineSection from '@/components/sections/home/TimelineSection'
+import TopicGrid from '@/components/sections/home/TopicGrid'
 
 export default function PublicPage() {
   return (
@@ -13,7 +14,7 @@ export default function PublicPage() {
         <Hero />
         <TimelineSection />
         <NewsSection />
-        {/* <TopicGrid /> */}
+        <TopicGrid />
       </main>
       {/* <Footer /> */}
     </div>

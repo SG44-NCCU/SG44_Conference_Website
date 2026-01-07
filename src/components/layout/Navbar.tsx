@@ -51,15 +51,15 @@ const NAV_ITEMS: NavItem[] = [
   //     { name: '報名須知', href: '/registration#notice' },
   //   ],
   // },
-  // {
-  //   name: '論文發表',
-  //   href: '/submission',
-  //   items: [
-  //     { name: '會議論文集', href: '/proceedings' },
-  //     { name: '投稿說明', href: '/submission' },
-  //     { name: '發表注意事項', href: '/guidelines' },
-  //   ],
-  // },
+  {
+    name: '論文發表',
+    href: '/submission',
+    items: [
+      { name: '會議論文集', href: '/proceedings' },
+      { name: '投稿說明', href: '/submission' },
+      { name: '發表注意事項', href: '/guidelines' },
+    ],
+  },
   // {
   //   name: '大專生競賽',
   //   href: '/competition-rules',
