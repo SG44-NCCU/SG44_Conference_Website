@@ -1,6 +1,7 @@
 'use client'
 
-import { ChevronDown, Menu, UserCircle, X } from 'lucide-react'
+// import { ChevronDown, Menu, UserCircle, X } from 'lucide-react'
+import { ChevronDown, Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
@@ -182,9 +183,9 @@ const Navbar: React.FC = () => {
 
           {/* Mobile Menu Button */}
           <div className="lg:hidden flex items-center gap-4">
-            <Link href="/auth" className="text-stone-600 hover:text-[#5F7161]">
+            {/* <Link href="/auth" className="text-stone-600 hover:text-[#5F7161]">
               <UserCircle size={24} />
-            </Link>
+            </Link> */}
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-stone-600 hover:text-stone-900 focus:outline-none"
@@ -242,7 +243,7 @@ const Navbar: React.FC = () => {
               </div>
             ))}
 
-            <div className="pt-4">
+            {/* <div className="pt-4">
               <Link
                 href="/auth"
                 className="block w-full text-center py-3 bg-[#5F7161] text-white rounded-md font-bold"
@@ -250,7 +251,7 @@ const Navbar: React.FC = () => {
               >
                 會員登入 / 註冊
               </Link>
-            </div>
+            </div> */}
           </div>
         </div>
       )}

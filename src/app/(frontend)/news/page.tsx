@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { getPayload } from 'payload'
 
 export const dynamic = 'force-dynamic'
-export const revalidate = 600
+export const revalidate = 10
 
 export default async function NewsPage() {
   const payload = await getPayload({ config: configPromise })

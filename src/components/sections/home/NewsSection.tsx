@@ -4,6 +4,9 @@ import { ArrowRight, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 import { getPayload } from 'payload'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 20 // 20秒重新驗證一次
+
 export default async function NewsSection() {
   const payload = await getPayload({ config: configPromise })
 

@@ -7,6 +7,9 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getPayload } from 'payload'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 10
+
 // 預先生成靜態路徑 (Optional, 適合 SSG)
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
