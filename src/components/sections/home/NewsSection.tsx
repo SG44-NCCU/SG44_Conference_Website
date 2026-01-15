@@ -65,8 +65,6 @@ export default async function NewsSection() {
                   <span className="text-xs text-stone-400 font-mono tracking-tighter">
                     {new Date(news.publishedDate).toLocaleDateString('zh-TW')}
                   </span>
-                  {/* 顯示是否為精選 */}
-                  {news.showOnHomepage}
                 </div>
                 <h3 className="text-lg font-bold text-stone-800 group-hover:text-[#5F7161] transition-colors">
                   {news.title}
