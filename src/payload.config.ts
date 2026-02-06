@@ -10,12 +10,12 @@ import sharp from 'sharp'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { News } from './collections/News'
-import { Submissions } from './collections/Submissions' // ✨ 新增：投稿
-import { Registrations } from './collections/Registrations' // ✨ 新增：報名
+// ❌ 已刪除 Submissions 引入
+// ❌ 已刪除 Registrations 引入
 
 // 2. 引入 Globals (全域設定)
 import { Contact } from './globals/Contact'
-import { Transport } from './globals/Transport' // ✨ 新增：交通
+import { Transport } from './globals/Transport'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -33,15 +33,12 @@ export default buildConfig({
     Users,
     Media,
     News,
-    Submissions, // 記得加這個
-    Registrations, // 還有這個
+    // ❌ 已刪除 Submissions 註冊
+    // ❌ 已刪除 Registrations 註冊
   ],
 
   // 4. 註冊所有的 Globals
-  globals: [
-    Contact,
-    Transport, // 交通資訊放這裡
-  ],
+  globals: [Contact, Transport],
 
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

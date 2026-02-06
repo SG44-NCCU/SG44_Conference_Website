@@ -70,8 +70,6 @@ export interface Config {
     users: User;
     media: Media;
     news: News;
-    submissions: Submission;
-    registrations: Registration;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -82,8 +80,6 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     news: NewsSelect<false> | NewsSelect<true>;
-    submissions: SubmissionsSelect<false> | SubmissionsSelect<true>;
-    registrations: RegistrationsSelect<false> | RegistrationsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -228,38 +224,6 @@ export interface News {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "submissions".
- */
-export interface Submission {
-  id: number;
-  title: string;
-  file: number | Media;
-  owner: number | User;
-  status?: ('processing' | 'reviewing' | 'accepted' | 'rejected') | null;
-  assignedReviewer?: (number | null) | User;
-  reviewComments?: string | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "registrations".
- */
-export interface Registration {
-  id: number;
-  user: number | User;
-  ticketType: 'early_student' | 'early_regular' | 'regular';
-  dietary: 'meat' | 'vegetarian';
-  /**
-   * 用戶匯款後回填
-   */
-  last5Digits?: string | null;
-  paymentStatus?: ('pending' | 'paid' | 'cancelled') | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -293,14 +257,6 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'news';
         value: number | News;
-      } | null)
-    | ({
-        relationTo: 'submissions';
-        value: number | Submission;
-      } | null)
-    | ({
-        relationTo: 'registrations';
-        value: number | Registration;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -411,33 +367,6 @@ export interface NewsSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "submissions_select".
- */
-export interface SubmissionsSelect<T extends boolean = true> {
-  title?: T;
-  file?: T;
-  owner?: T;
-  status?: T;
-  assignedReviewer?: T;
-  reviewComments?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "registrations_select".
- */
-export interface RegistrationsSelect<T extends boolean = true> {
-  user?: T;
-  ticketType?: T;
-  dietary?: T;
-  last5Digits?: T;
-  paymentStatus?: T;
-  updatedAt?: T;
-  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
