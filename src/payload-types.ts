@@ -130,7 +130,12 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: number;
-  name?: string | null;
+  name: string;
+  gender?: ('male' | 'female' | 'other') | null;
+  birthday: string;
+  phone: string;
+  organization: string;
+  jobTitle: string;
   role: 'admin' | 'user' | 'reviewer';
   updatedAt: string;
   createdAt: string;
@@ -306,6 +311,11 @@ export interface PayloadMigration {
  */
 export interface UsersSelect<T extends boolean = true> {
   name?: T;
+  gender?: T;
+  birthday?: T;
+  phone?: T;
+  organization?: T;
+  jobTitle?: T;
   role?: T;
   updatedAt?: T;
   createdAt?: T;
