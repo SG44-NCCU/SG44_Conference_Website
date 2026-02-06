@@ -111,7 +111,7 @@ export const TIMELINE_DATA: TimelineEvent[] = serverData?.timeline || [
   { date: '115/07/17', title: '文章全文投稿截止', isPast: false },
   { date: '115/07/24', title: '論文審查結果及議程安排公告', isPast: false },
   { date: '115/08/11', title: '線上報名截止', isPast: false },
-  { date: '115/08/20-21', title: 'SG44 研討會開幕', isPast: false },
+  { date: '115/08/20-21', title: 'SG44 研討會', isPast: false },
 ]
 
 // 4. 徵稿主題

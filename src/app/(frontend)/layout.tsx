@@ -2,7 +2,7 @@ import React from 'react'
 import './styles.css'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
-import { Noto_Sans_TC } from 'next/font/google'
+import { Noto_Sans_TC, Noto_Sans } from 'next/font/google'
 // 👇 1. 引入 Viewport 型別 (TypeScript 才需要，沒有也沒關係，但建議加)
 import type { Metadata, Viewport } from 'next'
 
@@ -12,6 +12,13 @@ const notoSansTC = Noto_Sans_TC({
   variable: '--font-noto',
   display: 'swap',
   preload: false,
+})
+
+const notoSans = Noto_Sans({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-noto-sans',
+  display: 'swap',
 })
 
 export const metadata: Metadata = {
@@ -34,8 +41,8 @@ export default function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props
 
   return (
-    <html lang="zh-TW">
-      <body className={`flex flex-col min-h-screen ${notoSansTC.variable} font-sans`}>
+    <html lang="zh-TW" className={`${notoSans.variable} ${notoSansTC.variable}`}>
+      <body className="flex flex-col min-h-screen font-sans">
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

@@ -162,7 +162,7 @@ const TimelineSection: React.FC = () => {
                           event.isPast ? 'opacity-40' : 'opacity-100'
                         }`}
                       >
-                        <span className="text-[10px] font-mono font-bold tracking-widest text-stone-400 bg-white px-2 uppercase whitespace-nowrap">
+                        <span className="text-sm font-mono font-bold tracking-widest text-stone-600 bg-white px-2 uppercase whitespace-nowrap">
                           {event.date}
                         </span>
                       </div>
@@ -256,8 +256,8 @@ const TimelineSection: React.FC = () => {
                   >
                     <div className="flex flex-col">
                       <span
-                        className={`text-[10px] font-mono font-bold tracking-[0.2em] mb-1 ${
-                          event.isPast ? 'text-stone-400' : 'text-[#869D85]'
+                        className={`text-sm font-mono tracking-[0.2em] mb-1 ${
+                          event.isPast ? 'text-stone-600' : 'text-[#5F7161]'
                         }`}
                       >
                         {event.date}

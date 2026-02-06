@@ -1,13 +1,15 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* 1. 設定 Tailwind v4 的變數 */
 @theme {
-  --color-sg-green: #5F7161;
-  --color-sg-light: #869D85;
+  --color-sg-green: #5f7161;
+  --color-sg-light: #869d85;
 
-  /* 👇 關鍵修改：重新定義 font-sans */
-  /* 意思：優先使用 --font-noto，如果沒有才用系統字體 */
-  --font-sans: var(--font-noto), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  /* 👇 關鍵修改：優先使用 Noto Sans (英文)，接著才是思源黑體 (中文) */
+  --font-sans:
+    var(--font-noto-sans), var(--font-noto), system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 /* 2. 重置基礎樣式 */
@@ -27,7 +29,13 @@
     /* 這裡原本的 font-family 刪掉，讓它繼承 html 的設定即可 */
   }
 
-  h1, h2, h3, h4, h5, h6, p {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
     margin: 0;
   }
 }
