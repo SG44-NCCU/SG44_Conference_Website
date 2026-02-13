@@ -22,10 +22,10 @@ function VerifyContent() {
 
       try {
         // 2. 呼叫 Payload 驗證 API
-        const res = await fetch('/api/users/verify', {
+        // Endpoint: POST /api/users/verify/{token}
+        const res = await fetch(`/api/users/verify/${token}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ token }),
         })
 
         if (!res.ok) throw new Error('驗證失敗或連結已過期')
@@ -50,15 +50,20 @@ function VerifyContent() {
   }
 
   if (status === 'success') {
+    // 驗證成功後自動導向登入頁
+    setTimeout(() => {
+      window.location.href = '/login'
+    }, 2000)
+
     return (
       <div className="text-center">
-        <h3 className="text-xl font-bold text-green-600">驗證成功！</h3>
-        <p className="mt-2 text-gray-600 mb-6">您的帳號已啟用，現在可以登入了。</p>
+        <h3 className="text-xl font-bold text-[#5F7161]">驗證成功！</h3>
+        <p className="mt-2 text-gray-600 mb-6">您的帳號已啟用，即將導向登入頁...</p>
         <Link
           href="/login"
           className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700"
         >
-          前往登入
+          立即前往登入
         </Link>
       </div>
     )
