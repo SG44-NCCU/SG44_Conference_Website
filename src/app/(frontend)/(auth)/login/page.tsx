@@ -30,7 +30,7 @@ export default function LoginPage() {
       }
 
       // 登入成功
-      alert(`歡迎回來，${json.user.name}`)
+      // alert(`歡迎回來，${json.user.name}`) // 移除 alert，改為直接跳轉
       router.push('/') // 跳轉回首頁
       router.refresh() // 刷新頁面狀態以更新 Navbar
     } catch (err: any) {
@@ -40,30 +40,32 @@ export default function LoginPage() {
 
   return (
     <div>
-      <h3 className="text-xl font-bold text-gray-900 mb-6 text-center">登入 SG44</h3>
+      <h3 className="text-2xl font-bold text-[#5F7161] mb-6 text-center tracking-tight">
+        登入 SG44
+      </h3>
 
       {error && (
-        <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-4 text-red-700 text-sm">
+        <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-6 text-red-700 text-sm rounded shadow-sm">
           {error}
         </div>
       )}
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div>
-          <label className="block text-sm font-medium text-gray-700">Email</label>
+          <label className="block text-sm font-medium text-stone-700 mb-1">Email</label>
           <input
             {...register('email', { required: true })}
             type="email"
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm border p-2"
+            className="appearance-none block w-full px-3 py-2 border border-stone-300 rounded-md shadow-sm placeholder-stone-400 focus:outline-none focus:ring-[#869D85] focus:border-[#869D85] sm:text-sm transition-colors"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700">密碼</label>
+          <label className="block text-sm font-medium text-stone-700 mb-1">密碼</label>
           <input
             {...register('password', { required: true })}
             type="password"
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm border p-2"
+            className="appearance-none block w-full px-3 py-2 border border-stone-300 rounded-md shadow-sm placeholder-stone-400 focus:outline-none focus:ring-[#869D85] focus:border-[#869D85] sm:text-sm transition-colors"
           />
         </div>
 
@@ -71,7 +73,7 @@ export default function LoginPage() {
           <div className="text-sm">
             <Link
               href="/recover-password"
-              className="font-medium text-blue-600 hover:text-blue-500"
+              className="font-medium text-[#5F7161] hover:text-[#869D85] transition-colors"
             >
               忘記密碼？
             </Link>
@@ -81,15 +83,18 @@ export default function LoginPage() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-gray-400"
+          className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-md text-sm font-bold text-white bg-[#869D85] hover:bg-[#6b7d6a] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#869D85] disabled:bg-stone-300 disabled:shadow-none transition-all duration-200"
         >
           {isSubmitting ? '登入中...' : '登入'}
         </button>
       </form>
 
-      <div className="mt-6 text-center text-sm">
-        <span className="text-gray-500">還沒有帳號？</span>
-        <Link href="/register" className="ml-2 font-medium text-blue-600 hover:text-blue-500">
+      <div className="mt-8 text-center text-sm">
+        <span className="text-stone-500">還沒有帳號？</span>
+        <Link
+          href="/register"
+          className="ml-2 font-medium text-[#5F7161] hover:text-[#869D85] transition-colors"
+        >
           立即註冊
         </Link>
       </div>
