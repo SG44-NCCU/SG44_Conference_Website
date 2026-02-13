@@ -3,9 +3,35 @@ import type { CollectionConfig } from 'payload'
 export const Users: CollectionConfig = {
   slug: 'users',
   // 1. 開啟 Email 驗證
+  // 1. 開啟 Email 驗證
   auth: {
-    verify: true,
-    // verify: false,
+    verify: {
+      generateEmailHTML: ({ token, user }) => {
+        // 使用環境變數或預設 domain
+        const serverURL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
+        const verifyURL = `${serverURL}/verify?token=${token}`
+
+        return `
+          <!doctype html>
+          <html>
+            <body style="font-family: sans-serif; color: #333; line-height: 1.6;">
+              <div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;">
+                <h2 style="color: #5F7161;">歡迎加入 SG44！</h2>
+                <p>親愛的 ${user.name} 您好，</p>
+                <p>感謝您註冊第44屆測量及空間資訊研討會帳號。請點擊下方按鈕以啟用您的帳號：</p>
+                <div style="text-align: center; margin: 30px 0;">
+                  <a href="${verifyURL}" style="display: inline-block; background-color: #869D85; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">啟用帳號</a>
+                </div>
+                <p style="font-size: 14px; color: #666;">或是複製以下連結至瀏覽器開啟：<br/>
+                <a href="${verifyURL}" style="color: #5F7161;">${verifyURL}</a></p>
+                <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;" />
+                <p style="font-size: 12px; color: #999;">SG44 研討會籌備團隊 敬上</p>
+              </div>
+            </body>
+          </html>
+        `
+      },
+    },
   },
   admin: {
     useAsTitle: 'email',
