@@ -4,8 +4,8 @@ export const Users: CollectionConfig = {
   slug: 'users',
   // 1. 開啟 Email 驗證
   auth: {
-    // verify: true,
-    verify: false,
+    verify: true,
+    // verify: false,
   },
   admin: {
     useAsTitle: 'email',

@@ -52,7 +52,6 @@ export default function RegisterPage() {
         <p className="text-stone-600 mb-8">
           驗證信件已發送至您的信箱，請查收並點擊連結啟用帳號。
           <br />
-          <span className="text-sm text-stone-400">(開發模式請查看 Terminal)</span>
         </p>
         <Link
           href="/login"

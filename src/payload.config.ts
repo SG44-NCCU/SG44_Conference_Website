@@ -20,6 +20,8 @@ import { Transport } from './globals/Transport'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
+
 export default buildConfig({
   admin: {
     user: Users.slug,
@@ -51,5 +53,17 @@ export default buildConfig({
     },
   }),
   sharp,
+  email: nodemailerAdapter({
+    defaultFromAddress: process.env.SMTP_FROM_ADDRESS || 'info@sg44.tw',
+    defaultFromName: process.env.SMTP_FROM_NAME || 'SG44 Conference',
+    transportOptions: {
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT) || 587,
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
+    },
+  }),
   plugins: [],
 })
