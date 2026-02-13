@@ -13,10 +13,6 @@ import { News } from './collections/News'
 // ❌ 已刪除 Submissions 引入
 // ❌ 已刪除 Registrations 引入
 
-// 2. 引入 Globals (全域設定)
-import { Contact } from './globals/Contact'
-import { Transport } from './globals/Transport'
-
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -40,7 +36,7 @@ export default buildConfig({
   ],
 
   // 4. 註冊所有的 Globals
-  globals: [Contact, Transport],
+  globals: [],
 
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

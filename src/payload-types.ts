@@ -89,14 +89,8 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {
-    contact: Contact;
-    transport: Transport;
-  };
-  globalsSelect: {
-    contact: ContactSelect<false> | ContactSelect<true>;
-    transport: TransportSelect<false> | TransportSelect<true>;
-  };
+  globals: {};
+  globalsSelect: {};
   locale: null;
   user: User & {
     collection: 'users';
@@ -421,136 +415,6 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "contact".
- */
-export interface Contact {
-  id: number;
-  title: string;
-  email: string;
-  phone?: string | null;
-  address?: string | null;
-  googleMapUrl?: string | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "transport".
- */
-export interface Transport {
-  id: number;
-  pageTitle: string;
-  layout?:
-    | (
-        | {
-            richText: {
-              root: {
-                type: string;
-                children: {
-                  type: any;
-                  version: number;
-                  [k: string]: unknown;
-                }[];
-                direction: ('ltr' | 'rtl') | null;
-                format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                indent: number;
-                version: number;
-              };
-              [k: string]: unknown;
-            };
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'content';
-          }
-        | {
-            /**
-             * 請至 Google Maps -> 分享 -> 嵌入地圖 -> 複製 src 裡面的網址
-             */
-            embedUrl: string;
-            height?: number | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'googleMap';
-          }
-        | {
-            title?: string | null;
-            methods?:
-              | {
-                  type: 'mrt' | 'bus' | 'car' | 'walk';
-                  title: string;
-                  description: string;
-                  id?: string | null;
-                }[]
-              | null;
-            id?: string | null;
-            blockName?: string | null;
-            blockType: 'transportGrid';
-          }
-      )[]
-    | null;
-  updatedAt?: string | null;
-  createdAt?: string | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "contact_select".
- */
-export interface ContactSelect<T extends boolean = true> {
-  title?: T;
-  email?: T;
-  phone?: T;
-  address?: T;
-  googleMapUrl?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "transport_select".
- */
-export interface TransportSelect<T extends boolean = true> {
-  pageTitle?: T;
-  layout?:
-    | T
-    | {
-        content?:
-          | T
-          | {
-              richText?: T;
-              id?: T;
-              blockName?: T;
-            };
-        googleMap?:
-          | T
-          | {
-              embedUrl?: T;
-              height?: T;
-              id?: T;
-              blockName?: T;
-            };
-        transportGrid?:
-          | T
-          | {
-              title?: T;
-              methods?:
-                | T
-                | {
-                    type?: T;
-                    title?: T;
-                    description?: T;
-                    id?: T;
-                  };
-              id?: T;
-              blockName?: T;
-            };
-      };
-  updatedAt?: T;
-  createdAt?: T;
-  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
