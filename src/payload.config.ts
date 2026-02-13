@@ -10,7 +10,9 @@ import sharp from 'sharp'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { News } from './collections/News'
+import { UserMenu } from './components/payload/UserMenu'
 // ❌ 已刪除 Submissions 引入
+
 // ❌ 已刪除 Registrations 引入
 
 const filename = fileURLToPath(import.meta.url)
@@ -23,6 +25,9 @@ export default buildConfig({
     user: Users.slug,
     importMap: {
       baseDir: path.resolve(dirname),
+    },
+    components: {
+      actions: [UserMenu],
     },
   },
 

@@ -1,0 +1,4 @@
+// Hide default account icon in header since we replaced it with UserMenu
+.app-header__account {
+  display: none !important;
+}
