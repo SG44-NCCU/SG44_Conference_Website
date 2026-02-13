@@ -43,8 +43,8 @@ function VerifyContent() {
   if (status === 'verifying') {
     return (
       <div className="text-center">
-        <h3 className="text-lg font-medium text-gray-900">驗證中...</h3>
-        <p className="mt-2 text-gray-500">請稍候，我們正在啟用您的帳號。</p>
+        <h3 className="text-lg font-bold text-[#5F7161]">驗證中...</h3>
+        <p className="mt-2 text-stone-500">請稍候，我們正在啟用您的帳號。</p>
       </div>
     )
   }
@@ -57,11 +57,11 @@ function VerifyContent() {
 
     return (
       <div className="text-center">
-        <h3 className="text-xl font-bold text-[#5F7161]">驗證成功！</h3>
-        <p className="mt-2 text-gray-600 mb-6">您的帳號已啟用，即將導向登入頁...</p>
+        <h3 className="text-2xl font-bold text-[#5F7161] tracking-tight">驗證成功！</h3>
+        <p className="mt-2 text-stone-600 mb-6">您的帳號已啟用，即將導向登入頁...</p>
         <Link
           href="/login"
-          className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700"
+          className="inline-flex items-center px-6 py-2.5 border border-transparent text-sm font-bold rounded-lg shadow-md text-white bg-[#869D85] hover:bg-[#6b7d6a] hover:shadow-lg transition-all duration-200"
         >
           立即前往登入
         </Link>
@@ -71,11 +71,14 @@ function VerifyContent() {
 
   return (
     <div className="text-center">
-      <h3 className="text-xl font-bold text-red-600">驗證失敗</h3>
-      <p className="mt-2 text-gray-600 mb-6">{message}</p>
+      <h3 className="text-2xl font-bold text-red-600 tracking-tight">驗證失敗</h3>
+      <p className="mt-2 text-stone-600 mb-6">{message}</p>
       <div className="space-x-4">
-        <Link href="/login" className="text-blue-600 hover:text-blue-500">
-          回登入頁
+        <Link
+          href="/login"
+          className="font-medium text-[#5F7161] hover:text-[#869D85] transition-colors"
+        >
+          返回登入頁
         </Link>
       </div>
     </div>
