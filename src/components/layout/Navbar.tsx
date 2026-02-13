@@ -5,6 +5,7 @@ import { ChevronDown, Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
+import { useAuth } from '@/providers/Auth'
 
 // ✅ 定義型別
 interface SubMenuItem {
@@ -92,6 +93,7 @@ const NAV_ITEMS: NavItem[] = [
 ]
 
 const Navbar: React.FC = () => {
+  const { user, loading, logout } = useAuth()
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [mobileSubMenuOpen, setMobileSubMenuOpen] = useState<number | null>(null)
@@ -179,6 +181,55 @@ const Navbar: React.FC = () => {
                 )}
               </div>
             ))}
+
+            {/* Desktop Auth Buttons */}
+            <div className="pl-4 ml-4 border-l border-stone-200 flex items-center gap-3">
+              {loading ? (
+                // Loading Skeleton
+                <div className="w-24 h-9 bg-stone-100 animate-pulse rounded-md" />
+              ) : user ? (
+                <div className="relative group">
+                  <button className="flex items-center gap-2 text-stone-700 hover:text-[#5F7161] font-medium transition-colors">
+                    <div className="w-8 h-8 rounded-full bg-[#5F7161] text-white flex items-center justify-center text-sm font-bold">
+                      {user.name?.charAt(0) || 'U'}
+                    </div>
+                    <span className="text-sm max-w-[100px] truncate">{user.name}</span>
+                    <ChevronDown size={14} />
+                  </button>
+
+                  {/* Auth Dropdown */}
+                  <div className="absolute right-0 top-full pt-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform group-hover:translate-y-0 translate-y-2">
+                    <div className="bg-white rounded-md shadow-lg border border-stone-100 overflow-hidden py-1">
+                      <div className="px-4 py-2 border-b border-stone-100">
+                        <p className="text-xs text-stone-500">已登入為</p>
+                        <p className="text-sm font-bold text-stone-800 truncate" title={user.email}>
+                          {user.email}
+                        </p>
+                      </div>
+                      <Link
+                        href="/dashboard"
+                        className="block px-4 py-2 text-sm text-stone-600 hover:bg-[#F0F4F1] hover:text-[#5F7161] transition-colors"
+                      >
+                        會員中心
+                      </Link>
+                      <button
+                        onClick={logout}
+                        className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
+                      >
+                        登出
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  href="/login"
+                  className="px-5 py-2 bg-[#5F7161] text-white text-sm font-bold rounded-md hover:bg-[#4a584b] transition-all shadow-sm hover:shadow-md"
+                >
+                  會員登入
+                </Link>
+              )}
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -243,15 +294,45 @@ const Navbar: React.FC = () => {
               </div>
             ))}
 
-            {/* <div className="pt-4">
-              <Link
-                href="/auth"
-                className="block w-full text-center py-3 bg-[#5F7161] text-white rounded-md font-bold"
-                onClick={() => setIsOpen(false)}
-              >
-                會員登入 / 註冊
-              </Link>
-            </div> */}
+            <div className="pt-4 border-t border-stone-100 mt-2">
+              {user ? (
+                <div className="space-y-3">
+                  <div className="px-3 flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-[#5F7161] text-white flex items-center justify-center text-lg font-bold">
+                      {user.name?.charAt(0) || 'U'}
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="font-medium text-stone-900">{user.name}</span>
+                      <span className="text-xs text-stone-500">{user.email}</span>
+                    </div>
+                  </div>
+                  <Link
+                    href="/dashboard"
+                    className="block w-full text-center py-2.5 bg-[#5F7161] text-white rounded-md font-medium hover:bg-[#4a584b] transition-colors"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    會員中心
+                  </Link>
+                  <button
+                    onClick={() => {
+                      logout()
+                      setIsOpen(false)
+                    }}
+                    className="block w-full text-center py-2.5 border border-stone-200 text-stone-600 rounded-md font-medium hover:bg-stone-50 transition-colors"
+                  >
+                    登出
+                  </button>
+                </div>
+              ) : (
+                <Link
+                  href="/login"
+                  className="block w-full text-center py-3 bg-[#5F7161] text-white rounded-md font-bold hover:bg-[#4a584b] transition-colors"
+                  onClick={() => setIsOpen(false)}
+                >
+                  會員登入 / 註冊
+                </Link>
+              )}
+            </div>
           </div>
         </div>
       )}
