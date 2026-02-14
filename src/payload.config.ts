@@ -20,6 +20,13 @@ const dirname = path.dirname(filename)
 
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 
+// console.log('🔍 DEBUG PAYLOAD CONFIG:', {
+//   Users,
+//   Media,
+//   News,
+//   UserMenu, // 也檢查一下這個新朋友
+// })
+
 export default buildConfig({
   admin: {
     user: Users.slug,
@@ -27,18 +34,12 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
     components: {
-      actions: [UserMenu],
+      // actions: [UserMenu],
     },
   },
 
   // 3. 註冊所有的 Collections
-  collections: [
-    Users,
-    Media,
-    News,
-    // ❌ 已刪除 Submissions 註冊
-    // ❌ 已刪除 Registrations 註冊
-  ],
+  collections: [Users, Media, News],
 
   // 4. 註冊所有的 Globals
   globals: [],
