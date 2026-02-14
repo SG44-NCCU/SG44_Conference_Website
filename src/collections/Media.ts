@@ -1,6 +1,9 @@
 import type { CollectionConfig } from 'payload'
 
 export const Media: CollectionConfig = {
+  admin: {
+    group: '所有上傳檔案',
+  },
   slug: 'media',
   access: {
     read: () => true,

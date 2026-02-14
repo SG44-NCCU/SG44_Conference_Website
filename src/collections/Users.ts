@@ -34,6 +34,7 @@ export const Users: CollectionConfig = {
     // verify: false,
   },
   admin: {
+    group: '使用者資料',
     useAsTitle: 'email',
     // 後台列表顯示這幾個重要欄位
     defaultColumns: ['name', 'organization', 'jobTitle', 'email', 'role'],
