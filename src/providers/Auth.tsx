@@ -1,6 +1,6 @@
 'use client'
 
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState, useCallback } from 'react'
 import { User } from '@/payload-types'
 import { useRouter } from 'next/navigation'
 
@@ -9,6 +9,7 @@ type AuthContextType = {
   setUser: (user: User | null) => void
   loading: boolean
   logout: () => Promise<void>
+  refreshUser: () => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextType>({
@@ -16,6 +17,7 @@ const AuthContext = createContext<AuthContextType>({
   setUser: () => {},
   loading: true,
   logout: async () => {},
+  refreshUser: async () => {},
 })
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
@@ -23,23 +25,25 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [loading, setLoading] = useState(true)
   const router = useRouter()
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const res = await fetch('/api/users/me')
-        if (res.ok) {
-          const data = await res.json()
-          setUser(data.user || null)
-        }
-      } catch (error) {
-        console.error('Failed to fetch user', error)
-      } finally {
-        setLoading(false)
+  const refreshUser = useCallback(async () => {
+    try {
+      const res = await fetch('/api/users/me?_=' + Date.now().toString(), {
+        cache: 'no-store',
+      })
+      if (res.ok) {
+        const data = await res.json()
+        setUser(data.user || null)
       }
+    } catch (error) {
+      console.error('Failed to fetch user', error)
+    } finally {
+      setLoading(false)
     }
-
-    fetchUser()
   }, [])
+
+  useEffect(() => {
+    refreshUser()
+  }, [refreshUser])
 
   const logout = async () => {
     try {
@@ -53,7 +57,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ user, setUser, loading, logout }}>
+    <AuthContext.Provider value={{ user, setUser, loading, logout, refreshUser }}>
       {children}
     </AuthContext.Provider>
   )

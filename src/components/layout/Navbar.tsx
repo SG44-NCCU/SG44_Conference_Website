@@ -93,7 +93,7 @@ const NAV_ITEMS: NavItem[] = [
 ]
 
 const Navbar: React.FC = () => {
-  const { user, loading, logout } = useAuth()
+  const { user, loading, logout, refreshUser } = useAuth()
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [mobileSubMenuOpen, setMobileSubMenuOpen] = useState<number | null>(null)
@@ -111,7 +111,12 @@ const Navbar: React.FC = () => {
   useEffect(() => {
     setIsOpen(false)
     setMobileSubMenuOpen(null)
-  }, [pathname])
+
+    // 每次路徑改變 (跳轉頁面時) 強制同步一次使用者狀態，解決切換頁面後 Navbar 狀態未更新的問題
+    if (refreshUser) {
+      refreshUser()
+    }
+  }, [pathname, refreshUser])
 
   const toggleMobileSubMenu = (index: number) => {
     if (mobileSubMenuOpen === index) {
