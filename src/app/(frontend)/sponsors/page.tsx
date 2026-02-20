@@ -47,19 +47,29 @@ const SPONSOR_GROUPS = [
     subtitle: 'Sponsors',
     items: [
       {
-        name: '瑞竣科技',
+        name: '祐鴻測繪科技有限公司',
+        logo: '/sponsors_logo/祐鴻測繪科技有限公司.png',
+        url: 'https://portaly.cc/YH_G_S',
+      },
+      {
+        name: '詮華國土測繪股份有限公司',
+        logo: '/sponsors_logo/詮華國土測繪股份有限公司.png',
+        url: 'https://www.chuanhwa.com.tw/',
+      },
+      {
+        name: '瑞竣科技股份有限公司',
         logo: '/sponsors_logo/瑞竣科技.png',
-        url: 'https://google.com',
+        url: 'https://www.richitech.com.tw/',
       },
       {
-        name: '某某科技',
-        logo: '/sponsors_logo/demo-logo-2.png',
-        url: 'https://google.com',
+        name: '群立科技股份有限公司',
+        logo: '/sponsors_logo/群立科技股份有限公司.png',
+        url: 'https://www.geoforce.com.tw/',
       },
       {
-        name: '某某顧問公司',
-        logo: '/sponsors_logo/demo-logo-3.png',
-        url: 'https://google.com',
+        name: '坤眾科技股份有限公司',
+        logo: '/sponsors_logo/坤眾科技股份有限公司.png',
+        url: 'https://www.civilmap.com.tw/',
       },
     ],
   },
