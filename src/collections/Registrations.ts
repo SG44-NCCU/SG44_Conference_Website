@@ -6,6 +6,9 @@ export const Registrations: CollectionConfig = {
     group: '報名管理',
     useAsTitle: 'id',
     defaultColumns: ['user', 'ticketType', 'paymentStatus', 'amount', 'createdAt'],
+    components: {
+      beforeListTable: ['@/components/payload/RegistrationDashboard#RegistrationDashboard'],
+    },
   },
   access: {
     // Admin can see/do all
@@ -79,6 +82,11 @@ export const Registrations: CollectionConfig = {
         // Only admin can update payment status once created!
         update: ({ req: { user } }) => user?.role === 'admin',
       },
+      admin: {
+        components: {
+          Cell: '@/components/payload/PaymentStatusCell#PaymentStatusCell',
+        },
+      },
     },
 
     // 一、 基本資料 (除了 Users 本身已有的欄位，僅補足報名表需要的)
@@ -89,21 +97,20 @@ export const Registrations: CollectionConfig = {
       required: true,
     },
 
-    // 二、 會議參與資訊
     {
       name: 'participantRole',
       type: 'select',
       label: '參與身分',
       required: true,
       options: [
-        { label: '論文發表人', value: 'presenter' },
-        { label: '專題演講人', value: 'keynote' },
-        { label: '主持人', value: 'host' },
-        { label: '評論人/與談人', value: 'discussant' },
-        { label: '一般與會者', value: 'attendee' },
-        { label: '主/協辦單位同仁', value: 'staff' },
-        { label: '大會邀請貴賓', value: 'vip' },
-        { label: '其他', value: 'other' },
+        { label: '論文發表人 (Presenter)', value: 'presenter' },
+        { label: '專題演講人 (Keynote Speaker)', value: 'keynote' },
+        { label: '主持人 (Host / Chair)', value: 'host' },
+        { label: '評論人/與談人 (Discussant / Panelist)', value: 'discussant' },
+        { label: '一般與會者 (Attendee)', value: 'attendee' },
+        { label: '主/協辦單位同仁 (Staff)', value: 'staff' },
+        { label: '大會邀請貴賓 (VIP)', value: 'vip' },
+        { label: '其他 (Other)', value: 'other' },
       ],
     },
     {
@@ -111,7 +118,7 @@ export const Registrations: CollectionConfig = {
       type: 'text',
       label: '參與身分 (其他)',
       admin: {
-        condition: (data) => data.participantRole === 'other',
+        condition: (data) => data?.participantRole === 'other',
       },
     },
     {
@@ -119,10 +126,10 @@ export const Registrations: CollectionConfig = {
       type: 'select',
       label: '論文發表形式',
       options: [
-        { label: '口頭發表', value: 'oral' },
-        { label: '海報發表', value: 'poster' },
-        { label: '口頭或海報皆可', value: 'both' },
-        { label: '無發表/僅與會', value: 'none' },
+        { label: '口頭發表 (Oral)', value: 'oral' },
+        { label: '海報發表 (Poster)', value: 'poster' },
+        { label: '口頭或海報皆可 (Oral or Poster)', value: 'both' },
+        { label: '無發表/僅與會 (None / Attend Only)', value: 'none' },
       ],
       // not required because it depends on user need
     },
@@ -145,12 +152,6 @@ export const Registrations: CollectionConfig = {
           displayFormat: 'yyyy-MM-dd',
         },
       },
-    },
-    {
-      name: 'paymentTime',
-      type: 'text',
-      label: '匯款時間',
-      required: true,
     },
 
     // 四、 膳食與活動意願調查
@@ -189,13 +190,13 @@ export const Registrations: CollectionConfig = {
       type: 'select',
       label: '飲食偏好',
       options: [
-        { label: '一般(葷食)', value: 'regular' },
-        { label: '全素', value: 'vegan' },
+        { label: '一般 (葷食)', value: 'regular' },
+        { label: '素食 (Vegetarian)', value: 'vegan' },
         { label: '其他特殊需求', value: 'other' },
       ],
       admin: {
         condition: (data) =>
-          data.mealDay1 === 'yes' || data.mealDay2 === 'yes' || data.banquet === 'yes',
+          data?.mealDay1 === 'yes' || data?.mealDay2 === 'yes' || data?.banquet === 'yes',
       },
     },
     {
@@ -203,7 +204,7 @@ export const Registrations: CollectionConfig = {
       type: 'text',
       label: '飲食偏好 (其他特殊需求)',
       admin: {
-        condition: (data) => data.dietaryPreference === 'other',
+        condition: (data) => data?.dietaryPreference === 'other',
       },
     },
 

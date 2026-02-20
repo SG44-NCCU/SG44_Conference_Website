@@ -28,6 +28,8 @@ import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 //   UserMenu, // 也檢查一下這個新朋友
 // })
 
+import { exportCsvEndpoint } from './endpoints/exportCsvEndpoint'
+
 export default buildConfig({
   admin: {
     user: Users.slug,
@@ -41,6 +43,15 @@ export default buildConfig({
 
   // 3. 註冊所有的 Collections
   collections: [Users, Media, News, Registrations],
+
+  // Register custom endpoints
+  endpoints: [
+    {
+      path: '/export-csv',
+      method: 'get',
+      handler: exportCsvEndpoint as any,
+    },
+  ],
 
   // 4. 註冊所有的 Globals
   globals: [],
