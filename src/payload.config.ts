@@ -10,6 +10,7 @@ import sharp from 'sharp'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { News } from './collections/News'
+import { Registrations } from './collections/Registrations'
 import { UserMenu } from './components/payload/UserMenu'
 // ❌ 已刪除 Submissions 引入
 
@@ -39,7 +40,7 @@ export default buildConfig({
   },
 
   // 3. 註冊所有的 Collections
-  collections: [Users, Media, News],
+  collections: [Users, Media, News, Registrations],
 
   // 4. 註冊所有的 Globals
   globals: [],
