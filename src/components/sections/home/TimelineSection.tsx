@@ -9,8 +9,12 @@ const TimelineSection: React.FC = () => {
 
   // 狀態：捲動進度 (0 ~ 1)
   const [progress, setProgress] = useState(0)
-  // 狀態：是否正在拖曳滑桿
+  // 狀態：是否正在拖曳滑桿 (底部滑桿)
   const [isDragging, setIsDragging] = useState(false)
+  // 狀態：是否正在直接拖曳時間軸內容
+  const [isContentDragging, setIsContentDragging] = useState(false)
+  const dragStartX = useRef(0)
+  const scrollLeftStart = useRef(0)
 
   // ✨ 功能 1: 處理滑鼠滾輪 (將垂直滾動轉換為水平滾動)
   useEffect(() => {
@@ -89,6 +93,44 @@ const TimelineSection: React.FC = () => {
     }
   }, [isDragging])
 
+  // ✨ 功能 4: 拖曳時間軸內容 (滑鼠)
+  const handleContentMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const container = scrollContainerRef.current
+    if (!container) return
+    setIsContentDragging(true)
+    dragStartX.current = e.clientX
+    scrollLeftStart.current = container.scrollLeft
+    e.preventDefault()
+  }, [])
+
+  const handleContentMouseMove = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if (!isContentDragging || !scrollContainerRef.current) return
+      const dx = e.clientX - dragStartX.current
+      scrollContainerRef.current.scrollLeft = scrollLeftStart.current - dx
+    },
+    [isContentDragging],
+  )
+
+  const handleContentMouseUpOrLeave = useCallback(() => {
+    setIsContentDragging(false)
+  }, [])
+
+  // ✨ 功能 5: 拖曳時間軸內容 (觸控)
+  const handleTouchStart = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
+    const container = scrollContainerRef.current
+    if (!container) return
+    dragStartX.current = e.touches[0].clientX
+    scrollLeftStart.current = container.scrollLeft
+  }, [])
+
+  const handleTouchMove = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
+    const container = scrollContainerRef.current
+    if (!container) return
+    const dx = e.touches[0].clientX - dragStartX.current
+    container.scrollLeft = scrollLeftStart.current - dx
+  }, [])
+
   // 初始定位 (維持不變)
   useEffect(() => {
     const nearestEventIndex = TIMELINE_DATA.findIndex((event) => !event.isPast)
@@ -141,10 +183,19 @@ const TimelineSection: React.FC = () => {
             <div
               ref={scrollContainerRef}
               onScroll={handleScroll}
-              className="overflow-x-auto scrollbar-hide scroll-smooth pb-12 cursor-grab active:cursor-grabbing"
+              onMouseDown={handleContentMouseDown}
+              onMouseMove={handleContentMouseMove}
+              onMouseUp={handleContentMouseUpOrLeave}
+              onMouseLeave={handleContentMouseUpOrLeave}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              className={`overflow-x-auto scrollbar-hide pb-12 select-none ${
+                isContentDragging ? 'cursor-grabbing' : 'cursor-grab'
+              }`}
               style={{
                 scrollbarWidth: 'none',
                 msOverflowStyle: 'none',
+                scrollBehavior: isContentDragging ? 'auto' : 'smooth',
               }}
             >
               <div className="relative inline-flex min-w-full px-20">
