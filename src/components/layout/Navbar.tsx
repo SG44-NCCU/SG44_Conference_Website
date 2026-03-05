@@ -29,6 +29,14 @@ const NAV_ITEMS: NavItem[] = [
     name: '最新消息',
     href: '/news',
   },
+  {
+    name: '大專生3S創客競賽',
+    href: '/3S_competition_rules',
+    items: [
+      { name: '競賽細則', href: '/3S_competition_rules' },
+      { name: '競賽流程', href: '/3S_competition_flow' },
+    ],
+  },
   // {
   //   name: '議程',
   //   href: '/agenda',
