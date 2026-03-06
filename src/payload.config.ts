@@ -58,6 +58,8 @@ export default buildConfig({
 
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
+  // 驗證信的連結網址，本機開發用 localhost，部署時讀取環境變數
+  serverURL: process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
