@@ -45,7 +45,7 @@ type FormValues = {
   presentationPreference?: string
 }
 
-export default function AbstractSubmitPage() {
+export default function AbstractSubmitClient() {
   const { user, loading } = useAuth()
   const router = useRouter()
   const searchParams = useSearchParams()
