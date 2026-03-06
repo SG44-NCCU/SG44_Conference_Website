@@ -4,33 +4,44 @@ import React, { useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useAuth } from '@/providers/Auth'
-import { User, FileText, Calendar, Award, Bell, LogOut, LayoutDashboard } from 'lucide-react'
+import { User, FileText, Calendar, Award, Bell, LogOut, ClipboardList } from 'lucide-react'
 
 const SIDEBAR_ITEMS = [
   {
     name: '個人資料',
     href: '/dashboard/profile',
     icon: User,
+    roles: ['admin', 'user', 'reviewer'],
   },
   {
     name: '我的報名',
     href: '/dashboard/my-registrations',
     icon: Calendar,
+    roles: ['admin', 'user', 'reviewer'],
   },
   {
     name: '我的投稿',
     href: '/dashboard/my-submissions',
     icon: FileText,
+    roles: ['admin', 'user', 'reviewer'],
   },
+  // {
+  //   name: '我的競賽',
+  //   href: '/dashboard/my-competitions',
+  //   icon: Award,
+  //   roles: ['admin', 'user', 'reviewer'],
+  // },
   {
-    name: '我的競賽',
-    href: '/dashboard/my-competitions',
-    icon: Award,
+    name: '待審稿件',
+    href: '/dashboard/review-queue',
+    icon: ClipboardList,
+    roles: ['reviewer', 'admin'],
   },
   {
     name: '通知中心',
     href: '/dashboard/notifications',
     icon: Bell,
+    roles: ['admin', 'user', 'reviewer'],
   },
 ]
 
@@ -80,7 +91,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
               {/* Navigation */}
               <nav className="p-2 space-y-1">
-                {SIDEBAR_ITEMS.map((item) => {
+                {SIDEBAR_ITEMS.filter((item) => item.roles.includes(user.role)).map((item) => {
                   const isActive = pathname === item.href || pathname?.startsWith(`${item.href}/`)
                   return (
                     <Link

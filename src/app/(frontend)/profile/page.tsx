@@ -28,9 +28,9 @@ export default async function ProfilePage() {
 
   // 3. 抓取【投稿資料】
   const submissionData = await payload.find({
-    collection: 'submissions',
+    collection: 'abstracts',
     where: {
-      owner: { equals: user.id },
+      submitter: { equals: user.id },
     },
   })
   const mySubmissions = submissionData.docs
@@ -103,8 +103,9 @@ export default async function ProfilePage() {
                   <div className="flex justify-between items-center pb-4 border-b border-stone-100">
                     <span className="text-stone-500 text-sm">票種</span>
                     <span className="font-bold text-stone-800">
-                      {myRegistration.ticketType === 'early_student' ? '早鳥學生票' : 
-                       myRegistration.ticketType === 'early_regular' ? '早鳥一般票' : '一般票'}
+                      {myRegistration.ticketType === 'early-bird-student' ? '早鳥學生票' :
+                       myRegistration.ticketType === 'early-bird-regular' ? '早鳥一般票' :
+                       myRegistration.ticketType === 'standard-student' ? '一般學生票' : '一般票'}
                     </span>
                   </div>
 
@@ -132,7 +133,7 @@ export default async function ProfilePage() {
                         href="/dashboard/payment" // 需另外製作此頁面
                         className="block w-full text-center bg-[#5F7161] text-white font-bold py-3 rounded hover:bg-[#4a584b] transition-colors"
                       >
-                        {myRegistration.last5Digits ? '修改匯款資訊' : '回報匯款帳號'}
+                        {myRegistration.paymentAccountLast5 ? '修改小匠資訊' : '回報小匠帳號'}
                       </Link>
                     </div>
                   )}
@@ -166,7 +167,7 @@ export default async function ProfilePage() {
                   {mySubmissions.map((sub) => (
                     <div key={sub.id} className="p-6 hover:bg-stone-50 transition-colors group">
                       <div className="flex justify-between items-start mb-3">
-                        {getStatusBadge(sub.status as string)}
+                        {getStatusBadge(sub.reviewStatus as string)}
                         <span className="text-xs text-stone-400 font-mono">
                           {new Date(sub.updatedAt).toLocaleDateString()}
                         </span>

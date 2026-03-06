@@ -11,10 +11,10 @@ import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { News } from './collections/News'
 import { Registrations } from './collections/Registrations'
-import { UserMenu } from './components/payload/UserMenu'
-// ❌ 已刪除 Submissions 引入
+import { Abstracts } from './collections/Abstracts'
 
-// ❌ 已刪除 Registrations 引入
+// 2. 引入 Globals
+import { AbstractsSettings } from './globals/AbstractsSettings'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -42,7 +42,7 @@ export default buildConfig({
   },
 
   // 3. 註冊所有的 Collections
-  collections: [Users, Media, News, Registrations],
+  collections: [Users, Media, News, Registrations, Abstracts],
 
   // Register custom endpoints
   endpoints: [
@@ -54,7 +54,7 @@ export default buildConfig({
   ],
 
   // 4. 註冊所有的 Globals
-  globals: [],
+  globals: [AbstractsSettings],
 
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

@@ -71,6 +71,7 @@ export interface Config {
     media: Media;
     news: News;
     registrations: Registration;
+    abstracts: Abstract;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -82,6 +83,7 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     news: NewsSelect<false> | NewsSelect<true>;
     registrations: RegistrationsSelect<false> | RegistrationsSelect<true>;
+    abstracts: AbstractsSelect<false> | AbstractsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -91,8 +93,12 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'abstracts-settings': AbstractsSetting;
+  };
+  globalsSelect: {
+    'abstracts-settings': AbstractsSettingsSelect<false> | AbstractsSettingsSelect<true>;
+  };
   locale: null;
   user: User & {
     collection: 'users';
@@ -252,6 +258,75 @@ export interface Registration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "abstracts".
+ */
+export interface Abstract {
+  id: number;
+  submitter: number | User;
+  title: string;
+  authors: {
+    name: string;
+    affiliation: string;
+    email: string;
+    isCorresponding?: boolean | null;
+    id?: string | null;
+  }[];
+  /**
+   * 特別論壇投稿可留空
+   */
+  subTopic?:
+    | (
+        | 'topic-1'
+        | 'topic-2'
+        | 'topic-3'
+        | 'topic-4'
+        | 'topic-5'
+        | 'topic-6'
+        | 'topic-7'
+        | 'topic-8'
+        | 'topic-9'
+        | 'topic-10'
+      )
+    | null;
+  /**
+   * 如為特別論壇邀請文章，請在此選擇；一般投稿請留空
+   */
+  specialSession?: ('special-nstc' | 'special-nlsc' | 'special-land' | 'special-national-park') | null;
+  isStudent?: boolean | null;
+  /**
+   * 勾選後需上傳全文（PDF 或 DOCX，10MB 以內）
+   */
+  applyStudentAward?: boolean | null;
+  /**
+   * 請上傳 PDF 或 DOCX 格式，檔案大小限 10MB 以內
+   */
+  fullTextFile?: (number | null) | Media;
+  /**
+   * 請輸入 250 字以內的中英文摘要
+   */
+  abstract: string;
+  /**
+   * 請以逗號分隔，至少填寫 3 個關鍵字，例如：衛星定位, GNSS, 導航
+   */
+  keywords: string;
+  /**
+   * 實際發表形式由大會排程決定，此為偏好登記
+   */
+  presentationPreference?: ('oral' | 'poster' | 'either') | null;
+  reviewStatus: 'pending' | 'accepted' | 'rejected' | 'revision';
+  /**
+   * 此評語在大會發布審查結果後，會顯示給投稿人
+   */
+  reviewComments?: string | null;
+  /**
+   * 只能選擇 role=reviewer 的使用者
+   */
+  assignedReviewer?: (number | null) | User;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -289,6 +364,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'registrations';
         value: number | Registration;
+      } | null)
+    | ({
+        relationTo: 'abstracts';
+        value: number | Abstract;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -433,6 +512,36 @@ export interface RegistrationsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "abstracts_select".
+ */
+export interface AbstractsSelect<T extends boolean = true> {
+  submitter?: T;
+  title?: T;
+  authors?:
+    | T
+    | {
+        name?: T;
+        affiliation?: T;
+        email?: T;
+        isCorresponding?: T;
+        id?: T;
+      };
+  subTopic?: T;
+  specialSession?: T;
+  isStudent?: T;
+  applyStudentAward?: T;
+  fullTextFile?: T;
+  abstract?: T;
+  keywords?: T;
+  presentationPreference?: T;
+  reviewStatus?: T;
+  reviewComments?: T;
+  assignedReviewer?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -470,6 +579,39 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "abstracts-settings".
+ */
+export interface AbstractsSetting {
+  id: number;
+  /**
+   * 關閉後，前台投稿表單將顯示「投稿已截止」，使用者無法新增或修改投稿
+   */
+  submissionOpen?: boolean | null;
+  /**
+   * 勾選後，投稿人在「我的投稿」頁面將看到真實的審查結果（通過/未通過）與評語。建議在所有文章都有審查結果後再發布。
+   */
+  reviewResultPublished?: boolean | null;
+  /**
+   * 僅供顯示用，實際開關請用「開放摘要投稿」選項
+   */
+  submissionDeadline?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "abstracts-settings_select".
+ */
+export interface AbstractsSettingsSelect<T extends boolean = true> {
+  submissionOpen?: T;
+  reviewResultPublished?: T;
+  submissionDeadline?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

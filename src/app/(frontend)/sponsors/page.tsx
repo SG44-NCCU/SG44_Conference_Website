@@ -90,7 +90,6 @@ export default function SponsorsPage() {
             <SectionTitle
               title="協辦與贊助單位"
               subtitle="Sponsors & Partners"
-              center // 讓標題置中看起來比較大氣
             />
             <p className="mt-4 text-stone-500 max-w-2xl mx-auto">
               感謝以下單位對 SG44 的熱情支持與協助，共同推動學術交流與發展。
