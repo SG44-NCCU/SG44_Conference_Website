@@ -8,18 +8,6 @@ import { notFound } from 'next/navigation'
 import { getPayload } from 'payload'
 
 export const dynamic = 'force-dynamic'
-export const revalidate = 10
-
-// 預先生成靜態路徑 (Optional, 適合 SSG)
-export async function generateStaticParams() {
-  const payload = await getPayload({ config: configPromise })
-  const news = await payload.find({
-    collection: 'news',
-    limit: 100,
-  })
-
-  return news.docs.map(({ slug }) => ({ slug }))
-}
 
 export default async function NewsPost({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params

@@ -109,6 +109,29 @@ export const Abstracts: CollectionConfig = {
     },
     delete: ({ req: { user } }) => user?.role === 'admin',
   },
+  hooks: {
+    beforeOperation: [
+      async ({ operation, req, args }) => {
+        // 新增投稿時，non-admin 必須先報名且繳費通過
+        if (operation === 'create' && req.user && req.user.role !== 'admin') {
+          const registrations = await req.payload.find({
+            collection: 'registrations',
+            where: {
+              and: [
+                { user: { equals: req.user.id } },
+                { paymentStatus: { equals: 'paid' } },
+              ],
+            },
+            limit: 1,
+          })
+          if (registrations.totalDocs === 0) {
+            throw new Error('您尚未完成報名繳費，請先完成報名並通過繳費確認才能投稿摘要。')
+          }
+        }
+        return args
+      },
+    ],
+  },
   fields: [
     // ─── 投稿人 ─────────────────────────────────────────────────────────
     {

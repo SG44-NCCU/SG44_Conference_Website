@@ -5,6 +5,7 @@ import { useAuth } from '@/providers/Auth'
 import { useForm, useFieldArray } from 'react-hook-form'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Loader2, Plus, Trash2, ArrowRight } from 'lucide-react'
+import Link from 'next/link'
 import SectionTitle from '@/components/ui/SectionTitle'
 
 // ─── Sub-topic options (mirrors Abstracts.ts) ────────────────────────────────
@@ -54,6 +55,7 @@ export default function AbstractSubmitPage() {
   const [existingId, setExistingId] = useState<number | null>(null)
   const [submissionOpen, setSubmissionOpen] = useState<boolean | null>(null)
   const [checkingSettings, setCheckingSettings] = useState(true)
+  const [hasRegistration, setHasRegistration] = useState<boolean | null>(null)
 
   const {
     register,
@@ -78,25 +80,38 @@ export default function AbstractSubmitPage() {
   const isStudent = watch('isStudent')
   const applyStudentAward = watch('applyStudentAward')
 
-  // ── Fetch settings ──────────────────────────────────────────────────────────
+  // ── Fetch settings + registration status ────────────────────────────────────────────
   useEffect(() => {
+    if (!user) return
     const fetchSettings = async () => {
       try {
-        const res = await fetch('/api/globals/abstracts-settings')
-        if (res.ok) {
-          const data = await res.json()
-          setSubmissionOpen(data?.submissionOpen !== false) // default open
+        const [settingsRes, regRes] = await Promise.all([
+          fetch('/api/globals/abstracts-settings'),
+          fetch(`/api/registrations?where[user][equals]=${user.id}&where[paymentStatus][equals]=paid&limit=1`),
+        ])
+
+        if (settingsRes.ok) {
+          const data = await settingsRes.json()
+          setSubmissionOpen(data?.submissionOpen !== false)
         } else {
           setSubmissionOpen(true)
         }
+
+        if (regRes.ok) {
+          const regData = await regRes.json()
+          setHasRegistration((regData?.docs?.length ?? 0) > 0)
+        } else {
+          setHasRegistration(false)
+        }
       } catch {
         setSubmissionOpen(true)
+        setHasRegistration(false)
       } finally {
         setCheckingSettings(false)
       }
     }
     fetchSettings()
-  }, [])
+  }, [user])
 
   // ── Redirect if not logged in ────────────────────────────────────────────────
   useEffect(() => {
@@ -173,7 +188,7 @@ export default function AbstractSubmitPage() {
     }
   }
 
-  if (loading || !user || checkingSettings) {
+  if (loading || !user || checkingSettings || hasRegistration === null) {
     return (
       <div className="min-h-screen flex justify-center items-center">
         <Loader2 className="w-8 h-8 animate-spin text-stone-300" />
@@ -194,12 +209,33 @@ export default function AbstractSubmitPage() {
             </p>
           </div>
 
-          {/* ── Closed notice ── */}
+          {/* ── 已截止 notice ── */}
           {submissionOpen === false && (
             <div className="flex flex-col items-center gap-4 py-20 text-center">
               <div className="text-5xl">🔒</div>
               <h2 className="text-2xl font-bold text-stone-800">摘要投稿已截止</h2>
               <p className="text-stone-500">目前投稿系統已關閉，感謝您的參與。</p>
+            </div>
+          )}
+
+          {/* ── 未報名 notice ── */}
+          {submissionOpen && !hasRegistration && (
+            <div className="max-w-2xl mx-auto py-20 text-center space-y-6">
+              <div className="border border-stone-200 p-10 space-y-5">
+                <p className="text-4xl">📋</p>
+                <h2 className="text-xl font-bold text-stone-800">您的報名尚未通過審核</h2>
+                <p className="text-stone-500 leading-relaxed">
+                  投稿摘要需要先完成大會報名並通過繳費確認。請先前往報名頁面完成報名與繳費，待大會確認繳費後即可回來投稿。
+                </p>
+                <div className="pt-2">
+                  <Link
+                    href="/SG44-register"
+                    className="inline-flex items-center gap-2 px-8 py-3 bg-[#5F7161] text-white font-bold hover:bg-[#4a584b] transition-colors tracking-wide"
+                  >
+                    前往報名專區 <ArrowRight size={16} />
+                  </Link>
+                </div>
+              </div>
             </div>
           )}
 

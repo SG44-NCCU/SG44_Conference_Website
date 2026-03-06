@@ -59,15 +59,17 @@ export default function MySubmissionsPage() {
   const [abstracts, setAbstracts] = useState<AbstractDoc[]>([])
   const [reviewPublished, setReviewPublished] = useState(false)
   const [submissionOpen, setSubmissionOpen] = useState(true)
+  const [hasRegistration, setHasRegistration] = useState(false)
 
   useEffect(() => {
     if (!user) return
 
     const fetchAll = async () => {
       try {
-        const [abstractsRes, settingsRes] = await Promise.all([
+        const [abstractsRes, settingsRes, regRes] = await Promise.all([
           fetch(`/api/abstracts?where[submitter][equals]=${user.id}&sort=-createdAt&limit=100`),
           fetch('/api/globals/abstracts-settings'),
+          fetch(`/api/registrations?where[user][equals]=${user.id}&where[paymentStatus][equals]=paid&limit=1`),
         ])
 
         if (abstractsRes.ok) {
@@ -79,6 +81,11 @@ export default function MySubmissionsPage() {
           const settings = await settingsRes.json()
           setReviewPublished(settings?.reviewResultPublished === true)
           setSubmissionOpen(settings?.submissionOpen !== false)
+        }
+
+        if (regRes.ok) {
+          const regData = await regRes.json()
+          setHasRegistration((regData?.docs?.length ?? 0) > 0)
         }
       } catch (err) {
         console.error('Failed to load submissions', err)
@@ -100,6 +107,29 @@ export default function MySubmissionsPage() {
 
   // ── 尚未投稿 ────────────────────────────────────────────────────────────────
   if (abstracts.length === 0) {
+    // 未報名 → 鎖住，要求先報名
+    if (!hasRegistration) {
+      return (
+        <div className="max-w-3xl mx-auto py-12">
+          <div className="text-center border border-stone-200 p-12 space-y-5">
+            <h1 className="text-2xl font-bold text-stone-800">您的報名尚未通過審核</h1>
+            <p className="text-stone-500 leading-relaxed max-w-md mx-auto">
+              投稿摘要需要先完成大會報名並通過繳費確認。請先前往報名專區完成報名與繳費，待大會確認後即可投稿。
+            </p>
+            <div className="pt-2">
+              <Link
+                href="/SG44-register"
+                className="inline-flex items-center gap-2 px-8 py-3 bg-[#5F7161] text-white font-bold hover:bg-[#4a584b] transition-colors tracking-wide"
+              >
+                前往報名專區 <ArrowRight size={16} />
+              </Link>
+            </div>
+          </div>
+        </div>
+      )
+    }
+
+    // 已報名但尚未投稿
     return (
       <div className="max-w-3xl mx-auto py-12">
         <div className="text-center mb-12 border-b border-stone-200 pb-12">
