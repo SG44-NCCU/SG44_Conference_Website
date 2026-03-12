@@ -26,7 +26,20 @@ export default function RecoverPasswordPage() {
         }),
       })
 
-      if (!res.ok) throw new Error('請求失敗，請稍後再試')
+      let resData;
+      try {
+        resData = await res.json()
+      } catch (e) {
+        resData = {}
+      }
+
+      if (!res.ok) {
+        let msg = resData?.errors?.[0]?.message || '發送重設信件失敗，請稍後再試'
+        if (msg.toLowerCase().includes('not found') || msg.toLowerCase().includes('no user')) {
+          msg = '找不到此信箱對應的帳號，請確認您輸入的信箱是否正確。'
+        }
+        throw new Error(msg)
+      }
 
       setSuccess(true)
     } catch (err: any) {

@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import { useAuth } from '@/providers/Auth'
 import { Registration } from '@/payload-types'
-import { CheckCircle2, AlertCircle, Loader2, Clock, ArrowRight, FileText, Edit } from 'lucide-react'
+import { CheckCircle2, AlertCircle, Loader2, Clock, ArrowRight, FileText, Edit, Wallet } from 'lucide-react'
 import Link from 'next/link'
 
 // --- 票種定義 (僅為顯示轉換使用) ---
@@ -56,7 +56,7 @@ export default function MyRegistrationsPage() {
       <div className="max-w-4xl mx-auto space-y-8">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b-2 border-stone-800 pb-4 gap-4">
           <div className="flex items-center gap-4">
-            <h1 className="text-2xl font-bold text-stone-800">我的報名紀錄</h1>
+            <h1 className="text-2xl font-bold text-stone-800">我的報名</h1>
             <Link
               href="/SG44-register?edit=true"
               className="px-3 py-1.5 border border-stone-300 text-stone-600 hover:bg-stone-50 transition-colors text-sm font-medium flex items-center gap-1.5"
@@ -104,6 +104,47 @@ export default function MyRegistrationsPage() {
               <p className="text-sm text-red-700 leading-relaxed">
                 很抱歉，在此紀錄中找不到符合的入帳資訊。請聯絡大會工作人員確認問題，或重新修改報名表。
               </p>
+            </div>
+          </div>
+        )}
+
+        {/* --- 新增解鎖投稿提示區塊 --- */}
+        {registration.paymentStatus === 'paid' ? (
+          <div className="bg-[#F0F4F1] py-8 border-y-2 lg:border lg:rounded-none border-[#d1dbd2] flex flex-col sm:flex-row items-center sm:items-start gap-5 sm:gap-6 justify-between lg:px-8 shadow-sm">
+            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left">
+              <div className="bg-[#5F7161] p-2.5 rounded-full flex-shrink-0 text-white shadow-sm ring-4 ring-[#e0e8e1]">
+                <FileText size={22} />
+              </div>
+              <div>
+                <h4 className="font-bold text-[#5F7161] text-lg mb-1.5 tracking-tight">
+                  報名繳費完成，已開放投稿功能！
+                </h4>
+                <p className="text-sm text-stone-600 leading-relaxed max-w-lg">
+                  您的報名與繳費已被大會確認。如您有論文發表的規劃，現在可前往「我的投稿」專區上傳您的摘要。
+                </p>
+              </div>
+            </div>
+            <Link
+              href="/dashboard/my-submissions"
+              className="flex-shrink-0 flex items-center justify-center gap-2 px-8 py-3 bg-[#5F7161] text-white text-sm font-bold shadow-md hover:bg-[#4a584b] hover:shadow-lg hover:-translate-y-0.5 transition-all w-full sm:w-auto mt-4 sm:mt-0"
+            >
+              前往我的投稿 <ArrowRight size={16} />
+            </Link>
+          </div>
+        ) : (
+          <div className="bg-stone-50 py-8 border-y-2 lg:border lg:rounded-none border-stone-200 flex flex-col sm:flex-row items-center sm:items-start gap-5 sm:gap-6 justify-between lg:px-8 shadow-sm">
+            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center sm:text-left">
+              <div className="bg-stone-400 p-2.5 rounded-full flex-shrink-0 text-white shadow-sm ring-4 ring-stone-200">
+                <FileText size={22} />
+              </div>
+              <div>
+                <h4 className="font-bold text-stone-600 text-base mb-1">
+                  報名資料已建立，等候繳費確認中
+                </h4>
+                <p className="text-sm text-stone-500 leading-relaxed max-w-lg">
+                  您已成功建立報名資料。請注意：系統需等候大會確認您的款項無誤並將「繳費狀態」更新為「已繳費」後，您才能使用「我的投稿」專區上傳您的摘要或論文。
+                </p>
+              </div>
             </div>
           </div>
         )}
@@ -196,10 +237,24 @@ export default function MyRegistrationsPage() {
         </div>
       </div>
 
-      <div className="bg-stone-50 p-8 border border-stone-200 text-center">
-        <h3 className="text-stone-800 font-bold mb-3 text-lg">匯款注意事項</h3>
+      <div className="bg-stone-50 p-8 border-t-2 border-stone-400 text-center shadow-sm mb-6">
+        <div className="flex justify-center mb-4 text-stone-500">
+          <Wallet size={32} />
+        </div>
+        <h3 className="text-stone-800 font-bold mb-3 text-lg tracking-wide">匯款注意事項</h3>
         <p className="text-sm text-stone-600 leading-relaxed max-w-xl mx-auto">
           系統強制要求您於報名表單內填寫匯款對帳資訊（帳戶末五碼與日期）以利對帳。若已匯款，請直接前往報名專區進行報名。
+        </p>
+      </div>
+
+      <div className="bg-[#F0F4F1] p-8 border-t-2 border-[#5F7161] text-center shadow-sm">
+        <div className="flex justify-center mb-4 text-[#5F7161]">
+          <FileText size={32} />
+        </div>
+        <h3 className="text-[#4a584b] font-bold mb-3 text-lg tracking-wide">論文審查與投稿需知</h3>
+        <p className="text-sm text-stone-600 leading-relaxed max-w-xl mx-auto">
+          「我的投稿」功能需在<span className="font-bold text-[#5F7161]">完成報名手續</span>
+          後方得解鎖使用。如果您希望投稿摘要或論文，請先點擊上方按鈕完成表單。報名完成後，系統將自動為您開啟專區功能。
         </p>
       </div>
     </div>

@@ -89,11 +89,22 @@ export const Abstracts: CollectionConfig = {
       }
     },
     // Admin 全部可改；投稿人只能改自己的；reviewer 只能改被指派的
-    update: ({ req: { user } }) => {
+    update: async ({ req }) => {
+      const { user, payload } = req
       if (!user) return false
       if (user.role === 'admin') return true
+
+      const settings = await payload.findGlobal({
+        slug: 'abstracts-settings',
+      })
+      const isPublished = settings.reviewResultPublished
+
       // reviewer: 可改被指派的（填審稿意見）+ 自己投稿的
       if (user.role === 'reviewer') {
+        if (isPublished) {
+          // If results are published, reviewers can only change their own submissions
+          return { submitter: { equals: user.id } } as import('payload').Where
+        }
         return {
           or: [
             { assignedReviewer: { equals: user.id } } as import('payload').Where,
@@ -291,8 +302,16 @@ export const Abstracts: CollectionConfig = {
       ],
       access: {
         // 一般投稿人不能「更改」審查狀態（可以讀，但透過 global setting 控制是否顯示）
-        update: ({ req: { user } }) =>
-          user?.role === 'admin' || user?.role === 'reviewer',
+        update: async ({ req }) => {
+          const { user, payload } = req
+          if (!user) return false
+          if (user.role === 'admin') return true
+          if (user.role === 'reviewer') {
+            const settings = await payload.findGlobal({ slug: 'abstracts-settings' })
+            return !settings.reviewResultPublished
+          }
+          return false
+        },
       },
       admin: {
         components: {
@@ -306,7 +325,16 @@ export const Abstracts: CollectionConfig = {
       label: '審稿評語 (Review Comments)',
       access: {
         read: ({ req: { user } }) => user?.role === 'admin' || user?.role === 'reviewer',
-        update: ({ req: { user } }) => user?.role === 'admin' || user?.role === 'reviewer',
+        update: async ({ req }) => {
+          const { user, payload } = req
+          if (!user) return false
+          if (user.role === 'admin') return true
+          if (user.role === 'reviewer') {
+            const settings = await payload.findGlobal({ slug: 'abstracts-settings' })
+            return !settings.reviewResultPublished
+          }
+          return false
+        },
       },
       admin: {
         description: '此評語在大會發布審查結果後，會顯示給投稿人',

@@ -112,9 +112,9 @@ export default function MySubmissionsPage() {
       return (
         <div className="max-w-3xl mx-auto py-12">
           <div className="text-center border border-stone-200 p-12 space-y-5">
-            <h1 className="text-2xl font-bold text-stone-800">您的報名尚未通過審核</h1>
+            <h1 className="text-2xl font-bold text-stone-800">您的報名尚未通過繳費審核</h1>
             <p className="text-stone-500 leading-relaxed max-w-md mx-auto">
-              投稿摘要需要先完成大會報名並通過繳費確認。請先前往報名專區完成報名與繳費，待大會確認後即可投稿。
+              投稿摘要需要先完成大會報名並通過繳費確認。請先前往報名專區完成報名與繳費，待大會確認後即可開啟投稿功能。
             </p>
             <div className="pt-2">
               <Link

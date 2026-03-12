@@ -138,7 +138,11 @@ export default function SG44RegisterPage() {
       const result = await res.json()
 
       if (!res.ok) {
-        throw new Error(result.errors?.[0]?.message || '報名送出失敗。')
+        let msg = result.errors?.[0]?.message || '報名送出失敗。'
+        if (msg.toLowerCase().includes('already exists') || msg.toLowerCase().includes('validation') || msg.toLowerCase().includes('exist')) {
+          msg = '部分資料格式驗證失敗或您已報名過，請檢查輸入內容。'
+        }
+        throw new Error(msg)
       }
 
       router.push('/dashboard/my-registrations')
@@ -256,7 +260,7 @@ export default function SG44RegisterPage() {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-stone-600 mb-1">
-                    服務單位 / 學校
+                    服務單位 / 學校 (Organization / School)
                   </label>
                   <p className="text-stone-800 font-bold">{user.organization}</p>
                 </div>
@@ -363,7 +367,8 @@ export default function SG44RegisterPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
                   <label className="block text-sm font-bold text-stone-800 mb-2">
-                    匯款帳號末五碼 <span className="text-red-500">*</span>
+                    匯款帳號末五碼 (Last 5 Digits of Account){' '}
+                    <span className="text-red-500">*</span>
                   </label>
                   <input
                     {...register('paymentAccountLast5', {
@@ -386,7 +391,7 @@ export default function SG44RegisterPage() {
                 </div>
                 <div>
                   <label className="block text-sm font-bold text-stone-800 mb-2">
-                    匯款日期 <span className="text-red-500">*</span>
+                    匯款日期 (Payment Date) <span className="text-red-500">*</span>
                   </label>
                   <input
                     {...register('paymentDate', { required: '請選取您實際操作匯款的日期' })}
@@ -414,6 +419,8 @@ export default function SG44RegisterPage() {
                 <div className="border border-stone-200 p-5">
                   <span className="block text-sm font-bold text-stone-800 mb-4 border-b border-stone-100 pb-3">
                     08/20 中午大會午餐
+                    <br />
+                    (08/20 Lunch)
                   </span>
                   <div className="flex flex-col gap-3">
                     <label className="flex items-center gap-2 cursor-pointer text-sm hover:text-stone-900 text-stone-700">
@@ -423,7 +430,7 @@ export default function SG44RegisterPage() {
                         value="yes"
                         className="accent-[#5F7161] w-4 h-4"
                       />
-                      需用餐
+                      需用餐 (Yes)
                     </label>
                     <label className="flex items-center gap-2 cursor-pointer text-sm hover:text-stone-900 text-stone-700">
                       <input
@@ -432,7 +439,7 @@ export default function SG44RegisterPage() {
                         value="no"
                         className="accent-[#5F7161] w-4 h-4"
                       />
-                      不需用餐
+                      不需用餐 (No)
                     </label>
                   </div>
                 </div>
@@ -440,6 +447,8 @@ export default function SG44RegisterPage() {
                 <div className="border border-stone-200 p-5">
                   <span className="block text-sm font-bold text-stone-800 mb-4 border-b border-stone-100 pb-3">
                     08/21 中午大會午餐
+                    <br />
+                    (08/21 Lunch)
                   </span>
                   <div className="flex flex-col gap-3">
                     <label className="flex items-center gap-2 cursor-pointer text-sm hover:text-stone-900 text-stone-700">
@@ -449,7 +458,7 @@ export default function SG44RegisterPage() {
                         value="yes"
                         className="accent-[#5F7161] w-4 h-4"
                       />
-                      需用餐
+                      需用餐 (Yes)
                     </label>
                     <label className="flex items-center gap-2 cursor-pointer text-sm hover:text-stone-900 text-stone-700">
                       <input
@@ -458,7 +467,7 @@ export default function SG44RegisterPage() {
                         value="no"
                         className="accent-[#5F7161] w-4 h-4"
                       />
-                      不需用餐
+                      不需用餐 (No)
                     </label>
                   </div>
                 </div>
@@ -466,6 +475,8 @@ export default function SG44RegisterPage() {
                 <div className="border border-stone-300 bg-stone-50 p-5">
                   <span className="block text-sm font-bold text-stone-800 mb-4 border-b border-stone-200 pb-3">
                     08/20 夜間大會晚宴
+                    <br />
+                    (08/20 Banquet)
                   </span>
                   <div className="flex flex-col gap-3">
                     <label className="flex items-center gap-2 cursor-pointer text-sm font-bold hover:text-stone-900 text-stone-800">
@@ -475,7 +486,7 @@ export default function SG44RegisterPage() {
                         value="yes"
                         className="accent-[#5F7161] w-4 h-4"
                       />
-                      大會晚宴 (將出席)
+                      將出席 (Yes)
                     </label>
                     <label className="flex items-center gap-2 cursor-pointer text-sm hover:text-stone-900 text-stone-700">
                       <input
@@ -484,7 +495,7 @@ export default function SG44RegisterPage() {
                         value="no"
                         className="accent-[#5F7161] w-4 h-4"
                       />
-                      不克出席
+                      不克出席 (No)
                     </label>
                   </div>
                 </div>
@@ -510,9 +521,9 @@ export default function SG44RegisterPage() {
                       className="w-full md:w-1/2 px-4 py-2.5 border border-stone-300 focus:border-[#5F7161] focus:ring-1 focus:ring-[#5F7161] outline-none bg-white rounded-none cursor-pointer text-sm transition-colors"
                     >
                       <option value="">請選擇您的飲食偏好</option>
-                      <option value="regular">一般 (葷食)</option>
-                      <option value="vegan">素食 (Vegetarian)</option>
-                      <option value="other">其他特殊需求</option>
+                      <option value="regular">葷食 (Non-Vegetarian)</option>
+                      <option value="vegetarian">素食 (Vegetarian)</option>
+                      <option value="other">其他特殊需求 (Other)</option>
                     </select>
 
                     {errors.dietaryPreference && (
@@ -528,7 +539,7 @@ export default function SG44RegisterPage() {
                             required: '請具體說明您的特殊飲食需求，以便大會膳食組準備',
                           })}
                           type="text"
-                          placeholder="請具體說明，例如：不吃牛羊、海鮮嚴重過敏..."
+                          placeholder="請具體說明，例如：不吃牛羊、嚴重過敏..."
                           className="w-full px-4 py-2.5 border border-stone-300 focus:border-[#5F7161] focus:ring-1 focus:ring-[#5F7161] outline-none rounded-none text-sm transition-colors"
                         />
                       </div>

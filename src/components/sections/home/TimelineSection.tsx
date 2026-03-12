@@ -16,7 +16,7 @@ const TimelineSection: React.FC = () => {
   const dragStartX = useRef(0)
   const scrollLeftStart = useRef(0)
 
-  // ✨ 功能 1: 處理滑鼠滾輪 (將垂直滾動轉換為水平滾動)
+  // 功能 1: 處理滑鼠滾輪 (將垂直滾動轉換為水平滾動)
   useEffect(() => {
     const container = scrollContainerRef.current
     if (!container) return
@@ -39,7 +39,7 @@ const TimelineSection: React.FC = () => {
     }
   }, [])
 
-  // ✨ 功能 2: 監聽捲動事件，更新滑桿進度
+  // 功能 2: 監聽捲動事件，更新滑桿進度
   const handleScroll = () => {
     if (scrollContainerRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current
@@ -50,7 +50,7 @@ const TimelineSection: React.FC = () => {
     }
   }
 
-  // ✨ 功能 3: 拖曳滑桿邏輯
+  // 功能 3: 拖曳滑桿邏輯
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
     setIsDragging(true)
     e.preventDefault()
@@ -93,7 +93,7 @@ const TimelineSection: React.FC = () => {
     }
   }, [isDragging])
 
-  // ✨ 功能 4: 拖曳時間軸內容 (滑鼠)
+  // 功能 4: 拖曳時間軸內容 (滑鼠)
   const handleContentMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const container = scrollContainerRef.current
     if (!container) return
@@ -116,7 +116,7 @@ const TimelineSection: React.FC = () => {
     setIsContentDragging(false)
   }, [])
 
-  // ✨ 功能 5: 拖曳時間軸內容 (觸控)
+  // 功能 5: 拖曳時間軸內容 (觸控)
   const handleTouchStart = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
     const container = scrollContainerRef.current
     if (!container) return
@@ -243,7 +243,7 @@ const TimelineSection: React.FC = () => {
               </div>
             </div>
 
-            {/* ✨ 自定義滑桿區塊 */}
+            {/* 自定義滑桿區塊 */}
             <div className="max-w-md mx-auto mt-2 px-4">
               <div
                 ref={scrollbarRef}

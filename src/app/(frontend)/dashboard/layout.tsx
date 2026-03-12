@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { useAuth } from '@/providers/Auth'
 import { User, FileText, Calendar, Award, Bell, LogOut, ClipboardList } from 'lucide-react'
+import { useState } from 'react'
 
 const SIDEBAR_ITEMS = [
   {
@@ -49,12 +50,30 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const { user, loading, logout } = useAuth()
   const router = useRouter()
   const pathname = usePathname()
+  const [hasPaidRegistration, setHasPaidRegistration] = useState(false)
 
   useEffect(() => {
     if (!loading && !user) {
       router.push('/login')
     }
   }, [user, loading, router])
+
+  useEffect(() => {
+    if (user) {
+      const checkRegistration = async () => {
+        try {
+          const res = await fetch(`/api/registrations?where[user][equals]=${user.id}&where[paymentStatus][equals]=paid`)
+          if (res.ok) {
+            const data = await res.json()
+            if (data.docs && data.docs.length > 0) {
+              setHasPaidRegistration(true)
+            }
+          }
+        } catch (err) {}
+      }
+      checkRegistration()
+    }
+  }, [user])
 
   if (loading) {
     return (
@@ -91,7 +110,15 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
               {/* Navigation */}
               <nav className="p-2 space-y-1">
-                {SIDEBAR_ITEMS.filter((item) => item.roles.includes(user.role)).map((item) => {
+                {SIDEBAR_ITEMS.filter((item) => {
+                  if (!user) return false
+                  if (!item.roles.includes(user.role)) return false
+                  // Hide "我的投稿" if standard user hasn't registered and paid
+                  if (item.name === '我的投稿' && user.role === 'user' && !hasPaidRegistration) {
+                    return false
+                  }
+                  return true
+                }).map((item) => {
                   const isActive = pathname === item.href || pathname?.startsWith(`${item.href}/`)
                   return (
                     <Link
@@ -109,13 +136,15 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                   )
                 })}
 
-                <button
-                  onClick={logout}
-                  className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-red-600 hover:bg-red-50 transition-colors mt-4"
-                >
-                  <LogOut size={18} />
-                  登出
-                </button>
+                <div className="pt-2 mt-2 border-t border-stone-100">
+                  <button
+                    onClick={logout}
+                    className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-stone-600 hover:bg-stone-50 hover:text-stone-800 transition-colors"
+                  >
+                    <LogOut size={18} />
+                    登出
+                  </button>
+                </div>
               </nav>
             </div>
           </aside>

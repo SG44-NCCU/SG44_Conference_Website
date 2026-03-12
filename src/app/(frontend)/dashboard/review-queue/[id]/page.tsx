@@ -69,6 +69,7 @@ export default function ReviewDetailPage() {
   const [reviewStatus, setReviewStatus] = useState<string>('')
   const [reviewComments, setReviewComments] = useState<string>('')
   const [saveMsg, setSaveMsg] = useState<string | null>(null)
+  const [isPublished, setIsPublished] = useState(false)
 
   // ── Fetch current doc ──────────────────────────────────────────────────────
   useEffect(() => {
@@ -76,11 +77,12 @@ export default function ReviewDetailPage() {
 
     const fetchData = async () => {
       try {
-        const [docRes, listRes] = await Promise.all([
+        const [docRes, listRes, settingsRes] = await Promise.all([
           fetch(`/api/abstracts/${id}?depth=1`),
           fetch(
             `/api/abstracts?where[assignedReviewer][equals]=${user.id}&sort=-createdAt&limit=200&select=id`,
           ),
+          fetch('/api/globals/abstracts-settings'),
         ])
 
         if (docRes.ok) {
@@ -90,9 +92,9 @@ export default function ReviewDetailPage() {
           setReviewComments(data.reviewComments || '')
         }
 
-        if (listRes.ok) {
-          const listData = await listRes.json()
-          setAllIds((listData.docs || []).map((d: { id: number }) => d.id))
+        if (settingsRes.ok) {
+          const settings = await settingsRes.json()
+          setIsPublished(settings.reviewResultPublished)
         }
       } catch (err) {
         console.error('Failed to load abstract', err)
@@ -121,15 +123,15 @@ export default function ReviewDetailPage() {
       })
 
       if (res.ok) {
-        setSaveMsg('✅ 審稿意見已儲存')
+        setSaveMsg('審稿意見已儲存')
         if (nextId) {
           setTimeout(() => router.push(`/dashboard/review-queue/${nextId}`), 1000)
         }
       } else {
-        setSaveMsg('❌ 儲存失敗，請重試')
+        setSaveMsg('儲存失敗，請重試')
       }
     } catch {
-      setSaveMsg('❌ 儲存失敗，請重試')
+      setSaveMsg('儲存失敗，請重試')
     } finally {
       setSaving(false)
     }
@@ -265,9 +267,16 @@ export default function ReviewDetailPage() {
 
       {/* ── Review form ── */}
       <div className="border border-stone-200 p-6 space-y-6">
-        <h2 className="font-bold text-stone-800 text-base border-b-2 border-stone-800 pb-3">
-          審稿表單
-        </h2>
+        <div className="border-b-2 border-stone-800 pb-3 flex items-center justify-between">
+          <h2 className="font-bold text-stone-800 text-base">
+            審稿表單
+          </h2>
+          {isPublished && (
+            <span className="text-sm font-bold text-red-600 bg-red-50 px-3 py-1 rounded border border-red-200">
+              審查結果已發布，無法再修改審查意見
+            </span>
+          )}
+        </div>
 
         {/* Decision radio */}
         <div>
@@ -296,7 +305,8 @@ export default function ReviewDetailPage() {
                     value={opt.value}
                     checked={isSelected}
                     onChange={() => setReviewStatus(opt.value)}
-                    className="w-4 h-4 accent-[#5F7161]"
+                    disabled={isPublished}
+                    className="w-4 h-4 accent-[#5F7161] disabled:opacity-50"
                   />
                   <span
                     className="text-sm"
@@ -321,9 +331,10 @@ export default function ReviewDetailPage() {
           <textarea
             value={reviewComments}
             onChange={(e) => setReviewComments(e.target.value)}
+            disabled={isPublished}
             rows={6}
             placeholder="請填寫給投稿人的評語。若選擇「修改後通過」，請說明需要修改的部分；若選擇「未通過」，請說明原因。大會發布審查結果後，評語將顯示給投稿人。"
-            className="w-full px-4 py-3 border border-stone-300 focus:border-[#5F7161] focus:ring-1 focus:ring-[#5F7161] outline-none resize-y text-sm transition-colors bg-white text-stone-800"
+            className="w-full px-4 py-3 border border-stone-300 focus:border-[#5F7161] focus:ring-1 focus:ring-[#5F7161] outline-none resize-y text-sm transition-colors bg-white text-stone-800 disabled:bg-stone-100 disabled:text-stone-500 disabled:cursor-not-allowed"
           />
         </div>
 
@@ -331,7 +342,7 @@ export default function ReviewDetailPage() {
         <div className="flex items-center gap-4 pt-2">
           <button
             onClick={handleSave}
-            disabled={saving}
+            disabled={saving || isPublished}
             className="px-8 py-2.5 bg-[#5F7161] text-white font-medium hover:bg-[#4a584b] transition-colors disabled:opacity-70 disabled:cursor-not-allowed text-sm tracking-wide"
           >
             {saving ? (
@@ -346,7 +357,7 @@ export default function ReviewDetailPage() {
           {saveMsg && (
             <span
               className="text-sm"
-              style={{ color: saveMsg.startsWith('✅') ? '#5F7161' : '#dc2626' }}
+              style={{ color: saveMsg.includes('失敗') ? '#dc2626' : '#5F7161' }}
             >
               {saveMsg}
             </span>

@@ -4,9 +4,11 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { useAuth } from '@/providers/Auth'
 
 export default function LoginPage() {
   const router = useRouter()
+  const { refreshUser } = useAuth()
   const [error, setError] = useState<string | null>(null)
   const {
     register,
@@ -26,12 +28,16 @@ export default function LoginPage() {
       const json = await res.json()
 
       if (!res.ok) {
-        throw new Error(json.errors?.[0]?.message || '登入失敗，請檢查帳號密碼')
+        let msg = json.errors?.[0]?.message || '登入失敗，請檢查帳號密碼'
+        if (msg.toLowerCase().includes('login failed') || msg.toLowerCase().includes('credentials')) {
+          msg = '登入失敗，請確認您的信箱與密碼是否完全正確。'
+        }
+        throw new Error(msg)
       }
 
       // 登入成功
-      // alert(`歡迎回來，${json.user.name}`) // 移除 alert，改為直接跳轉
-      router.push('/') // 跳轉回首頁
+      await refreshUser() // 更新 context 中的 user state
+      router.push('/dashboard/my-registrations') // 跳轉回我的報名
       router.refresh() // 刷新頁面狀態以更新 Navbar
     } catch (err: any) {
       setError(err.message)

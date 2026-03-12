@@ -79,7 +79,7 @@ export default async function NewsPost({ params }: { params: Promise<{ slug: str
                 let url = ''
                 let typeLabel = ''
 
-                // ✅ 正確的型別檢查
+                // 正確的型別檢查
                 if (item.type === 'file' && item.file) {
                   // item.file 可能是 string (ID) 或 Media 物件
                   const fileData = item.file as Media

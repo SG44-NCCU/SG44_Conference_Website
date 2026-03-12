@@ -36,7 +36,15 @@ export default function RegisterPage() {
       const json = await res.json()
 
       if (!res.ok) {
-        throw new Error(json.errors?.[0]?.message || '註冊失敗')
+        let msg = json.errors?.[0]?.message || '註冊失敗'
+        if (msg.toLowerCase().includes('already exists') || msg.toLowerCase().includes('duplicate')) {
+          msg = '這個信箱已經被註冊過了，請直接登入或使用忘記密碼。'
+        } else if (msg.toLowerCase().includes('validation')) {
+          msg = '部分資料格式不符，請檢查輸入內容是否完整。'
+        } else if (msg.toLowerCase().includes('invalid')) {
+          msg = '輸入的資料無效，請重新檢查。'
+        }
+        throw new Error(msg)
       }
 
       setSuccess(true)

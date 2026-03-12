@@ -132,7 +132,7 @@ export const AbstractDashboard: React.FC = () => {
         setDocs(data.docs || [])
       }
     } catch (err) {
-      setBulkMsg('❌ 指派時發生錯誤，請重試')
+      setBulkMsg('指派時發生錯誤，請重試')
     } finally {
       setBulkAssigning(false)
     }
@@ -322,7 +322,7 @@ export const AbstractDashboard: React.FC = () => {
         )}
 
         {bulkMsg && (
-          <p style={{ marginTop: '0.5rem', fontSize: '0.8rem', color: bulkMsg.startsWith('✅') ? '#166534' : '#991b1b' }}>
+          <p style={{ marginTop: '0.5rem', fontSize: '0.8rem', color: bulkMsg.includes('錯誤') ? '#991b1b' : '#166534' }}>
             {bulkMsg}
           </p>
         )}

@@ -250,7 +250,7 @@ export interface Registration {
   mealDay1: 'yes' | 'no';
   mealDay2: 'yes' | 'no';
   banquet: 'yes' | 'no';
-  dietaryPreference?: ('regular' | 'vegan' | 'other') | null;
+  dietaryPreference?: ('regular' | 'vegetarian' | 'other') | null;
   dietaryOther?: string | null;
   remarks?: string | null;
   updatedAt: string;

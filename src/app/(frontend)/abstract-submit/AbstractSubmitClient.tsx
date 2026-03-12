@@ -176,7 +176,11 @@ export default function AbstractSubmitClient() {
       const result = await res.json()
 
       if (!res.ok) {
-        throw new Error(result.errors?.[0]?.message || '投稿送出失敗，請再試一次。')
+        let msg = result.errors?.[0]?.message || '投稿送出失敗，請再試一次。'
+        if (msg.toLowerCase().includes('validation') || msg.toLowerCase().includes('exist')) {
+          msg = '部分資料格式驗證失敗，請檢查輸入內容是否完整有效。'
+        }
+        throw new Error(msg)
       }
 
       router.push('/dashboard/my-submissions')
@@ -279,7 +283,7 @@ export default function AbstractSubmitClient() {
                       >
                         <div className="flex items-center justify-between mb-4">
                           <span className="font-bold text-stone-700 text-sm">
-                            作者 {index + 1}
+                            作者 (Author) {index + 1}
                             {watch(`authors.${index}.isCorresponding`) && (
                               <span className="ml-2 text-xs font-normal text-[#5F7161] border border-[#5F7161] px-2 py-0.5 rounded">
                                 通訊作者
@@ -290,6 +294,7 @@ export default function AbstractSubmitClient() {
                             <button
                               type="button"
                               onClick={() => removeAuthor(index)}
+                              title="刪除作者 (Remove Author)"
                               className="text-red-400 hover:text-red-600 transition-colors"
                             >
                               <Trash2 size={16} />
@@ -300,7 +305,7 @@ export default function AbstractSubmitClient() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           <div>
                             <label className="block text-xs font-bold text-stone-600 mb-1.5 uppercase tracking-wider">
-                              姓名 <span className="text-red-500">*</span>
+                              姓名 (Name) <span className="text-red-500">*</span>
                             </label>
                             <input
                               {...register(`authors.${index}.name`, { required: '請填寫作者姓名' })}
@@ -314,7 +319,7 @@ export default function AbstractSubmitClient() {
                           </div>
                           <div>
                             <label className="block text-xs font-bold text-stone-600 mb-1.5 uppercase tracking-wider">
-                              所屬單位 <span className="text-red-500">*</span>
+                              所屬單位 (Affiliation) <span className="text-red-500">*</span>
                             </label>
                             <input
                               {...register(`authors.${index}.affiliation`, { required: '請填寫所屬單位' })}
@@ -328,7 +333,7 @@ export default function AbstractSubmitClient() {
                           </div>
                           <div>
                             <label className="block text-xs font-bold text-stone-600 mb-1.5 uppercase tracking-wider">
-                              電子郵件 <span className="text-red-500">*</span>
+                              電子郵件 (Email) <span className="text-red-500">*</span>
                             </label>
                             <input
                               {...register(`authors.${index}.email`, {
@@ -363,7 +368,7 @@ export default function AbstractSubmitClient() {
                     onClick={() => appendAuthor({ name: '', affiliation: '', email: '', isCorresponding: false })}
                     className="mt-4 flex items-center gap-2 text-sm text-[#5F7161] border border-[#5F7161] px-4 py-2 hover:bg-stone-50 transition-colors"
                   >
-                    <Plus size={16} /> 新增作者
+                    <Plus size={16} /> 新增作者 (Add Author)
                   </button>
                 </section>
 
@@ -373,8 +378,8 @@ export default function AbstractSubmitClient() {
                     3. 投稿分類 (Classification)
                   </h3>
 
-                  {/* 特別論壇選擇放在最上面 */}
-                  <div className="mb-6">
+                  {/* 特別論壇選擇放在最上面 (暫時註解依使用者要求) */}
+                  {/* <div className="mb-6">
                     <label className="block text-sm font-bold text-stone-800 mb-2">
                       特別論壇 (Special Session)
                     </label>
@@ -392,13 +397,13 @@ export default function AbstractSubmitClient() {
                     <p className="text-stone-400 text-xs mt-1">
                       若為特別論壇邀稿請在此選擇，一般投稿請留空並於下方選擇子題
                     </p>
-                  </div>
+                  </div> */}
 
                   {/* 子題：只有在沒有選特別論壇時才顯示 */}
                   {!watch('specialSession') && (
                     <div>
                       <label className="block text-sm font-bold text-stone-800 mb-2">
-                        投稿子題 <span className="text-red-500">*</span>
+                        投稿子題 (Sub-Topic) <span className="text-red-500">*</span>
                       </label>
                       <select
                         {...register('subTopic', {
@@ -419,12 +424,12 @@ export default function AbstractSubmitClient() {
                     </div>
                   )}
 
-                  {/* 若選了特別論壇，顯示說明 */}
-                  {watch('specialSession') && (
+                  {/* 若選了特別論壇，顯示說明 (暫時註解) */}
+                  {/* {watch('specialSession') && (
                     <div className="p-3 bg-stone-50 border border-stone-200 text-sm text-stone-600">
                        特別論壇投稿不需選擇子題，分類由各論壇主持人統籌安排。
                     </div>
-                  )}
+                  )} */}
                 </section>
 
                 {/* ── Section 4: 偏好發表形式 ── */}

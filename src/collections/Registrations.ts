@@ -190,9 +190,9 @@ export const Registrations: CollectionConfig = {
       type: 'select',
       label: '飲食偏好',
       options: [
-        { label: '一般 (葷食)', value: 'regular' },
-        { label: '素食 (Vegetarian)', value: 'vegan' },
-        { label: '其他特殊需求', value: 'other' },
+        { label: '葷食 (Non-Vegetarian)', value: 'regular' },
+        { label: '素食 (Vegetarian)', value: 'vegetarian' },
+        { label: '其他特殊需求 (Other)', value: 'other' },
       ],
       admin: {
         condition: (data) =>

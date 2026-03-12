@@ -39,7 +39,11 @@ function ResetPasswordContent() {
 
       if (!res.ok) {
         const json = await res.json()
-        throw new Error(json.errors?.[0]?.message || '重設失敗，連結可能已過期')
+        let msg = json.errors?.[0]?.message || '重設失敗，連結可能已過期'
+        if (msg.toLowerCase().includes('token') || msg.toLowerCase().includes('expired') || msg.toLowerCase().includes('invalid')) {
+          msg = '無效的驗證碼或重設連結已過期，請重新發送忘記密碼信件。'
+        }
+        throw new Error(msg)
       }
 
       setSuccess(true)

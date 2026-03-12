@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { useAuth } from '@/providers/Auth'
 
-// ✅ 定義型別
+// 定義型別
 interface SubMenuItem {
   name: string
   href: string
@@ -220,7 +220,7 @@ const Navbar: React.FC = () => {
                         </p>
                       </div>
                       <Link
-                        href="/dashboard"
+                        href="/dashboard/my-registrations"
                         className="block px-4 py-2 text-sm text-stone-600 hover:bg-[#F0F4F1] hover:text-[#5F7161] transition-colors"
                       >
                         會員中心
@@ -320,7 +320,7 @@ const Navbar: React.FC = () => {
                     </div>
                   </div>
                   <Link
-                    href="/dashboard"
+                    href="/dashboard/my-registrations"
                     className="block w-full text-center py-2.5 bg-[#5F7161] text-white rounded-md font-medium hover:bg-[#4a584b] transition-colors"
                     onClick={() => setIsOpen(false)}
                   >
