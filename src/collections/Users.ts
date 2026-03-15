@@ -131,6 +131,9 @@ export const Users: CollectionConfig = {
       admin: {
         // 在後台側邊欄，非 Admin 其實也看不到（因為上面的 access.admin 擋住了），但加這行更保險
         position: 'sidebar',
+        components: {
+          Cell: '@/components/payload/RoleSelectCell#RoleSelectCell',
+        },
       },
     },
   ],
