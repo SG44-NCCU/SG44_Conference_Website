@@ -1,15 +1,18 @@
-'use client'
 import React from 'react'
+import Image from 'next/image'
 
 const Hero: React.FC = () => {
   return (
     <section className="relative w-full overflow-hidden bg-white">
-      <img 
-        src="/key-visual.svg" 
-        alt="SG44 研討會主視覺 Key Visual" 
-        className="block w-full h-auto object-cover"
-        fetchPriority="high"
-      />
+      <div className="relative w-full aspect-[1920/1080] md:aspect-[1920/800] lg:aspect-[1920/700]">
+        <Image 
+          src="/key-visual.svg" 
+          alt="SG44 研討會主視覺 Key Visual" 
+          fill
+          priority
+          className="object-cover"
+        />
+      </div>
       
       {/* Bottom Fade Gradient Overlay */}
       <div 

@@ -46,7 +46,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
       <body className="flex flex-col min-h-screen font-sans">
         <AuthProvider>
           <Navbar />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1 pt-[88px] lg:pt-[88px]">{children}</main>
           <Footer />
         </AuthProvider>
       </body>

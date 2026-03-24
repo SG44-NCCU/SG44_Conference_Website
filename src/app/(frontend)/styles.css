@@ -21,6 +21,10 @@
   --color-sg-green: #4d4c9d;
   --color-sg-light: #53b2e5;
 
+  /* 👇 Define primary and secondary to match branding and fix button visibility */
+  --color-primary: #4d4c9d;
+  --color-secondary: #53b2e5;
+
   /* 👇 優先使用 Swei Halfmoon */
   --font-sans:
     'Swei Halfmoon', var(--font-noto-sans), var(--font-noto), system-ui, -apple-system, BlinkMacSystemFont,
