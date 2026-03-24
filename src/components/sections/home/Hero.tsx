@@ -10,6 +10,12 @@ const Hero: React.FC = () => {
         className="block w-full h-auto object-cover"
         fetchPriority="high"
       />
+      
+      {/* Bottom Fade Gradient Overlay */}
+      <div 
+        className="absolute inset-x-0 bottom-0 h-24 sm:h-32 md:h-48 bg-gradient-to-t from-white via-white/40 to-transparent pointer-events-none" 
+        aria-hidden="true"
+      />
     </section>
   )
 }
