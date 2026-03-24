@@ -5,6 +5,7 @@ export const Users: CollectionConfig = {
   // 1. 開啟 Email 驗證
   auth: {
     verify: {
+      generateEmailSubject: () => '[SG44] 啟用您的帳號 / Activate Your Account',
       generateEmailHTML: ({ token, user }) => {
         // 使用環境變數或預設 domain
         const serverURL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
@@ -15,16 +16,18 @@ export const Users: CollectionConfig = {
           <html>
             <body style="font-family: sans-serif; color: #333; line-height: 1.6;">
               <div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;">
-                <h2 style="color: #5F7161;">歡迎加入 SG44！</h2>
+                <h2 style="color: #5F7161;">歡迎加入 SG44！ / Welcome to SG44!</h2>
                 <p>親愛的 ${user.name} 您好，</p>
                 <p>感謝您註冊第44屆測量及空間資訊研討會帳號。請點擊下方按鈕以啟用您的帳號：</p>
+                <p>Dear ${user.name},</p>
+                <p>Thank you for registering an account for the 44th Surveying and Geoinformatics Conference. Please click the button below to activate your account:</p>
                 <div style="text-align: center; margin: 30px 0;">
-                  <a href="${verifyURL}" style="display: inline-block; background-color: #869D85; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">啟用帳號</a>
+                  <a href="${verifyURL}" style="display: inline-block; background-color: #869D85; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">啟用帳號 / Activate Account</a>
                 </div>
-                <p style="font-size: 14px; color: #666;">或是複製以下連結至瀏覽器開啟：<br/>
+                <p style="font-size: 14px; color: #666;">或是複製以下連結至瀏覽器開啟： / Or copy the link below into your browser:<br/>
                 <a href="${verifyURL}" style="color: #5F7161;">${verifyURL}</a></p>
                 <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;" />
-                <p style="font-size: 12px; color: #999;">SG44 研討會籌備團隊 敬上</p>
+                <p style="font-size: 12px; color: #999;">SG44 研討會籌備團隊 敬上<br/>SG44 Conference Organizing Team</p>
               </div>
             </body>
           </html>
@@ -32,6 +35,37 @@ export const Users: CollectionConfig = {
       },
     },
     // verify: false,
+    forgotPassword: {
+      generateEmailSubject: () => '[SG44] 重設您的密碼 / Reset Your Password',
+      generateEmailHTML: (args) => {
+        const token = args?.token
+        const user = args?.user
+        const serverURL = process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3000'
+        const resetURL = `${serverURL}/reset-password?token=${token}`
+
+        return `
+          <!doctype html>
+          <html>
+            <body style="font-family: sans-serif; color: #333; line-height: 1.6;">
+              <div style="max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;">
+                <h2 style="color: #5F7161;">重設 SG44 密碼 / Reset SG44 Password</h2>
+                <p>親愛的 ${user?.name || '使用者'} 您好，</p>
+                <p>我們收到了您重設密碼的請求。若這不是您本人的操作，請忽略此信件。請點擊下方按鈕以重設您的密碼：</p>
+                <p>Dear ${user?.name || 'User'},</p>
+                <p>We received a request to reset your password. If you did not make this request, please ignore this email. Please click the button below to reset your password:</p>
+                <div style="text-align: center; margin: 30px 0;">
+                  <a href="${resetURL}" style="display: inline-block; background-color: #869D85; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold;">重設密碼 / Reset Password</a>
+                </div>
+                <p style="font-size: 14px; color: #666;">或是複製以下連結至瀏覽器開啟： / Or copy the link below into your browser:<br/>
+                <a href="${resetURL}" style="color: #5F7161;">${resetURL}</a></p>
+                <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;" />
+                <p style="font-size: 12px; color: #999;">SG44 研討會籌備團隊 敬上<br/>SG44 Conference Organizing Team</p>
+              </div>
+            </body>
+          </html>
+        `
+      },
+    },
   },
   admin: {
     group: '使用者資料',
