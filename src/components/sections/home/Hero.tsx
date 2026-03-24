@@ -1,19 +1,26 @@
-import React from 'react'
+'use client'
+
+import React, { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
 const Hero: React.FC = () => {
+  const [isLoaded, setIsLoaded] = useState(false)
+
   return (
     <section className="relative w-full overflow-hidden bg-white">
       {/* Hero Image Container */}
-      <div className="relative w-full aspect-[1920/1080] md:aspect-[1920/800] lg:aspect-[1920/700]">
+      <div className="relative w-full aspect-[1920/1080] md:aspect-[1920/800] lg:aspect-[1920/700] bg-stone-50">
         <Image 
           src="/key-visual.webp" 
           alt="SG44 研討會主視覺 Key Visual" 
           fill
           priority
-          unoptimized={true}
-          className="object-cover"
+          quality={90}
+          onLoad={() => setIsLoaded(true)}
+          className={`object-cover transition-opacity duration-1000 ease-in-out ${
+            isLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
         />
         
         {/* Bottom Fade Gradient Overlay - Subtle blend into the button section */}
