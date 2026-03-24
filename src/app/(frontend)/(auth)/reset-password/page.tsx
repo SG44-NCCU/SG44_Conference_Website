@@ -61,7 +61,7 @@ function ResetPasswordContent() {
   if (success) {
     return (
       <div className="text-center">
-        <h3 className="text-2xl font-bold text-primary mb-4 tracking-tight">密碼重設成功！</h3>
+        <h3 className="text-2xl font-semibold tracking-wide text-primary mb-4 tracking-tight">密碼重設成功！</h3>
         <p className="text-stone-600 mb-6">
           您現在可以使用新密碼登入了。
           <br />
@@ -73,7 +73,7 @@ function ResetPasswordContent() {
 
   return (
     <div>
-      <h3 className="text-2xl font-bold text-primary mb-6 text-center tracking-tight">
+      <h3 className="text-2xl font-semibold tracking-wide text-primary mb-6 text-center tracking-tight">
         重設密碼
       </h3>
 
@@ -117,7 +117,7 @@ function ResetPasswordContent() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-md text-sm font-bold text-white bg-secondary hover:bg-[#6b7d6a] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary disabled:bg-stone-300 disabled:shadow-none transition-all duration-200 mt-4"
+          className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-sm shadow-md text-sm font-semibold tracking-wide text-white bg-secondary hover:bg-[#4098c7] hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary disabled:bg-stone-300 disabled:shadow-none transition-all duration-200 mt-4"
         >
           {isSubmitting ? '重設中...' : '確認重設'}
         </button>

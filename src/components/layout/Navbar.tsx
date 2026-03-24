@@ -138,19 +138,17 @@ const Navbar: React.FC = () => {
     <nav
       className={`fixed w-full z-50 transition-all duration-300 font-sans ${
         scrolled
-          ? 'bg-white/95 backdrop-blur-sm border-b border-stone-200 py-2 shadow-sm'
-          : 'bg-white/80 backdrop-blur-md py-4'
+          ? 'bg-[#f3f3f9]/95 backdrop-blur-sm border-b border-[#bfa3cd]/20 py-2 shadow-sm'
+          : 'bg-white/90 backdrop-blur-md py-4'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-14">
           {/* Logo 區域 */}
           <Link href="/" className="flex-shrink-0 flex items-center gap-3 group">
-            <div className="w-10 h-10 bg-[#5F7161] text-white flex items-center justify-center rounded-sm shadow-sm group-hover:bg-[#4a584b] transition-colors">
-              <span className="font-bold text-lg">SG</span>
-            </div>
+            <img src="/LOGO.svg" alt="SG44 Logo" className="h-10 w-auto object-contain transition-transform group-hover:scale-105" />
             <div className="flex flex-col">
-              <span className="font-bold text-stone-800 text-lg leading-tight tracking-wide">
+              <span className="font-semibold tracking-wide text-stone-800 text-lg leading-tight tracking-wide">
                 SG44
               </span>
               <span className="text-[10px] text-stone-500 font-medium tracking-wider uppercase">
@@ -165,7 +163,7 @@ const Navbar: React.FC = () => {
               <div key={item.name} className="relative group px-3 py-2">
                 <Link
                   href={item.href}
-                  className="flex items-center gap-1 text-sm font-medium text-stone-600 hover:text-[#5F7161] transition-colors"
+                  className="flex items-center gap-1 text-sm font-medium text-stone-600 hover:text-[#4d4c9d] transition-colors"
                 >
                   {item.name}
                   {item.items && (
@@ -179,12 +177,12 @@ const Navbar: React.FC = () => {
                 {/* Dropdown */}
                 {item.items && (
                   <div className="absolute left-0 top-full pt-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform group-hover:translate-y-0 translate-y-2">
-                    <div className="bg-white rounded-md shadow-lg border border-stone-100 overflow-hidden py-1">
+                    <div className="bg-white rounded-md shadow-sm border border-stone-100 overflow-hidden py-1">
                       {item.items.map((subItem) => (
                         <Link
                           key={subItem.name}
                           href={subItem.href}
-                          className="block px-4 py-2 text-sm text-stone-600 hover:bg-[#F0F4F1] hover:text-[#5F7161] transition-colors"
+                          className="block px-4 py-2 text-sm text-stone-600 hover:bg-[#f3f3f9] hover:text-[#4d4c9d] transition-colors"
                         >
                           {subItem.name}
                         </Link>
@@ -202,8 +200,8 @@ const Navbar: React.FC = () => {
                 <div className="w-24 h-9 bg-stone-100 animate-pulse rounded-md" />
               ) : user ? (
                 <div className="relative group">
-                  <button className="flex items-center gap-2 text-stone-700 hover:text-[#5F7161] font-medium transition-colors">
-                    <div className="w-8 h-8 rounded-full bg-[#5F7161] text-white flex items-center justify-center text-sm font-bold">
+                  <button className="flex items-center gap-2 text-stone-700 hover:text-[#4d4c9d] font-medium transition-colors">
+                    <div className="w-8 h-8 rounded-full bg-[#4d4c9d] text-white flex items-center justify-center text-sm font-semibold tracking-wide">
                       {user.name?.charAt(0) || 'U'}
                     </div>
                     <span className="text-sm max-w-[100px] truncate">{user.name}</span>
@@ -212,16 +210,16 @@ const Navbar: React.FC = () => {
 
                   {/* Auth Dropdown */}
                   <div className="absolute right-0 top-full pt-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform group-hover:translate-y-0 translate-y-2">
-                    <div className="bg-white rounded-md shadow-lg border border-stone-100 overflow-hidden py-1">
+                    <div className="bg-white rounded-md shadow-sm border border-stone-100 overflow-hidden py-1">
                       <div className="px-4 py-2 border-b border-stone-100">
                         <p className="text-xs text-stone-500">已登入為</p>
-                        <p className="text-sm font-bold text-stone-800 truncate" title={user.email}>
+                        <p className="text-sm font-semibold tracking-wide text-stone-800 truncate" title={user.email}>
                           {user.email}
                         </p>
                       </div>
                       <Link
                         href="/dashboard/my-registrations"
-                        className="block px-4 py-2 text-sm text-stone-600 hover:bg-[#F0F4F1] hover:text-[#5F7161] transition-colors"
+                        className="block px-4 py-2 text-sm text-stone-600 hover:bg-[#f3f3f9] hover:text-[#4d4c9d] transition-colors"
                       >
                         會員中心
                       </Link>
@@ -237,7 +235,7 @@ const Navbar: React.FC = () => {
               ) : (
                 <Link
                   href="/login"
-                  className="px-5 py-2 bg-[#5F7161] text-white text-sm font-bold rounded-md hover:bg-[#4a584b] transition-all shadow-sm hover:shadow-md"
+                  className="px-5 py-2 bg-[#4d4c9d] text-white text-sm font-semibold tracking-wide rounded-md hover:bg-[#3a3977] transition-all shadow-sm hover:shadow-md"
                 >
                   會員登入
                 </Link>
@@ -247,7 +245,7 @@ const Navbar: React.FC = () => {
 
           {/* Mobile Menu Button */}
           <div className="lg:hidden flex items-center gap-4">
-            {/* <Link href="/auth" className="text-stone-600 hover:text-[#5F7161]">
+            {/* <Link href="/auth" className="text-stone-600 hover:text-[#4d4c9d]">
               <UserCircle size={24} />
             </Link> */}
             <button
@@ -262,7 +260,7 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Menu Panel */}
       {isOpen && (
-        <div className="lg:hidden absolute top-full left-0 w-full bg-white border-b border-stone-200 shadow-xl max-h-[80vh] overflow-y-auto">
+        <div className="lg:hidden absolute top-full left-0 w-full bg-white border-b border-stone-200 shadow-md border border-stone-200 max-h-[80vh] overflow-y-auto">
           <div className="px-4 pt-2 pb-6 space-y-1">
             {NAV_ITEMS.map((item, index) => (
               <div key={item.name} className="border-b border-stone-100 last:border-0">
@@ -270,7 +268,7 @@ const Navbar: React.FC = () => {
                   <div>
                     <button
                       onClick={() => toggleMobileSubMenu(index)}
-                      className="w-full flex justify-between items-center px-3 py-3 text-stone-700 font-medium hover:text-[#5F7161]"
+                      className="w-full flex justify-between items-center px-3 py-3 text-stone-700 font-medium hover:text-[#4d4c9d]"
                     >
                       {item.name}
                       <ChevronDown
@@ -286,7 +284,7 @@ const Navbar: React.FC = () => {
                           <Link
                             key={subItem.name}
                             href={subItem.href}
-                            className="block py-2 text-sm text-stone-500 hover:text-[#5F7161]"
+                            className="block py-2 text-sm text-stone-500 hover:text-[#4d4c9d]"
                             onClick={() => setIsOpen(false)}
                           >
                             {subItem.name}
@@ -298,7 +296,7 @@ const Navbar: React.FC = () => {
                 ) : (
                   <Link
                     href={item.href}
-                    className="block px-3 py-3 text-stone-700 font-medium hover:text-[#5F7161]"
+                    className="block px-3 py-3 text-stone-700 font-medium hover:text-[#4d4c9d]"
                     onClick={() => setIsOpen(false)}
                   >
                     {item.name}
@@ -311,7 +309,7 @@ const Navbar: React.FC = () => {
               {user ? (
                 <div className="space-y-3">
                   <div className="px-3 flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-[#5F7161] text-white flex items-center justify-center text-lg font-bold">
+                    <div className="w-10 h-10 rounded-full bg-[#4d4c9d] text-white flex items-center justify-center text-lg font-semibold tracking-wide">
                       {user.name?.charAt(0) || 'U'}
                     </div>
                     <div className="flex flex-col">
@@ -321,7 +319,7 @@ const Navbar: React.FC = () => {
                   </div>
                   <Link
                     href="/dashboard/my-registrations"
-                    className="block w-full text-center py-2.5 bg-[#5F7161] text-white rounded-md font-medium hover:bg-[#4a584b] transition-colors"
+                    className="block w-full text-center py-2.5 bg-[#4d4c9d] text-white rounded-md font-medium hover:bg-[#3a3977] transition-colors"
                     onClick={() => setIsOpen(false)}
                   >
                     會員中心
@@ -339,7 +337,7 @@ const Navbar: React.FC = () => {
               ) : (
                 <Link
                   href="/login"
-                  className="block w-full text-center py-3 bg-[#5F7161] text-white rounded-md font-bold hover:bg-[#4a584b] transition-colors"
+                  className="block w-full text-center py-3 bg-[#4d4c9d] text-white rounded-md font-semibold tracking-wide hover:bg-[#3a3977] transition-colors"
                   onClick={() => setIsOpen(false)}
                 >
                   會員登入 / 註冊

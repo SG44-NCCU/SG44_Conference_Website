@@ -35,7 +35,7 @@ export default async function NewsPost({ params }: { params: Promise<{ slug: str
         {/* 返回按鈕 */}
         <Link
           href="/news"
-          className="inline-flex items-center text-sm text-stone-500 hover:text-[#5F7161] mb-8 transition-colors group"
+          className="inline-flex items-center text-sm text-stone-500 hover:text-[#4d4c9d] mb-8 transition-colors group"
         >
           <ArrowLeft className="w-4 h-4 mr-1 group-hover:-translate-x-1 transition-transform" />
           返回列表
@@ -44,7 +44,7 @@ export default async function NewsPost({ params }: { params: Promise<{ slug: str
         {/* 文章頭部 */}
         <header className="mb-12">
           <div className="flex flex-wrap items-center gap-4 mb-4 text-sm">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#5F7161] text-white rounded-full text-xs font-bold tracking-wider uppercase">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#4d4c9d] text-white rounded-full text-xs font-semibold tracking-wide tracking-wider uppercase">
               <Tag className="w-3 h-3" />
               {news.category}
             </span>
@@ -71,7 +71,7 @@ export default async function NewsPost({ params }: { params: Promise<{ slug: str
         {/* 附件與連結 */}
         {news.relatedFiles && news.relatedFiles.length > 0 && (
           <div className="mt-16 pt-8 border-t border-stone-100">
-            <h3 className="text-sm font-bold text-stone-900 mb-4 uppercase tracking-widest">
+            <h3 className="text-sm font-semibold tracking-wide text-stone-900 mb-4 uppercase tracking-widest">
               相關附件與連結
             </h3>
             <ul className="space-y-3">
@@ -98,12 +98,12 @@ export default async function NewsPost({ params }: { params: Promise<{ slug: str
                       href={url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-center justify-between p-4 bg-stone-50 border border-stone-100 rounded-sm hover:border-[#869D85] transition-all duration-300"
+                      className="group flex items-center justify-between p-4 bg-stone-50 border border-stone-100 rounded-sm hover:border-[#53b2e5] transition-all duration-300"
                     >
-                      <span className="font-medium text-stone-800 group-hover:text-[#5F7161] transition-colors">
+                      <span className="font-medium text-stone-800 group-hover:text-[#4d4c9d] transition-colors">
                         {item.label}
                       </span>
-                      <span className="text-xs text-stone-400 font-mono group-hover:text-[#5F7161] transition-colors">
+                      <span className="text-xs text-stone-400 font-mono group-hover:text-[#4d4c9d] transition-colors">
                         {typeLabel}
                       </span>
                     </a>
@@ -121,7 +121,7 @@ export default async function NewsPost({ params }: { params: Promise<{ slug: str
               href={news.actionLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-[#5F7161] text-white font-bold rounded hover:bg-[#4b594d] transition-all transform hover:-translate-y-1 shadow-lg hover:shadow-xl"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-[#4d4c9d] text-white font-semibold tracking-wide rounded hover:bg-[#4b594d] transition-all transform hover:-translate-y-1 shadow-sm hover:shadow-md border border-stone-200"
             >
               {news.actionText || '前往查看'}
               <ArrowLeft className="w-4 h-4 rotate-180" />

@@ -149,7 +149,7 @@ export default function ReviewDetailPage() {
     return (
       <div className="text-center py-20 text-stone-400">
         <p>找不到此稿件，或您沒有審閱此文章的權限。</p>
-        <Link href="/dashboard/review-queue" className="text-[#5F7161] text-sm mt-4 block">
+        <Link href="/dashboard/review-queue" className="text-[#4d4c9d] text-sm mt-4 block">
           ← 回到待審清單
         </Link>
       </div>
@@ -196,7 +196,7 @@ export default function ReviewDetailPage() {
       <div className="border border-stone-200 p-8 space-y-6 font-serif">
         {/* Title */}
         <div className="text-center space-y-3 pb-6 border-b border-stone-200">
-          <h1 className="text-xl font-bold text-stone-900 leading-relaxed font-sans">{doc.title}</h1>
+          <h1 className="text-xl font-semibold tracking-wide text-stone-900 leading-relaxed font-sans">{doc.title}</h1>
 
           {/* Authors */}
           {doc.authors && doc.authors.length > 0 && (
@@ -206,7 +206,7 @@ export default function ReviewDetailPage() {
                   <span key={i}>
                     {a.name}
                     {a.isCorresponding && (
-                      <sup className="text-[#5F7161] font-sans text-xs"> *</sup>
+                      <sup className="text-[#4d4c9d] font-sans text-xs"> *</sup>
                     )}
                     {i < doc.authors!.length - 1 && <span className="text-stone-400">, </span>}
                   </span>
@@ -218,7 +218,7 @@ export default function ReviewDetailPage() {
                     {a.affiliation}
                     {a.isCorresponding && (
                       <span className="text-stone-400 ml-1">
-                        (通訊: <a href={`mailto:${a.email}`} className="text-[#5F7161]">{a.email}</a>)
+                        (通訊: <a href={`mailto:${a.email}`} className="text-[#4d4c9d]">{a.email}</a>)
                       </span>
                     )}
                   </p>
@@ -232,19 +232,19 @@ export default function ReviewDetailPage() {
         <div className="flex flex-wrap gap-x-8 gap-y-2 text-sm font-sans">
           {doc.subTopic && (
             <div>
-              <span className="text-stone-400 text-xs font-bold uppercase tracking-widest mr-2">子題</span>
+              <span className="text-stone-400 text-xs font-semibold tracking-wide uppercase tracking-widest mr-2">子題</span>
               <span className="text-stone-700">{SUB_TOPIC_LABELS[doc.subTopic] || doc.subTopic}</span>
             </div>
           )}
           {doc.specialSession && (
             <div>
-              <span className="text-stone-400 text-xs font-bold uppercase tracking-widest mr-2">特別論壇</span>
+              <span className="text-stone-400 text-xs font-semibold tracking-wide uppercase tracking-widest mr-2">特別論壇</span>
               <span className="text-stone-700">{SPECIAL_SESSION_LABELS[doc.specialSession] || doc.specialSession}</span>
             </div>
           )}
           {doc.isStudent && (
             <div className="flex items-center gap-1.5">
-              <span className="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-700 text-xs font-sans font-bold">
+              <span className="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-700 text-xs font-sans font-semibold tracking-wide">
                 學生
                 {doc.applyStudentAward && ' · 學生論文獎'}
               </span>
@@ -254,13 +254,13 @@ export default function ReviewDetailPage() {
 
         {/* Abstract body */}
         <div>
-          <h2 className="text-xs font-bold uppercase tracking-widest text-stone-400 mb-2 font-sans">摘要 Abstract</h2>
+          <h2 className="text-xs font-semibold tracking-wide uppercase tracking-widest text-stone-400 mb-2 font-sans">摘要 Abstract</h2>
           <p className="text-stone-800 leading-relaxed text-sm whitespace-pre-wrap break-words">{doc.abstract}</p>
         </div>
 
         {/* Keywords */}
         <div>
-          <h2 className="text-xs font-bold uppercase tracking-widest text-stone-400 mb-1.5 font-sans">關鍵字 Keywords</h2>
+          <h2 className="text-xs font-semibold tracking-wide uppercase tracking-widest text-stone-400 mb-1.5 font-sans">關鍵字 Keywords</h2>
           <p className="text-stone-700 text-sm">{doc.keywords}</p>
         </div>
       </div>
@@ -268,11 +268,11 @@ export default function ReviewDetailPage() {
       {/* ── Review form ── */}
       <div className="border border-stone-200 p-6 space-y-6">
         <div className="border-b-2 border-stone-800 pb-3 flex items-center justify-between">
-          <h2 className="font-bold text-stone-800 text-base">
+          <h2 className="font-semibold tracking-wide text-stone-800 text-base">
             審稿表單
           </h2>
           {isPublished && (
-            <span className="text-sm font-bold text-red-600 bg-red-50 px-3 py-1 rounded border border-red-200">
+            <span className="text-sm font-semibold tracking-wide text-red-600 bg-red-50 px-3 py-1 rounded border border-red-200">
               審查結果已發布，無法再修改審查意見
             </span>
           )}
@@ -280,7 +280,7 @@ export default function ReviewDetailPage() {
 
         {/* Decision radio */}
         <div>
-          <label className="block text-sm font-bold text-stone-700 mb-3">
+          <label className="block text-sm font-semibold tracking-wide text-stone-700 mb-3">
             審查決定 <span className="text-red-500">*</span>
           </label>
           <div className="divide-y divide-stone-100 border border-stone-200">
@@ -297,7 +297,7 @@ export default function ReviewDetailPage() {
                   className="flex items-center gap-4 px-5 py-3.5 cursor-pointer transition-colors hover:bg-stone-50"
                   style={{
                     backgroundColor: isSelected ? 'rgba(95,113,97,0.06)' : undefined,
-                    borderLeft: isSelected ? '3px solid #5F7161' : '3px solid transparent',
+                    borderLeft: isSelected ? '3px solid #4d4c9d' : '3px solid transparent',
                   }}
                 >
                   <input
@@ -306,12 +306,12 @@ export default function ReviewDetailPage() {
                     checked={isSelected}
                     onChange={() => setReviewStatus(opt.value)}
                     disabled={isPublished}
-                    className="w-4 h-4 accent-[#5F7161] disabled:opacity-50"
+                    className="w-4 h-4 accent-[#4d4c9d] disabled:opacity-50"
                   />
                   <span
                     className="text-sm"
                     style={{
-                      color: isSelected ? '#5F7161' : '#374151',
+                      color: isSelected ? '#4d4c9d' : '#374151',
                       fontWeight: isSelected ? 600 : 400,
                     }}
                   >
@@ -325,7 +325,7 @@ export default function ReviewDetailPage() {
 
         {/* Comments */}
         <div>
-          <label className="block text-sm font-bold text-stone-700 mb-2">
+          <label className="block text-sm font-semibold tracking-wide text-stone-700 mb-2">
             審稿評語 (Review Comments)
           </label>
           <textarea
@@ -334,7 +334,7 @@ export default function ReviewDetailPage() {
             disabled={isPublished}
             rows={6}
             placeholder="請填寫給投稿人的評語。若選擇「修改後通過」，請說明需要修改的部分；若選擇「未通過」，請說明原因。大會發布審查結果後，評語將顯示給投稿人。"
-            className="w-full px-4 py-3 border border-stone-300 focus:border-[#5F7161] focus:ring-1 focus:ring-[#5F7161] outline-none resize-y text-sm transition-colors bg-white text-stone-800 disabled:bg-stone-100 disabled:text-stone-500 disabled:cursor-not-allowed"
+            className="w-full px-4 py-3 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none resize-y text-sm transition-colors bg-white text-stone-800 disabled:bg-stone-100 disabled:text-stone-500 disabled:cursor-not-allowed"
           />
         </div>
 
@@ -343,7 +343,7 @@ export default function ReviewDetailPage() {
           <button
             onClick={handleSave}
             disabled={saving || isPublished}
-            className="px-8 py-2.5 bg-[#5F7161] text-white font-medium hover:bg-[#4a584b] transition-colors disabled:opacity-70 disabled:cursor-not-allowed text-sm tracking-wide"
+            className="px-8 py-2.5 bg-[#4d4c9d] text-white font-medium hover:bg-[#3a3977] transition-colors disabled:opacity-70 disabled:cursor-not-allowed text-sm tracking-wide"
           >
             {saving ? (
               <span className="flex items-center gap-2">
@@ -357,7 +357,7 @@ export default function ReviewDetailPage() {
           {saveMsg && (
             <span
               className="text-sm"
-              style={{ color: saveMsg.includes('失敗') ? '#dc2626' : '#5F7161' }}
+              style={{ color: saveMsg.includes('失敗') ? '#dc2626' : '#4d4c9d' }}
             >
               {saveMsg}
             </span>

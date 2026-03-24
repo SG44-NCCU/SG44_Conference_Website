@@ -43,7 +43,7 @@ function VerifyContent() {
   if (status === 'verifying') {
     return (
       <div className="text-center">
-        <h3 className="text-lg font-bold text-primary">驗證中...</h3>
+        <h3 className="text-lg font-semibold tracking-wide text-primary">驗證中...</h3>
         <p className="mt-2 text-stone-500">請稍候，我們正在啟用您的帳號。</p>
       </div>
     )
@@ -57,11 +57,11 @@ function VerifyContent() {
 
     return (
       <div className="text-center">
-        <h3 className="text-2xl font-bold text-primary tracking-tight">驗證成功！</h3>
+        <h3 className="text-2xl font-semibold tracking-wide text-primary tracking-tight">驗證成功！</h3>
         <p className="mt-2 text-stone-600 mb-6">您的帳號已啟用，即將導向登入頁...</p>
         <Link
           href="/login"
-          className="inline-flex items-center px-6 py-2.5 border border-transparent text-sm font-bold rounded-lg shadow-md text-white bg-secondary hover:bg-[#6b7d6a] hover:shadow-lg transition-all duration-200"
+          className="inline-flex items-center px-6 py-2.5 border border-transparent text-sm font-semibold tracking-wide rounded-sm shadow-md text-white bg-secondary hover:bg-[#4098c7] hover:shadow-sm transition-all duration-200"
         >
           立即前往登入
         </Link>
@@ -71,7 +71,7 @@ function VerifyContent() {
 
   return (
     <div className="text-center">
-      <h3 className="text-2xl font-bold text-red-600 tracking-tight">驗證失敗</h3>
+      <h3 className="text-2xl font-semibold tracking-wide text-red-600 tracking-tight">驗證失敗</h3>
       <p className="mt-2 text-stone-600 mb-6">{message}</p>
       <div className="space-x-4">
         <Link

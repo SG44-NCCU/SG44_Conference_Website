@@ -183,7 +183,7 @@ export default function SG44RegisterPage() {
           )}
 
           <div className="mb-12 border-b border-stone-200 pb-8">
-            <h3 className="text-xl font-bold text-stone-800 mb-4">
+            <h3 className="text-xl font-semibold tracking-wide text-stone-800 mb-4">
               繳費資訊 (Payment Instructions)
             </h3>
             <p className="text-sm text-stone-600 mb-4">
@@ -211,7 +211,7 @@ export default function SG44RegisterPage() {
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-12 pb-20">
             <section>
-              <h3 className="text-lg font-bold text-stone-800 border-b border-stone-300 pb-2 mb-6">
+              <h3 className="text-lg font-semibold tracking-wide text-stone-800 border-b border-stone-300 pb-2 mb-6">
                 1. 報名費與票種選擇 (Ticketing)
               </h3>
               <div className="space-y-3">
@@ -220,7 +220,7 @@ export default function SG44RegisterPage() {
                     key={ticket.id}
                     className={`flex items-center justify-between p-4 border cursor-pointer hover:bg-stone-50 transition-colors ${
                       watchTicketType === ticket.id
-                        ? 'border-[#5F7161] bg-stone-50'
+                        ? 'border-[#4d4c9d] bg-stone-50'
                         : 'border-stone-200'
                     }`}
                   >
@@ -229,14 +229,14 @@ export default function SG44RegisterPage() {
                         type="radio"
                         {...register('ticketType', { required: '請選取您要報名的票種' })}
                         value={ticket.id}
-                        className="w-4 h-4 accent-[#5F7161]"
+                        className="w-4 h-4 accent-[#4d4c9d]"
                       />
                       <div>
                         <span className="block font-medium text-stone-800">{ticket.title}</span>
                         <span className="text-sm text-stone-500">報名期間：{ticket.period}</span>
                       </div>
                     </div>
-                    <span className="font-bold text-stone-800">
+                    <span className="font-semibold tracking-wide text-stone-800">
                       NT$ {ticket.price.toLocaleString()}
                     </span>
                   </label>
@@ -248,7 +248,7 @@ export default function SG44RegisterPage() {
             </section>
 
             <section>
-              <h3 className="text-lg font-bold text-stone-800 border-b border-stone-300 pb-2 mb-6">
+              <h3 className="text-lg font-semibold tracking-wide text-stone-800 border-b border-stone-300 pb-2 mb-6">
                 2. 基本資料 (Personal Info)
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -256,43 +256,43 @@ export default function SG44RegisterPage() {
                   <label className="block text-sm font-medium text-stone-600 mb-1">
                     姓名 (Name)
                   </label>
-                  <p className="text-stone-800 font-bold">{user.name}</p>
+                  <p className="text-stone-800 font-semibold tracking-wide">{user.name}</p>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-stone-600 mb-1">
                     服務單位 / 學校 (Organization / School)
                   </label>
-                  <p className="text-stone-800 font-bold">{user.organization}</p>
+                  <p className="text-stone-800 font-semibold tracking-wide">{user.organization}</p>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-stone-600 mb-1">
                     職稱 (Job Title)
                   </label>
-                  <p className="text-stone-800 font-bold">{user.jobTitle}</p>
+                  <p className="text-stone-800 font-semibold tracking-wide">{user.jobTitle}</p>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-stone-600 mb-1">
                     聯絡信箱 (Email)
                   </label>
-                  <p className="text-stone-800 font-bold">{user.email}</p>
+                  <p className="text-stone-800 font-semibold tracking-wide">{user.email}</p>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-stone-600 mb-1">
                     手機 (Phone)
                   </label>
-                  <p className="text-stone-800 font-bold">{user.phone}</p>
+                  <p className="text-stone-800 font-semibold tracking-wide">{user.phone}</p>
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-bold text-stone-800 mb-2">
+                <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">
                   聯絡地址 (Mailing Address) <span className="text-red-500">*</span>
                 </label>
                 <input
                   {...register('contactAddress', { required: '請輸入聯絡地址' })}
                   type="text"
                   placeholder="請輸入可確實收受大會實體資料之詳細地址"
-                  className="w-full px-4 py-2 border border-stone-300 focus:border-[#5F7161] focus:ring-1 focus:ring-[#5F7161] outline-none rounded-none text-sm transition-colors"
+                  className="w-full px-4 py-2 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none rounded-none text-sm transition-colors"
                 />
                 {errors.contactAddress && (
                   <p className="text-red-600 text-sm mt-2">
@@ -303,17 +303,17 @@ export default function SG44RegisterPage() {
             </section>
 
             <section>
-              <h3 className="text-lg font-bold text-stone-800 border-b border-stone-300 pb-2 mb-6">
+              <h3 className="text-lg font-semibold tracking-wide text-stone-800 border-b border-stone-300 pb-2 mb-6">
                 3. 會議參與資訊 (Participation)
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                  <label className="block text-sm font-bold text-stone-800 mb-2">
+                  <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">
                     參與身分 (Participant Role) <span className="text-red-500">*</span>
                   </label>
                   <select
                     {...register('participantRole', { required: '請選擇您的參與身分' })}
-                    className="w-full px-4 py-2.5 border border-stone-300 focus:border-[#5F7161] focus:ring-1 focus:ring-[#5F7161] outline-none bg-white rounded-none cursor-pointer text-sm transition-colors"
+                    className="w-full px-4 py-2.5 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none bg-white rounded-none cursor-pointer text-sm transition-colors"
                   >
                     <option value="">請選擇一項最符合的身分</option>
                     <option value="presenter">論文發表人 (Presenter)</option>
@@ -337,19 +337,19 @@ export default function SG44RegisterPage() {
                         {...register('participantRoleOther', { required: '請輸入您的實際身分' })}
                         type="text"
                         placeholder="請描述您的身分..."
-                        className="w-full px-4 py-2 border border-stone-300 focus:border-[#5F7161] focus:ring-1 focus:ring-[#5F7161] outline-none rounded-none text-sm transition-colors"
+                        className="w-full px-4 py-2 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none rounded-none text-sm transition-colors"
                       />
                     </div>
                   )}
                 </div>
 
                 <div>
-                  <label className="block text-sm font-bold text-stone-800 mb-2">
+                  <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">
                     論文發表形式 (Presentation)
                   </label>
                   <select
                     {...register('presentationType')}
-                    className="w-full px-4 py-2.5 border border-stone-300 focus:border-[#5F7161] focus:ring-1 focus:ring-[#5F7161] outline-none bg-white rounded-none cursor-pointer text-sm transition-colors"
+                    className="w-full px-4 py-2.5 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none bg-white rounded-none cursor-pointer text-sm transition-colors"
                   >
                     <option value="none">無發表 / 僅與會 (None / Attend Only)</option>
                     <option value="oral">口頭發表 (Oral)</option>
@@ -361,12 +361,12 @@ export default function SG44RegisterPage() {
             </section>
 
             <section>
-              <h3 className="text-lg font-bold text-stone-800 border-b border-stone-300 pb-2 mb-6">
+              <h3 className="text-lg font-semibold tracking-wide text-stone-800 border-b border-stone-300 pb-2 mb-6">
                 4. 繳費對帳資訊 (Payment Verification)
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                  <label className="block text-sm font-bold text-stone-800 mb-2">
+                  <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">
                     匯款帳號末五碼 (Last 5 Digits of Account){' '}
                     <span className="text-red-500">*</span>
                   </label>
@@ -381,7 +381,7 @@ export default function SG44RegisterPage() {
                     type="text"
                     maxLength={5}
                     placeholder="例如: 12345"
-                    className="w-full px-4 py-2 border border-stone-300 focus:border-[#5F7161] focus:ring-1 focus:ring-[#5F7161] outline-none font-mono tracking-widest rounded-none text-sm transition-colors"
+                    className="w-full px-4 py-2 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none font-mono tracking-widest rounded-none text-sm transition-colors"
                   />
                   {errors.paymentAccountLast5 && (
                     <p className="text-red-600 text-sm mt-2">
@@ -390,13 +390,13 @@ export default function SG44RegisterPage() {
                   )}
                 </div>
                 <div>
-                  <label className="block text-sm font-bold text-stone-800 mb-2">
+                  <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">
                     匯款日期 (Payment Date) <span className="text-red-500">*</span>
                   </label>
                   <input
                     {...register('paymentDate', { required: '請選取您實際操作匯款的日期' })}
                     type="date"
-                    className="w-full px-4 py-2 border border-stone-300 focus:border-[#5F7161] focus:ring-1 focus:ring-[#5F7161] outline-none cursor-text rounded-none text-sm transition-colors text-stone-800"
+                    className="w-full px-4 py-2 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none cursor-text rounded-none text-sm transition-colors text-stone-800"
                   />
                   {errors.paymentDate && (
                     <p className="text-red-600 text-sm mt-2">
@@ -408,7 +408,7 @@ export default function SG44RegisterPage() {
             </section>
 
             <section>
-              <h3 className="text-lg font-bold text-stone-800 border-b border-stone-300 pb-2 mb-6">
+              <h3 className="text-lg font-semibold tracking-wide text-stone-800 border-b border-stone-300 pb-2 mb-6">
                 5. 膳食與活動意願調查 (Meals & Events)
               </h3>
               <p className="text-sm text-stone-600 mb-6">
@@ -417,7 +417,7 @@ export default function SG44RegisterPage() {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 <div className="border border-stone-200 p-5">
-                  <span className="block text-sm font-bold text-stone-800 mb-4 border-b border-stone-100 pb-3">
+                  <span className="block text-sm font-semibold tracking-wide text-stone-800 mb-4 border-b border-stone-100 pb-3">
                     08/20 中午大會午餐
                     <br />
                     (08/20 Lunch)
@@ -428,7 +428,7 @@ export default function SG44RegisterPage() {
                         type="radio"
                         {...register('mealDay1', { required: '請選取意願' })}
                         value="yes"
-                        className="accent-[#5F7161] w-4 h-4"
+                        className="accent-[#4d4c9d] w-4 h-4"
                       />
                       需用餐 (Yes)
                     </label>
@@ -437,7 +437,7 @@ export default function SG44RegisterPage() {
                         type="radio"
                         {...register('mealDay1')}
                         value="no"
-                        className="accent-[#5F7161] w-4 h-4"
+                        className="accent-[#4d4c9d] w-4 h-4"
                       />
                       不需用餐 (No)
                     </label>
@@ -445,7 +445,7 @@ export default function SG44RegisterPage() {
                 </div>
 
                 <div className="border border-stone-200 p-5">
-                  <span className="block text-sm font-bold text-stone-800 mb-4 border-b border-stone-100 pb-3">
+                  <span className="block text-sm font-semibold tracking-wide text-stone-800 mb-4 border-b border-stone-100 pb-3">
                     08/21 中午大會午餐
                     <br />
                     (08/21 Lunch)
@@ -456,7 +456,7 @@ export default function SG44RegisterPage() {
                         type="radio"
                         {...register('mealDay2', { required: '請選取意願' })}
                         value="yes"
-                        className="accent-[#5F7161] w-4 h-4"
+                        className="accent-[#4d4c9d] w-4 h-4"
                       />
                       需用餐 (Yes)
                     </label>
@@ -465,7 +465,7 @@ export default function SG44RegisterPage() {
                         type="radio"
                         {...register('mealDay2')}
                         value="no"
-                        className="accent-[#5F7161] w-4 h-4"
+                        className="accent-[#4d4c9d] w-4 h-4"
                       />
                       不需用餐 (No)
                     </label>
@@ -473,18 +473,18 @@ export default function SG44RegisterPage() {
                 </div>
 
                 <div className="border border-stone-300 bg-stone-50 p-5">
-                  <span className="block text-sm font-bold text-stone-800 mb-4 border-b border-stone-200 pb-3">
+                  <span className="block text-sm font-semibold tracking-wide text-stone-800 mb-4 border-b border-stone-200 pb-3">
                     08/20 夜間大會晚宴
                     <br />
                     (08/20 Banquet)
                   </span>
                   <div className="flex flex-col gap-3">
-                    <label className="flex items-center gap-2 cursor-pointer text-sm font-bold hover:text-stone-900 text-stone-800">
+                    <label className="flex items-center gap-2 cursor-pointer text-sm font-semibold tracking-wide hover:text-stone-900 text-stone-800">
                       <input
                         type="radio"
                         {...register('banquet', { required: '請選取意願' })}
                         value="yes"
-                        className="accent-[#5F7161] w-4 h-4"
+                        className="accent-[#4d4c9d] w-4 h-4"
                       />
                       將出席 (Yes)
                     </label>
@@ -493,7 +493,7 @@ export default function SG44RegisterPage() {
                         type="radio"
                         {...register('banquet')}
                         value="no"
-                        className="accent-[#5F7161] w-4 h-4"
+                        className="accent-[#4d4c9d] w-4 h-4"
                       />
                       不克出席 (No)
                     </label>
@@ -509,7 +509,7 @@ export default function SG44RegisterPage() {
 
               {showDietary && (
                 <div className="pt-6 border-t border-stone-200 mt-4">
-                  <label className="block text-sm font-bold text-stone-800 mb-3">
+                  <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-3">
                     飲食偏好 (Dietary Preferences) <span className="text-red-500">*</span>
                   </label>
 
@@ -518,7 +518,7 @@ export default function SG44RegisterPage() {
                       {...register('dietaryPreference', {
                         required: '因為您有勾選用餐/晚宴，請務必設定飲食偏好',
                       })}
-                      className="w-full md:w-1/2 px-4 py-2.5 border border-stone-300 focus:border-[#5F7161] focus:ring-1 focus:ring-[#5F7161] outline-none bg-white rounded-none cursor-pointer text-sm transition-colors"
+                      className="w-full md:w-1/2 px-4 py-2.5 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none bg-white rounded-none cursor-pointer text-sm transition-colors"
                     >
                       <option value="">請選擇您的飲食偏好</option>
                       <option value="regular">葷食 (Non-Vegetarian)</option>
@@ -540,7 +540,7 @@ export default function SG44RegisterPage() {
                           })}
                           type="text"
                           placeholder="請具體說明，例如：不吃牛羊、嚴重過敏..."
-                          className="w-full px-4 py-2.5 border border-stone-300 focus:border-[#5F7161] focus:ring-1 focus:ring-[#5F7161] outline-none rounded-none text-sm transition-colors"
+                          className="w-full px-4 py-2.5 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none rounded-none text-sm transition-colors"
                         />
                       </div>
                     )}
@@ -550,14 +550,14 @@ export default function SG44RegisterPage() {
             </section>
 
             <section>
-              <h3 className="text-lg font-bold text-stone-800 border-b border-stone-300 pb-2 mb-6">
+              <h3 className="text-lg font-semibold tracking-wide text-stone-800 border-b border-stone-300 pb-2 mb-6">
                 6. 其他建議 (Remarks / Suggestions)
               </h3>
               <textarea
                 {...register('remarks')}
                 rows={4}
                 placeholder="有任何備註或需要向大會建議的事項，請填寫於此..."
-                className="w-full px-4 py-3 border border-stone-300 focus:border-[#5F7161] focus:ring-1 focus:ring-[#5F7161] outline-none resize-y rounded-none text-sm transition-colors"
+                className="w-full px-4 py-3 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none resize-y rounded-none text-sm transition-colors"
               ></textarea>
             </section>
 
@@ -566,7 +566,7 @@ export default function SG44RegisterPage() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="px-12 py-3 bg-[#5F7161] text-white font-medium hover:bg-[#4a584b] transition-colors disabled:opacity-70 disabled:cursor-not-allowed rounded-none tracking-wide"
+                  className="px-12 py-3 bg-[#4d4c9d] text-white font-medium hover:bg-[#3a3977] transition-colors disabled:opacity-70 disabled:cursor-not-allowed rounded-none tracking-wide"
                 >
                   {isSubmitting
                     ? '報名資料處理中...'

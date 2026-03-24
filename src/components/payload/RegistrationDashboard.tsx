@@ -98,7 +98,7 @@ export const RegistrationDashboard: React.FC = () => {
         <button
           onClick={handleExportCSV}
           style={{
-            backgroundColor: '#5F7161',
+            backgroundColor: '#4d4c9d',
             color: 'white',
             padding: '0.5rem 1rem',
             border: 'none',

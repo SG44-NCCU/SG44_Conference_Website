@@ -264,7 +264,7 @@ export const AbstractDashboard: React.FC = () => {
             style={{
               padding: '4px 12px',
               fontSize: '0.8rem',
-              backgroundColor: selectedIds.size > 0 && bulkReviewer ? '#5F7161' : '#9ca3af',
+              backgroundColor: selectedIds.size > 0 && bulkReviewer ? '#4d4c9d' : '#9ca3af',
               color: 'white',
               border: 'none',
               borderRadius: 4,

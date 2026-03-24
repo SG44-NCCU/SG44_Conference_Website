@@ -46,7 +46,7 @@ export default function LoginPage() {
 
   return (
     <div>
-      <h3 className="text-2xl font-bold text-[#5F7161] mb-6 text-center tracking-tight">
+      <h3 className="text-2xl font-semibold tracking-wide text-[#4d4c9d] mb-6 text-center tracking-tight">
         登入 SG44
       </h3>
 
@@ -62,7 +62,7 @@ export default function LoginPage() {
           <input
             {...register('email', { required: true })}
             type="email"
-            className="appearance-none block w-full px-3 py-2 border border-stone-300 rounded-md shadow-sm placeholder-stone-400 focus:outline-none focus:ring-[#869D85] focus:border-[#869D85] sm:text-sm transition-colors"
+            className="appearance-none block w-full px-3 py-2 border border-stone-300 rounded-md shadow-sm placeholder-stone-400 focus:outline-none focus:ring-[#53b2e5] focus:border-[#53b2e5] sm:text-sm transition-colors"
           />
         </div>
 
@@ -71,7 +71,7 @@ export default function LoginPage() {
           <input
             {...register('password', { required: true })}
             type="password"
-            className="appearance-none block w-full px-3 py-2 border border-stone-300 rounded-md shadow-sm placeholder-stone-400 focus:outline-none focus:ring-[#869D85] focus:border-[#869D85] sm:text-sm transition-colors"
+            className="appearance-none block w-full px-3 py-2 border border-stone-300 rounded-md shadow-sm placeholder-stone-400 focus:outline-none focus:ring-[#53b2e5] focus:border-[#53b2e5] sm:text-sm transition-colors"
           />
         </div>
 
@@ -79,7 +79,7 @@ export default function LoginPage() {
           <div className="text-sm">
             <Link
               href="/recover-password"
-              className="font-medium text-[#5F7161] hover:text-[#869D85] transition-colors"
+              className="font-medium text-[#4d4c9d] hover:text-[#53b2e5] transition-colors"
             >
               忘記密碼？
             </Link>
@@ -89,7 +89,7 @@ export default function LoginPage() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-md text-sm font-bold text-white bg-[#869D85] hover:bg-[#6b7d6a] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#869D85] disabled:bg-stone-300 disabled:shadow-none transition-all duration-200"
+          className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-sm shadow-md text-sm font-semibold tracking-wide text-white bg-[#53b2e5] hover:bg-[#4098c7] hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#53b2e5] disabled:bg-stone-300 disabled:shadow-none transition-all duration-200"
         >
           {isSubmitting ? '登入中...' : '登入'}
         </button>
@@ -99,7 +99,7 @@ export default function LoginPage() {
         <span className="text-stone-500">還沒有帳號？</span>
         <Link
           href="/register"
-          className="ml-2 font-medium text-[#5F7161] hover:text-[#869D85] transition-colors"
+          className="ml-2 font-medium text-[#4d4c9d] hover:text-[#53b2e5] transition-colors"
         >
           立即註冊
         </Link>

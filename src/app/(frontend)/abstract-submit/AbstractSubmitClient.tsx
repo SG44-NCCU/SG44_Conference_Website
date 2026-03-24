@@ -31,7 +31,7 @@ const SPECIAL_SESSIONS = [
 
 // ── Helper input style ───────────────────────────────────────────────────────
 const INPUT_CLS =
-  'w-full px-4 py-2.5 border border-stone-300 focus:border-[#5F7161] focus:ring-1 focus:ring-[#5F7161] outline-none rounded-none text-sm transition-colors'
+  'w-full px-4 py-2.5 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none rounded-none text-sm transition-colors'
 
 type FormValues = {
   title: string
@@ -217,7 +217,7 @@ export default function AbstractSubmitClient() {
           {submissionOpen === false && (
             <div className="flex flex-col items-center gap-4 py-20 text-center">
               <div className="text-5xl">🔒</div>
-              <h2 className="text-2xl font-bold text-stone-800">摘要投稿已截止</h2>
+              <h2 className="text-2xl font-semibold tracking-wide text-stone-800">摘要投稿已截止</h2>
               <p className="text-stone-500">目前投稿系統已關閉，感謝您的參與。</p>
             </div>
           )}
@@ -227,14 +227,14 @@ export default function AbstractSubmitClient() {
             <div className="max-w-2xl mx-auto py-20 text-center space-y-6">
               <div className="border border-stone-200 p-10 space-y-5">
                 <p className="text-4xl">📋</p>
-                <h2 className="text-xl font-bold text-stone-800">您的報名尚未通過審核</h2>
+                <h2 className="text-xl font-semibold tracking-wide text-stone-800">您的報名尚未通過審核</h2>
                 <p className="text-stone-500 leading-relaxed">
                   投稿摘要需要先完成大會報名並通過繳費確認。請先前往報名頁面完成報名與繳費，待大會確認繳費後即可回來投稿。
                 </p>
                 <div className="pt-2">
                   <Link
                     href="/SG44-register"
-                    className="inline-flex items-center gap-2 px-8 py-3 bg-[#5F7161] text-white font-bold hover:bg-[#4a584b] transition-colors tracking-wide"
+                    className="inline-flex items-center gap-2 px-8 py-3 bg-[#4d4c9d] text-white font-semibold tracking-wide hover:bg-[#3a3977] transition-colors tracking-wide"
                   >
                     前往報名專區 <ArrowRight size={16} />
                   </Link>
@@ -254,7 +254,7 @@ export default function AbstractSubmitClient() {
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-12 pb-20">
                 {/* ── Section 1: 標題 ── */}
                 <section>
-                  <h3 className="text-lg font-bold text-stone-800 border-b border-stone-300 pb-2 mb-6">
+                  <h3 className="text-lg font-semibold tracking-wide text-stone-800 border-b border-stone-300 pb-2 mb-6">
                     1. 論文標題 (Paper Title)
                   </h3>
                   <input
@@ -268,7 +268,7 @@ export default function AbstractSubmitClient() {
 
                 {/* ── Section 2: 作者群 ── */}
                 <section>
-                  <h3 className="text-lg font-bold text-stone-800 border-b border-stone-300 pb-2 mb-6">
+                  <h3 className="text-lg font-semibold tracking-wide text-stone-800 border-b border-stone-300 pb-2 mb-6">
                     2. 作者群 (Authors)
                   </h3>
                   <p className="text-sm text-stone-500 mb-4">
@@ -282,10 +282,10 @@ export default function AbstractSubmitClient() {
                         className="border border-stone-200 p-5 bg-stone-50/50 relative"
                       >
                         <div className="flex items-center justify-between mb-4">
-                          <span className="font-bold text-stone-700 text-sm">
+                          <span className="font-semibold tracking-wide text-stone-700 text-sm">
                             作者 (Author) {index + 1}
                             {watch(`authors.${index}.isCorresponding`) && (
-                              <span className="ml-2 text-xs font-normal text-[#5F7161] border border-[#5F7161] px-2 py-0.5 rounded">
+                              <span className="ml-2 text-xs font-normal text-[#4d4c9d] border border-[#4d4c9d] px-2 py-0.5 rounded">
                                 通訊作者
                               </span>
                             )}
@@ -304,7 +304,7 @@ export default function AbstractSubmitClient() {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           <div>
-                            <label className="block text-xs font-bold text-stone-600 mb-1.5 uppercase tracking-wider">
+                            <label className="block text-xs font-semibold tracking-wide text-stone-600 mb-1.5 uppercase tracking-wider">
                               姓名 (Name) <span className="text-red-500">*</span>
                             </label>
                             <input
@@ -318,7 +318,7 @@ export default function AbstractSubmitClient() {
                             )}
                           </div>
                           <div>
-                            <label className="block text-xs font-bold text-stone-600 mb-1.5 uppercase tracking-wider">
+                            <label className="block text-xs font-semibold tracking-wide text-stone-600 mb-1.5 uppercase tracking-wider">
                               所屬單位 (Affiliation) <span className="text-red-500">*</span>
                             </label>
                             <input
@@ -332,7 +332,7 @@ export default function AbstractSubmitClient() {
                             )}
                           </div>
                           <div>
-                            <label className="block text-xs font-bold text-stone-600 mb-1.5 uppercase tracking-wider">
+                            <label className="block text-xs font-semibold tracking-wide text-stone-600 mb-1.5 uppercase tracking-wider">
                               電子郵件 (Email) <span className="text-red-500">*</span>
                             </label>
                             <input
@@ -353,7 +353,7 @@ export default function AbstractSubmitClient() {
                               <input
                                 type="checkbox"
                                 {...register(`authors.${index}.isCorresponding`)}
-                                className="w-4 h-4 accent-[#5F7161]"
+                                className="w-4 h-4 accent-[#4d4c9d]"
                               />
                               設為通訊作者 (Corresponding Author)
                             </label>
@@ -366,7 +366,7 @@ export default function AbstractSubmitClient() {
                   <button
                     type="button"
                     onClick={() => appendAuthor({ name: '', affiliation: '', email: '', isCorresponding: false })}
-                    className="mt-4 flex items-center gap-2 text-sm text-[#5F7161] border border-[#5F7161] px-4 py-2 hover:bg-stone-50 transition-colors"
+                    className="mt-4 flex items-center gap-2 text-sm text-[#4d4c9d] border border-[#4d4c9d] px-4 py-2 hover:bg-stone-50 transition-colors"
                   >
                     <Plus size={16} /> 新增作者 (Add Author)
                   </button>
@@ -374,13 +374,13 @@ export default function AbstractSubmitClient() {
 
                 {/* ── Section 3: 投稿分類 ── */}
                 <section>
-                  <h3 className="text-lg font-bold text-stone-800 border-b border-stone-300 pb-2 mb-6">
+                  <h3 className="text-lg font-semibold tracking-wide text-stone-800 border-b border-stone-300 pb-2 mb-6">
                     3. 投稿分類 (Classification)
                   </h3>
 
                   {/* 特別論壇選擇放在最上面 (暫時註解依使用者要求) */}
                   {/* <div className="mb-6">
-                    <label className="block text-sm font-bold text-stone-800 mb-2">
+                    <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">
                       特別論壇 (Special Session)
                     </label>
                     <select
@@ -402,7 +402,7 @@ export default function AbstractSubmitClient() {
                   {/* 子題：只有在沒有選特別論壇時才顯示 */}
                   {!watch('specialSession') && (
                     <div>
-                      <label className="block text-sm font-bold text-stone-800 mb-2">
+                      <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">
                         投稿子題 (Sub-Topic) <span className="text-red-500">*</span>
                       </label>
                       <select
@@ -434,7 +434,7 @@ export default function AbstractSubmitClient() {
 
                 {/* ── Section 4: 偏好發表形式 ── */}
                 <section>
-                  <h3 className="text-lg font-bold text-stone-800 border-b border-stone-300 pb-2 mb-6">
+                  <h3 className="text-lg font-semibold tracking-wide text-stone-800 border-b border-stone-300 pb-2 mb-6">
                     4. 偏好發表形式 (Presentation Preference)
                   </h3>
                   <div className="space-y-3">
@@ -447,7 +447,7 @@ export default function AbstractSubmitClient() {
                         key={opt.value}
                         className={`flex items-center gap-3 p-4 border cursor-pointer transition-colors hover:bg-stone-50 ${
                           watch('presentationPreference') === opt.value
-                            ? 'border-[#5F7161] bg-stone-50'
+                            ? 'border-[#4d4c9d] bg-stone-50'
                             : 'border-stone-200'
                         }`}
                       >
@@ -455,7 +455,7 @@ export default function AbstractSubmitClient() {
                           type="radio"
                           {...register('presentationPreference')}
                           value={opt.value}
-                          className="w-4 h-4 accent-[#5F7161]"
+                          className="w-4 h-4 accent-[#4d4c9d]"
                         />
                         <span className="text-stone-800 text-sm">{opt.label}</span>
                       </label>
@@ -468,7 +468,7 @@ export default function AbstractSubmitClient() {
 
                 {/* ── Section 5: 學生資訊 ── */}
                 <section>
-                  <h3 className="text-lg font-bold text-stone-800 border-b border-stone-300 pb-2 mb-6">
+                  <h3 className="text-lg font-semibold tracking-wide text-stone-800 border-b border-stone-300 pb-2 mb-6">
                     5. 學生身份與論文獎 (Student Information)
                   </h3>
                   <div className="space-y-4">
@@ -476,7 +476,7 @@ export default function AbstractSubmitClient() {
                       <input
                         type="checkbox"
                         {...register('isStudent')}
-                        className="w-5 h-5 accent-[#5F7161]"
+                        className="w-5 h-5 accent-[#4d4c9d]"
                       />
                       <div>
                         <span className="font-medium text-stone-800">我是學生 (I am a student)</span>
@@ -487,12 +487,12 @@ export default function AbstractSubmitClient() {
                     </label>
 
                     {isStudent && (
-                      <div className="ml-4 border-l-2 border-[#5F7161]/30 pl-6 space-y-4">
+                      <div className="ml-4 border-l-2 border-[#4d4c9d]/30 pl-6 space-y-4">
                         <label className="flex items-center gap-3 p-4 border border-stone-200 cursor-pointer hover:bg-stone-50 transition-colors">
                           <input
                             type="checkbox"
                             {...register('applyStudentAward')}
-                            className="w-5 h-5 accent-[#5F7161]"
+                            className="w-5 h-5 accent-[#4d4c9d]"
                           />
                           <div>
                             <span className="font-medium text-stone-800">
@@ -510,12 +510,12 @@ export default function AbstractSubmitClient() {
 
                 {/* ── Section 6: 摘要內容 ── */}
                 <section>
-                  <h3 className="text-lg font-bold text-stone-800 border-b border-stone-300 pb-2 mb-6">
+                  <h3 className="text-lg font-semibold tracking-wide text-stone-800 border-b border-stone-300 pb-2 mb-6">
                     6. 摘要內容 (Abstract Content)
                   </h3>
                   <div className="space-y-6">
                     <div>
-                      <label className="block text-sm font-bold text-stone-800 mb-2">
+                      <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">
                         摘要 (Abstract) <span className="text-red-500">*</span>
                       </label>
                       <textarea
@@ -533,7 +533,7 @@ export default function AbstractSubmitClient() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-bold text-stone-800 mb-2">
+                      <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">
                         關鍵字 (Keywords) <span className="text-red-500">*</span>
                       </label>
                       <input
@@ -557,7 +557,7 @@ export default function AbstractSubmitClient() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="px-12 py-3 bg-[#5F7161] text-white font-medium hover:bg-[#4a584b] transition-colors disabled:opacity-70 disabled:cursor-not-allowed rounded-none tracking-wide flex items-center gap-2"
+                      className="px-12 py-3 bg-[#4d4c9d] text-white font-medium hover:bg-[#3a3977] transition-colors disabled:opacity-70 disabled:cursor-not-allowed rounded-none tracking-wide flex items-center gap-2"
                     >
                       {isSubmitting ? (
                         <>

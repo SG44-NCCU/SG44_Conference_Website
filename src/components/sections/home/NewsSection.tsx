@@ -55,22 +55,22 @@ export default async function NewsSection() {
             <Link
               key={news.id}
               href={`/news/${news.slug}`}
-              className="w-full text-left group flex flex-col md:flex-row md:items-center justify-between bg-white border border-stone-200 p-6 rounded-sm hover:border-[#869D85] hover:shadow-md transition-all duration-300"
+              className="w-full text-left group flex flex-col md:flex-row md:items-center justify-between bg-white border border-stone-200 p-6 rounded-sm hover:border-[#53b2e5] hover:shadow-md transition-all duration-300"
             >
               <div className="flex-1">
                 <div className="flex items-center gap-3 mb-2">
-                  <span className="text-[10px] font-bold uppercase text-[#5F7161] bg-[#F0F4F1] px-2 py-0.5 rounded tracking-widest">
+                  <span className="text-[10px] font-semibold tracking-wide uppercase text-[#4d4c9d] bg-[#f3f3f9] px-2 py-0.5 rounded tracking-widest">
                     {news.category || '公告'}
                   </span>
                   <span className="text-xs text-stone-400 font-mono tracking-tighter">
                     {new Date(news.publishedDate).toLocaleDateString('zh-TW')}
                   </span>
                 </div>
-                <h3 className="text-lg font-bold text-stone-800 group-hover:text-[#5F7161] transition-colors">
+                <h3 className="text-lg font-semibold tracking-wide text-stone-800 group-hover:text-[#4d4c9d] transition-colors">
                   {news.title}
                 </h3>
               </div>
-              <div className="mt-4 md:mt-0 flex items-center text-[#5F7161] text-sm font-semibold md:opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="mt-4 md:mt-0 flex items-center text-[#4d4c9d] text-sm font-semibold md:opacity-0 group-hover:opacity-100 transition-opacity">
                 查看詳情
                 <ChevronRight className="w-4 h-4 ml-1" />
               </div>
@@ -82,7 +82,7 @@ export default async function NewsSection() {
         <div className="mt-8 text-center">
           <Link
             href="/news"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-[#5F7161] text-white font-semibold rounded-sm hover:bg-[#869D85] transition-colors duration-300 group"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-[#4d4c9d] text-white font-semibold rounded-sm hover:bg-[#53b2e5] transition-colors duration-300 group"
           >
             查看所有消息
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

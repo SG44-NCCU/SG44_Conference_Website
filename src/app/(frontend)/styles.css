@@ -1,13 +1,29 @@
 @import 'tailwindcss';
 
+@font-face {
+  font-family: 'Swei Halfmoon';
+  src: url('/fonts/SweiHalfMoon-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Swei Halfmoon';
+  src: url('/fonts/SweiHalfMoon-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* 1. 設定 Tailwind v4 的變數 */
 @theme {
-  --color-sg-green: #5f7161;
-  --color-sg-light: #869d85;
+  --color-sg-green: #4d4c9d;
+  --color-sg-light: #53b2e5;
 
-  /* 👇 關鍵修改：優先使用 Noto Sans (英文)，接著才是思源黑體 (中文) */
+  /* 👇 優先使用 Swei Halfmoon */
   --font-sans:
-    var(--font-noto-sans), var(--font-noto), system-ui, -apple-system, BlinkMacSystemFont,
+    'Swei Halfmoon', var(--font-noto-sans), var(--font-noto), system-ui, -apple-system, BlinkMacSystemFont,
     'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }

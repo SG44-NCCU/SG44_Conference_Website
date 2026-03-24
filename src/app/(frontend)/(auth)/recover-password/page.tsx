@@ -49,7 +49,7 @@ export default function RecoverPasswordPage() {
   if (success) {
     return (
       <div className="text-center">
-        <h3 className="text-2xl font-bold text-primary mb-4 tracking-tight">信件已發送</h3>
+        <h3 className="text-2xl font-semibold tracking-wide text-primary mb-4 tracking-tight">信件已發送</h3>
         <p className="text-stone-600 mb-8">
           如果此 Email 存在於我們的系統中，您將會收到一封包含重設密碼連結的信件。
         </p>
@@ -65,7 +65,7 @@ export default function RecoverPasswordPage() {
 
   return (
     <div>
-      <h3 className="text-2xl font-bold text-primary mb-2 text-center tracking-tight">
+      <h3 className="text-2xl font-semibold tracking-wide text-primary mb-2 text-center tracking-tight">
         忘記密碼
       </h3>
       <p className="text-sm text-stone-500 text-center mb-8">
@@ -91,7 +91,7 @@ export default function RecoverPasswordPage() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-md text-sm font-bold text-white bg-secondary hover:bg-[#6b7d6a] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary disabled:bg-stone-300 disabled:shadow-none transition-all duration-200"
+          className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-sm shadow-md text-sm font-semibold tracking-wide text-white bg-secondary hover:bg-[#4098c7] hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary disabled:bg-stone-300 disabled:shadow-none transition-all duration-200"
         >
           {isSubmitting ? '發送重設信件' : '發送'}
         </button>

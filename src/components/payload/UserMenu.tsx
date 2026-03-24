@@ -29,7 +29,7 @@ export const UserMenu = (props: any) => {
             width: '32px',
             height: '32px',
             borderRadius: '50%',
-            backgroundColor: '#5F7161',
+            backgroundColor: '#4d4c9d',
             color: 'white',
             display: 'flex',
             alignItems: 'center',

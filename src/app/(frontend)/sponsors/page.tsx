@@ -2,8 +2,6 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import Navbar from '@/components/layout/Navbar'
-import Footer from '@/components/layout/Footer'
 import SectionTitle from '@/components/ui/SectionTitle'
 import { ExternalLink } from 'lucide-react'
 
@@ -78,12 +76,10 @@ const SPONSOR_GROUPS = [
 export default function SponsorsPage() {
   return (
     <div className="min-h-screen bg-white">
-      <Navbar />
-
       {/* 頂部裝飾 (與 News 頁面一致) */}
       <div className="fixed top-0 left-0 w-full h-64 bg-stone-50/50 -z-10 pointer-events-none" />
 
-      <main className="pt-32 pb-24">
+      <div className="pt-32 pb-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* 頁面大標題 */}
           <div className="mb-16 text-center">
@@ -102,7 +98,7 @@ export default function SponsorsPage() {
               <section key={groupIndex} className="animate-fade-in-up">
                 {/* 分組標題 */}
                 <div className="flex items-end gap-3 mb-8 border-b border-stone-100 pb-4">
-                  <h2 className="text-2xl font-bold text-stone-800">{group.title}</h2>
+                  <h2 className="text-2xl font-semibold tracking-wide text-stone-800">{group.title}</h2>
                   <span className="text-stone-400 font-serif italic text-lg">{group.subtitle}</span>
                 </div>
 
@@ -114,7 +110,7 @@ export default function SponsorsPage() {
                       href={item.url}
                       target="_blank" // 開新視窗
                       rel="noopener noreferrer" // 安全性設定
-                      className="group relative flex flex-col items-center justify-center p-8 bg-white border border-stone-200 rounded-lg hover:border-[#5F7161] hover:shadow-lg transition-all duration-300 h-48"
+                      className="group relative flex flex-col items-center justify-center p-8 bg-white border border-stone-200 rounded-sm hover:border-[#4d4c9d] hover:shadow-sm transition-all duration-300 h-48"
                     >
                       {/* Logo 容器 */}
                       <div className="relative w-full h-24 mb-4 flex items-center justify-center overflow-hidden">
@@ -130,12 +126,12 @@ export default function SponsorsPage() {
                       </div>
 
                       {/* 廠商名稱 */}
-                      <h3 className="text-stone-600 font-medium text-center group-hover:text-[#5F7161] transition-colors">
+                      <h3 className="text-stone-600 font-medium text-center group-hover:text-[#4d4c9d] transition-colors">
                         {item.name}
                       </h3>
 
                       {/* Hover 時出現的小圖示 */}
-                      <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity text-[#5F7161]">
+                      <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity text-[#4d4c9d]">
                         <ExternalLink size={16} />
                       </div>
                     </Link>
@@ -146,18 +142,18 @@ export default function SponsorsPage() {
           </div>
 
           {/* 底部招商區塊 (Optional) */}
-          <div className="mt-24 p-8 bg-stone-50 rounded-xl border border-stone-100 text-center">
-            <h3 className="text-xl font-bold text-stone-800 mb-2">有意成為贊助夥伴？</h3>
+          <div className="mt-24 p-8 bg-stone-50 rounded-md border border-stone-100 text-center">
+            <h3 className="text-xl font-semibold tracking-wide text-stone-800 mb-2">有意成為贊助夥伴？</h3>
             <p className="text-stone-600 mb-6">歡迎聯絡我們洽談合作方案，共同參與這場學術盛會。</p>
             <Link
               href="/contact"
-              className="inline-flex items-center px-6 py-3 bg-[#5F7161] text-white rounded-lg hover:bg-[#4a584b] transition-colors font-medium"
+              className="inline-flex items-center px-6 py-3 bg-[#4d4c9d] text-white rounded-sm hover:bg-[#3a3977] transition-colors font-medium"
             >
               聯絡大會籌備處
             </Link>
           </div>
         </div>
-      </main>
+      </div>
     </div>
   )
 }

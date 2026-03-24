@@ -112,14 +112,14 @@ export default function MySubmissionsPage() {
       return (
         <div className="max-w-3xl mx-auto py-12">
           <div className="text-center border border-stone-200 p-12 space-y-5">
-            <h1 className="text-2xl font-bold text-stone-800">您的報名尚未通過繳費審核</h1>
+            <h1 className="text-2xl font-semibold tracking-wide text-stone-800">您的報名尚未通過繳費審核</h1>
             <p className="text-stone-500 leading-relaxed max-w-md mx-auto">
               投稿摘要需要先完成大會報名並通過繳費確認。請先前往報名專區完成報名與繳費，待大會確認後即可開啟投稿功能。
             </p>
             <div className="pt-2">
               <Link
                 href="/SG44-register"
-                className="inline-flex items-center gap-2 px-8 py-3 bg-[#5F7161] text-white font-bold hover:bg-[#4a584b] transition-colors tracking-wide"
+                className="inline-flex items-center gap-2 px-8 py-3 bg-[#4d4c9d] text-white font-semibold tracking-wide hover:bg-[#3a3977] transition-colors tracking-wide"
               >
                 前往報名專區 <ArrowRight size={16} />
               </Link>
@@ -133,14 +133,14 @@ export default function MySubmissionsPage() {
     return (
       <div className="max-w-3xl mx-auto py-12">
         <div className="text-center mb-12 border-b border-stone-200 pb-12">
-          <h1 className="text-3xl font-bold text-stone-800 mb-4">您尚未投稿任何摘要</h1>
+          <h1 className="text-3xl font-semibold tracking-wide text-stone-800 mb-4">您尚未投稿任何摘要</h1>
           <p className="text-stone-600 text-lg max-w-lg mx-auto leading-relaxed mb-8">
             歡迎投稿第44屆測量及空間資訊研討會！點擊下方按鈕前往投稿表單。
           </p>
           {submissionOpen ? (
             <Link
               href="/abstract-submit"
-              className="inline-flex items-center gap-2 px-10 py-3 bg-[#5F7161] text-white font-bold hover:bg-[#4a584b] transition-colors text-base tracking-wide"
+              className="inline-flex items-center gap-2 px-10 py-3 bg-[#4d4c9d] text-white font-semibold tracking-wide hover:bg-[#3a3977] transition-colors text-base tracking-wide"
             >
               前往填寫投稿表單 <ArrowRight size={18} />
             </Link>
@@ -160,7 +160,7 @@ export default function MySubmissionsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b-2 border-stone-800 pb-4 gap-4">
         <div className="flex items-center gap-4">
-          <h1 className="text-2xl font-bold text-stone-800">我的投稿</h1>
+          <h1 className="text-2xl font-semibold tracking-wide text-stone-800">我的投稿</h1>
           <span className="text-stone-400 text-sm">{abstracts.length} 篇</span>
         </div>
         {submissionOpen ? (
@@ -180,7 +180,7 @@ export default function MySubmissionsPage() {
       {/* 審查結果發布通知 */}
       {reviewPublished && (
         <div className="bg-stone-50 p-5 border border-stone-200 text-sm text-stone-700">
-          <p className="font-bold text-stone-800 mb-1">大會審查結果已發布</p>
+          <p className="font-semibold tracking-wide text-stone-800 mb-1">大會審查結果已發布</p>
           <p>您可在下方各篇投稿中查看審查結果與評語。</p>
         </div>
       )}
@@ -198,7 +198,7 @@ export default function MySubmissionsPage() {
               {/* 標題列 */}
               <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 border-b border-stone-200 pb-5 mb-6">
                 <div className="flex-1 min-w-0">
-                  <h2 className="text-lg font-bold text-stone-900 leading-snug">{doc.title}</h2>
+                  <h2 className="text-lg font-semibold tracking-wide text-stone-900 leading-snug">{doc.title}</h2>
                   <p className="text-stone-400 text-xs mt-1.5">
                     投稿時間：
                     {new Date(doc.createdAt).toLocaleString('zh-TW', {
@@ -214,15 +214,15 @@ export default function MySubmissionsPage() {
                 <div className="flex items-center gap-3 flex-shrink-0">
                   {/* 審查狀態 badge */}
                   {!reviewPublished || doc.reviewStatus === 'pending' ? (
-                    <span className="px-3 py-1.5 bg-stone-50 border border-stone-300 text-stone-500 text-xs font-bold">
+                    <span className="px-3 py-1.5 bg-stone-50 border border-stone-300 text-stone-500 text-xs font-semibold tracking-wide">
                       審核中
                     </span>
                   ) : isAccepted ? (
-                    <span className="px-3 py-1.5 bg-stone-50 border border-[#5F7161] text-[#5F7161] text-xs font-bold">
+                    <span className="px-3 py-1.5 bg-stone-50 border border-[#4d4c9d] text-[#4d4c9d] text-xs font-semibold tracking-wide">
                       {statusLabel}
                     </span>
                   ) : (
-                    <span className="px-3 py-1.5 bg-stone-50 border border-stone-400 text-stone-600 text-xs font-bold">
+                    <span className="px-3 py-1.5 bg-stone-50 border border-stone-400 text-stone-600 text-xs font-semibold tracking-wide">
                       {statusLabel}
                     </span>
                   )}
@@ -242,7 +242,7 @@ export default function MySubmissionsPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12">
                 {doc.specialSession ? (
                   <div className="flex flex-col gap-1">
-                    <p className="text-stone-500 text-xs font-bold uppercase tracking-widest">
+                    <p className="text-stone-500 text-xs font-semibold tracking-wide uppercase tracking-widest">
                       特別論壇
                     </p>
                     <p className="font-medium text-stone-800 border-b border-stone-100 pb-2">
@@ -251,7 +251,7 @@ export default function MySubmissionsPage() {
                   </div>
                 ) : doc.subTopic ? (
                   <div className="flex flex-col gap-1">
-                    <p className="text-stone-500 text-xs font-bold uppercase tracking-widest">
+                    <p className="text-stone-500 text-xs font-semibold tracking-wide uppercase tracking-widest">
                       投稿子題
                     </p>
                     <p className="font-medium text-stone-800 border-b border-stone-100 pb-2">
@@ -262,7 +262,7 @@ export default function MySubmissionsPage() {
 
                 {doc.presentationPreference && (
                   <div className="flex flex-col gap-1">
-                    <p className="text-stone-500 text-xs font-bold uppercase tracking-widest">
+                    <p className="text-stone-500 text-xs font-semibold tracking-wide uppercase tracking-widest">
                       偏好發表形式
                     </p>
                     <p className="font-medium text-stone-800 border-b border-stone-100 pb-2">
@@ -274,7 +274,7 @@ export default function MySubmissionsPage() {
 
                 {doc.isStudent && (
                   <div className="flex flex-col gap-1">
-                    <p className="text-stone-500 text-xs font-bold uppercase tracking-widest">
+                    <p className="text-stone-500 text-xs font-semibold tracking-wide uppercase tracking-widest">
                       學生身份
                     </p>
                     <p className="font-medium text-stone-800 border-b border-stone-100 pb-2">
@@ -287,21 +287,21 @@ export default function MySubmissionsPage() {
               {/* 審查結果（發布後才顯示） */}
               {showResult && (
                 <div className="mt-6 pt-6 border-t border-stone-200">
-                  <p className="text-stone-500 text-xs font-bold uppercase tracking-widest mb-3">
+                  <p className="text-stone-500 text-xs font-semibold tracking-wide uppercase tracking-widest mb-3">
                     審查結果
                   </p>
                   <div
                     className="p-5 border-l-4"
                     style={{
-                      borderLeftColor: isAccepted ? '#5F7161' : '#9ca3af',
+                      borderLeftColor: isAccepted ? '#4d4c9d' : '#9ca3af',
                       backgroundColor: isAccepted
                         ? 'rgba(95,113,97,0.04)'
                         : 'rgba(0,0,0,0.02)',
                     }}
                   >
                     <p
-                      className="font-bold mb-2"
-                      style={{ color: isAccepted ? '#5F7161' : '#374151' }}
+                      className="font-semibold tracking-wide mb-2"
+                      style={{ color: isAccepted ? '#4d4c9d' : '#374151' }}
                     >
                       {statusLabel}
                     </p>
@@ -318,7 +318,7 @@ export default function MySubmissionsPage() {
                   {/* 學生論文獎 — 通過後才顯示 */}
                   {isAccepted && doc.isStudent && doc.applyStudentAward && (
                     <div className="mt-3 p-4 bg-stone-50 border border-stone-200 text-sm text-stone-700">
-                      <p className="font-bold text-stone-800 mb-1">學生論文獎報名</p>
+                      <p className="font-semibold tracking-wide text-stone-800 mb-1">學生論文獎報名</p>
                       <p>
                         您已報名學生論文獎競賽，大會將另行 Email 通知繳交全文的方式與截止日期，請留意信箱。
                       </p>

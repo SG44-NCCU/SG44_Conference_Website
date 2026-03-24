@@ -27,10 +27,10 @@ export default function CompetitionFlowPage() {
 
         {/* Title */}
         <div className="text-center mb-16">
-          <h1 className="text-3xl sm:text-4xl font-bold text-stone-900 mb-4">
+          <h1 className="text-3xl sm:text-4xl font-semibold tracking-wide text-stone-900 mb-4">
             2026 年大專生 3S 創客競賽流程
           </h1>
-          <div className="mx-auto w-12 h-0.5 bg-[#5F7161]" />
+          <div className="mx-auto w-12 h-0.5 bg-[#4d4c9d]" />
           <p className="mt-5 text-stone-400 text-sm">
             2026年08月20日（星期三）・國立政治大學
           </p>
@@ -40,7 +40,7 @@ export default function CompetitionFlowPage() {
         <div className="overflow-x-auto">
           <table className="w-full border-collapse text-sm">
             <thead>
-              <tr className="border-b-2 border-[#5F7161]">
+              <tr className="border-b-2 border-[#4d4c9d]">
                 <th className="text-left py-3 px-4 font-semibold text-stone-700 w-[130px]">時間</th>
                 <th className="text-left py-3 px-4 font-semibold text-stone-700">活動事項</th>
                 <th className="text-left py-3 px-4 font-semibold text-stone-700">備註</th>

@@ -213,7 +213,7 @@ const TimelineSection: React.FC = () => {
                           event.isPast ? 'opacity-40' : 'opacity-100'
                         }`}
                       >
-                        <span className="text-sm font-mono font-bold tracking-widest text-stone-600 bg-white px-2 uppercase whitespace-nowrap">
+                        <span className="text-sm font-mono font-semibold tracking-wide tracking-widest text-stone-600 bg-white px-2 uppercase whitespace-nowrap">
                           {event.date}
                         </span>
                       </div>
@@ -222,7 +222,7 @@ const TimelineSection: React.FC = () => {
                         className={`w-8 h-8 rounded-full border-[6px] border-white shadow-sm flex items-center justify-center transition-all duration-500 ${
                           event.isPast
                             ? 'bg-stone-300'
-                            : 'bg-[#5F7161] ring-2 ring-stone-100 scale-110'
+                            : 'bg-[#4d4c9d] ring-2 ring-stone-100 scale-110'
                         }`}
                       >
                         <div className="w-2 h-2 rounded-full bg-white"></div>
@@ -233,7 +233,7 @@ const TimelineSection: React.FC = () => {
                           event.isPast ? 'opacity-40' : 'opacity-100'
                         }`}
                       >
-                        <h4 className="text-sm font-bold text-stone-800 leading-tight">
+                        <h4 className="text-sm font-semibold tracking-wide text-stone-800 leading-tight">
                           {formatTitle(event.title)}
                         </h4>
                       </div>
@@ -263,7 +263,7 @@ const TimelineSection: React.FC = () => {
               >
                 {/* 滑塊 Thumb */}
                 <div
-                  className={`absolute top-0 bottom-0 bg-stone-300 rounded-full cursor-grab active:cursor-grabbing hover:bg-[#5F7161] transition-colors duration-200 ${isDragging ? 'bg-[#5F7161]' : ''}`}
+                  className={`absolute top-0 bottom-0 bg-stone-300 rounded-full cursor-grab active:cursor-grabbing hover:bg-[#4d4c9d] transition-colors duration-200 ${isDragging ? 'bg-[#4d4c9d]' : ''}`}
                   style={{
                     left: `${progress * 100}%`,
                     width: '15%', // 滑塊寬度
@@ -293,7 +293,7 @@ const TimelineSection: React.FC = () => {
                   <div className="relative z-10 flex-shrink-0 w-12 flex justify-center">
                     <div
                       className={`w-10 h-10 rounded-full border-[6px] border-white shadow-md flex items-center justify-center transition-all duration-500 ${
-                        event.isPast ? 'bg-stone-300' : 'bg-[#5F7161] ring-2 ring-stone-50'
+                        event.isPast ? 'bg-stone-300' : 'bg-[#4d4c9d] ring-2 ring-stone-50'
                       }`}
                     >
                       <div className="w-2.5 h-2.5 rounded-full bg-white"></div>
@@ -308,14 +308,14 @@ const TimelineSection: React.FC = () => {
                     <div className="flex flex-col">
                       <span
                         className={`text-sm font-mono tracking-[0.2em] mb-1 ${
-                          event.isPast ? 'text-stone-600' : 'text-[#5F7161]'
+                          event.isPast ? 'text-stone-600' : 'text-[#4d4c9d]'
                         }`}
                       >
                         {event.date}
                       </span>
                       <h4
                         className={`text-lg font-black tracking-tight ${
-                          event.isPast ? 'text-stone-500 font-bold' : 'text-stone-800'
+                          event.isPast ? 'text-stone-500 font-semibold tracking-wide' : 'text-stone-800'
                         }`}
                       >
                         {formatTitle(event.title)}

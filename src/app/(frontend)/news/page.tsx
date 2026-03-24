@@ -35,7 +35,7 @@ export default async function NewsPage() {
         {/* 列表區域 */}
         <div className="space-y-4">
           {newsData.docs.length === 0 && (
-            <div className="text-center py-20 bg-stone-50 rounded-lg border border-stone-100">
+            <div className="text-center py-20 bg-stone-50 rounded-sm border border-stone-100">
               <p className="text-stone-500">目前沒有任何消息。</p>
             </div>
           )}
@@ -44,15 +44,15 @@ export default async function NewsPage() {
             <Link
               key={news.id}
               href={`/news/${news.slug}`}
-              className="w-full text-left group flex flex-col md:flex-row md:items-center justify-between bg-white border border-stone-200 p-6 rounded-sm hover:border-[#869D85] hover:shadow-md transition-all duration-300 relative overflow-hidden"
+              className="w-full text-left group flex flex-col md:flex-row md:items-center justify-between bg-white border border-stone-200 p-6 rounded-sm hover:border-[#53b2e5] hover:shadow-md transition-all duration-300 relative overflow-hidden"
             >
               {/* 裝飾：Hover 時左側出現綠色線條 */}
-              <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#869D85] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#53b2e5] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
               <div className="flex-1 pl-2">
                 <div className="flex flex-wrap items-center gap-3 mb-2">
                   {/* 分類標籤 */}
-                  <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase text-[#5F7161] bg-[#F0F4F1] px-2 py-0.5 rounded tracking-widest">
+                  <span className="inline-flex items-center gap-1 text-[10px] font-semibold tracking-wide uppercase text-[#4d4c9d] bg-[#f3f3f9] px-2 py-0.5 rounded tracking-widest">
                     <Tag className="w-3 h-3" />
                     {news.category || '公告'}
                   </span>
@@ -65,18 +65,18 @@ export default async function NewsPage() {
 
                   {/* 首頁置頂標記 */}
                   {news.showOnHomepage && (
-                    <span className="text-[10px] text-[#869D85] border border-[#869D85]/30 px-1.5 rounded">
+                    <span className="text-[10px] text-[#53b2e5] border border-[#53b2e5]/30 px-1.5 rounded">
                       置頂
                     </span>
                   )}
                 </div>
 
-                <h3 className="text-lg font-bold text-stone-800 group-hover:text-[#5F7161] transition-colors">
+                <h3 className="text-lg font-semibold tracking-wide text-stone-800 group-hover:text-[#4d4c9d] transition-colors">
                   {news.title}
                 </h3>
               </div>
 
-              <div className="mt-4 md:mt-0 flex items-center text-[#5F7161] text-sm font-semibold md:opacity-0 group-hover:opacity-100 transition-opacity pl-2">
+              <div className="mt-4 md:mt-0 flex items-center text-[#4d4c9d] text-sm font-semibold md:opacity-0 group-hover:opacity-100 transition-opacity pl-2">
                 閱讀全文
                 <ChevronRight className="w-4 h-4 ml-1" />
               </div>

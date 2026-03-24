@@ -56,14 +56,14 @@ export default function RegisterPage() {
   if (success) {
     return (
       <div className="text-center">
-        <h3 className="text-2xl font-bold text-primary mb-4 tracking-tight">註冊成功！</h3>
+        <h3 className="text-2xl font-semibold tracking-wide text-[#4d4c9d] mb-4 tracking-tight">註冊成功！</h3>
         <p className="text-stone-600 mb-8">
           驗證信件已發送至您的信箱，請查收並點擊連結啟用帳號。
           <br />
         </p>
         <Link
           href="/login"
-          className="text-primary hover:text-secondary font-medium transition-colors"
+          className="text-[#4d4c9d] hover:text-[#53b2e5] font-medium transition-colors"
         >
           前往登入頁面 &rarr;
         </Link>
@@ -73,7 +73,7 @@ export default function RegisterPage() {
 
   return (
     <div>
-      <h3 className="text-2xl font-bold text-primary mb-6 text-center tracking-tight">
+      <h3 className="text-2xl font-semibold tracking-wide text-[#4d4c9d] mb-6 text-center tracking-tight">
         註冊會員帳號
       </h3>
 
@@ -90,7 +90,7 @@ export default function RegisterPage() {
           <input
             {...register('name', { required: '請輸入姓名' })}
             type="text"
-            className="appearance-none block w-full px-3 py-2 border border-stone-300 rounded-md shadow-sm placeholder-stone-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm transition-colors"
+            className="appearance-none block w-full px-3 py-2 border border-stone-300 rounded-sm placeholder-stone-400 focus:outline-none focus:ring-[#53b2e5] focus:border-[#53b2e5] sm:text-sm transition-colors"
           />
           {errors.name && (
             <p className="text-red-500 text-xs mt-1">{errors.name.message as string}</p>
@@ -103,7 +103,7 @@ export default function RegisterPage() {
           <input
             {...register('email', { required: '請輸入 Email' })}
             type="email"
-            className="appearance-none block w-full px-3 py-2 border border-stone-300 rounded-md shadow-sm placeholder-stone-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm transition-colors"
+            className="appearance-none block w-full px-3 py-2 border border-stone-300 rounded-sm placeholder-stone-400 focus:outline-none focus:ring-[#53b2e5] focus:border-[#53b2e5] sm:text-sm transition-colors"
           />
         </div>
 
@@ -116,7 +116,7 @@ export default function RegisterPage() {
               minLength: { value: 6, message: '密碼至少需 6 碼' },
             })}
             type="password"
-            className="appearance-none block w-full px-3 py-2 border border-stone-300 rounded-md shadow-sm placeholder-stone-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm transition-colors"
+            className="appearance-none block w-full px-3 py-2 border border-stone-300 rounded-sm placeholder-stone-400 focus:outline-none focus:ring-[#53b2e5] focus:border-[#53b2e5] sm:text-sm transition-colors"
           />
           {errors.password && (
             <p className="text-red-500 text-xs mt-1">{errors.password.message as string}</p>
@@ -132,7 +132,7 @@ export default function RegisterPage() {
               validate: (value) => value === password || '兩次密碼不一致',
             })}
             type="password"
-            className="appearance-none block w-full px-3 py-2 border border-stone-300 rounded-md shadow-sm placeholder-stone-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm transition-colors"
+            className="appearance-none block w-full px-3 py-2 border border-stone-300 rounded-sm placeholder-stone-400 focus:outline-none focus:ring-[#53b2e5] focus:border-[#53b2e5] sm:text-sm transition-colors"
           />
           {errors.confirmPassword && (
             <p className="text-red-500 text-xs mt-1">{errors.confirmPassword.message as string}</p>
@@ -151,7 +151,7 @@ export default function RegisterPage() {
               <input
                 {...register('organization', { required: true })}
                 placeholder="學校或公司"
-                className="appearance-none block w-full px-3 py-2 border border-stone-300 rounded-md shadow-sm placeholder-stone-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm transition-colors"
+                className="appearance-none block w-full px-3 py-2 border border-stone-300 rounded-sm placeholder-stone-400 focus:outline-none focus:ring-[#53b2e5] focus:border-[#53b2e5] sm:text-sm transition-colors"
               />
             </div>
             <div>
@@ -159,7 +159,7 @@ export default function RegisterPage() {
               <input
                 {...register('jobTitle', { required: true })}
                 placeholder="如: 教授、學生"
-                className="appearance-none block w-full px-3 py-2 border border-stone-300 rounded-md shadow-sm placeholder-stone-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm transition-colors"
+                className="appearance-none block w-full px-3 py-2 border border-stone-300 rounded-sm placeholder-stone-400 focus:outline-none focus:ring-[#53b2e5] focus:border-[#53b2e5] sm:text-sm transition-colors"
               />
             </div>
           </div>
@@ -170,7 +170,7 @@ export default function RegisterPage() {
             <input
               {...register('phone', { required: true })}
               type="tel"
-              className="appearance-none block w-full px-3 py-2 border border-stone-300 rounded-md shadow-sm placeholder-stone-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm transition-colors"
+              className="appearance-none block w-full px-3 py-2 border border-stone-300 rounded-sm placeholder-stone-400 focus:outline-none focus:ring-[#53b2e5] focus:border-[#53b2e5] sm:text-sm transition-colors"
             />
           </div>
 
@@ -181,14 +181,14 @@ export default function RegisterPage() {
               <input
                 {...register('birthday', { required: true })}
                 type="date"
-                className="appearance-none block w-full px-3 py-2 border border-stone-300 rounded-md shadow-sm placeholder-stone-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm transition-colors"
+                className="appearance-none block w-full px-3 py-2 border border-stone-300 rounded-sm placeholder-stone-400 focus:outline-none focus:ring-[#53b2e5] focus:border-[#53b2e5] sm:text-sm transition-colors"
               />
             </div>
             <div>
               <label className="block text-sm font-medium text-stone-700 mb-1">性別 (選填)</label>
               <select
                 {...register('gender')}
-                className="appearance-none block w-full px-3 py-2 border border-stone-300 rounded-md shadow-sm placeholder-stone-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm transition-colors bg-white"
+                className="appearance-none block w-full px-3 py-2 border border-stone-300 rounded-sm placeholder-stone-400 focus:outline-none focus:ring-[#53b2e5] focus:border-[#53b2e5] sm:text-sm transition-colors bg-white"
               >
                 <option value="">請選擇</option>
                 <option value="male">男</option>
@@ -202,7 +202,7 @@ export default function RegisterPage() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-lg shadow-md text-sm font-bold text-white bg-secondary hover:bg-[#6b7d6a] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary disabled:bg-stone-300 disabled:shadow-none transition-all duration-200 mt-6"
+          className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-sm shadow-md text-sm font-semibold tracking-wide text-white bg-secondary hover:bg-[#4098c7] hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary disabled:bg-stone-300 disabled:shadow-none transition-all duration-200 mt-6"
         >
           {isSubmitting ? '註冊中...' : '註冊帳號'}
         </button>
@@ -212,7 +212,7 @@ export default function RegisterPage() {
         <span className="text-stone-500">已經有帳號了嗎？</span>
         <Link
           href="/login"
-          className="ml-2 font-medium text-primary hover:text-secondary transition-colors"
+          className="ml-2 font-medium text-[#4d4c9d] hover:text-[#53b2e5] transition-colors"
         >
           登入
         </Link>

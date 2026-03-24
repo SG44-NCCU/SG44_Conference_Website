@@ -85,18 +85,18 @@ export default function ReviewQueuePage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b-2 border-stone-800 pb-4 gap-4">
         <div className="flex items-center gap-4">
-          <h1 className="text-2xl font-bold text-stone-800">待審稿件</h1>
+          <h1 className="text-2xl font-semibold tracking-wide text-stone-800">待審稿件</h1>
           <span className="text-stone-400 text-sm">{abstracts.length} 篇指派</span>
         </div>
 
         <div className="flex items-center gap-3">
           {pending > 0 && (
-            <span className="px-3 py-1.5 bg-stone-50 border border-stone-400 text-stone-600 text-xs font-bold">
+            <span className="px-3 py-1.5 bg-stone-50 border border-stone-400 text-stone-600 text-xs font-semibold tracking-wide">
               待審 {pending} 篇
             </span>
           )}
           {reviewed > 0 && (
-            <span className="px-3 py-1.5 bg-stone-50 border border-[#5F7161] text-[#5F7161] text-xs font-bold">
+            <span className="px-3 py-1.5 bg-stone-50 border border-[#4d4c9d] text-[#4d4c9d] text-xs font-semibold tracking-wide">
               已審 {reviewed} 篇
             </span>
           )}
@@ -135,7 +135,7 @@ export default function ReviewQueuePage() {
 
                 {/* 標題+分類 */}
                 <div className="flex-1 min-w-0">
-                  <p className="font-bold text-stone-800 group-hover:text-[#5F7161] transition-colors leading-snug truncate">
+                  <p className="font-semibold tracking-wide text-stone-800 group-hover:text-[#4d4c9d] transition-colors leading-snug truncate">
                     {doc.title}
                   </p>
                   <p className="text-xs text-stone-400 mt-0.5">{category}</p>
@@ -144,17 +144,17 @@ export default function ReviewQueuePage() {
                 {/* 狀態 + 箭頭 */}
                 <div className="flex items-center gap-3 flex-shrink-0">
                   {isDone ? (
-                    <span className="px-2.5 py-1 border border-[#5F7161] text-[#5F7161] text-xs font-bold">
+                    <span className="px-2.5 py-1 border border-[#4d4c9d] text-[#4d4c9d] text-xs font-semibold tracking-wide">
                       {statusLabel}
                     </span>
                   ) : (
-                    <span className="px-2.5 py-1 border border-stone-300 text-stone-500 text-xs font-bold">
+                    <span className="px-2.5 py-1 border border-stone-300 text-stone-500 text-xs font-semibold tracking-wide">
                       待審
                     </span>
                   )}
                   <ArrowRight
                     size={16}
-                    className="text-stone-300 group-hover:text-[#5F7161] transition-colors"
+                    className="text-stone-300 group-hover:text-[#4d4c9d] transition-colors"
                   />
                 </div>
               </Link>

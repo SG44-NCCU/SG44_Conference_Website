@@ -94,15 +94,15 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Sidebar */}
           <aside className="w-full lg:w-64 flex-shrink-0">
-            <div className="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden sticky top-24">
+            <div className="bg-white rounded-md shadow-sm border border-stone-200 overflow-hidden sticky top-24">
               {/* User Info */}
               <div className="p-6 border-b border-stone-100 bg-stone-50/50">
                 <div className="flex items-center gap-3 mb-1">
-                  <div className="w-12 h-12 rounded-full bg-[#5F7161] text-white flex items-center justify-center text-xl font-bold">
+                  <div className="w-12 h-12 rounded-full bg-[#4d4c9d] text-white flex items-center justify-center text-xl font-semibold tracking-wide">
                     {user.name?.charAt(0) || 'U'}
                   </div>
                   <div>
-                    <h3 className="font-bold text-stone-800">{user.name}</h3>
+                    <h3 className="font-semibold tracking-wide text-stone-800">{user.name}</h3>
                     <p className="text-xs text-stone-500 uppercase tracking-wider">{user.role}</p>
                   </div>
                 </div>
@@ -124,10 +124,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                     <Link
                       key={item.href}
                       href={item.href}
-                      className={`flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
+                      className={`flex items-center gap-3 px-4 py-3 rounded-sm text-sm font-medium transition-colors ${
                         isActive
-                          ? 'bg-[#5F7161] text-white shadow-sm'
-                          : 'text-stone-600 hover:bg-stone-50 hover:text-[#5F7161]'
+                          ? 'bg-[#4d4c9d] text-white shadow-sm'
+                          : 'text-stone-600 hover:bg-stone-50 hover:text-[#4d4c9d]'
                       }`}
                     >
                       <item.icon size={18} />
@@ -139,7 +139,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 <div className="pt-2 mt-2 border-t border-stone-100">
                   <button
                     onClick={logout}
-                    className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-stone-600 hover:bg-stone-50 hover:text-stone-800 transition-colors"
+                    className="w-full flex items-center gap-3 px-4 py-3 rounded-sm text-sm font-medium text-stone-600 hover:bg-stone-50 hover:text-stone-800 transition-colors"
                   >
                     <LogOut size={18} />
                     登出
@@ -151,7 +151,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
           {/* Main Content */}
           <main className="flex-1 min-w-0">
-            <div className="bg-white rounded-xl shadow-sm border border-stone-200 min-h-[500px] p-6 sm:p-8">
+            <div className="bg-white rounded-md shadow-sm border border-stone-200 min-h-[500px] p-6 sm:p-8">
               {children}
             </div>
           </main>

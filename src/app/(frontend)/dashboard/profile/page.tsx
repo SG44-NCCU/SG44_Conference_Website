@@ -84,7 +84,7 @@ export default function ProfilePage() {
   return (
     <div className="max-w-3xl mx-auto">
       <div className="mb-8 border-b-2 border-stone-800 pb-4">
-        <h1 className="text-2xl font-bold text-stone-800">個人資料管理</h1>
+        <h1 className="text-2xl font-semibold tracking-wide text-stone-800">個人資料管理</h1>
         <p className="text-stone-600 mt-2">
           請確實填寫您的基本資料與聯絡方式，以便大會進行相關通知與作業。
         </p>
@@ -94,7 +94,7 @@ export default function ProfilePage() {
         <div
           className={`mb-8 p-4 flex items-center border ${
             message.type === 'success'
-              ? 'bg-stone-50 text-[#5F7161] border-[#5F7161]'
+              ? 'bg-stone-50 text-[#4d4c9d] border-[#4d4c9d]'
               : 'bg-red-50 text-red-700 border-red-200'
           }`}
         >
@@ -109,18 +109,18 @@ export default function ProfilePage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* 姓名 */}
           <div>
-            <label className="block text-sm font-bold text-stone-800 mb-2">真實姓名</label>
+            <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">真實姓名</label>
             <input
               {...register('name', { required: '請輸入真實姓名' })}
               type="text"
-              className="w-full px-4 py-2.5 rounded-none border border-stone-300 focus:ring-1 focus:ring-[#5F7161] focus:border-[#5F7161] outline-none transition-colors"
+              className="w-full px-4 py-2.5 rounded-none border border-stone-300 focus:ring-1 focus:ring-[#4d4c9d] focus:border-[#4d4c9d] outline-none transition-colors"
             />
             {errors.name && <p className="mt-2 text-xs text-red-600">{errors.name.message}</p>}
           </div>
 
           {/* Email (Read only) */}
           <div>
-            <label className="block text-sm font-bold text-stone-800 mb-2">
+            <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">
               電子信箱 (無法修改)
             </label>
             <input
@@ -133,12 +133,12 @@ export default function ProfilePage() {
 
           {/* 單位 */}
           <div>
-            <label className="block text-sm font-bold text-stone-800 mb-2">所屬 / 服務單位</label>
+            <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">所屬 / 服務單位</label>
             <input
               {...register('organization', { required: '請輸入所屬單位' })}
               type="text"
               placeholder="例如：國立政治大學地政學系"
-              className="w-full px-4 py-2.5 rounded-none border border-stone-300 focus:ring-1 focus:ring-[#5F7161] focus:border-[#5F7161] outline-none transition-colors"
+              className="w-full px-4 py-2.5 rounded-none border border-stone-300 focus:ring-1 focus:ring-[#4d4c9d] focus:border-[#4d4c9d] outline-none transition-colors"
             />
             {errors.organization && (
               <p className="mt-2 text-xs text-red-600">{errors.organization.message}</p>
@@ -147,12 +147,12 @@ export default function ProfilePage() {
 
           {/* 職稱 */}
           <div>
-            <label className="block text-sm font-bold text-stone-800 mb-2">職稱</label>
+            <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">職稱</label>
             <input
               {...register('jobTitle', { required: '請輸入職稱' })}
               type="text"
               placeholder="例如：教授、碩士生"
-              className="w-full px-4 py-2.5 rounded-none border border-stone-300 focus:ring-1 focus:ring-[#5F7161] focus:border-[#5F7161] outline-none transition-colors"
+              className="w-full px-4 py-2.5 rounded-none border border-stone-300 focus:ring-1 focus:ring-[#4d4c9d] focus:border-[#4d4c9d] outline-none transition-colors"
             />
             {errors.jobTitle && (
               <p className="mt-2 text-xs text-red-600">{errors.jobTitle.message}</p>
@@ -161,22 +161,22 @@ export default function ProfilePage() {
 
           {/* 手機 */}
           <div>
-            <label className="block text-sm font-bold text-stone-800 mb-2">手機號碼</label>
+            <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">手機號碼</label>
             <input
               {...register('phone', { required: '請輸入手機號碼' })}
               type="tel"
-              className="w-full px-4 py-2.5 rounded-none border border-stone-300 focus:ring-1 focus:ring-[#5F7161] focus:border-[#5F7161] outline-none transition-colors font-mono"
+              className="w-full px-4 py-2.5 rounded-none border border-stone-300 focus:ring-1 focus:ring-[#4d4c9d] focus:border-[#4d4c9d] outline-none transition-colors font-mono"
             />
             {errors.phone && <p className="mt-2 text-xs text-red-600">{errors.phone.message}</p>}
           </div>
 
           {/* 生日 */}
           <div>
-            <label className="block text-sm font-bold text-stone-800 mb-2">出生年月日</label>
+            <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">出生年月日</label>
             <input
               {...register('birthday', { required: '請選擇出生年月日' })}
               type="date"
-              className="w-full px-4 py-2.5 rounded-none border border-stone-300 focus:ring-1 focus:ring-[#5F7161] focus:border-[#5F7161] outline-none transition-colors text-stone-800 cursor-text"
+              className="w-full px-4 py-2.5 rounded-none border border-stone-300 focus:ring-1 focus:ring-[#4d4c9d] focus:border-[#4d4c9d] outline-none transition-colors text-stone-800 cursor-text"
             />
             {errors.birthday && (
               <p className="mt-2 text-xs text-red-600">{errors.birthday.message}</p>
@@ -185,10 +185,10 @@ export default function ProfilePage() {
 
           {/* 性別 */}
           <div>
-            <label className="block text-sm font-bold text-stone-800 mb-2">性別</label>
+            <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">性別</label>
             <select
               {...register('gender')}
-              className="w-full px-4 py-2.5 rounded-none border border-stone-300 focus:ring-1 focus:ring-[#5F7161] focus:border-[#5F7161] outline-none transition-colors bg-white cursor-pointer"
+              className="w-full px-4 py-2.5 rounded-none border border-stone-300 focus:ring-1 focus:ring-[#4d4c9d] focus:border-[#4d4c9d] outline-none transition-colors bg-white cursor-pointer"
             >
               <option value="">請選擇</option>
               <option value="male">男</option>
@@ -202,7 +202,7 @@ export default function ProfilePage() {
           <button
             type="submit"
             disabled={isSaving}
-            className="w-full sm:w-auto px-10 py-3 bg-[#5F7161] text-white font-medium hover:bg-[#4a584b] transition-colors rounded-none disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="w-full sm:w-auto px-10 py-3 bg-[#4d4c9d] text-white font-medium hover:bg-[#3a3977] transition-colors rounded-none disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
             {isSaving ? (
               <>
