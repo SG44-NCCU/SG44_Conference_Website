@@ -29,14 +29,7 @@ const NAV_ITEMS: NavItem[] = [
     name: '最新消息',
     href: '/news',
   },
-  {
-    name: '3S創客競賽',
-    href: '/3S_competition_rules',
-    items: [
-      { name: '競賽細則', href: '/3S_competition_rules' },
-      // { name: '競賽流程', href: '/3S_competition_flow' },
-    ],
-  },
+  
   // {
   //   name: '議程',
   //   href: '/agenda',
@@ -50,25 +43,28 @@ const NAV_ITEMS: NavItem[] = [
   //     { name: '空間資訊永續應用獎', href: '/award' },
   //   ],
   // },
-  // {
-  //   name: '會議報名',
-  //   href: '/registration',
-  //   items: [
-  //     { name: '報名時程', href: '/registration#timeline' },
-  //     { name: '報名費用', href: '/registration#fees' },
-  //     { name: '報名方式', href: '/registration#method' },
-  //     { name: '報名須知', href: '/registration#notice' },
-  //   ],
-  // },
-  // {
-  //   name: '論文發表',
-  //   href: '/submission',
-  //   items: [
-  //     { name: '會議論文集', href: '/proceedings' },
-  //     { name: '投稿說明', href: '/submission' },
-  //     { name: '發表注意事項', href: '/guidelines' },
-  //   ],
-  // },
+  {
+    name: '會議報名',
+    href: '/registration',
+    items: [
+      { name: '報名時程', href: '/registration#timeline' },
+      { name: '報名費用', href: '/registration#fees' },
+      { name: '報名方式', href: '/registration#method' },
+      { name: '報名須知', href: '/registration#notice' },
+      { name: '前往報名', href: '/SG44-register' },
+    ],
+  },
+  {
+    name: '論文發表',
+    href: '/submission',
+    items: [
+      // { name: '會議論文集', href: '/proceedings' },
+      { name: '投稿說明', href: '/submission' },
+      { name: '發表注意事項', href: '/guidelines' },
+      { name: '前往投稿', href: '/abstract-submit' },
+    ],
+  },
+
   // {
   //   name: '大專生競賽',
   //   href: '/competition-rules',
@@ -77,27 +73,35 @@ const NAV_ITEMS: NavItem[] = [
   //     { name: '競賽流程', href: '/competition-schedule' },
   //   ],
   // },
-  // {
-  //   name: '參展贊助',
-  //   href: '/sponsors',
-  //   items: [
-  //     { name: '參展及贊助單位', href: '/sponsors' },
-  //     { name: '參展報名', href: '/exhibition' },
-  //     { name: '活動贊助', href: '/sponsorship' },
-  //   ],
-  // },
-  // {
-  //   name: '會議資訊',
-  //   href: '/about',
-  //   items: [
-  //     { name: '活動照片', href: '/gallery' },
-  //     { name: '會議介紹', href: '/about' },
-  //     { name: '會場地圖', href: '/venue' },
-  //     { name: '交通資訊', href: '/transportation' },
-  //     { name: '住宿資訊', href: '/hotels' },
-  //     { name: '聯絡我們', href: '/contact' },
-  //   ],
-  // },
+  {
+    name: '參展贊助',
+    href: '/sponsors',
+    items: [
+      { name: '參展及贊助單位', href: '/sponsors' },
+      { name: '參展報名', href: '/exhibition' },
+      { name: '活動贊助', href: '/sponsorship' },
+    ],
+  },
+  {
+    name: '會議資訊',
+    href: '/about',
+    items: [
+      // { name: '活動照片', href: '/gallery' },
+      { name: '會議介紹', href: '/about' },
+      { name: '會場地圖', href: '/venue' },
+      { name: '交通資訊', href: '/transportation' },
+      { name: '住宿資訊', href: '/hotels' },
+      { name: '聯絡我們', href: '/contact' },
+    ],
+  },
+  {
+    name: '3S創客競賽',
+    href: '/3S_competition_rules',
+    items: [
+      { name: '競賽細則', href: '/3S_competition_rules' },
+      // { name: '競賽流程', href: '/3S_competition_flow' },
+    ],
+  },
 ]
 
 const Navbar: React.FC = () => {

@@ -11,18 +11,13 @@ const Hero: React.FC = () => {
     <section className="relative w-full overflow-hidden bg-white">
       {/* Hero Image Container - Using natural height to prevent any cropping */}
       <div className="relative w-full bg-white">
-        <Image 
-          src="/key-visual.webp" 
-          alt="SG44 研討會主視覺 Key Visual" 
-          width={1920}
-          height={1080}
-          style={{ width: '100%', height: 'auto' }}
-          priority
-          quality={100}
-          onLoad={() => setIsLoaded(true)}
-          className={`transition-opacity duration-1000 ease-in-out ${
-            isLoaded ? 'opacity-100' : 'opacity-0'
-          }`}
+        <video 
+          src="/SG44設計/主視覺(備份的備份的備份)_1.mp4" 
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-auto object-cover"
         />
         
         {/* Bottom Fade Gradient Overlay - Subtle blend into the button section */}
