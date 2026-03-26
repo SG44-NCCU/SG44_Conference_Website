@@ -249,6 +249,8 @@ export interface Registration {
   presentationType?: ('oral' | 'poster' | 'both' | 'none') | null;
   paymentAccountLast5: string;
   paymentDate: string;
+  invoiceTitle?: string | null;
+  invoiceTaxId?: string | null;
   mealDay1: 'yes' | 'no';
   mealDay2: 'yes' | 'no';
   banquet: 'yes' | 'no';
@@ -558,6 +560,8 @@ export interface RegistrationsSelect<T extends boolean = true> {
   presentationType?: T;
   paymentAccountLast5?: T;
   paymentDate?: T;
+  invoiceTitle?: T;
+  invoiceTaxId?: T;
   mealDay1?: T;
   mealDay2?: T;
   banquet?: T;

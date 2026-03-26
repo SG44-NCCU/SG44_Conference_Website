@@ -94,6 +94,8 @@ export default function SG44RegisterPage() {
             if (doc.paymentDate) {
               setValue('paymentDate', new Date(doc.paymentDate).toISOString().split('T')[0])
             }
+            setValue('invoiceTitle', doc.invoiceTitle)
+            setValue('invoiceTaxId', doc.invoiceTaxId)
             setValue('mealDay1', doc.mealDay1)
             setValue('mealDay2', doc.mealDay2)
             setValue('banquet', doc.banquet)

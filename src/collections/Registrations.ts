@@ -153,6 +153,16 @@ export const Registrations: CollectionConfig = {
         },
       },
     },
+    {
+      name: 'invoiceTitle',
+      type: 'text',
+      label: '註冊費發票抬頭',
+    },
+    {
+      name: 'invoiceTaxId',
+      type: 'text',
+      label: '註冊費發票統編',
+    },
 
     // 四、 膳食與活動意願調查
     {
