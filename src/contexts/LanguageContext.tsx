@@ -271,7 +271,18 @@ const translations: Record<Language, Record<string, string>> = {
     'abstract.submit.btn.saveEdit': '確認並儲存修改',
     'abstract.submit.btn.submit': '確認並送出投稿',
     'abstract.submit.btn.hint': '送出後可在「我的投稿」頁面查看投稿狀態',
-    'dashboard.notif.empty': '尚無新通知。'
+    'dashboard.notif.empty': '尚無新通知。',
+    'dashboard.notif.regPaid.title': '報名繳費成功',
+    'dashboard.notif.regPaid.desc': '您的研討會報名與繳費已被大會確認，現在您可以自由使用「我的投稿」功能。',
+    'dashboard.notif.regFailed.title': '繳費對帳異常',
+    'dashboard.notif.regFailed.desc': '我們無法核實您的繳費資訊，請前往「我的報名」查閱詳細資訊或聯絡大會。',
+    'dashboard.notif.absAccept.title': '摘要審查通過',
+    'dashboard.notif.absAccept.desc': '您的摘要「{title}」已通過大會審查！',
+    'dashboard.notif.absRevision.title': '摘要需修改後通過',
+    'dashboard.notif.absRevision.desc': '您的摘要「{title}」獲評為修改後通過，請依評語進行修正。',
+    'dashboard.notif.absReject.title': '摘要未通過',
+    'dashboard.notif.absReject.desc': '您的摘要「{title}」未通過本次審查，感謝您的投稿。',
+    'dashboard.notif.btn.view': '查看詳情'
   },
   en: {
     // Navbar sections
@@ -533,7 +544,18 @@ const translations: Record<Language, Record<string, string>> = {
     'abstract.submit.btn.saveEdit': 'Confirm & Save Changes',
     'abstract.submit.btn.submit': 'Confirm and Submit',
     'abstract.submit.btn.hint': 'You can view submission status in "My Submissions" after sending.',
-    'dashboard.notif.empty': 'No new notifications.'
+    'dashboard.notif.empty': 'No new notifications.',
+    'dashboard.notif.regPaid.title': 'Payment Verified',
+    'dashboard.notif.regPaid.desc': 'Your conference registration and payment have been confirmed. Abstract submission is now unlocked.',
+    'dashboard.notif.regFailed.title': 'Payment Verification Failed',
+    'dashboard.notif.regFailed.desc': 'We could not verify your payment. Please check "My Registrations" for details or contact us.',
+    'dashboard.notif.absAccept.title': 'Abstract Accepted',
+    'dashboard.notif.absAccept.desc': 'Your abstract "{title}" has been accepted!',
+    'dashboard.notif.absRevision.title': 'Abstract Accepted with Minor Revision',
+    'dashboard.notif.absRevision.desc': 'Your abstract "{title}" has been accepted with minor revisions required.',
+    'dashboard.notif.absReject.title': 'Abstract Rejected',
+    'dashboard.notif.absReject.desc': 'Your abstract "{title}" was not accepted. Thank you for your submission.',
+    'dashboard.notif.btn.view': 'View Details'
   },
 }
 
