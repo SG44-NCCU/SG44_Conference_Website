@@ -199,15 +199,15 @@ export default function SG44RegisterPage() {
               </div>
               <div>
                 <span className="block text-stone-500 mb-1">銀行代碼</span>
-                <span className="font-medium text-stone-800">808 (玉山商業銀行)</span>
+                <span className="font-medium text-stone-800">006 (合作金庫銀行)</span>
               </div>
               <div>
                 <span className="block text-stone-500 mb-1">戶名</span>
-                <span className="font-medium text-stone-800">中華民國航測及遙測學會</span>
+                <span className="font-medium text-stone-800">中華空間資訊學會</span>
               </div>
               <div>
                 <span className="block text-stone-500 mb-1">帳號</span>
-                <span className="font-medium text-stone-800 tracking-wider">0123-456-789012</span>
+                <span className="font-medium text-stone-800 tracking-wider">1070717806061</span>
               </div>
             </div>
           </div>
