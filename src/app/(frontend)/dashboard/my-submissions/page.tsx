@@ -1,9 +1,9 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useAuth } from '@/providers/Auth'
 import Link from 'next/link'
-import { Loader2, Plus, Edit, ArrowRight } from 'lucide-react'
+import { Loader2, Plus, Edit, ArrowRight, Upload, FileText, ExternalLink } from 'lucide-react'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 // ─── Label maps ────────────────────────────────────────────────────────────
@@ -20,6 +20,12 @@ const SUB_TOPIC_LABELS: Record<string, string> = {
   'topic-10': '跨國交流專題',
 }
 
+type FullPaperDoc = {
+  id: number
+  filename: string
+  url: string
+}
+
 type AbstractDoc = {
   id: number
   title: string
@@ -30,6 +36,7 @@ type AbstractDoc = {
   reviewComments?: string | null
   isStudent?: boolean
   applyStudentAward?: boolean
+  fullPaper?: FullPaperDoc | null
   createdAt: string
   updatedAt: string
 }
@@ -42,6 +49,13 @@ export default function MySubmissionsPage() {
   const [reviewPublished, setReviewPublished] = useState(false)
   const [submissionOpen, setSubmissionOpen] = useState(true)
   const [hasRegistration, setHasRegistration] = useState(false)
+  const [fullPaperSubmissionOpen, setFullPaperSubmissionOpen] = useState(true)
+  const [fullPaperDeadline, setFullPaperDeadline] = useState<string | null>(null)
+  // per-abstract upload state
+  const [uploadingId, setUploadingId] = useState<number | null>(null)
+  const [uploadError, setUploadError] = useState<Record<number, string>>({})
+  const fileInputRef = useRef<HTMLInputElement>(null)
+  const [pendingUploadAbstractId, setPendingUploadAbstractId] = useState<number | null>(null)
 
   const REVIEW_STATUS_LABELS: Record<string, string> = {
     pending: t('abstract.status.pending'),
@@ -69,7 +83,7 @@ export default function MySubmissionsPage() {
     const fetchAll = async () => {
       try {
         const [abstractsRes, settingsRes, regRes] = await Promise.all([
-          fetch(`/api/abstracts?where[submitter][equals]=${user.id}&sort=-createdAt&limit=100`),
+          fetch(`/api/abstracts?where[submitter][equals]=${user.id}&sort=-createdAt&limit=100&depth=1`),
           fetch('/api/globals/abstracts-settings'),
           fetch(`/api/registrations?where[user][equals]=${user.id}&where[paymentStatus][equals]=paid&limit=1`),
         ])
@@ -83,6 +97,14 @@ export default function MySubmissionsPage() {
           const settings = await settingsRes.json()
           setReviewPublished(settings?.reviewResultPublished === true)
           setSubmissionOpen(settings?.submissionOpen !== false)
+          setFullPaperSubmissionOpen(settings?.fullPaperSubmissionOpen !== false)
+          if (settings?.fullPaperDeadline) {
+            setFullPaperDeadline(
+              new Date(settings.fullPaperDeadline).toLocaleDateString('zh-TW', {
+                year: 'numeric', month: '2-digit', day: '2-digit',
+              })
+            )
+          }
         }
 
         if (regRes.ok) {
@@ -99,6 +121,52 @@ export default function MySubmissionsPage() {
     fetchAll()
   }, [user])
 
+  // ── Handle full paper upload from dashboard ──────────────────────────────
+  const handleFullPaperUpload = async (abstractId: number, file: File) => {
+    if (!user) return
+    setUploadingId(abstractId)
+    setUploadError((prev) => ({ ...prev, [abstractId]: '' }))
+    try {
+      // 1. Upload PDF to full-papers
+      const formData = new FormData()
+      formData.append('file', file)
+      formData.append('uploadedBy', String(user.id))
+      const fpRes = await fetch('/api/full-papers', { method: 'POST', body: formData })
+      if (!fpRes.ok) {
+        const fpErr = await fpRes.json()
+        throw new Error(fpErr?.errors?.[0]?.message || t('dashboard.sub.fullPaper.uploadFail'))
+      }
+      const fpData = await fpRes.json()
+      const fullPaperId = fpData?.doc?.id
+
+      // 2. PATCH abstract to link the full paper
+      const patchRes = await fetch(`/api/abstracts/${abstractId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ fullPaper: fullPaperId }),
+      })
+      if (!patchRes.ok) throw new Error(t('dashboard.sub.fullPaper.uploadFail'))
+
+      const patchData = await patchRes.json()
+      // Update local state
+      setAbstracts((prev) =>
+        prev.map((a) =>
+          a.id === abstractId
+            ? { ...a, fullPaper: patchData?.doc?.fullPaper ?? null }
+            : a
+        )
+      )
+    } catch (err) {
+      setUploadError((prev) => ({
+        ...prev,
+        [abstractId]: err instanceof Error ? err.message : t('dashboard.sub.fullPaper.uploadFail'),
+      }))
+    } finally {
+      setUploadingId(null)
+      setPendingUploadAbstractId(null)
+    }
+  }
+
   if (loading || !user) {
     return (
       <div className="flex justify-center items-center py-20">
@@ -109,7 +177,6 @@ export default function MySubmissionsPage() {
 
   // ── 尚未投稿 ────────────────────────────────────────────────────────────────
   if (abstracts.length === 0) {
-    // 未報名 → 鎖住，要求先報名
     if (!hasRegistration) {
       return (
         <div className="max-w-3xl mx-auto py-12">
@@ -131,7 +198,6 @@ export default function MySubmissionsPage() {
       )
     }
 
-    // 已報名但尚未投稿
     return (
       <div className="max-w-3xl mx-auto py-12">
         <div className="text-center mb-12 border-b border-stone-200 pb-12">
@@ -159,6 +225,21 @@ export default function MySubmissionsPage() {
   // ── 已有投稿 ────────────────────────────────────────────────────────────────
   return (
     <div className="max-w-4xl mx-auto space-y-8">
+      {/* Hidden file input for dashboard PDF upload */}
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="application/pdf"
+        className="hidden"
+        onChange={(e) => {
+          const file = e.target.files?.[0]
+          if (file && pendingUploadAbstractId !== null) {
+            handleFullPaperUpload(pendingUploadAbstractId, file)
+          }
+          e.target.value = ''
+        }}
+      />
+
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b-2 border-stone-800 pb-4 gap-4">
         <div className="flex items-center gap-4">
@@ -193,6 +274,9 @@ export default function MySubmissionsPage() {
           const statusLabel = REVIEW_STATUS_LABELS[doc.reviewStatus] ?? doc.reviewStatus
           const isAccepted = doc.reviewStatus === 'accepted' || doc.reviewStatus === 'revision'
           const showResult = reviewPublished && doc.reviewStatus !== 'pending'
+          const isUploading = uploadingId === doc.id
+          const thisUploadError = uploadError[doc.id]
+          const needsFullPaper = doc.isStudent && doc.applyStudentAward && !doc.fullPaper
 
           return (
             <div key={doc.id} className="border border-stone-200 p-8">
@@ -284,6 +368,91 @@ export default function MySubmissionsPage() {
                   </div>
                 )}
               </div>
+
+              {/* ── 全文投稿區塊 ── */}
+              {fullPaperSubmissionOpen && (
+                <div className="mt-6 pt-5 border-t border-stone-200">
+                  <p className="text-stone-500 text-xs font-semibold tracking-wide uppercase tracking-widest mb-3">
+                    {t('dashboard.sub.fullPaper.label')}
+                  </p>
+
+                  {/* 學生獎但未上傳 → 紅色提醒 */}
+                  {needsFullPaper && (
+                    <div className="mb-3 p-3 border-l-4 border-red-400 bg-red-50">
+                      <p className="text-sm font-semibold text-red-700">
+                        ⚠️ {t('dashboard.sub.fullPaper.awardAlert')}
+                      </p>
+                      {fullPaperDeadline && (
+                        <p className="text-xs text-red-600 mt-0.5">
+                          {t('abstract.submit.fullPaper.award.deadline')}{fullPaperDeadline}
+                        </p>
+                      )}
+                    </div>
+                  )}
+
+                  {doc.fullPaper ? (
+                    /* 已上傳 */
+                    <div className="flex flex-wrap items-center gap-3">
+                      <div className="flex items-center gap-2 px-3 py-2 border border-stone-200 bg-stone-50 text-sm text-stone-700">
+                        <FileText size={15} className="text-[#4d4c9d]" />
+                        <span className="truncate max-w-[200px]">{doc.fullPaper.filename}</span>
+                        <span className="text-xs text-stone-400 border border-stone-300 px-1.5 py-0.5">
+                          {t('dashboard.sub.fullPaper.uploaded')}
+                        </span>
+                      </div>
+                      {doc.fullPaper.url && (
+                        <a
+                          href={doc.fullPaper.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-1.5 text-xs text-[#4d4c9d] hover:underline"
+                        >
+                          <ExternalLink size={13} /> {t('dashboard.sub.fullPaper.view')}
+                        </a>
+                      )}
+                      <button
+                        type="button"
+                        disabled={isUploading}
+                        onClick={() => {
+                          setPendingUploadAbstractId(doc.id)
+                          fileInputRef.current?.click()
+                        }}
+                        className="flex items-center gap-1.5 text-xs px-3 py-1.5 border border-stone-300 text-stone-600 hover:bg-stone-50 transition-colors disabled:opacity-50"
+                      >
+                        {isUploading ? (
+                          <><Loader2 size={13} className="animate-spin" /> {t('dashboard.sub.fullPaper.uploading')}</>
+                        ) : (
+                          <><Upload size={13} /> {t('dashboard.sub.fullPaper.replace')}</>
+                        )}
+                      </button>
+                    </div>
+                  ) : (
+                    /* 未上傳 */
+                    <div className="flex flex-wrap items-center gap-3">
+                      <span className="text-sm text-stone-500">{t('dashboard.sub.fullPaper.none')}</span>
+                      <button
+                        type="button"
+                        disabled={isUploading}
+                        onClick={() => {
+                          setPendingUploadAbstractId(doc.id)
+                          fileInputRef.current?.click()
+                        }}
+                        className="flex items-center gap-1.5 text-sm px-4 py-2 border border-[#4d4c9d] text-[#4d4c9d] hover:bg-stone-50 transition-colors disabled:opacity-50"
+                      >
+                        {isUploading ? (
+                          <><Loader2 size={15} className="animate-spin" /> {t('dashboard.sub.fullPaper.uploading')}</>
+                        ) : (
+                          <><Upload size={15} /> {t('dashboard.sub.fullPaper.upload')}</>
+                        )}
+                      </button>
+                    </div>
+                  )}
+
+                  {thisUploadError && (
+                    <p className="mt-2 text-xs text-red-600">{thisUploadError}</p>
+                  )}
+                </div>
+              )}
 
               {/* 審查結果（發布後才顯示） */}
               {showResult && (

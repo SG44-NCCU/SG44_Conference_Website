@@ -42,5 +42,26 @@ export const AbstractsSettings: GlobalConfig = {
         description: '僅供顯示用，實際開關請用「開放摘要投稿」選項',
       },
     },
+    {
+      name: 'fullPaperSubmissionOpen',
+      type: 'checkbox',
+      label: '開放全文投稿',
+      defaultValue: true,
+      admin: {
+        description: '關閉後，投稿表單及 Dashboard 的全文上傳功能將隱藏。',
+      },
+    },
+    {
+      name: 'fullPaperDeadline',
+      type: 'date',
+      label: '全文截止日期',
+      admin: {
+        date: {
+          pickerAppearance: 'dayOnly',
+          displayFormat: 'yyyy-MM-dd',
+        },
+        description: '全文上傳截止日，顯示於前台提醒文字（若留空則不顯示日期）',
+      },
+    },
   ],
 }

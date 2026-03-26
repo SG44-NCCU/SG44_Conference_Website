@@ -238,17 +238,17 @@ export const Abstracts: CollectionConfig = {
       defaultValue: false,
       admin: {
         condition: (data) => Boolean(data?.isStudent),
-        description: '勾選後需上傳全文（PDF 或 DOCX，10MB 以內）',
+        description: '勾選後，請記得在截止日前透過「我的投稿」上傳全文 PDF，否則將無法參賽。',
       },
     },
     {
-      name: 'fullTextFile',
+      name: 'fullPaper',
       type: 'upload',
-      relationTo: 'media',
-      label: '全文檔案 (Full Paper File)',
+      relationTo: 'full-papers',
+      label: '全文 PDF (Full Paper)',
+      required: false,
       admin: {
-        condition: (data) => Boolean(data?.isStudent && data?.applyStudentAward),
-        description: '請上傳 PDF 或 DOCX 格式，檔案大小限 10MB 以內',
+        description: '選填。請上傳 PDF 格式，大小限 20MB 以內。可在摘要投稿後隨時從「我的投稿」補上傳。',
       },
     },
 

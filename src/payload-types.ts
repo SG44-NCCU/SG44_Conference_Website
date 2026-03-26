@@ -73,6 +73,7 @@ export interface Config {
     registrations: Registration;
     abstracts: Abstract;
     pages: Page;
+    'full-papers': FullPaper;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -86,6 +87,7 @@ export interface Config {
     registrations: RegistrationsSelect<false> | RegistrationsSelect<true>;
     abstracts: AbstractsSelect<false> | AbstractsSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
+    'full-papers': FullPapersSelect<false> | FullPapersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -298,13 +300,13 @@ export interface Abstract {
   specialSession?: ('special-nstc' | 'special-nlsc' | 'special-land' | 'special-national-park') | null;
   isStudent?: boolean | null;
   /**
-   * 勾選後需上傳全文（PDF 或 DOCX，10MB 以內）
+   * 勾選後，請記得在截止日前透過「我的投稿」上傳全文 PDF，否則將無法參賽。
    */
   applyStudentAward?: boolean | null;
   /**
-   * 請上傳 PDF 或 DOCX 格式，檔案大小限 10MB 以內
+   * 選填。請上傳 PDF 格式，大小限 20MB 以內。可在摘要投稿後隨時從「我的投稿」補上傳。
    */
-  fullTextFile?: (number | null) | Media;
+  fullPaper?: (number | null) | FullPaper;
   /**
    * 請輸入 250 字以內的中英文摘要
    */
@@ -328,6 +330,25 @@ export interface Abstract {
   assignedReviewer?: (number | null) | User;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "full-papers".
+ */
+export interface FullPaper {
+  id: number;
+  uploadedBy?: (number | null) | User;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -427,6 +448,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'pages';
         value: number | Page;
+      } | null)
+    | ({
+        relationTo: 'full-papers';
+        value: number | FullPaper;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -591,7 +616,7 @@ export interface AbstractsSelect<T extends boolean = true> {
   specialSession?: T;
   isStudent?: T;
   applyStudentAward?: T;
-  fullTextFile?: T;
+  fullPaper?: T;
   abstract?: T;
   keywords?: T;
   presentationPreference?: T;
@@ -632,6 +657,24 @@ export interface PagesSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "full-papers_select".
+ */
+export interface FullPapersSelect<T extends boolean = true> {
+  uploadedBy?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -691,6 +734,14 @@ export interface AbstractsSetting {
    * 僅供顯示用，實際開關請用「開放摘要投稿」選項
    */
   submissionDeadline?: string | null;
+  /**
+   * 關閉後，投稿表單及 Dashboard 的全文上傳功能將隱藏。
+   */
+  fullPaperSubmissionOpen?: boolean | null;
+  /**
+   * 全文上傳截止日，顯示於前台提醒文字（若留空則不顯示日期）
+   */
+  fullPaperDeadline?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -702,6 +753,8 @@ export interface AbstractsSettingsSelect<T extends boolean = true> {
   submissionOpen?: T;
   reviewResultPublished?: T;
   submissionDeadline?: T;
+  fullPaperSubmissionOpen?: T;
+  fullPaperDeadline?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

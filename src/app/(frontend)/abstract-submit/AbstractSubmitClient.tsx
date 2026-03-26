@@ -1,10 +1,10 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useAuth } from '@/providers/Auth'
 import { useForm, useFieldArray } from 'react-hook-form'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { Loader2, Plus, Trash2, ArrowRight } from 'lucide-react'
+import { Loader2, Plus, Trash2, ArrowRight, Upload, FileText, X } from 'lucide-react'
 import Link from 'next/link'
 import SectionTitle from '@/components/ui/SectionTitle'
 import { useLanguage } from '@/contexts/LanguageContext'
@@ -58,6 +58,10 @@ export default function AbstractSubmitClient() {
   const [submissionOpen, setSubmissionOpen] = useState<boolean | null>(null)
   const [checkingSettings, setCheckingSettings] = useState(true)
   const [hasRegistration, setHasRegistration] = useState<boolean | null>(null)
+  const [fullPaperSubmissionOpen, setFullPaperSubmissionOpen] = useState(true)
+  const [fullPaperDeadline, setFullPaperDeadline] = useState<string | null>(null)
+  const [fullPaperFile, setFullPaperFile] = useState<File | null>(null)
+  const fullPaperInputRef = useRef<HTMLInputElement>(null)
 
   const {
     register,
@@ -95,6 +99,14 @@ export default function AbstractSubmitClient() {
         if (settingsRes.ok) {
           const data = await settingsRes.json()
           setSubmissionOpen(data?.submissionOpen !== false)
+          setFullPaperSubmissionOpen(data?.fullPaperSubmissionOpen !== false)
+          if (data?.fullPaperDeadline) {
+            setFullPaperDeadline(
+              new Date(data.fullPaperDeadline).toLocaleDateString('zh-TW', {
+                year: 'numeric', month: '2-digit', day: '2-digit',
+              })
+            )
+          }
         } else {
           setSubmissionOpen(true)
         }
@@ -156,14 +168,33 @@ export default function AbstractSubmitClient() {
     setIsSubmitting(true)
 
     try {
+      // Step 1: Upload full paper PDF if selected
+      let fullPaperId: number | null = null
+      if (fullPaperFile && fullPaperSubmissionOpen) {
+        const formData = new FormData()
+        formData.append('file', fullPaperFile)
+        formData.append('uploadedBy', String(user.id))
+        const fpRes = await fetch('/api/full-papers', {
+          method: 'POST',
+          body: formData,
+        })
+        if (!fpRes.ok) {
+          const fpErr = await fpRes.json()
+          throw new Error(fpErr?.errors?.[0]?.message || '全文上傳失敗，請重試')
+        }
+        const fpData = await fpRes.json()
+        fullPaperId = fpData?.doc?.id ?? null
+      }
+
+      // Step 2: Submit the abstract
       const payloadData = {
         ...data,
         submitter: user.id,
-        // 特別論壇不需子題，明確送 null 避免空字串被 Payload 拒絕
         subTopic: data.specialSession ? null : (data.subTopic || null),
         applyStudentAward: data.isStudent ? data.applyStudentAward : false,
         specialSession: data.specialSession || null,
         presentationPreference: data.presentationPreference || null,
+        ...(fullPaperId ? { fullPaper: fullPaperId } : {}),
       }
 
       const url = existingId ? `/api/abstracts/${existingId}` : '/api/abstracts'
@@ -552,6 +583,77 @@ export default function AbstractSubmitClient() {
                     </div>
                   </div>
                 </section>
+
+                {/* ── Section 7: 全文投稿 ── */}
+                {fullPaperSubmissionOpen && (
+                  <section>
+                    <h3 className="text-lg font-semibold tracking-wide text-stone-800 border-b border-stone-300 pb-2 mb-6">
+                      {t('abstract.submit.step7')}
+                    </h3>
+
+                    {/* Award warning banner */}
+                    {applyStudentAward && (
+                      <div className="mb-5 p-4 border-l-4 border-amber-400 bg-amber-50">
+                        <p className="text-sm font-semibold text-amber-800">
+                          {t('abstract.submit.fullPaper.award.alert')}
+                        </p>
+                        {fullPaperDeadline && (
+                          <p className="text-xs text-amber-700 mt-1">
+                            {t('abstract.submit.fullPaper.award.deadline')}{fullPaperDeadline}
+                          </p>
+                        )}
+                      </div>
+                    )}
+
+                    <div className="space-y-3">
+                      <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-1">
+                        {t('abstract.submit.fullPaper.label')}
+                        <span className="ml-2 text-xs font-normal text-stone-400">
+                          {t('abstract.submit.fullPaper.hint')}
+                        </span>
+                      </label>
+
+                      {fullPaperFile ? (
+                        <div className="flex items-center gap-3 p-3 border border-stone-200 bg-stone-50">
+                          <FileText size={18} className="text-[#4d4c9d] flex-shrink-0" />
+                          <span className="text-sm text-stone-700 flex-1 truncate">
+                            {t('abstract.submit.fullPaper.selected')}{fullPaperFile.name}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => setFullPaperFile(null)}
+                            className="text-stone-400 hover:text-red-500 transition-colors"
+                          >
+                            <X size={16} />
+                          </button>
+                        </div>
+                      ) : null}
+
+                      <button
+                        type="button"
+                        onClick={() => fullPaperInputRef.current?.click()}
+                        className="flex items-center gap-2 px-4 py-2 border border-[#4d4c9d] text-[#4d4c9d] text-sm hover:bg-stone-50 transition-colors"
+                      >
+                        <Upload size={15} />
+                        {fullPaperFile
+                          ? t('abstract.submit.fullPaper.change')
+                          : t('abstract.submit.fullPaper.select')}
+                      </button>
+
+                      <input
+                        ref={fullPaperInputRef}
+                        type="file"
+                        accept="application/pdf"
+                        className="hidden"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0]
+                          if (file) setFullPaperFile(file)
+                          e.target.value = ''
+                        }}
+                      />
+                    </div>
+                  </section>
+                )}
 
                 {/* ── Submit ── */}
                 <div className="pt-10 border-t border-stone-300">
