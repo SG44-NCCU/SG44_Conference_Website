@@ -10,6 +10,7 @@ import {
   ArrowLeft,
 } from 'lucide-react'
 import Link from 'next/link'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 // ─── Label maps ────────────────────────────────────────────────────────────
 const SUB_TOPIC_LABELS: Record<string, string> = {
@@ -23,13 +24,6 @@ const SUB_TOPIC_LABELS: Record<string, string> = {
   'topic-8': '8. 衛星科技與海洋測繪 (Satellite Technology and Marine Surveying)',
   'topic-9': '9. 國土政策與規劃治理 (Land Policy and Planning Governance)',
   'topic-10': '10. 跨國交流專題 (Cross-Cutting International Session)',
-}
-
-const SPECIAL_SESSION_LABELS: Record<string, string> = {
-  'special-nstc': '國科會空間資訊學門成果發表',
-  'special-nlsc': '國土測繪中心成果發表會',
-  'special-land': '地政司',
-  'special-national-park': '國家公園',
 }
 
 type Author = {
@@ -58,9 +52,17 @@ type AbstractDetail = {
 
 export default function ReviewDetailPage() {
   const { user } = useAuth()
+  const { t } = useLanguage()
   const params = useParams()
   const router = useRouter()
   const id = params?.id as string
+
+  const SPECIAL_SESSION_LABELS: Record<string, string> = {
+    'special-nstc': t('abstract.session.nstc'),
+    'special-nlsc': t('abstract.session.nlsc'),
+    'special-land': t('abstract.session.land'),
+    'special-national-park': t('abstract.session.park'),
+  }
 
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
@@ -90,6 +92,11 @@ export default function ReviewDetailPage() {
           setDoc(data)
           setReviewStatus(data.reviewStatus || 'pending')
           setReviewComments(data.reviewComments || '')
+        }
+
+        if (listRes.ok) {
+          const data = await listRes.json()
+          setAllIds(data.docs.map((d: { id: number }) => d.id))
         }
 
         if (settingsRes.ok) {
@@ -123,15 +130,15 @@ export default function ReviewDetailPage() {
       })
 
       if (res.ok) {
-        setSaveMsg('審稿意見已儲存')
+        setSaveMsg(t('dashboard.rev.detail.form.saveSuccess'))
         if (nextId) {
           setTimeout(() => router.push(`/dashboard/review-queue/${nextId}`), 1000)
         }
       } else {
-        setSaveMsg('儲存失敗，請重試')
+        setSaveMsg(t('dashboard.rev.detail.form.saveFail'))
       }
     } catch {
-      setSaveMsg('儲存失敗，請重試')
+      setSaveMsg(t('dashboard.rev.detail.form.saveFail'))
     } finally {
       setSaving(false)
     }
@@ -148,9 +155,9 @@ export default function ReviewDetailPage() {
   if (!doc) {
     return (
       <div className="text-center py-20 text-stone-400">
-        <p>找不到此稿件，或您沒有審閱此文章的權限。</p>
+        <p>{t('dashboard.rev.detail.notFound')}</p>
         <Link href="/dashboard/review-queue" className="text-[#4d4c9d] text-sm mt-4 block">
-          ← 回到待審清單
+          ← {t('dashboard.rev.detail.back')}
         </Link>
       </div>
     )
@@ -164,7 +171,7 @@ export default function ReviewDetailPage() {
           href="/dashboard/review-queue"
           className="flex items-center gap-1.5 text-sm text-stone-500 hover:text-stone-700 transition-colors"
         >
-          <ArrowLeft size={16} /> 待審清單
+          <ArrowLeft size={16} /> {t('dashboard.rev.title')}
         </Link>
 
         {allIds.length > 0 && (
@@ -177,7 +184,7 @@ export default function ReviewDetailPage() {
                 href={`/dashboard/review-queue/${prevId}`}
                 className="flex items-center gap-1 text-xs border border-stone-300 px-3 py-1.5 hover:bg-stone-50 transition-colors text-stone-600"
               >
-                <ChevronLeft size={14} /> 上一篇
+                <ChevronLeft size={14} /> {t('dashboard.rev.detail.prev')}
               </Link>
             )}
             {nextId && (
@@ -185,7 +192,7 @@ export default function ReviewDetailPage() {
                 href={`/dashboard/review-queue/${nextId}`}
                 className="flex items-center gap-1 text-xs border border-stone-300 px-3 py-1.5 hover:bg-stone-50 transition-colors text-stone-600"
               >
-                下一篇 <ChevronRight size={14} />
+                {t('dashboard.rev.detail.next')} <ChevronRight size={14} />
               </Link>
             )}
           </div>
@@ -218,7 +225,7 @@ export default function ReviewDetailPage() {
                     {a.affiliation}
                     {a.isCorresponding && (
                       <span className="text-stone-400 ml-1">
-                        (通訊: <a href={`mailto:${a.email}`} className="text-[#4d4c9d]">{a.email}</a>)
+                        ({t('dashboard.rev.detail.author.corr')} <a href={`mailto:${a.email}`} className="text-[#4d4c9d]">{a.email}</a>)
                       </span>
                     )}
                   </p>
@@ -232,21 +239,20 @@ export default function ReviewDetailPage() {
         <div className="flex flex-wrap gap-x-8 gap-y-2 text-sm font-sans">
           {doc.subTopic && (
             <div>
-              <span className="text-stone-400 text-xs font-semibold tracking-wide uppercase tracking-widest mr-2">子題</span>
+              <span className="text-stone-400 text-xs font-semibold tracking-wide uppercase tracking-widest mr-2">{t('dashboard.sub.item.label.topic')}</span>
               <span className="text-stone-700">{SUB_TOPIC_LABELS[doc.subTopic] || doc.subTopic}</span>
             </div>
           )}
           {doc.specialSession && (
             <div>
-              <span className="text-stone-400 text-xs font-semibold tracking-wide uppercase tracking-widest mr-2">特別論壇</span>
+              <span className="text-stone-400 text-xs font-semibold tracking-wide uppercase tracking-widest mr-2">{t('dashboard.sub.item.label.special')}</span>
               <span className="text-stone-700">{SPECIAL_SESSION_LABELS[doc.specialSession] || doc.specialSession}</span>
             </div>
           )}
           {doc.isStudent && (
             <div className="flex items-center gap-1.5">
               <span className="px-2 py-0.5 bg-amber-50 border border-amber-200 text-amber-700 text-xs font-sans font-semibold tracking-wide">
-                學生
-                {doc.applyStudentAward && ' · 學生論文獎'}
+                {doc.applyStudentAward ? t('dashboard.sub.item.student.award') : t('dashboard.sub.item.student.normal')}
               </span>
             </div>
           )}
@@ -254,13 +260,13 @@ export default function ReviewDetailPage() {
 
         {/* Abstract body */}
         <div>
-          <h2 className="text-xs font-semibold tracking-wide uppercase tracking-widest text-stone-400 mb-2 font-sans">摘要 Abstract</h2>
+          <h2 className="text-xs font-semibold tracking-wide uppercase tracking-widest text-stone-400 mb-2 font-sans">{t('dashboard.rev.detail.abstract')}</h2>
           <p className="text-stone-800 leading-relaxed text-sm whitespace-pre-wrap break-words">{doc.abstract}</p>
         </div>
 
         {/* Keywords */}
         <div>
-          <h2 className="text-xs font-semibold tracking-wide uppercase tracking-widest text-stone-400 mb-1.5 font-sans">關鍵字 Keywords</h2>
+          <h2 className="text-xs font-semibold tracking-wide uppercase tracking-widest text-stone-400 mb-1.5 font-sans">{t('dashboard.rev.detail.keywords')}</h2>
           <p className="text-stone-700 text-sm">{doc.keywords}</p>
         </div>
       </div>
@@ -269,11 +275,11 @@ export default function ReviewDetailPage() {
       <div className="border border-stone-200 p-6 space-y-6">
         <div className="border-b-2 border-stone-800 pb-3 flex items-center justify-between">
           <h2 className="font-semibold tracking-wide text-stone-800 text-base">
-            審稿表單
+            {t('dashboard.rev.detail.form.title')}
           </h2>
           {isPublished && (
             <span className="text-sm font-semibold tracking-wide text-red-600 bg-red-50 px-3 py-1 rounded border border-red-200">
-              審查結果已發布，無法再修改審查意見
+              {t('dashboard.rev.detail.form.locked')}
             </span>
           )}
         </div>
@@ -281,14 +287,14 @@ export default function ReviewDetailPage() {
         {/* Decision radio */}
         <div>
           <label className="block text-sm font-semibold tracking-wide text-stone-700 mb-3">
-            審查決定 <span className="text-red-500">*</span>
+            {t('dashboard.rev.detail.form.decision')} <span className="text-red-500">*</span>
           </label>
           <div className="divide-y divide-stone-100 border border-stone-200">
             {[
-              { value: 'pending', label: '尚未決定' },
-              { value: 'accepted', label: '通過　(Accept)' },
-              { value: 'revision', label: '修改後通過　(Minor Revision)' },
-              { value: 'rejected', label: '未通過　(Reject)' },
+              { value: 'pending', label: t('dashboard.rev.detail.form.decision.pending') },
+              { value: 'accepted', label: t('dashboard.rev.detail.form.decision.accept') },
+              { value: 'revision', label: t('dashboard.rev.detail.form.decision.revision') },
+              { value: 'rejected', label: t('dashboard.rev.detail.form.decision.reject') },
             ].map((opt) => {
               const isSelected = reviewStatus === opt.value
               return (
@@ -326,14 +332,14 @@ export default function ReviewDetailPage() {
         {/* Comments */}
         <div>
           <label className="block text-sm font-semibold tracking-wide text-stone-700 mb-2">
-            審稿評語 (Review Comments)
+            {t('dashboard.rev.detail.form.comments')}
           </label>
           <textarea
             value={reviewComments}
             onChange={(e) => setReviewComments(e.target.value)}
             disabled={isPublished}
             rows={6}
-            placeholder="請填寫給投稿人的評語。若選擇「修改後通過」，請說明需要修改的部分；若選擇「未通過」，請說明原因。大會發布審查結果後，評語將顯示給投稿人。"
+            placeholder={t('dashboard.rev.detail.form.comments.plh')}
             className="w-full px-4 py-3 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none resize-y text-sm transition-colors bg-white text-stone-800 disabled:bg-stone-100 disabled:text-stone-500 disabled:cursor-not-allowed"
           />
         </div>
@@ -347,17 +353,17 @@ export default function ReviewDetailPage() {
           >
             {saving ? (
               <span className="flex items-center gap-2">
-                <Loader2 size={16} className="animate-spin" /> 儲存中...
+                <Loader2 size={16} className="animate-spin" /> {t('dashboard.rev.detail.form.saving')}
               </span>
             ) : (
-              '儲存審稿意見'
+              t('dashboard.rev.detail.form.save')
             )}
           </button>
 
           {saveMsg && (
             <span
               className="text-sm"
-              style={{ color: saveMsg.includes('失敗') ? '#dc2626' : '#4d4c9d' }}
+              style={{ color: saveMsg.includes('失敗') || saveMsg.includes('Fail') ? '#dc2626' : '#4d4c9d' }}
             >
               {saveMsg}
             </span>
@@ -372,7 +378,7 @@ export default function ReviewDetailPage() {
             href={`/dashboard/review-queue/${prevId}`}
             className="flex items-center gap-2 text-sm text-stone-600 border border-stone-300 px-4 py-2 hover:bg-stone-50 transition-colors"
           >
-            <ChevronLeft size={16} /> 上一篇
+            <ChevronLeft size={16} /> {t('dashboard.rev.detail.prev')}
           </Link>
         ) : (
           <div />
@@ -383,7 +389,7 @@ export default function ReviewDetailPage() {
             href={`/dashboard/review-queue/${nextId}`}
             className="flex items-center gap-2 text-sm text-stone-600 border border-stone-300 px-4 py-2 hover:bg-stone-50 transition-colors"
           >
-            下一篇 <ChevronRight size={16} />
+            {t('dashboard.rev.detail.next')} <ChevronRight size={16} />
           </Link>
         ) : (
           <div />

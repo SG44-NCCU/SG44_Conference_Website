@@ -6,40 +6,41 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useAuth } from '@/providers/Auth'
 import { User, FileText, Calendar, Award, Bell, LogOut, ClipboardList } from 'lucide-react'
 import { useState } from 'react'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 const SIDEBAR_ITEMS = [
   {
-    name: '個人資料',
+    key: 'profile',
     href: '/dashboard/profile',
     icon: User,
     roles: ['admin', 'user', 'reviewer'],
   },
   {
-    name: '我的報名',
+    key: 'myRegistrations',
     href: '/dashboard/my-registrations',
     icon: Calendar,
     roles: ['admin', 'user', 'reviewer'],
   },
   {
-    name: '我的投稿',
+    key: 'mySubmissions',
     href: '/dashboard/my-submissions',
     icon: FileText,
     roles: ['admin', 'user', 'reviewer'],
   },
   // {
-  //   name: '我的競賽',
+  //   key: 'competition',
   //   href: '/dashboard/my-competitions',
   //   icon: Award,
   //   roles: ['admin', 'user', 'reviewer'],
   // },
   {
-    name: '待審稿件',
+    key: 'reviewQueue',
     href: '/dashboard/review-queue',
     icon: ClipboardList,
     roles: ['reviewer', 'admin'],
   },
   {
-    name: '通知中心',
+    key: 'notifications',
     href: '/dashboard/notifications',
     icon: Bell,
     roles: ['admin', 'user', 'reviewer'],
@@ -50,6 +51,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   const { user, loading, logout } = useAuth()
   const router = useRouter()
   const pathname = usePathname()
+  const { t } = useLanguage()
   const [hasPaidRegistration, setHasPaidRegistration] = useState(false)
 
   useEffect(() => {
@@ -114,7 +116,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                   if (!user) return false
                   if (!item.roles.includes(user.role)) return false
                   // Hide "我的投稿" if standard user hasn't registered and paid
-                  if (item.name === '我的投稿' && user.role === 'user' && !hasPaidRegistration) {
+                  if (item.key === 'mySubmissions' && user.role === 'user' && !hasPaidRegistration) {
                     return false
                   }
                   return true
@@ -131,7 +133,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                       }`}
                     >
                       <item.icon size={18} />
-                      {item.name}
+                      {t(`dashboard.sidebar.${item.key}` as any)}
                     </Link>
                   )
                 })}
@@ -142,7 +144,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                     className="w-full flex items-center gap-3 px-4 py-3 rounded-sm text-sm font-medium text-stone-600 hover:bg-stone-50 hover:text-stone-800 transition-colors"
                   >
                     <LogOut size={18} />
-                    登出
+                    {t('dashboard.sidebar.logout')}
                   </button>
                 </div>
               </nav>

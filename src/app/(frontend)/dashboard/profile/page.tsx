@@ -6,6 +6,7 @@ import { useAuth } from '@/providers/Auth'
 import { User } from '@/payload-types'
 import { useRouter } from 'next/navigation'
 import { Save, Loader2 } from 'lucide-react'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 type ProfileFormData = {
   name: string
@@ -19,6 +20,7 @@ type ProfileFormData = {
 export default function ProfilePage() {
   const { user, setUser, loading } = useAuth()
   const router = useRouter()
+  const { t } = useLanguage()
   const [isSaving, setIsSaving] = useState(false)
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null)
 
@@ -60,7 +62,7 @@ export default function ProfilePage() {
 
       if (!res.ok) {
         const errorData = await res.json()
-        throw new Error(errorData.errors?.[0]?.message || '更新失敗')
+        throw new Error(errorData.errors?.[0]?.message || t('dashboard.profile.fail'))
       }
 
       const updatedUser = await res.json()
@@ -71,9 +73,9 @@ export default function ProfilePage() {
         ...updatedUser.doc,
       })
 
-      setMessage({ type: 'success', text: '個人資料更新成功！' })
+      setMessage({ type: 'success', text: t('dashboard.profile.success') })
     } catch (error: any) {
-      setMessage({ type: 'error', text: error.message || '更新失敗，請稍後再試' })
+      setMessage({ type: 'error', text: error.message || t('dashboard.profile.fail') })
     } finally {
       setIsSaving(false)
     }
@@ -84,9 +86,9 @@ export default function ProfilePage() {
   return (
     <div className="max-w-3xl mx-auto">
       <div className="mb-8 border-b-2 border-stone-800 pb-4">
-        <h1 className="text-2xl font-semibold tracking-wide text-stone-800">個人資料管理</h1>
+        <h1 className="text-2xl font-semibold tracking-wide text-stone-800">{t('dashboard.profile.title')}</h1>
         <p className="text-stone-600 mt-2">
-          請確實填寫您的基本資料與聯絡方式，以便大會進行相關通知與作業。
+          {t('dashboard.profile.desc')}
         </p>
       </div>
 
@@ -109,9 +111,9 @@ export default function ProfilePage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* 姓名 */}
           <div>
-            <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">真實姓名</label>
+            <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">{t('dashboard.profile.name')}</label>
             <input
-              {...register('name', { required: '請輸入真實姓名' })}
+              {...register('name', { required: t('dashboard.profile.nameReq') })}
               type="text"
               className="w-full px-4 py-2.5 rounded-none border border-stone-300 focus:ring-1 focus:ring-[#4d4c9d] focus:border-[#4d4c9d] outline-none transition-colors"
             />
@@ -121,7 +123,7 @@ export default function ProfilePage() {
           {/* Email (Read only) */}
           <div>
             <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">
-              電子信箱 (無法修改)
+              {t('dashboard.profile.email')}
             </label>
             <input
               value={user.email}
@@ -133,11 +135,11 @@ export default function ProfilePage() {
 
           {/* 單位 */}
           <div>
-            <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">所屬 / 服務單位</label>
+            <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">{t('dashboard.profile.org')}</label>
             <input
-              {...register('organization', { required: '請輸入所屬單位' })}
+              {...register('organization', { required: t('dashboard.profile.orgReq') })}
               type="text"
-              placeholder="例如：國立政治大學地政學系"
+              placeholder={t('dashboard.profile.orgPlh')}
               className="w-full px-4 py-2.5 rounded-none border border-stone-300 focus:ring-1 focus:ring-[#4d4c9d] focus:border-[#4d4c9d] outline-none transition-colors"
             />
             {errors.organization && (
@@ -147,11 +149,11 @@ export default function ProfilePage() {
 
           {/* 職稱 */}
           <div>
-            <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">職稱</label>
+            <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">{t('dashboard.profile.jobTitle')}</label>
             <input
-              {...register('jobTitle', { required: '請輸入職稱' })}
+              {...register('jobTitle', { required: t('dashboard.profile.jobTitleReq') })}
               type="text"
-              placeholder="例如：教授、碩士生"
+              placeholder={t('dashboard.profile.jobTitlePlh')}
               className="w-full px-4 py-2.5 rounded-none border border-stone-300 focus:ring-1 focus:ring-[#4d4c9d] focus:border-[#4d4c9d] outline-none transition-colors"
             />
             {errors.jobTitle && (
@@ -161,9 +163,9 @@ export default function ProfilePage() {
 
           {/* 手機 */}
           <div>
-            <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">手機號碼</label>
+            <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">{t('dashboard.profile.phone')}</label>
             <input
-              {...register('phone', { required: '請輸入手機號碼' })}
+              {...register('phone', { required: t('dashboard.profile.phoneReq') })}
               type="tel"
               className="w-full px-4 py-2.5 rounded-none border border-stone-300 focus:ring-1 focus:ring-[#4d4c9d] focus:border-[#4d4c9d] outline-none transition-colors font-mono"
             />
@@ -172,9 +174,9 @@ export default function ProfilePage() {
 
           {/* 生日 */}
           <div>
-            <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">出生年月日</label>
+            <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">{t('dashboard.profile.birthday')}</label>
             <input
-              {...register('birthday', { required: '請選擇出生年月日' })}
+              {...register('birthday', { required: t('dashboard.profile.birthdayReq') })}
               type="date"
               className="w-full px-4 py-2.5 rounded-none border border-stone-300 focus:ring-1 focus:ring-[#4d4c9d] focus:border-[#4d4c9d] outline-none transition-colors text-stone-800 cursor-text"
             />
@@ -185,15 +187,15 @@ export default function ProfilePage() {
 
           {/* 性別 */}
           <div>
-            <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">性別</label>
+            <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">{t('dashboard.profile.gender')}</label>
             <select
               {...register('gender')}
               className="w-full px-4 py-2.5 rounded-none border border-stone-300 focus:ring-1 focus:ring-[#4d4c9d] focus:border-[#4d4c9d] outline-none transition-colors bg-white cursor-pointer"
             >
-              <option value="">請選擇</option>
-              <option value="male">男</option>
-              <option value="female">女</option>
-              <option value="other">不透露 / 其他</option>
+              <option value="">{t('dashboard.profile.gender.select')}</option>
+              <option value="male">{t('dashboard.profile.gender.male')}</option>
+              <option value="female">{t('dashboard.profile.gender.female')}</option>
+              <option value="other">{t('dashboard.profile.gender.other')}</option>
             </select>
           </div>
         </div>
@@ -207,10 +209,10 @@ export default function ProfilePage() {
             {isSaving ? (
               <>
                 <Loader2 size={18} className="animate-spin" />
-                儲存中...
+                {t('dashboard.profile.btn.saving')}
               </>
             ) : (
-              <>確認變更並儲存</>
+              <>{t('dashboard.profile.btn.save')}</>
             )}
           </button>
         </div>

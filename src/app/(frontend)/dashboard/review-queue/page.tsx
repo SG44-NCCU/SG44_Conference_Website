@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useAuth } from '@/providers/Auth'
 import Link from 'next/link'
 import { Loader2, ArrowRight } from 'lucide-react'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 const SUB_TOPIC_LABELS: Record<string, string> = {
   'topic-1': '大地測量與導航技術',
@@ -18,20 +19,6 @@ const SUB_TOPIC_LABELS: Record<string, string> = {
   'topic-10': '跨國交流專題',
 }
 
-const SPECIAL_SESSION_LABELS: Record<string, string> = {
-  'special-nstc': '國科會空間資訊學門成果發表',
-  'special-nlsc': '國土測繪中心成果發表會',
-  'special-land': '地政司',
-  'special-national-park': '國家公園',
-}
-
-const REVIEW_STATUS_LABELS: Record<string, string> = {
-  pending: '待審',
-  accepted: '通過',
-  rejected: '未通過',
-  revision: '修改後通過',
-}
-
 type AbstractDoc = {
   id: number
   title: string
@@ -43,8 +30,23 @@ type AbstractDoc = {
 
 export default function ReviewQueuePage() {
   const { user } = useAuth()
+  const { t } = useLanguage()
   const [loading, setLoading] = useState(true)
   const [abstracts, setAbstracts] = useState<AbstractDoc[]>([])
+
+  const SPECIAL_SESSION_LABELS: Record<string, string> = {
+    'special-nstc': t('abstract.session.nstc'),
+    'special-nlsc': t('abstract.session.nlsc'),
+    'special-land': t('abstract.session.land'),
+    'special-national-park': t('abstract.session.park'),
+  }
+
+  const REVIEW_STATUS_LABELS: Record<string, string> = {
+    pending: t('dashboard.rev.badge.pending'),
+    accepted: t('abstract.status.accepted'),
+    rejected: t('abstract.status.rejected'),
+    revision: t('abstract.status.revision'),
+  }
 
   useEffect(() => {
     if (!user) return
@@ -85,19 +87,19 @@ export default function ReviewQueuePage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b-2 border-stone-800 pb-4 gap-4">
         <div className="flex items-center gap-4">
-          <h1 className="text-2xl font-semibold tracking-wide text-stone-800">待審稿件</h1>
-          <span className="text-stone-400 text-sm">{abstracts.length} 篇指派</span>
+          <h1 className="text-2xl font-semibold tracking-wide text-stone-800">{t('dashboard.rev.title')}</h1>
+          <span className="text-stone-400 text-sm">{abstracts.length} {t('dashboard.rev.count')}</span>
         </div>
 
         <div className="flex items-center gap-3">
           {pending > 0 && (
             <span className="px-3 py-1.5 bg-stone-50 border border-stone-400 text-stone-600 text-xs font-semibold tracking-wide">
-              待審 {pending} 篇
+              {t('dashboard.rev.badge.pending')} {pending}
             </span>
           )}
           {reviewed > 0 && (
             <span className="px-3 py-1.5 bg-stone-50 border border-[#4d4c9d] text-[#4d4c9d] text-xs font-semibold tracking-wide">
-              已審 {reviewed} 篇
+              {t('dashboard.rev.badge.done')} {reviewed}
             </span>
           )}
         </div>
@@ -106,7 +108,7 @@ export default function ReviewQueuePage() {
       {/* 尚未分配 */}
       {abstracts.length === 0 && (
         <div className="py-20 text-center">
-          <p className="text-stone-400">目前沒有指派給您的待審稿件。</p>
+          <p className="text-stone-400">{t('dashboard.rev.empty')}</p>
         </div>
       )}
 
@@ -149,7 +151,7 @@ export default function ReviewQueuePage() {
                     </span>
                   ) : (
                     <span className="px-2.5 py-1 border border-stone-300 text-stone-500 text-xs font-semibold tracking-wide">
-                      待審
+                      {t('dashboard.rev.badge.pending')}
                     </span>
                   )}
                   <ArrowRight

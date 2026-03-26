@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useAuth } from '@/providers/Auth'
 import Link from 'next/link'
 import { Loader2, Plus, Edit, ArrowRight } from 'lucide-react'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 // ─── Label maps ────────────────────────────────────────────────────────────
 const SUB_TOPIC_LABELS: Record<string, string> = {
@@ -17,26 +18,6 @@ const SUB_TOPIC_LABELS: Record<string, string> = {
   'topic-8': '衛星科技與海洋測繪',
   'topic-9': '國土政策與規劃治理',
   'topic-10': '跨國交流專題',
-}
-
-const SPECIAL_SESSION_LABELS: Record<string, string> = {
-  'special-nstc': '國科會空間資訊學門成果發表',
-  'special-nlsc': '國土測繪中心成果發表會',
-  'special-land': '地政司',
-  'special-national-park': '國家公園',
-}
-
-const PRESENTATION_LABELS: Record<string, string> = {
-  oral: '口頭發表 (Oral)',
-  poster: '海報發表 (Poster)',
-  either: '口頭或海報皆可 (Either)',
-}
-
-const REVIEW_STATUS_LABELS: Record<string, string> = {
-  pending: '審核中',
-  accepted: '通過',
-  rejected: '未通過',
-  revision: '修改後通過',
 }
 
 type AbstractDoc = {
@@ -55,11 +36,32 @@ type AbstractDoc = {
 
 export default function MySubmissionsPage() {
   const { user } = useAuth()
+  const { t } = useLanguage()
   const [loading, setLoading] = useState(true)
   const [abstracts, setAbstracts] = useState<AbstractDoc[]>([])
   const [reviewPublished, setReviewPublished] = useState(false)
   const [submissionOpen, setSubmissionOpen] = useState(true)
   const [hasRegistration, setHasRegistration] = useState(false)
+
+  const REVIEW_STATUS_LABELS: Record<string, string> = {
+    pending: t('abstract.status.pending'),
+    accepted: t('abstract.status.accepted'),
+    rejected: t('abstract.status.rejected'),
+    revision: t('abstract.status.revision'),
+  }
+
+  const SPECIAL_SESSION_LABELS: Record<string, string> = {
+    'special-nstc': t('abstract.session.nstc'),
+    'special-nlsc': t('abstract.session.nlsc'),
+    'special-land': t('abstract.session.land'),
+    'special-national-park': t('abstract.session.park'),
+  }
+
+  const PRESENTATION_LABELS: Record<string, string> = {
+    oral: t('abstract.type.oral'),
+    poster: t('abstract.type.poster'),
+    either: t('abstract.type.both'),
+  }
 
   useEffect(() => {
     if (!user) return
@@ -112,16 +114,16 @@ export default function MySubmissionsPage() {
       return (
         <div className="max-w-3xl mx-auto py-12">
           <div className="text-center border border-stone-200 p-12 space-y-5">
-            <h1 className="text-2xl font-semibold tracking-wide text-stone-800">您的報名尚未通過繳費審核</h1>
+            <h1 className="text-2xl font-semibold tracking-wide text-stone-800">{t('dashboard.sub.notPaid.title')}</h1>
             <p className="text-stone-500 leading-relaxed max-w-md mx-auto">
-              投稿摘要需要先完成大會報名並通過繳費確認。請先前往報名專區完成報名與繳費，待大會確認後即可開啟投稿功能。
+              {t('dashboard.sub.notPaid.desc')}
             </p>
             <div className="pt-2">
               <Link
                 href="/SG44-register"
                 className="inline-flex items-center gap-2 px-8 py-3 bg-[#4d4c9d] text-white font-semibold tracking-wide hover:bg-[#3a3977] transition-colors tracking-wide"
               >
-                前往報名專區 <ArrowRight size={16} />
+                {t('dashboard.sub.notPaid.btn')} <ArrowRight size={16} />
               </Link>
             </div>
           </div>
@@ -133,20 +135,20 @@ export default function MySubmissionsPage() {
     return (
       <div className="max-w-3xl mx-auto py-12">
         <div className="text-center mb-12 border-b border-stone-200 pb-12">
-          <h1 className="text-3xl font-semibold tracking-wide text-stone-800 mb-4">您尚未投稿任何摘要</h1>
+          <h1 className="text-3xl font-semibold tracking-wide text-stone-800 mb-4">{t('dashboard.sub.empty.title')}</h1>
           <p className="text-stone-600 text-lg max-w-lg mx-auto leading-relaxed mb-8">
-            歡迎投稿第44屆測量及空間資訊研討會！點擊下方按鈕前往投稿表單。
+            {t('dashboard.sub.empty.desc')}
           </p>
           {submissionOpen ? (
             <Link
               href="/abstract-submit"
               className="inline-flex items-center gap-2 px-10 py-3 bg-[#4d4c9d] text-white font-semibold tracking-wide hover:bg-[#3a3977] transition-colors text-base tracking-wide"
             >
-              前往填寫投稿表單 <ArrowRight size={18} />
+              {t('dashboard.sub.btn.goSubmit')} <ArrowRight size={18} />
             </Link>
           ) : (
             <span className="px-6 py-3 border border-stone-300 text-stone-500 text-sm inline-block">
-              投稿已截止
+              {t('dashboard.sub.closed')}
             </span>
           )}
         </div>
@@ -160,19 +162,19 @@ export default function MySubmissionsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b-2 border-stone-800 pb-4 gap-4">
         <div className="flex items-center gap-4">
-          <h1 className="text-2xl font-semibold tracking-wide text-stone-800">我的投稿</h1>
-          <span className="text-stone-400 text-sm">{abstracts.length} 篇</span>
+          <h1 className="text-2xl font-semibold tracking-wide text-stone-800">{t('dashboard.sub.title')}</h1>
+          <span className="text-stone-400 text-sm">{abstracts.length} {t('dashboard.sub.count')}</span>
         </div>
         {submissionOpen ? (
           <Link
             href="/abstract-submit"
             className="px-3 py-1.5 border border-stone-300 text-stone-600 hover:bg-stone-50 transition-colors text-sm font-medium flex items-center gap-1.5"
           >
-            <Plus size={14} /> 新增投稿
+            <Plus size={14} /> {t('dashboard.sub.btn.add')}
           </Link>
         ) : (
           <span className="px-3 py-1.5 border border-stone-200 text-stone-400 text-sm">
-            投稿已截止
+            {t('dashboard.sub.closed')}
           </span>
         )}
       </div>
@@ -180,8 +182,8 @@ export default function MySubmissionsPage() {
       {/* 審查結果發布通知 */}
       {reviewPublished && (
         <div className="bg-stone-50 p-5 border border-stone-200 text-sm text-stone-700">
-          <p className="font-semibold tracking-wide text-stone-800 mb-1">大會審查結果已發布</p>
-          <p>您可在下方各篇投稿中查看審查結果與評語。</p>
+          <p className="font-semibold tracking-wide text-stone-800 mb-1">{t('dashboard.sub.pub.title')}</p>
+          <p>{t('dashboard.sub.pub.desc')}</p>
         </div>
       )}
 
@@ -189,8 +191,7 @@ export default function MySubmissionsPage() {
       <div className="space-y-6">
         {abstracts.map((doc) => {
           const statusLabel = REVIEW_STATUS_LABELS[doc.reviewStatus] ?? doc.reviewStatus
-          const isAccepted = doc.reviewStatus === 'accepted'
-          const isRejected = doc.reviewStatus === 'rejected'
+          const isAccepted = doc.reviewStatus === 'accepted' || doc.reviewStatus === 'revision'
           const showResult = reviewPublished && doc.reviewStatus !== 'pending'
 
           return (
@@ -200,7 +201,7 @@ export default function MySubmissionsPage() {
                 <div className="flex-1 min-w-0">
                   <h2 className="text-lg font-semibold tracking-wide text-stone-900 leading-snug">{doc.title}</h2>
                   <p className="text-stone-400 text-xs mt-1.5">
-                    投稿時間：
+                    {t('dashboard.sub.item.time')}
                     {new Date(doc.createdAt).toLocaleString('zh-TW', {
                       year: 'numeric',
                       month: '2-digit',
@@ -215,7 +216,7 @@ export default function MySubmissionsPage() {
                   {/* 審查狀態 badge */}
                   {!reviewPublished || doc.reviewStatus === 'pending' ? (
                     <span className="px-3 py-1.5 bg-stone-50 border border-stone-300 text-stone-500 text-xs font-semibold tracking-wide">
-                      審核中
+                      {t('abstract.status.pending')}
                     </span>
                   ) : isAccepted ? (
                     <span className="px-3 py-1.5 bg-stone-50 border border-[#4d4c9d] text-[#4d4c9d] text-xs font-semibold tracking-wide">
@@ -232,7 +233,7 @@ export default function MySubmissionsPage() {
                       href={`/abstract-submit?edit=${doc.id}`}
                       className="px-3 py-1.5 border border-stone-300 text-stone-600 hover:bg-stone-50 transition-colors text-sm font-medium flex items-center gap-1.5"
                     >
-                      <Edit size={14} /> 編輯
+                      <Edit size={14} /> {t('dashboard.sub.item.btn.edit')}
                     </Link>
                   )}
                 </div>
@@ -243,7 +244,7 @@ export default function MySubmissionsPage() {
                 {doc.specialSession ? (
                   <div className="flex flex-col gap-1">
                     <p className="text-stone-500 text-xs font-semibold tracking-wide uppercase tracking-widest">
-                      特別論壇
+                      {t('dashboard.sub.item.label.special')}
                     </p>
                     <p className="font-medium text-stone-800 border-b border-stone-100 pb-2">
                       {SPECIAL_SESSION_LABELS[doc.specialSession] ?? doc.specialSession}
@@ -252,7 +253,7 @@ export default function MySubmissionsPage() {
                 ) : doc.subTopic ? (
                   <div className="flex flex-col gap-1">
                     <p className="text-stone-500 text-xs font-semibold tracking-wide uppercase tracking-widest">
-                      投稿子題
+                      {t('dashboard.sub.item.label.topic')}
                     </p>
                     <p className="font-medium text-stone-800 border-b border-stone-100 pb-2">
                       {SUB_TOPIC_LABELS[doc.subTopic] ?? doc.subTopic}
@@ -263,7 +264,7 @@ export default function MySubmissionsPage() {
                 {doc.presentationPreference && (
                   <div className="flex flex-col gap-1">
                     <p className="text-stone-500 text-xs font-semibold tracking-wide uppercase tracking-widest">
-                      偏好發表形式
+                      {t('dashboard.sub.item.label.pref')}
                     </p>
                     <p className="font-medium text-stone-800 border-b border-stone-100 pb-2">
                       {PRESENTATION_LABELS[doc.presentationPreference] ??
@@ -275,10 +276,10 @@ export default function MySubmissionsPage() {
                 {doc.isStudent && (
                   <div className="flex flex-col gap-1">
                     <p className="text-stone-500 text-xs font-semibold tracking-wide uppercase tracking-widest">
-                      學生身份
+                      {t('dashboard.sub.item.label.student')}
                     </p>
                     <p className="font-medium text-stone-800 border-b border-stone-100 pb-2">
-                      {doc.applyStudentAward ? '學生，已報名學生論文獎' : '學生'}
+                      {doc.applyStudentAward ? t('dashboard.sub.item.student.award') : t('dashboard.sub.item.student.normal')}
                     </p>
                   </div>
                 )}
@@ -288,7 +289,7 @@ export default function MySubmissionsPage() {
               {showResult && (
                 <div className="mt-6 pt-6 border-t border-stone-200">
                   <p className="text-stone-500 text-xs font-semibold tracking-wide uppercase tracking-widest mb-3">
-                    審查結果
+                    {t('dashboard.sub.review.title')}
                   </p>
                   <div
                     className="p-5 border-l-4"
@@ -311,16 +312,16 @@ export default function MySubmissionsPage() {
                       </p>
                     )}
                     {!doc.reviewComments && (
-                      <p className="text-sm text-stone-400">（無評語）</p>
+                      <p className="text-sm text-stone-400">{t('dashboard.sub.review.noComment')}</p>
                     )}
                   </div>
 
                   {/* 學生論文獎 — 通過後才顯示 */}
                   {isAccepted && doc.isStudent && doc.applyStudentAward && (
                     <div className="mt-3 p-4 bg-stone-50 border border-stone-200 text-sm text-stone-700">
-                      <p className="font-semibold tracking-wide text-stone-800 mb-1">學生論文獎報名</p>
+                      <p className="font-semibold tracking-wide text-stone-800 mb-1">{t('dashboard.sub.award.title')}</p>
                       <p>
-                        您已報名學生論文獎競賽，大會將另行 Email 通知繳交全文的方式與截止日期，請留意信箱。
+                        {t('dashboard.sub.award.desc')}
                       </p>
                     </div>
                   )}

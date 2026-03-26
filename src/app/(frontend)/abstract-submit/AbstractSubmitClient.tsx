@@ -543,7 +543,7 @@ export default function AbstractSubmitClient() {
                           required: t('validation.required'),
                         })}
                         type="text"
-                        placeholder="請以逗號分隔，至少填寫 3 個關鍵字，例如：衛星定位, GNSS, 慣性導航"
+                        placeholder={t('abstract.submit.keywords.placeholder')}
                         className={INPUT_CLS}
                       />
                       {errors.keywords && (
@@ -563,17 +563,17 @@ export default function AbstractSubmitClient() {
                     >
                       {isSubmitting ? (
                         <>
-                          <Loader2 size={18} className="animate-spin" /> 處理中...
+                          <Loader2 size={18} className="animate-spin" /> {t('abstract.submit.btn.processing')}
                         </>
                       ) : existingId ? (
-                        <>確認並儲存修改</>
+                        <>{t('abstract.submit.btn.saveEdit')}</>
                       ) : (
                         <>
-                          確認並送出投稿 <ArrowRight size={18} />
+                          {t('abstract.submit.btn.submit')} <ArrowRight size={18} />
                         </>
                       )}
                     </button>
-                    <p className="text-xs text-stone-400">送出後可在「我的投稿」頁面查看投稿狀態</p>
+                    <p className="text-xs text-stone-400">{t('abstract.submit.btn.hint')}</p>
                   </div>
                 </div>
               </form>
