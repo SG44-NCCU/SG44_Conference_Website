@@ -3,6 +3,7 @@ import './styles.css'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import { AuthProvider } from '@/providers/Auth'
+import { LanguageProvider } from '@/contexts/LanguageContext'
 import { Noto_Sans_TC, Noto_Sans } from 'next/font/google'
 // 👇 1. 引入 Viewport 型別 (TypeScript 才需要，沒有也沒關係，但建議加)
 import type { Metadata, Viewport } from 'next'
@@ -44,11 +45,13 @@ export default function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="zh-TW" className={`${notoSans.variable} ${notoSansTC.variable}`}>
       <body className="flex flex-col min-h-screen font-sans">
-        <AuthProvider>
-          <Navbar />
-          <main className="flex-1 pt-[88px] lg:pt-[88px]">{children}</main>
-          <Footer />
-        </AuthProvider>
+        <LanguageProvider>
+          <AuthProvider>
+            <Navbar />
+            <main className="flex-1 pt-[88px] lg:pt-[88px]">{children}</main>
+            <Footer />
+          </AuthProvider>
+        </LanguageProvider>
       </body>
     </html>
   )

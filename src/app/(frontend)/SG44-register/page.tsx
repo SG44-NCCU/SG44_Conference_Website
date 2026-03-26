@@ -6,38 +6,40 @@ import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import { Loader2 } from 'lucide-react'
 import SectionTitle from '@/components/ui/SectionTitle'
-
-// --- 票種定義 ---
-const TICKET_OPTIONS = [
-  {
-    id: 'early-bird-student',
-    title: '早鳥報名 - 學生 (Student)',
-    price: 1500,
-    period: '2026.04.01 ~ 2026.06.15',
-  },
-  {
-    id: 'early-bird-regular',
-    title: '早鳥報名 - 一般人士 (Regular)',
-    price: 2000,
-    period: '2026.04.01 ~ 2026.06.15',
-  },
-  {
-    id: 'standard-student',
-    title: '一般報名 - 學生 (Student)',
-    price: 2200,
-    period: '2026.06.16 起',
-  },
-  {
-    id: 'standard-regular',
-    title: '一般報名 - 一般人士 (Regular)',
-    price: 2700,
-    period: '2026.06.16 起',
-  },
-]
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function SG44RegisterPage() {
   const { user, loading } = useAuth()
+  const { t, lang } = useLanguage()
   const router = useRouter()
+
+  // --- 票種定義 (內部定義以支援語系) ---
+  const TICKET_OPTIONS = [
+    {
+      id: 'early-bird-student',
+      title: lang === 'zh' ? '早鳥報名 - 學生 (Student)' : 'Early Bird - Student',
+      price: 1500,
+      period: lang === 'zh' ? '2026.04.01 ~ 2026.06.15' : '2026.04.01 ~ 2026.06.15',
+    },
+    {
+      id: 'early-bird-regular',
+      title: lang === 'zh' ? '早鳥報名 - 一般人士 (Regular)' : 'Early Bird - Regular',
+      price: 2000,
+      period: lang === 'zh' ? '2026.04.01 ~ 2026.06.15' : '2026.04.01 ~ 2026.06.15',
+    },
+    {
+      id: 'standard-student',
+      title: lang === 'zh' ? '一般報名 - 學生 (Student)' : 'Standard - Student',
+      price: 2200,
+      period: lang === 'zh' ? '2026.06.16 起' : 'From 2026.06.16',
+    },
+    {
+      id: 'standard-regular',
+      title: lang === 'zh' ? '一般報名 - 一般人士 (Regular)' : 'Standard - Regular',
+      price: 2700,
+      period: lang === 'zh' ? '2026.06.16 起' : 'From 2026.06.16',
+    },
+  ]
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [existingId, setExistingId] = useState<string | null>(null)
@@ -169,10 +171,9 @@ export default function SG44RegisterPage() {
       <main className="pt-32 pb-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-16 text-center">
-            <SectionTitle title="研討會報名系統" subtitle="Conference Registration" />
+            <SectionTitle title={t('sg44.title')} subtitle={t('sg44.subtitle')} />
             <p className="mt-4 text-stone-600 max-w-2xl mx-auto text-lg">
-              歡迎報名【第44屆測量及空間資訊研討會】。大會將於 2026.08.20 ~ 2026.08.21
-              假國立政治大學舉辦。請依據下方指示依序完成各項資料填寫與票種選擇。
+              {t('sg44.desc')}
             </p>
           </div>
 
@@ -184,7 +185,7 @@ export default function SG44RegisterPage() {
 
           <div className="mb-12 border-b border-stone-200 pb-8">
             <h3 className="text-xl font-semibold tracking-wide text-stone-800 mb-4">
-              繳費資訊 (Payment Instructions)
+              {t('sg44.payment.info')} (Payment Instructions)
             </h3>
             <p className="text-sm text-stone-600 mb-4">
               注意事項：系統於表單內強制要求填寫匯款對帳資訊（帳號末五碼與日期），因此請務必於所選時間完成匯款，我們將以此進行人工對帳審核。
@@ -401,6 +402,39 @@ export default function SG44RegisterPage() {
                   {errors.paymentDate && (
                     <p className="text-red-600 text-sm mt-2">
                       {errors.paymentDate.message as string}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">
+                    註冊費發票抬頭 (Invoice Title)
+                  </label>
+                  <input
+                    {...register('invoiceTitle')}
+                    type="text"
+                    placeholder="例如: 國立政治大學"
+                    className="w-full px-4 py-2 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none rounded-none text-sm transition-colors"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">
+                    註冊費發票統編 (Invoice Tax ID)
+                  </label>
+                  <input
+                    {...register('invoiceTaxId', {
+                      pattern: {
+                        value: /^\d{8}$/,
+                        message: '統編格式錯誤，請輸入8位數字',
+                      },
+                    })}
+                    type="text"
+                    maxLength={8}
+                    placeholder="例如: 03807654"
+                    className="w-full px-4 py-2 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none rounded-none text-sm transition-colors"
+                  />
+                  {errors.invoiceTaxId && (
+                    <p className="text-red-600 text-sm mt-2">
+                      {errors.invoiceTaxId.message as string}
                     </p>
                   )}
                 </div>

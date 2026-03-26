@@ -4,11 +4,14 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { AlertCircle } from 'lucide-react'
 import { useAuth } from '@/providers/Auth'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function LoginPage() {
   const router = useRouter()
   const { refreshUser } = useAuth()
+  const { t } = useLanguage()
   const [error, setError] = useState<string | null>(null)
   const {
     register,
@@ -28,9 +31,9 @@ export default function LoginPage() {
       const json = await res.json()
 
       if (!res.ok) {
-        let msg = json.errors?.[0]?.message || '登入失敗，請檢查帳號密碼'
-        if (msg.toLowerCase().includes('login failed') || msg.toLowerCase().includes('credentials')) {
-          msg = '登入失敗，請確認您的信箱與密碼是否完全正確。'
+        let msg = json.errors?.[0]?.message || t('login.error.default')
+        if (msg.toLowerCase().includes('login failed') || msg.toLowerCase().includes('credentials') || msg.toLowerCase().includes('incorrect')) {
+          msg = t('login.error.credentials')
         }
         throw new Error(msg)
       }
@@ -47,18 +50,21 @@ export default function LoginPage() {
   return (
     <div>
       <h3 className="text-2xl font-semibold tracking-wide text-[#4d4c9d] mb-6 text-center tracking-tight">
-        登入 SG44
+        {t('login.title')}
       </h3>
 
       {error && (
-        <div className="bg-red-50 border-l-4 border-red-500 p-4 mb-6 text-red-700 text-sm rounded shadow-sm">
-          {error}
+        <div className="bg-red-50/50 border border-red-100 p-4 mb-6 rounded-lg shadow-sm flex items-start gap-3 animate-in fade-in slide-in-from-top-2 duration-300">
+          <AlertCircle className="text-red-500 shrink-0 mt-0.5" size={18} />
+          <div className="text-red-700 text-sm font-medium leading-relaxed">
+            {error}
+          </div>
         </div>
       )}
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div>
-          <label className="block text-sm font-medium text-stone-700 mb-1">Email</label>
+          <label className="block text-sm font-medium text-stone-700 mb-1">{t('login.email')}</label>
           <input
             {...register('email', { required: true })}
             type="email"
@@ -67,7 +73,7 @@ export default function LoginPage() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-stone-700 mb-1">密碼</label>
+          <label className="block text-sm font-medium text-stone-700 mb-1">{t('login.password')}</label>
           <input
             {...register('password', { required: true })}
             type="password"
@@ -81,7 +87,7 @@ export default function LoginPage() {
               href="/recover-password"
               className="font-medium text-[#4d4c9d] hover:text-[#53b2e5] transition-colors"
             >
-              忘記密碼？
+              {t('login.forgotPassword')}
             </Link>
           </div>
         </div>
@@ -91,17 +97,17 @@ export default function LoginPage() {
           disabled={isSubmitting}
           className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-sm shadow-md text-sm font-semibold tracking-wide text-white bg-[#53b2e5] hover:bg-[#4098c7] hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#53b2e5] disabled:bg-stone-300 disabled:shadow-none transition-all duration-200"
         >
-          {isSubmitting ? '登入中...' : '登入'}
+          {isSubmitting ? t('login.submitting') : t('login.submit')}
         </button>
       </form>
 
       <div className="mt-8 text-center text-sm">
-        <span className="text-stone-500">還沒有帳號？</span>
+        <span className="text-stone-500">{t('login.noAccount')}</span>
         <Link
           href="/register"
           className="ml-2 font-medium text-[#4d4c9d] hover:text-[#53b2e5] transition-colors"
         >
-          立即註冊
+          {t('login.registerNow')}
         </Link>
       </div>
     </div>

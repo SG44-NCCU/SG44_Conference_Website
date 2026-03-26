@@ -5,7 +5,16 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 const Hero: React.FC = () => {
-  const [isLoaded, setIsLoaded] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
+
+  React.useEffect(() => {
+    // Trigger the fade-in shortly after the component mounts
+    // This avoids reliance on onLoadedData which can fail with cached videos
+    const timer = setTimeout(() => {
+      setIsVisible(true)
+    }, 100)
+    return () => clearTimeout(timer)
+  }, [])
 
   return (
     <section className="relative w-full overflow-hidden bg-white">
@@ -17,7 +26,9 @@ const Hero: React.FC = () => {
           loop
           muted
           playsInline
-          className="w-full h-auto object-cover"
+          className={`w-full h-auto object-cover transition-opacity duration-1000 ease-in-out ${
+            isVisible ? 'opacity-100' : 'opacity-0'
+          }`}
         />
         
         {/* Bottom Fade Gradient Overlay - Subtle blend into the button section */}

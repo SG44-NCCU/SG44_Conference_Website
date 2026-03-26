@@ -1,11 +1,11 @@
 'use client'
 
-// import { ChevronDown, Menu, UserCircle, X } from 'lucide-react'
-import { ChevronDown, Menu, X } from 'lucide-react'
+import { ChevronDown, Globe, Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { useAuth } from '@/providers/Auth'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 // 定義型別
 interface SubMenuItem {
@@ -19,14 +19,14 @@ interface NavItem {
   items?: SubMenuItem[] // 可選的子選單
 }
 
-// 定義導覽列資料結構
-const NAV_ITEMS: NavItem[] = [
+// 導覽列使用 translation key 取代硬編碼文字
+const NAV_ITEM_DEFS = [
   {
-    name: '首頁',
+    nameKey: 'nav.home',
     href: '/',
   },
   {
-    name: '最新消息',
+    nameKey: 'nav.news',
     href: '/news',
   },
   
@@ -44,71 +44,65 @@ const NAV_ITEMS: NavItem[] = [
   //   ],
   // },
   {
-    name: '會議報名',
+    nameKey: 'nav.registration',
     href: '/registration',
     items: [
-      { name: '報名時程', href: '/registration#timeline' },
-      { name: '報名費用', href: '/registration#fees' },
-      { name: '報名方式', href: '/registration#method' },
-      { name: '報名須知', href: '/registration#notice' },
-      { name: '前往報名', href: '/SG44-register' },
+      { nameKey: 'nav.registration.timeline', href: '/registration#timeline' },
+      { nameKey: 'nav.registration.fees', href: '/registration#fees' },
+      { nameKey: 'nav.registration.method', href: '/registration#method' },
+      { nameKey: 'nav.registration.notice', href: '/registration#notice' },
+      { nameKey: 'nav.registration.go', href: '/SG44-register' },
     ],
   },
   {
-    name: '論文發表',
+    nameKey: 'nav.submission',
     href: '/submission',
     items: [
-      // { name: '會議論文集', href: '/proceedings' },
-      { name: '投稿說明', href: '/submission' },
-      { name: '發表注意事項', href: '/guidelines' },
-      { name: '前往投稿', href: '/abstract-submit' },
+      { nameKey: 'nav.submission.guide', href: '/submission' },
+      { nameKey: 'nav.submission.guidelines', href: '/guidelines' },
+      { nameKey: 'nav.submission.go', href: '/abstract-submit' },
     ],
   },
-
-  // {
-  //   name: '大專生競賽',
-  //   href: '/competition-rules',
-  //   items: [
-  //     { name: '競賽細則', href: '/competition-rules' },
-  //     { name: '競賽流程', href: '/competition-schedule' },
-  //   ],
-  // },
   {
-    name: '參展贊助',
+    nameKey: 'nav.sponsors',
     href: '/sponsors',
     items: [
-      { name: '參展及贊助單位', href: '/sponsors' },
-      { name: '參展報名', href: '/exhibition' },
-      { name: '活動贊助', href: '/sponsorship' },
+      { nameKey: 'nav.sponsors.units', href: '/sponsors' },
     ],
   },
   {
-    name: '會議資訊',
+    nameKey: 'nav.about',
     href: '/about',
     items: [
-      // { name: '活動照片', href: '/gallery' },
-      { name: '會議介紹', href: '/about' },
-      { name: '會場地圖', href: '/venue' },
-      { name: '交通資訊', href: '/transportation' },
-      { name: '住宿資訊', href: '/hotels' },
-      { name: '聯絡我們', href: '/contact' },
+      { nameKey: 'nav.about.intro', href: '/about' },
+      { nameKey: 'nav.about.transport', href: '/transportation' },
+      { nameKey: 'nav.about.contact', href: '/contact' },
     ],
   },
   {
-    name: '3S創客競賽',
+    nameKey: 'nav.3s',
     href: '/3S_competition_rules',
     items: [
-      { name: '競賽細則', href: '/3S_competition_rules' },
-      // { name: '競賽流程', href: '/3S_competition_flow' },
+      { nameKey: 'nav.3s.rules', href: '/3S_competition_rules' },
     ],
   },
 ]
 
 const Navbar: React.FC = () => {
   const { user, loading, logout, refreshUser } = useAuth()
+  const { lang, setLang, t } = useLanguage()
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [mobileSubMenuOpen, setMobileSubMenuOpen] = useState<number | null>(null)
+
+  // Build nav items using translations
+  const NAV_ITEMS = NAV_ITEM_DEFS.map((item) => ({
+    ...item,
+    name: t(item.nameKey),
+    items: item.items?.map((sub) => ({ ...sub, name: t(sub.nameKey) })),
+  }))
+
+  const toggleLang = () => setLang(lang === 'zh' ? 'en' : 'zh')
 
   const pathname = usePathname()
 
@@ -197,8 +191,23 @@ const Navbar: React.FC = () => {
               </div>
             ))}
 
-            {/* Desktop Auth Buttons */}
-            <div className="pl-4 ml-4 border-l border-stone-200 flex items-center gap-3">
+            {/* Desktop Auth Buttons + Language Switcher */}
+            <div className="flex items-center gap-3">
+              {/* Desktop Language Switcher */}
+            <div className="hidden lg:flex items-center">
+              <button
+                onClick={toggleLang}
+                title={lang === 'zh' ? 'Switch to English' : '切換至中文'}
+                className="group flex items-center gap-2 px-3 py-1.5 rounded-full border border-stone-200 hover:border-[#4d4c9d] hover:bg-stone-50 transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer ml-4"
+              >
+                <Globe size={14} className="text-stone-400 group-hover:text-[#4d4c9d] transition-colors" />
+                <span className="text-[10px] font-black tracking-tighter text-stone-500 group-hover:text-[#4d4c9d]">
+                  {lang === 'zh' ? 'EN' : '中'}
+                </span>
+              </button>
+            </div>
+
+            {/* Login / Member Action */}
               {loading ? (
                 // Loading Skeleton
                 <div className="w-24 h-9 bg-stone-100 animate-pulse rounded-md" />
@@ -216,7 +225,7 @@ const Navbar: React.FC = () => {
                   <div className="absolute right-0 top-full pt-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform group-hover:translate-y-0 translate-y-2">
                     <div className="bg-white rounded-md shadow-sm border border-stone-100 overflow-hidden py-1">
                       <div className="px-4 py-2 border-b border-stone-100">
-                        <p className="text-xs text-stone-500">已登入為</p>
+                        <p className="text-xs text-stone-500">{t('auth.loggedInAs')}</p>
                         <p className="text-sm font-semibold tracking-wide text-stone-800 truncate" title={user.email}>
                           {user.email}
                         </p>
@@ -225,13 +234,13 @@ const Navbar: React.FC = () => {
                         href="/dashboard/my-registrations"
                         className="block px-4 py-2 text-sm text-stone-600 hover:bg-[#f3f3f9] hover:text-[#4d4c9d] transition-colors"
                       >
-                        會員中心
+                        {t('auth.member')}
                       </Link>
                       <button
                         onClick={logout}
                         className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
                       >
-                        登出
+                        {t('auth.logout')}
                       </button>
                     </div>
                   </div>
@@ -241,17 +250,23 @@ const Navbar: React.FC = () => {
                   href="/login"
                   className="px-5 py-2 bg-[#4d4c9d] text-white text-sm font-semibold tracking-wide rounded-md hover:bg-[#3a3977] transition-all shadow-sm hover:shadow-md"
                 >
-                  會員登入
+                  {t('auth.login')}
                 </Link>
               )}
             </div>
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="lg:hidden flex items-center gap-4">
-            {/* <Link href="/auth" className="text-stone-600 hover:text-[#4d4c9d]">
-              <UserCircle size={24} />
-            </Link> */}
+          <div className="lg:hidden flex items-center gap-3">
+            {/* Globe Language Toggle (Mobile) */}
+            <button
+              onClick={toggleLang}
+              title={lang === 'zh' ? 'Switch to English' : '切換至中文'}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-stone-200 text-stone-500 hover:text-[#4d4c9d] hover:border-[#4d4c9d] transition-all duration-300"
+            >
+              <Globe size={16} />
+              <span className="text-[10px] font-black tracking-tighter">{lang === 'zh' ? 'EN' : '中'}</span>
+            </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-stone-600 hover:text-stone-900 focus:outline-none"
@@ -326,7 +341,7 @@ const Navbar: React.FC = () => {
                     className="block w-full text-center py-2.5 bg-[#4d4c9d] text-white rounded-md font-medium hover:bg-[#3a3977] transition-colors"
                     onClick={() => setIsOpen(false)}
                   >
-                    會員中心
+                    {t('auth.member')}
                   </Link>
                   <button
                     onClick={() => {
@@ -335,7 +350,7 @@ const Navbar: React.FC = () => {
                     }}
                     className="block w-full text-center py-2.5 border border-stone-200 text-stone-600 rounded-md font-medium hover:bg-stone-50 transition-colors"
                   >
-                    登出
+                    {t('auth.logout')}
                   </button>
                 </div>
               ) : (
@@ -344,7 +359,7 @@ const Navbar: React.FC = () => {
                   className="block w-full text-center py-3 bg-[#4d4c9d] text-white rounded-md font-semibold tracking-wide hover:bg-[#3a3977] transition-colors"
                   onClick={() => setIsOpen(false)}
                 >
-                  會員登入 / 註冊
+                  {t('auth.loginRegister')}
                 </Link>
               )}
             </div>

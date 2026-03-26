@@ -7,6 +7,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { Loader2, Plus, Trash2, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import SectionTitle from '@/components/ui/SectionTitle'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 // ─── Sub-topic options (mirrors Abstracts.ts) ────────────────────────────────
 const SUB_TOPICS = [
@@ -47,6 +48,7 @@ type FormValues = {
 
 export default function AbstractSubmitClient() {
   const { user, loading } = useAuth()
+  const { t } = useLanguage()
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -176,16 +178,16 @@ export default function AbstractSubmitClient() {
       const result = await res.json()
 
       if (!res.ok) {
-        let msg = result.errors?.[0]?.message || '投稿送出失敗，請再試一次。'
+        let msg = result.errors?.[0]?.message || t('abstract.submit.error.default')
         if (msg.toLowerCase().includes('validation') || msg.toLowerCase().includes('exist')) {
-          msg = '部分資料格式驗證失敗，請檢查輸入內容是否完整有效。'
+          msg = t('abstract.submit.error.validation')
         }
         throw new Error(msg)
       }
 
       router.push('/dashboard/my-submissions')
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : '投稿送出失敗，請再試一次。')
+      setError(err instanceof Error ? err.message : t('abstract.submit.error.default'))
       window.scrollTo({ top: 0, behavior: 'smooth' })
     } finally {
       setIsSubmitting(false)
@@ -207,9 +209,9 @@ export default function AbstractSubmitClient() {
       <main className="pt-32 pb-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-16 text-center">
-            <SectionTitle title="摘要投稿系統" subtitle="Abstract Submission" />
+            <SectionTitle title={t('abstract.submit.title')} subtitle={t('abstract.submit.subtitle')} />
             <p className="mt-4 text-stone-600 max-w-2xl mx-auto text-lg">
-              歡迎投稿第44屆測量及空間資訊研討會。請依序填寫作者資訊、投稿分類與摘要內容。
+              {t('abstract.submit.desc')}
             </p>
           </div>
 
@@ -217,8 +219,8 @@ export default function AbstractSubmitClient() {
           {submissionOpen === false && (
             <div className="flex flex-col items-center gap-4 py-20 text-center">
               <div className="text-5xl">🔒</div>
-              <h2 className="text-2xl font-semibold tracking-wide text-stone-800">摘要投稿已截止</h2>
-              <p className="text-stone-500">目前投稿系統已關閉，感謝您的參與。</p>
+              <h2 className="text-2xl font-semibold tracking-wide text-stone-800">{t('abstract.submit.closed.title')}</h2>
+              <p className="text-stone-500">{t('abstract.submit.closed.desc')}</p>
             </div>
           )}
 
@@ -227,16 +229,16 @@ export default function AbstractSubmitClient() {
             <div className="max-w-2xl mx-auto py-20 text-center space-y-6">
               <div className="border border-stone-200 p-10 space-y-5">
                 <p className="text-4xl">📋</p>
-                <h2 className="text-xl font-semibold tracking-wide text-stone-800">您的報名尚未通過審核</h2>
+                <h2 className="text-xl font-semibold tracking-wide text-stone-800">{t('abstract.submit.notRegistered.title')}</h2>
                 <p className="text-stone-500 leading-relaxed">
-                  投稿摘要需要先完成大會報名並通過繳費確認。請先前往報名頁面完成報名與繳費，待大會確認繳費後即可回來投稿。
+                  {t('abstract.submit.notRegistered.desc')}
                 </p>
                 <div className="pt-2">
                   <Link
                     href="/SG44-register"
                     className="inline-flex items-center gap-2 px-8 py-3 bg-[#4d4c9d] text-white font-semibold tracking-wide hover:bg-[#3a3977] transition-colors tracking-wide"
                   >
-                    前往報名專區 <ArrowRight size={16} />
+                    {t('abstract.submit.notRegistered.btn')} <ArrowRight size={16} />
                   </Link>
                 </div>
               </div>
@@ -255,12 +257,12 @@ export default function AbstractSubmitClient() {
                 {/* ── Section 1: 標題 ── */}
                 <section>
                   <h3 className="text-lg font-semibold tracking-wide text-stone-800 border-b border-stone-300 pb-2 mb-6">
-                    1. 論文標題 (Paper Title)
+                    {t('abstract.submit.step1')}
                   </h3>
                   <input
-                    {...register('title', { required: '請填寫論文標題' })}
+                    {...register('title', { required: t('validation.required') })}
                     type="text"
-                    placeholder="請輸入論文標題（中、英文皆可）"
+                    placeholder={t('abstract.submit.title.placeholder')}
                     className={INPUT_CLS}
                   />
                   {errors.title && <p className="text-red-600 text-sm mt-2">{errors.title.message}</p>}
@@ -269,10 +271,10 @@ export default function AbstractSubmitClient() {
                 {/* ── Section 2: 作者群 ── */}
                 <section>
                   <h3 className="text-lg font-semibold tracking-wide text-stone-800 border-b border-stone-300 pb-2 mb-6">
-                    2. 作者群 (Authors)
+                    {t('abstract.submit.step2')}
                   </h3>
                   <p className="text-sm text-stone-500 mb-4">
-                    第一位作者預設為通訊作者，若有多位作者請依序新增。
+                    {t('abstract.submit.authors.hint')}
                   </p>
 
                   <div className="space-y-6">
@@ -283,10 +285,10 @@ export default function AbstractSubmitClient() {
                       >
                         <div className="flex items-center justify-between mb-4">
                           <span className="font-semibold tracking-wide text-stone-700 text-sm">
-                            作者 (Author) {index + 1}
+                            {t('abstract.submit.author.label')} {index + 1}
                             {watch(`authors.${index}.isCorresponding`) && (
                               <span className="ml-2 text-xs font-normal text-[#4d4c9d] border border-[#4d4c9d] px-2 py-0.5 rounded">
-                                通訊作者
+                                {t('abstract.submit.author.corresponding')}
                               </span>
                             )}
                           </span>
@@ -294,7 +296,7 @@ export default function AbstractSubmitClient() {
                             <button
                               type="button"
                               onClick={() => removeAuthor(index)}
-                              title="刪除作者 (Remove Author)"
+                              title={t('abstract.submit.author.remove')}
                               className="text-red-400 hover:text-red-600 transition-colors"
                             >
                               <Trash2 size={16} />
@@ -305,12 +307,12 @@ export default function AbstractSubmitClient() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           <div>
                             <label className="block text-xs font-semibold tracking-wide text-stone-600 mb-1.5 uppercase tracking-wider">
-                              姓名 (Name) <span className="text-red-500">*</span>
+                              {t('abstract.submit.author.name')} <span className="text-red-500">*</span>
                             </label>
                             <input
-                              {...register(`authors.${index}.name`, { required: '請填寫作者姓名' })}
+                              {...register(`authors.${index}.name`, { required: t('validation.required') })}
                               type="text"
-                              placeholder="例：王小明 / Wang Xiao-Ming"
+                              placeholder={t('abstract.submit.author.name.placeholder')}
                               className={INPUT_CLS}
                             />
                             {errors.authors?.[index]?.name && (
@@ -319,12 +321,12 @@ export default function AbstractSubmitClient() {
                           </div>
                           <div>
                             <label className="block text-xs font-semibold tracking-wide text-stone-600 mb-1.5 uppercase tracking-wider">
-                              所屬單位 (Affiliation) <span className="text-red-500">*</span>
+                              {t('abstract.submit.author.affiliation')} <span className="text-red-500">*</span>
                             </label>
                             <input
-                              {...register(`authors.${index}.affiliation`, { required: '請填寫所屬單位' })}
+                              {...register(`authors.${index}.affiliation`, { required: t('validation.required') })}
                               type="text"
-                              placeholder="例：國立政治大學地政系"
+                              placeholder={t('abstract.submit.author.affiliation.placeholder')}
                               className={INPUT_CLS}
                             />
                             {errors.authors?.[index]?.affiliation && (
@@ -333,12 +335,12 @@ export default function AbstractSubmitClient() {
                           </div>
                           <div>
                             <label className="block text-xs font-semibold tracking-wide text-stone-600 mb-1.5 uppercase tracking-wider">
-                              電子郵件 (Email) <span className="text-red-500">*</span>
+                              {t('abstract.submit.author.email')} <span className="text-red-500">*</span>
                             </label>
                             <input
                               {...register(`authors.${index}.email`, {
-                                required: '請填寫電子郵件',
-                                pattern: { value: /^\S+@\S+\.\S+$/, message: '格式不正確' },
+                                required: t('validation.required'),
+                                pattern: { value: /^\S+@\S+\.\S+$/, message: t('validation.email') },
                               })}
                               type="email"
                               placeholder="email@example.com"
@@ -355,7 +357,7 @@ export default function AbstractSubmitClient() {
                                 {...register(`authors.${index}.isCorresponding`)}
                                 className="w-4 h-4 accent-[#4d4c9d]"
                               />
-                              設為通訊作者 (Corresponding Author)
+                              {t('abstract.submit.author.isCorresponding')}
                             </label>
                           </div>
                         </div>
@@ -368,14 +370,14 @@ export default function AbstractSubmitClient() {
                     onClick={() => appendAuthor({ name: '', affiliation: '', email: '', isCorresponding: false })}
                     className="mt-4 flex items-center gap-2 text-sm text-[#4d4c9d] border border-[#4d4c9d] px-4 py-2 hover:bg-stone-50 transition-colors"
                   >
-                    <Plus size={16} /> 新增作者 (Add Author)
+                    <Plus size={16} /> {t('abstract.submit.author.add')}
                   </button>
                 </section>
 
                 {/* ── Section 3: 投稿分類 ── */}
                 <section>
                   <h3 className="text-lg font-semibold tracking-wide text-stone-800 border-b border-stone-300 pb-2 mb-6">
-                    3. 投稿分類 (Classification)
+                    {t('abstract.submit.step3')}
                   </h3>
 
                   {/* 特別論壇選擇放在最上面 (暫時註解依使用者要求) */}
@@ -403,18 +405,18 @@ export default function AbstractSubmitClient() {
                   {!watch('specialSession') && (
                     <div>
                       <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">
-                        投稿子題 (Sub-Topic) <span className="text-red-500">*</span>
+                        {t('abstract.submit.topic.label')} <span className="text-red-500">*</span>
                       </label>
                       <select
                         {...register('subTopic', {
-                          required: !watch('specialSession') ? '請選擇投稿子題' : false,
+                          required: !watch('specialSession') ? t('abstract.submit.topic.placeholder') : false,
                         })}
                         className={`${INPUT_CLS} bg-white cursor-pointer`}
                       >
-                        <option value="">請選擇一個最相符的子題</option>
-                        {SUB_TOPICS.map((t) => (
-                          <option key={t.value} value={t.value}>
-                            {t.label}
+                        <option value="">{t('abstract.submit.topic.placeholder')}</option>
+                        {SUB_TOPICS.map((topic) => (
+                          <option key={topic.value} value={topic.value}>
+                            {topic.label}
                           </option>
                         ))}
                       </select>
@@ -435,13 +437,13 @@ export default function AbstractSubmitClient() {
                 {/* ── Section 4: 偏好發表形式 ── */}
                 <section>
                   <h3 className="text-lg font-semibold tracking-wide text-stone-800 border-b border-stone-300 pb-2 mb-6">
-                    4. 偏好發表形式 (Presentation Preference)
+                    {t('abstract.submit.step4')}
                   </h3>
                   <div className="space-y-3">
                     {[
-                      { value: 'oral', label: '口頭發表 (Oral Presentation)' },
-                      { value: 'poster', label: '海報發表 (Poster Presentation)' },
-                      { value: 'either', label: '口頭或海報皆可 (Either)' },
+                      { value: 'oral', label: t('abstract.submit.pref.oral') },
+                      { value: 'poster', label: t('abstract.submit.pref.poster') },
+                      { value: 'either', label: t('abstract.submit.pref.either') },
                     ].map((opt) => (
                       <label
                         key={opt.value}
@@ -462,14 +464,14 @@ export default function AbstractSubmitClient() {
                     ))}
                   </div>
                   <p className="text-stone-400 text-xs mt-2">
-                    實際發表形式由大會排程決定，此為偏好登記僅供參考
+                    {t('abstract.submit.pref.hint')}
                   </p>
                 </section>
 
                 {/* ── Section 5: 學生資訊 ── */}
                 <section>
                   <h3 className="text-lg font-semibold tracking-wide text-stone-800 border-b border-stone-300 pb-2 mb-6">
-                    5. 學生身份與論文獎 (Student Information)
+                    {t('abstract.submit.step5')}
                   </h3>
                   <div className="space-y-4">
                     <label className="flex items-center gap-3 p-4 border border-stone-200 cursor-pointer hover:bg-stone-50 transition-colors">
@@ -479,9 +481,9 @@ export default function AbstractSubmitClient() {
                         className="w-5 h-5 accent-[#4d4c9d]"
                       />
                       <div>
-                        <span className="font-medium text-stone-800">我是學生 (I am a student)</span>
+                        <span className="font-medium text-stone-800">{t('abstract.submit.student.label')}</span>
                         <p className="text-sm text-stone-500 mt-0.5">
-                          勾選後可選擇是否報名學生論文獎
+                          {t('abstract.submit.student.hint')}
                         </p>
                       </div>
                     </label>
@@ -496,10 +498,10 @@ export default function AbstractSubmitClient() {
                           />
                           <div>
                             <span className="font-medium text-stone-800">
-                              報名學生論文獎 (Apply for Student Paper Award)
+                              {t('abstract.submit.studentAward.label')}
                             </span>
                             <p className="text-sm text-stone-500 mt-0.5">
-                              勾選表示有意願參加學生論文競賽。摘要通過審查後，大會將以 Email 通知您繳交全文。
+                              {t('abstract.submit.studentAward.hint')}
                             </p>
                           </div>
                         </label>
@@ -511,20 +513,20 @@ export default function AbstractSubmitClient() {
                 {/* ── Section 6: 摘要內容 ── */}
                 <section>
                   <h3 className="text-lg font-semibold tracking-wide text-stone-800 border-b border-stone-300 pb-2 mb-6">
-                    6. 摘要內容 (Abstract Content)
+                    {t('abstract.submit.step6')}
                   </h3>
                   <div className="space-y-6">
                     <div>
                       <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">
-                        摘要 (Abstract) <span className="text-red-500">*</span>
+                        {t('abstract.submit.abstract.label')} <span className="text-red-500">*</span>
                       </label>
                       <textarea
                         {...register('abstract', {
-                          required: '請填寫摘要',
-                          minLength: { value: 50, message: '摘要至少需要 50 個字元' },
+                          required: t('validation.required'),
+                          minLength: { value: 50, message: t('abstract.submit.abstract.placeholder') },
                         })}
                         rows={8}
-                        placeholder="請輸入中文或英文摘要，建議 250 字以內，包含研究目的、方法、結果與結論…"
+                        placeholder={t('abstract.submit.abstract.placeholder')}
                         className={`${INPUT_CLS} resize-y`}
                       />
                       {errors.abstract && (
@@ -534,11 +536,11 @@ export default function AbstractSubmitClient() {
 
                     <div>
                       <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">
-                        關鍵字 (Keywords) <span className="text-red-500">*</span>
+                        {t('abstract.submit.keywords.label')} <span className="text-red-500">*</span>
                       </label>
                       <input
                         {...register('keywords', {
-                          required: '請填寫關鍵字',
+                          required: t('validation.required'),
                         })}
                         type="text"
                         placeholder="請以逗號分隔，至少填寫 3 個關鍵字，例如：衛星定位, GNSS, 慣性導航"
