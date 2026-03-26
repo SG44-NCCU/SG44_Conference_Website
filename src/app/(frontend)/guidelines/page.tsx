@@ -117,17 +117,17 @@ export default function GuidelinesPage() {
 
           {/* Contact */}
           <section>
-            <h2 className="text-base font-semibold tracking-wide text-stone-800 border-l-[3px] border-[#4d4c9d] pl-3 mb-4">
+            <h2 className="text-base font-semibold tracking-wide text-stone-800 border-l-[3px] border-[#4d4c9d] pl-3 mb-6">
               聯絡方式
             </h2>
-            <p>
+            <p className="text-stone-600">
               如有任何疑問，歡迎來信至大會信箱：
-              <a
+              <Link
                 href="mailto:sg44@nccu.edu.tw"
-                className="text-[#4d4c9d] underline underline-offset-2 ml-1 hover:text-[#3d3c8d] transition-colors"
+                className="text-[#4d4c9d] font-bold hover:underline underline-offset-4 ml-1"
               >
                 sg44@nccu.edu.tw
-              </a>
+              </Link>
             </p>
           </section>
         </div>

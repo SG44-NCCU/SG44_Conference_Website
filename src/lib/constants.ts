@@ -5,13 +5,13 @@ const serverData = typeof window !== 'undefined' ? (window as any).WAGTAIL_DATA 
 
 // 1. 基本資訊
 export const CONFERENCE_INFO: ConferenceInfo = serverData?.info || {
-  title: '第四十四屆測量及空間資訊研討會',
-  subtitle: 'SG44 Conference on Surveying and Geomatics',
-  theme: '智測國土 X 韌啟未來',
-  themeEn: 'Smart Surveying of National Land, Resilient Future',
-  date: '115年 8月 20日 (四) - 21日 (五)',
-  location: '國立政治大學 法學院',
-  organizer: '國立政治大學 地政學系',
+  title: '第 44 屆測量及空間資訊研討會',
+  subtitle: 'The 44th Conference on Surveying and Geomatics',
+  theme: '智測國土 × 韌啟未來',
+  themeEn: 'Smart Surveying, Resilient Future',
+  date: '2026 年 8 月 20 日 (四) - 21 日 (五)',
+  location: '國立政治大學法學院',
+  organizer: '國立政治大學地政學系',
 }
 
 // 2. 最新消息
@@ -52,9 +52,9 @@ export const NEWS_DATA: NewsItem[] = serverData?.news || [
     `,
     // 注意：如果您的 types.ts 裡面的 NewsItem 沒有這些欄位，TypeScript 可能會報錯
     // 若報錯，請去 src/lib/types.ts 新增這些選填欄位 (optional fields)
-    meetingLink: 'https://meet.google.com/jcq-owyh-wnt',
-    meetingLinkText: '加入 Google Meet 視訊會議',
-    meetingTime: '114年12月30日（週二）下午14:00',
+    // meetingLink: 'https://meet.google.com/jcq-owyh-wnt',
+    // meetingLinkText: '加入 Google Meet 視訊會議',
+    // meetingTime: '114年12月30日（週二）下午14:00',
   },
   {
     id: 1,
@@ -69,49 +69,54 @@ export const NEWS_DATA: NewsItem[] = serverData?.news || [
  • 會議地點：國立政治大學（臺北市文山區指南路二段64號綜合院館6樓。）
  • 會議時間：114年12月30日（週二）下午14：00
  • 會議方式：線上視訊會議（請本表單報名，當日發送會議連結。）
-
-【籌備會議組織】
- • 研討會召集人：甯方璽（地政學系教授）
- • 承辦單位主管：白仁德（地政學系教授兼系主任）
- • 籌辦團隊成員：
-　　詹進發（地政學系教授）
-　　林士淵（地政學系教授）
-　　邱式鴻（地政學系教授）
-　　范噶色（地政學系副教授）
-　　蕭文斌（地政學系行政專員、系所助教）
- • 研討會聯絡人：李泱儒 博士生（地政學系博士班研究生）
- • 研討會信箱：sg44@nccu.edu.tw
- • 研討會網址：https://sg44.nccu.edu.tw/
-  
-【會議重要事項】
-1. 請於 114 年 12 月 26 日（週五）中午 17：00 前填寫完成本表單。
-2. 大會將於 114 年 12 月 30 日（週二）上午 11：00 前以 e-mail 寄送視訊會議連結。
-3. 敬請準時上線參與討論。
-4. 有意願出席本次籌備會之與會代表，請務必填寫本報名表單，以利線上會議連結寄發。
-5. 不克出席之單位，無需報名。
-6. 請各受文單位，本次開會通知公文請自行存查，是否出席以本表單調查結果為準，無需備文函復本系。
-7.會議報名之個資，僅提供主辦單位籌辦會議之用，並依相關法規管理保存，不另做他用。
-
-【研討會聯絡方式】 
-• 聯絡人：李泱儒 博士生、蕭文斌 行政專員（系所行政助教）
-• 聯絡信箱：sg44@nccu.edu.tw（大會專用信箱）
-• 聯絡電話：02-2939-3091 分機 50641（蕭助教分機 ）
     `,
   },
 ]
 
 // 3. 重要時程
 export const TIMELINE_DATA: TimelineEvent[] = serverData?.timeline || [
-  { date: '115/03/13', title: '徵求共同主辦及特別論壇主題截止', isPast: false },
-  { date: '115/04/01', title: '開放早鳥報名', isPast: false },
-  { date: '115/05/01', title: '開放摘要及全文投稿', isPast: false },
-  { date: '115/06/15', title: '早鳥報名截止', isPast: false },
-  { date: '115/06/29', title: '文章摘要投稿截止', isPast: false },
-  { date: '115/07/10', title: '摘要審查結果公告及廠商報名參展截止', isPast: false },
-  { date: '115/07/17', title: '文章全文投稿截止', isPast: false },
-  { date: '115/07/24', title: '論文審查結果及議程安排公告', isPast: false },
-  { date: '115/08/11', title: '線上報名截止', isPast: false },
-  { date: '115/08/20-21', title: 'SG44 研討會', isPast: false },
+  {
+    date: '04/01',
+    title: '早鳥報名開始',
+    titleEn: 'Early Bird Registration Opens',
+    isPast: false,
+  },
+  {
+    date: '04/01',
+    title: '論文摘要投稿開始',
+    titleEn: 'Paper Submission Opens',
+    isPast: false,
+  },
+  {
+    date: '06/15',
+    title: '早鳥報名截止',
+    titleEn: 'Early Bird Registration Deadline',
+    isPast: false,
+  },
+  {
+    date: '06/29',
+    title: '論文摘要投稿截止',
+    titleEn: 'Paper Submission Deadline',
+    isPast: false,
+  },
+  {
+    date: '07/10',
+    title: '摘要審查結果公告',
+    titleEn: 'Abstract Review Notification',
+    isPast: false,
+  },
+  {
+    date: '08/11',
+    title: '線上報名截止',
+    titleEn: 'Regular Registration Deadline',
+    isPast: false,
+  },
+  {
+    date: '08/20-21',
+    title: 'SG44 研討會',
+    titleEn: 'SG44 Conference',
+    isPast: false,
+  },
 ]
 
 // 4. 徵稿主題

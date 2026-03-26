@@ -68,7 +68,7 @@ export default function AboutPage() {
           </section>
 
           {/* Quick info cards */}
-          <section className="grid sm:grid-cols-3 gap-4">
+          {/* <section className="grid sm:grid-cols-3 gap-4">
             {[
               { label: '屆次', value: '第 44 屆' },
               { label: '日期', value: '2026 年 8 月 20–21 日' },
@@ -84,7 +84,7 @@ export default function AboutPage() {
                 <p className="text-stone-800 font-semibold">{item.value}</p>
               </div>
             ))}
-          </section>
+          </section> */}
         </div>
       </main>
     </div>

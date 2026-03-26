@@ -376,14 +376,14 @@ export default function MySubmissionsPage() {
                     {t('dashboard.sub.fullPaper.label')}
                   </p>
 
-                  {/* 學生獎但未上傳 → 紅色提醒 */}
+                  {/* 學生獎但未上傳 → 提醒 */}
                   {needsFullPaper && (
-                    <div className="mb-3 p-3 border-l-4 border-red-400 bg-red-50">
-                      <p className="text-sm font-semibold text-red-700">
-                        ⚠️ {t('dashboard.sub.fullPaper.awardAlert')}
+                    <div className="mb-4 p-4 border-l-[3px] border-[#4d4c9d] bg-stone-50">
+                      <p className="text-sm font-medium tracking-wide text-stone-800">
+                        {t('dashboard.sub.fullPaper.awardAlert')}
                       </p>
                       {fullPaperDeadline && (
-                        <p className="text-xs text-red-600 mt-0.5">
+                        <p className="text-xs text-stone-500 mt-1.5">
                           {t('abstract.submit.fullPaper.award.deadline')}{fullPaperDeadline}
                         </p>
                       )}
@@ -417,7 +417,7 @@ export default function MySubmissionsPage() {
                           setPendingUploadAbstractId(doc.id)
                           fileInputRef.current?.click()
                         }}
-                        className="flex items-center gap-1.5 text-xs px-3 py-1.5 border border-stone-300 text-stone-600 hover:bg-stone-50 transition-colors disabled:opacity-50"
+                        className="flex items-center gap-1.5 text-xs font-medium px-4 py-2 border border-stone-300 text-stone-600 hover:bg-stone-50 hover:border-[#4d4c9d] hover:text-[#4d4c9d] transition-colors disabled:opacity-50"
                       >
                         {isUploading ? (
                           <><Loader2 size={13} className="animate-spin" /> {t('dashboard.sub.fullPaper.uploading')}</>
@@ -437,7 +437,7 @@ export default function MySubmissionsPage() {
                           setPendingUploadAbstractId(doc.id)
                           fileInputRef.current?.click()
                         }}
-                        className="flex items-center gap-1.5 text-sm px-4 py-2 border border-[#4d4c9d] text-[#4d4c9d] hover:bg-stone-50 transition-colors disabled:opacity-50"
+                        className="flex items-center gap-1.5 text-sm font-medium px-4 py-2 border border-stone-300 text-stone-600 hover:bg-stone-50 hover:border-[#4d4c9d] hover:text-[#4d4c9d] transition-colors disabled:opacity-50"
                       >
                         {isUploading ? (
                           <><Loader2 size={15} className="animate-spin" /> {t('dashboard.sub.fullPaper.uploading')}</>

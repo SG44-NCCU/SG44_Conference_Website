@@ -1,13 +1,15 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 const Hero: React.FC = () => {
+  const { lang, t } = useLanguage()
   const [isVisible, setIsVisible] = useState(false)
 
-  React.useEffect(() => {
+  useEffect(() => {
     // Trigger the fade-in shortly after the component mounts
     // This avoids reliance on onLoadedData which can fail with cached videos
     const timer = setTimeout(() => {
@@ -38,69 +40,67 @@ const Hero: React.FC = () => {
         />
       </div>
 
-      {/* Conference Info + CTA Section */}
-      <div className="relative z-10 bg-white py-12 sm:py-16 px-6">
-        {/* Info Cards */}
-        <div className="max-w-4xl mx-auto grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-10">
-          {/* 會議時間 */}
-          <div className="col-span-2 sm:col-span-2 bg-stone-50 border border-stone-100 rounded-xl px-5 py-5">
-            <p className="text-[10px] font-semibold text-[#4d4c9d] uppercase tracking-widest mb-2">
-              會議時間
-            </p>
-            <p className="text-stone-800 font-semibold text-[15px] leading-snug">
-              2026 年 8 月 20 日（四）至 21 日（五）
-            </p>
-            <div className="mt-2 space-y-0.5 text-stone-500 text-[13px]">
-              <p>開幕：8 月 20 日（四）10:00</p>
-              <p>閉幕：8 月 21 日（五）16:45 頒獎與閉幕</p>
-            </div>
-          </div>
-
-          {/* 會議地點 */}
-          <div className="col-span-2 sm:col-span-2 bg-stone-50 border border-stone-100 rounded-xl px-5 py-5">
-            <p className="text-[10px] font-semibold text-[#4d4c9d] uppercase tracking-widest mb-2">
-              會議地點
-            </p>
-            <p className="text-stone-800 font-semibold text-[15px] leading-snug">國立政治大學</p>
-            <p className="text-stone-400 text-[12px] mt-1">116011 臺北市文山區指南路二段 64 號</p>
-            <div className="mt-2 space-y-0.5 text-stone-500 text-[13px]">
-              <p>大會場地：法學院</p>
-              <p>晚宴場地：四維堂</p>
-            </div>
-          </div>
-
-          {/* 主辦單位 */}
-          <div className="col-span-2 sm:col-span-4 bg-stone-50 border border-stone-100 rounded-xl px-5 py-4">
-            <p className="text-[10px] font-semibold text-[#4d4c9d] uppercase tracking-widest mb-1.5">
-              主辦單位
-            </p>
-            <p className="text-stone-700 text-[14px]">國立政治大學地政學系</p>
-          </div>
-        </div>
-
-        {/* CTA Button */}
-        <div className="flex justify-center">
-          <Link
-            href="/SG44-register"
-            className="group inline-flex items-center gap-3 px-10 py-4 border-2 border-primary text-primary font-semibold rounded-full hover:bg-primary hover:text-white transition-all duration-300 transform hover:-translate-y-1 shadow-sm hover:shadow-lg text-lg"
+      <div className="relative z-10 flex flex-col items-center pb-12 sm:pb-20 bg-white">
+        <Link
+          href="/SG44-register"
+          className="group inline-flex items-center gap-3 px-10 py-4 border-2 border-[#4d4c9d] text-[#4d4c9d] font-semibold rounded-full hover:bg-[#4d4c9d] hover:text-white transition-all duration-300 transform hover:-translate-y-1 shadow-sm hover:shadow-lg text-lg mb-12"
+        >
+          前往 SG44 活動報名
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="translate-x-0 group-hover:translate-x-1 -translate-y-0 group-hover:-translate-y-1 transition-transform duration-200"
           >
-            前往 SG44 活動報名
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="translate-x-0 group-hover:translate-x-1 -translate-y-0 group-hover:-translate-y-1 transition-transform duration-200"
-            >
-              <line x1="7" y1="17" x2="17" y2="7" />
-              <polyline points="7 7 17 7 17 17" />
-            </svg>
-          </Link>
+            <line x1="7" y1="17" x2="17" y2="7" />
+            <polyline points="7 7 17 7 17 17" />
+          </svg>
+        </Link>
+
+        {/* Conference Details Block */}
+        <div className="w-full max-w-5xl px-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 py-8 border-y border-stone-100">
+            <div className="flex flex-col gap-1 items-center md:items-start text-center md:text-left">
+              <span className="text-[10px] font-bold text-stone-400 uppercase tracking-widest">
+                {t('hero.info.name')}
+              </span>
+              <span className="text-stone-800 font-semibold leading-tight">
+                {lang === 'zh'
+                  ? '第 44 屆測量及空間資訊研討會'
+                  : 'The 44th Conference on Surveying and Geomatics'}
+              </span>
+            </div>
+            <div className="flex flex-col gap-1 items-center md:items-start text-center md:text-left">
+              <span className="text-[10px] font-bold text-stone-400 uppercase tracking-widest">
+                {t('hero.info.date')}
+              </span>
+              <span className="text-stone-800 font-semibold leading-tight">
+                2026/08/20 (四) - 08/21 (五)
+              </span>
+            </div>
+            <div className="flex flex-col gap-1 items-center md:items-start text-center md:text-left">
+              <span className="text-[10px] font-bold text-stone-400 uppercase tracking-widest">
+                {t('hero.info.location')}
+              </span>
+              <span className="text-stone-800 font-semibold leading-tight">
+                {lang === 'zh' ? '國立政治大學法學院' : 'NCCU College of Law'}
+              </span>
+            </div>
+            <div className="flex flex-col gap-1 items-center md:items-start text-center md:text-left">
+              <span className="text-[10px] font-bold text-stone-400 uppercase tracking-widest">
+                {t('hero.info.organizer')}
+              </span>
+              <span className="text-stone-800 font-semibold leading-tight">
+                {lang === 'zh' ? '國立政治大學地政學系' : 'Department of Land Economics, NCCU'}
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </section>

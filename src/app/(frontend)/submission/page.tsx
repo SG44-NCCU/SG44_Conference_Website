@@ -206,6 +206,22 @@ export default function SubmissionPage() {
             </svg>
           </Link>
         </div>
+
+        {/* Contact */}
+        <div className="mt-20 pt-10 border-t border-stone-100 flex flex-col items-center">
+          <h2 className="text-base font-semibold tracking-wide text-stone-800 border-l-[3px] border-[#4d4c9d] pl-3 mb-6 self-start">
+            聯絡方式
+          </h2>
+          <p className="text-stone-600 self-start">
+            如有任何疑問，歡迎來信至大會信箱：
+            <Link
+              href="mailto:sg44@nccu.edu.tw"
+              className="text-[#4d4c9d] font-bold hover:underline underline-offset-4 ml-1"
+            >
+              sg44@nccu.edu.tw
+            </Link>
+          </p>
+        </div>
       </main>
     </div>
   )

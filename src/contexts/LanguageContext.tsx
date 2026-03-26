@@ -33,6 +33,11 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.about.contact': '聯絡我們',
     'nav.3s': '3S創客競賽',
     'nav.3s.rules': '競賽細則',
+    // Hero Info
+    'hero.info.name': '會議名稱',
+    'hero.info.date': '會議時間',
+    'hero.info.location': '會議地點 / 場地',
+    'hero.info.organizer': '主辦單位',
     // User area
     'auth.login': '會員登入',
     'auth.loginRegister': '會員登入 / 註冊',
@@ -85,7 +90,8 @@ const translations: Record<Language, Record<string, string>> = {
     // SG44 Register form
     'sg44.title': '研討會報名系統',
     'sg44.subtitle': 'Conference Registration',
-    'sg44.desc': '歡迎報名【第44屆測量及空間資訊研討會】。大會將於 2026.08.20 ~ 2026.08.21 假國立政治大學舉辦。',
+    'sg44.desc':
+      '歡迎報名【第44屆測量及空間資訊研討會】。大會將於 2026.08.20 ~ 2026.08.21 假國立政治大學舉辦。',
     'sg44.payment.info': '繳費資訊',
     'sg44.payment.method': '繳費方式',
     'sg44.payment.bank': '銀行轉帳 (808 玉山銀行)',
@@ -99,11 +105,13 @@ const translations: Record<Language, Record<string, string>> = {
     // Abstract Submit
     'abstract.submit.title': '摘要投稿系統',
     'abstract.submit.subtitle': 'Abstract Submission',
-    'abstract.submit.desc': '歡迎投稿第44屆測量及空間資訊研討會。請依序填寫作者資訊、投稿分類與摘要內容。',
+    'abstract.submit.desc':
+      '歡迎投稿第44屆測量及空間資訊研討會。請依序填寫作者資訊、投稿分類與摘要內容。',
     'abstract.submit.closed.title': '摘要投稿已截止',
     'abstract.submit.closed.desc': '目前投稿系統已關閉，感謝您的參與。',
     'abstract.submit.notRegistered.title': '您的報名尚未通過審核',
-    'abstract.submit.notRegistered.desc': '投稿摘要需要先完成大會報名並通過繳費確認。請先前往報名頁面完成報名與繳費，待大會確認繳費後即可回來投稿。',
+    'abstract.submit.notRegistered.desc':
+      '投稿摘要需要先完成大會報名並通過繳費確認。請先前往報名頁面完成報名與繳費，待大會確認繳費後即可回來投稿。',
     'abstract.submit.notRegistered.btn': '前往報名專區',
     'abstract.submit.step1': '1. 論文標題 (Paper Title)',
     'abstract.submit.step2': '2. 作者群 (Authors)',
@@ -133,11 +141,14 @@ const translations: Record<Language, Record<string, string>> = {
     'abstract.submit.student.label': '我是學生 (I am a student)',
     'abstract.submit.student.hint': '勾選後可選擇是否報名學生論文獎',
     'abstract.submit.studentAward.label': '報名學生論文獎 (Apply for Student Paper Award)',
-    'abstract.submit.studentAward.hint': '勾選表示有意願參加學生論文競賽。摘要通過審查後，大會將以 Email 通知您繳交全文。',
+    'abstract.submit.studentAward.hint':
+      '勾選表示有意願參加學生論文競賽。摘要通過審查後，大會將以 Email 通知您繳交全文。',
     'abstract.submit.abstract.label': '摘要 (Abstract)',
-    'abstract.submit.abstract.placeholder': '請輸入中文或英文摘要，建議 250 字以內，包含研究目的、方法、結果與結論…',
+    'abstract.submit.abstract.placeholder':
+      '請輸入中文或英文摘要，建議 250 字以內，包含研究目的、方法、結果與結論…',
     'abstract.submit.keywords.label': '關鍵字 (Keywords)',
-    'abstract.submit.keywords.placeholder': '請以逗號分隔，至少填寫 3 個關鍵字，例如：衛星定位, GNSS, 慣性導航',
+    'abstract.submit.keywords.placeholder':
+      '請以逗號分隔，至少填寫 3 個關鍵字，例如：衛星定位, GNSS, 慣性導航',
     'abstract.submit.submit': '確認並送出投稿',
     'abstract.submit.submitting': '投稿送出中...',
     'abstract.submit.save': '確認並儲存修改',
@@ -191,15 +202,19 @@ const translations: Record<Language, Record<string, string>> = {
     'dashboard.reg.status.pending': '繳費審核中',
     'dashboard.reg.status.failed': '繳費異常 / 需重新上傳',
     'dashboard.reg.pending.title': '正在等待管理員對帳',
-    'dashboard.reg.pending.desc1': '您的報名資料已成功送出！行政團隊將於 1~3 個工作天內核對您的匯款紀錄（帳號末五碼：',
+    'dashboard.reg.pending.desc1':
+      '您的報名資料已成功送出！行政團隊將於 1~3 個工作天內核對您的匯款紀錄（帳號末五碼：',
     'dashboard.reg.pending.desc2': '）。若核對無誤，此處狀態將更新為「已繳費完成」。',
     'dashboard.reg.failed.title': '繳費對帳異常',
-    'dashboard.reg.failed.desc': '很抱歉，在此紀錄中找不到符合的入帳資訊。請聯絡大會工作人員確認問題，或重新修改報名表。',
+    'dashboard.reg.failed.desc':
+      '很抱歉，在此紀錄中找不到符合的入帳資訊。請聯絡大會工作人員確認問題，或重新修改報名表。',
     'dashboard.reg.unlock.title': '報名繳費完成，已開放投稿功能！',
-    'dashboard.reg.unlock.desc': '您的報名與繳費已被大會確認。如您有論文發表的規劃，現在可前往「我的投稿」專區上傳您的摘要。',
+    'dashboard.reg.unlock.desc':
+      '您的報名與繳費已被大會確認。如您有論文發表的規劃，現在可前往「我的投稿」專區上傳您的摘要。',
     'dashboard.reg.btn.goSubmissions': '前往我的投稿',
     'dashboard.reg.locked.title': '報名資料已建立，等候繳費確認中',
-    'dashboard.reg.locked.desc': '您已成功建立報名資料。請注意：系統需等候大會確認您的款項無誤並將「繳費狀態」更新為「已繳費」後，您才能使用「我的投稿」專區上傳您的摘要或論文。',
+    'dashboard.reg.locked.desc':
+      '您已成功建立報名資料。請注意：系統需等候大會確認您的款項無誤並將「繳費狀態」更新為「已繳費」後，您才能使用「我的投稿」專區上傳您的摘要或論文。',
     'dashboard.reg.detail.title': '報名明細',
     'dashboard.reg.detail.confName': '大會名稱',
     'dashboard.reg.detail.confValue': '第44屆測量及空間資訊研討會',
@@ -209,16 +224,20 @@ const translations: Record<Language, Record<string, string>> = {
     'dashboard.reg.detail.last5': '匯款後五碼',
     'dashboard.reg.detail.role': '您的參與身份',
     'dashboard.reg.notReg.title': '您尚未報名本屆研討會',
-    'dashboard.reg.notReg.desc': '歡迎參加第44屆測量及空間資訊研討會！點擊下方按鈕前往報名專區，了解票種資訊並完成報名手續。',
+    'dashboard.reg.notReg.desc':
+      '歡迎參加第44屆測量及空間資訊研討會！點擊下方按鈕前往報名專區，了解票種資訊並完成報名手續。',
     'dashboard.reg.btn.goReg': '前往填寫報名表',
     'dashboard.reg.notice.pay.title': '匯款注意事項',
-    'dashboard.reg.notice.pay.desc': '系統強制要求您於報名表單內填寫匯款對帳資訊（帳戶末五碼與日期）以利對帳。若已匯款，請直接前往報名專區進行報名。',
+    'dashboard.reg.notice.pay.desc':
+      '系統強制要求您於報名表單內填寫匯款對帳資訊（帳戶末五碼與日期）以利對帳。若已匯款，請直接前往報名專區進行報名。',
     'dashboard.reg.notice.sub.title': '論文審查與投稿需知',
     'dashboard.reg.notice.sub.desc1': '「我的投稿」功能需在',
     'dashboard.reg.notice.sub.desc2': '完成報名手續',
-    'dashboard.reg.notice.sub.desc3': '後方得解鎖使用。如果您希望投稿摘要或論文，請先點擊上方按鈕完成表單。報名完成後，系統將自動為您開啟專區功能。',
+    'dashboard.reg.notice.sub.desc3':
+      '後方得解鎖使用。如果您希望投稿摘要或論文，請先點擊上方按鈕完成表單。報名完成後，系統將自動為您開啟專區功能。',
     'dashboard.sub.notPaid.title': '您的報名尚未通過繳費審核',
-    'dashboard.sub.notPaid.desc': '投稿摘要需要先完成大會報名並通過繳費確認。請先前往報名專區完成報名與繳費，待大會確認後即可開啟投稿功能。',
+    'dashboard.sub.notPaid.desc':
+      '投稿摘要需要先完成大會報名並通過繳費確認。請先前往報名專區完成報名與繳費，待大會確認後即可開啟投稿功能。',
     'dashboard.sub.notPaid.btn': '前往報名專區',
     'dashboard.sub.empty.title': '您尚未投稿任何摘要',
     'dashboard.sub.empty.desc': '歡迎投稿第44屆測量及空間資訊研討會！點擊下方按鈕前往投稿表單。',
@@ -240,7 +259,8 @@ const translations: Record<Language, Record<string, string>> = {
     'dashboard.sub.review.title': '審查結果',
     'dashboard.sub.review.noComment': '（無評語）',
     'dashboard.sub.award.title': '學生論文獎報名',
-    'dashboard.sub.award.desc': '您已報名學生論文獎競賽，大會將另行 Email 通知繳交全文的方式與截止日期，請留意信箱。',
+    'dashboard.sub.award.desc':
+      '您已報名學生論文獎競賽，大會將另行 Email 通知繳交全文的方式與截止日期，請留意信箱。',
     'dashboard.rev.title': '待審稿件',
     'dashboard.rev.count': '篇指派',
     'dashboard.rev.badge.pending': '待審',
@@ -262,7 +282,8 @@ const translations: Record<Language, Record<string, string>> = {
     'dashboard.rev.detail.form.decision.revision': '修改後通過 (Minor Revision)',
     'dashboard.rev.detail.form.decision.reject': '不通過 (Reject)',
     'dashboard.rev.detail.form.comments': '審閱評語 (Review Comments)',
-    'dashboard.rev.detail.form.comments.plh': '在此輸入對本篇投稿的具體評語與修正建議。若選擇「修改後通過」，請說明需要修改的部分；若選擇「未通過」，請說明原因。',
+    'dashboard.rev.detail.form.comments.plh':
+      '在此輸入對本篇投稿的具體評語與修正建議。若選擇「修改後通過」，請說明需要修改的部分；若選擇「未通過」，請說明原因。',
     'dashboard.rev.detail.form.saving': '儲存中...',
     'dashboard.rev.detail.form.save': '儲存審查結果',
     'dashboard.rev.detail.form.saveSuccess': '審查結果已成功儲存',
@@ -274,8 +295,10 @@ const translations: Record<Language, Record<string, string>> = {
     // Full Paper section
     'abstract.submit.step7': '7. 全文投稿 (Full Paper，選填)',
     'abstract.submit.fullPaper.label': '全文 PDF （Full Paper PDF）',
-    'abstract.submit.fullPaper.hint': '選填上傳。摘要送出後可隨時從「我的投稿」補上傳。支援格式：PDF，大小限弁20MB。',
-    'abstract.submit.fullPaper.award.alert': '⚠️ 您已勾選「報名學生論文獎」，此獎項需在截止日前上傳全文才有效參賽。您可在摘要送出後從「我的投稿」補上傳。',
+    'abstract.submit.fullPaper.hint':
+      '選填上傳。摘要送出後可隨時從「我的投稿」補上傳。支援格式：PDF，大小限弁20MB。',
+    'abstract.submit.fullPaper.award.alert':
+      '您已勾選「報名學生論文獎」，此獎項需在截止日前上傳全文才有效參賽。您可在摘要送出後從「我的投稿」補上傳。',
     'abstract.submit.fullPaper.award.deadline': '截止日：',
     'abstract.submit.fullPaper.change': '更換檔案',
     'abstract.submit.fullPaper.selected': '已選擇：',
@@ -286,7 +309,7 @@ const translations: Record<Language, Record<string, string>> = {
     'dashboard.sub.fullPaper.label': '全文投稿',
     'dashboard.sub.fullPaper.uploaded': '已上傳',
     'dashboard.sub.fullPaper.none': '尚未上傳全文（選填）',
-    'dashboard.sub.fullPaper.awardAlert': '上傳全文才能參加學生論文獎！',
+    'dashboard.sub.fullPaper.awardAlert': '報名學生論文獎需完成全文上傳',
     'dashboard.sub.fullPaper.upload': '上傳全文',
     'dashboard.sub.fullPaper.replace': '更換全文',
     'dashboard.sub.fullPaper.view': '檢視全文',
@@ -294,16 +317,18 @@ const translations: Record<Language, Record<string, string>> = {
     'dashboard.sub.fullPaper.uploadFail': '上傳失敗，請重試',
     'dashboard.notif.empty': '尚無新通知。',
     'dashboard.notif.regPaid.title': '報名繳費成功',
-    'dashboard.notif.regPaid.desc': '您的研討會報名與繳費已被大會確認，現在您可以自由使用「我的投稿」功能。',
+    'dashboard.notif.regPaid.desc':
+      '您的研討會報名與繳費已被大會確認，現在您可以自由使用「我的投稿」功能。',
     'dashboard.notif.regFailed.title': '繳費對帳異常',
-    'dashboard.notif.regFailed.desc': '我們無法核實您的繳費資訊，請前往「我的報名」查閱詳細資訊或聯絡大會。',
+    'dashboard.notif.regFailed.desc':
+      '我們無法核實您的繳費資訊，請前往「我的報名」查閱詳細資訊或聯絡大會。',
     'dashboard.notif.absAccept.title': '摘要審查通過',
     'dashboard.notif.absAccept.desc': '您的摘要「{title}」已通過大會審查！',
     'dashboard.notif.absRevision.title': '摘要需修改後通過',
     'dashboard.notif.absRevision.desc': '您的摘要「{title}」獲評為修改後通過，請依評語進行修正。',
     'dashboard.notif.absReject.title': '摘要未通過',
     'dashboard.notif.absReject.desc': '您的摘要「{title}」未通過本次審查，感謝您的投稿。',
-    'dashboard.notif.btn.view': '查看詳情'
+    'dashboard.notif.btn.view': '查看詳情',
   },
   en: {
     // Navbar sections
@@ -327,6 +352,11 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.about.contact': 'Contact Us',
     'nav.3s': '3S Maker',
     'nav.3s.rules': 'Competition Rules',
+    // Hero Info
+    'hero.info.name': 'Conference',
+    'hero.info.date': 'Date',
+    'hero.info.location': 'Location / Venue',
+    'hero.info.organizer': 'Host',
     // User area
     'auth.login': '     Login     ',
     'auth.loginRegister': 'Login / Register',
@@ -344,7 +374,8 @@ const translations: Record<Language, Record<string, string>> = {
     'login.noAccount': "Don't have an account?",
     'login.registerNow': 'Register Now',
     'login.error.default': 'Login failed, please check your credentials',
-    'login.error.credentials': 'Login failed, please make sure your email and password are correct.',
+    'login.error.credentials':
+      'Login failed, please make sure your email and password are correct.',
     // Register page
     'register.title': 'Create Member Account',
     'register.name': 'Full Name',
@@ -369,8 +400,10 @@ const translations: Record<Language, Record<string, string>> = {
     'register.haveAccount': 'Already have an account?',
     'register.login': 'Login',
     'register.success.title': 'Registration Successful!',
-    'register.success.msg': 'A verification email has been sent. Please check your inbox and click the link to activate your account.',
-    'register.error.exists': 'This email has already been registered. Please login or use forgot password.',
+    'register.success.msg':
+      'A verification email has been sent. Please check your inbox and click the link to activate your account.',
+    'register.error.exists':
+      'This email has already been registered. Please login or use forgot password.',
     'register.error.validation': 'Invalid data format, please check your input.',
     // General Validation
     'validation.required': 'This field is required',
@@ -379,7 +412,8 @@ const translations: Record<Language, Record<string, string>> = {
     // SG44 Register form
     'sg44.title': 'Registration System',
     'sg44.subtitle': 'Conference Registration',
-    'sg44.desc': 'Welcome to register for the 44th Surveying and Geoinformatics Conference. The conference will be held at National Chengchi University from 2026.08.20 ~ 2026.08.21.',
+    'sg44.desc':
+      'Welcome to register for the 44th Surveying and Geoinformatics Conference. The conference will be held at National Chengchi University from 2026.08.20 ~ 2026.08.21.',
     'sg44.payment.info': 'Payment Info',
     'sg44.payment.method': 'Payment Method',
     'sg44.payment.bank': 'Bank Transfer (E.SUN Bank 808)',
@@ -393,11 +427,14 @@ const translations: Record<Language, Record<string, string>> = {
     // Abstract Submit
     'abstract.submit.title': 'Abstract Submission System',
     'abstract.submit.subtitle': 'Abstract Submission',
-    'abstract.submit.desc': 'Welcome to the 44th Surveying and Geoinformatics Conference abstract submission. Please fill in author info, category, and abstract content in order.',
+    'abstract.submit.desc':
+      'Welcome to the 44th Surveying and Geoinformatics Conference abstract submission. Please fill in author info, category, and abstract content in order.',
     'abstract.submit.closed.title': 'Abstract Submission Closed',
-    'abstract.submit.closed.desc': 'The submission system is currently closed. Thank you for your interest.',
+    'abstract.submit.closed.desc':
+      'The submission system is currently closed. Thank you for your interest.',
     'abstract.submit.notRegistered.title': 'Registration Not Verified',
-    'abstract.submit.notRegistered.desc': 'Abstract submission requires conference registration and payment verification. Please register and pay first, then return to submit your abstract after verification.',
+    'abstract.submit.notRegistered.desc':
+      'Abstract submission requires conference registration and payment verification. Please register and pay first, then return to submit your abstract after verification.',
     'abstract.submit.notRegistered.btn': 'Go to Registration',
     'abstract.submit.step1': '1. Paper Title',
     'abstract.submit.step2': '2. Authors',
@@ -407,7 +444,8 @@ const translations: Record<Language, Record<string, string>> = {
     'abstract.submit.step6': '6. Abstract Content',
     'abstract.submit.title.label': 'Paper Title',
     'abstract.submit.title.placeholder': 'Enter paper title (Chinese or English)',
-    'abstract.submit.authors.hint': 'The first author is the corresponding author by default. Add others in order.',
+    'abstract.submit.authors.hint':
+      'The first author is the corresponding author by default. Add others in order.',
     'abstract.submit.author.label': 'Author',
     'abstract.submit.author.corresponding': 'Corresponding Author',
     'abstract.submit.author.name': 'Name',
@@ -423,19 +461,24 @@ const translations: Record<Language, Record<string, string>> = {
     'abstract.submit.pref.oral': 'Oral Presentation',
     'abstract.submit.pref.poster': 'Poster Presentation',
     'abstract.submit.pref.either': 'Either',
-    'abstract.submit.pref.hint': 'Final presentation format is decided by the committee; this preference is for reference only.',
+    'abstract.submit.pref.hint':
+      'Final presentation format is decided by the committee; this preference is for reference only.',
     'abstract.submit.student.label': 'I am a student',
     'abstract.submit.student.hint': 'Check this to apply for the Student Paper Award',
     'abstract.submit.studentAward.label': 'Apply for Student Paper Award',
-    'abstract.submit.studentAward.hint': 'Checking this indicates interest in the Student Paper Competition. You will be notified to submit the full paper after the abstract is accepted.',
+    'abstract.submit.studentAward.hint':
+      'Checking this indicates interest in the Student Paper Competition. You will be notified to submit the full paper after the abstract is accepted.',
     'abstract.submit.abstract.label': 'Abstract',
-    'abstract.submit.abstract.placeholder': 'Enter abstract (ZH/EN), suggested under 250 words, including purpose, methods, results, and conclusions...',
+    'abstract.submit.abstract.placeholder':
+      'Enter abstract (ZH/EN), suggested under 250 words, including purpose, methods, results, and conclusions...',
     'abstract.submit.keywords.label': 'Keywords',
-    'abstract.submit.keywords.placeholder': 'Comma-separated, at least 3 keywords, e.g., GNSS, GIS, Remote Sensing',
+    'abstract.submit.keywords.placeholder':
+      'Comma-separated, at least 3 keywords, e.g., GNSS, GIS, Remote Sensing',
     'abstract.submit.submit': 'Confirm and Submit',
     'abstract.submit.submitting': 'Submitting...',
     'abstract.submit.save': 'Confirm and Save Changes',
-    'abstract.submit.viewSubmissions': 'You can view submission status in "My Submissions" after sending.',
+    'abstract.submit.viewSubmissions':
+      'You can view submission status in "My Submissions" after sending.',
 
     // --- Dashboard & Review Queue ---
     'dashboard.sidebar.profile': 'Profile',
@@ -456,7 +499,8 @@ const translations: Record<Language, Record<string, string>> = {
     'abstract.session.land': 'Department of Land Administration',
     'abstract.session.park': 'National Parks',
     'dashboard.profile.title': 'Profile Management',
-    'dashboard.profile.desc': 'Please fill in your basic information and contact details accurately for conference notifications.',
+    'dashboard.profile.desc':
+      'Please fill in your basic information and contact details accurately for conference notifications.',
     'dashboard.profile.success': 'Profile updated successfully!',
     'dashboard.profile.fail': 'Update failed, please try again.',
     'dashboard.profile.name': 'Full Name',
@@ -485,44 +529,56 @@ const translations: Record<Language, Record<string, string>> = {
     'dashboard.reg.status.pending': 'Payment Under Review',
     'dashboard.reg.status.failed': 'Payment Failed / Re-upload Required',
     'dashboard.reg.pending.title': 'Waiting for Admin Verification',
-    'dashboard.reg.pending.desc1': 'Your registration data has been submitted! The administrative team will verify your payment record within 1-3 working days (Last 5 digits: ',
-    'dashboard.reg.pending.desc2': '). If verified, the status here will be updated to "Payment Completed".',
+    'dashboard.reg.pending.desc1':
+      'Your registration data has been submitted! The administrative team will verify your payment record within 1-3 working days (Last 5 digits: ',
+    'dashboard.reg.pending.desc2':
+      '). If verified, the status here will be updated to "Payment Completed".',
     'dashboard.reg.failed.title': 'Payment Verification Error',
-    'dashboard.reg.failed.desc': 'Sorry, we could not find matching payment information in the records. Please contact conference staff or modify your registration.',
-    'dashboard.reg.unlock.title': 'Registration and Payment Completed. Abstract submission is now open!',
-    'dashboard.reg.unlock.desc': 'Your registration and payment have been confirmed. To present a paper, please proceed to the "My Submissions" area to upload your abstract.',
+    'dashboard.reg.failed.desc':
+      'Sorry, we could not find matching payment information in the records. Please contact conference staff or modify your registration.',
+    'dashboard.reg.unlock.title':
+      'Registration and Payment Completed. Abstract submission is now open!',
+    'dashboard.reg.unlock.desc':
+      'Your registration and payment have been confirmed. To present a paper, please proceed to the "My Submissions" area to upload your abstract.',
     'dashboard.reg.btn.goSubmissions': 'Go to My Submissions',
     'dashboard.reg.locked.title': 'Registration Created, Awaiting Payment Confirmation',
-    'dashboard.reg.locked.desc': 'You have successfully created your registration data. Please note: You must wait for the conference to confirm your payment and update the "Payment Status" to "Paid" before you can use the "My Submissions" area.',
+    'dashboard.reg.locked.desc':
+      'You have successfully created your registration data. Please note: You must wait for the conference to confirm your payment and update the "Payment Status" to "Paid" before you can use the "My Submissions" area.',
     'dashboard.reg.detail.title': 'Registration Details',
     'dashboard.reg.detail.confName': 'Conference Name',
-    'dashboard.reg.detail.confValue': 'The 44th Surveying and Spatial Information Conference',
+    'dashboard.reg.detail.confValue': 'The 44th Conference on Surveying and Geomatics',
     'dashboard.reg.detail.time': 'Registration Time',
     'dashboard.reg.detail.ticket': 'Ticket Type',
     'dashboard.reg.detail.amount': 'Amount Payable',
     'dashboard.reg.detail.last5': 'Last 5 Digits',
     'dashboard.reg.detail.role': 'Participant Role',
     'dashboard.reg.notReg.title': 'You have not registered for this conference yet',
-    'dashboard.reg.notReg.desc': 'Welcome to the 44th Surveying and Spatial Information Conference! Click the button below to proceed to the registration area, learn about ticket options, and complete registration.',
+    'dashboard.reg.notReg.desc':
+      'Welcome to The 44th Conference on Surveying and Geomatics! Click the button below to proceed to the registration area, learn about ticket options, and complete registration.',
     'dashboard.reg.btn.goReg': 'Go to Registration Form',
     'dashboard.reg.notice.pay.title': 'Payment Notice',
-    'dashboard.reg.notice.pay.desc': 'The system requires you to fill in your payment verification information in the registration form for accounting purposes. If you have already transferred the payment, please proceed directly to the registration area to enroll.',
+    'dashboard.reg.notice.pay.desc':
+      'The system requires you to fill in your payment verification information in the registration form for accounting purposes. If you have already transferred the payment, please proceed directly to the registration area to enroll.',
     'dashboard.reg.notice.sub.title': 'Abstract Review and Submission Notice',
     'dashboard.reg.notice.sub.desc1': 'The "My Submissions" function will be unlocked after ',
     'dashboard.reg.notice.sub.desc2': 'completing registration',
-    'dashboard.reg.notice.sub.desc3': '. If you wish to submit an abstract or paper, please click the button above to complete the form first. After registration, the system will automatically enable the submission area for you.',
+    'dashboard.reg.notice.sub.desc3':
+      '. If you wish to submit an abstract or paper, please click the button above to complete the form first. After registration, the system will automatically enable the submission area for you.',
     'dashboard.sub.notPaid.title': 'Your registration payment is not yet verified',
-    'dashboard.sub.notPaid.desc': 'Abstract submission requires completing conference registration and passing payment verification first. Please proceed to the registration area to complete payment. Once confirmed, submission will be enabled.',
+    'dashboard.sub.notPaid.desc':
+      'Abstract submission requires completing conference registration and passing payment verification first. Please proceed to the registration area to complete payment. Once confirmed, submission will be enabled.',
     'dashboard.sub.notPaid.btn': 'Go to Registration Area',
     'dashboard.sub.empty.title': 'You have not submitted any abstracts',
-    'dashboard.sub.empty.desc': 'Welcome to submit to the 44th Surveying and Spatial Information Conference! Click the button below to go to the submission form.',
+    'dashboard.sub.empty.desc':
+      'Welcome to submit to The 44th Conference on Surveying and Geomatics! Click the button below to go to the submission form.',
     'dashboard.sub.btn.goSubmit': 'Go to Submission Form',
     'dashboard.sub.closed': 'Submission Closed',
     'dashboard.sub.title': 'My Submissions',
     'dashboard.sub.count': 'papers',
     'dashboard.sub.btn.add': 'Add Submission',
     'dashboard.sub.pub.title': 'Conference Review Results Published',
-    'dashboard.sub.pub.desc': 'You can check the review results and comments in your submissions below.',
+    'dashboard.sub.pub.desc':
+      'You can check the review results and comments in your submissions below.',
     'dashboard.sub.item.time': 'Submitted at: ',
     'dashboard.sub.item.btn.edit': 'Edit',
     'dashboard.sub.item.label.special': 'Special Session',
@@ -534,7 +590,8 @@ const translations: Record<Language, Record<string, string>> = {
     'dashboard.sub.review.title': 'Review Result',
     'dashboard.sub.review.noComment': '(No comments)',
     'dashboard.sub.award.title': 'Best Student Paper Award Registration',
-    'dashboard.sub.award.desc': 'You have registered for the Best Student Paper Award. The conference will send another Email regarding the full paper submission method and deadline. Please check your inbox.',
+    'dashboard.sub.award.desc':
+      'You have registered for the Best Student Paper Award. The conference will send another Email regarding the full paper submission method and deadline. Please check your inbox.',
     'dashboard.rev.title': 'Review Queue',
     'dashboard.rev.count': 'assigned',
     'dashboard.rev.badge.pending': 'Pending',
@@ -543,20 +600,23 @@ const translations: Record<Language, Record<string, string>> = {
     'dashboard.rev.detail.back': 'Review Queue List',
     'dashboard.rev.detail.prev': 'Previous',
     'dashboard.rev.detail.next': 'Next',
-    'dashboard.rev.detail.notFound': 'Abstract not found, or you do not have permission to review it.',
+    'dashboard.rev.detail.notFound':
+      'Abstract not found, or you do not have permission to review it.',
     'dashboard.rev.detail.backBtn': '← Back to List',
     'dashboard.rev.detail.corr': 'Corresponding:',
     'dashboard.rev.detail.abstract': 'Abstract',
     'dashboard.rev.detail.keywords': 'Keywords',
     'dashboard.rev.detail.form.title': 'Review Form',
-    'dashboard.rev.detail.form.locked': 'Review results are published; comments can no longer be modified.',
+    'dashboard.rev.detail.form.locked':
+      'Review results are published; comments can no longer be modified.',
     'dashboard.rev.detail.form.decision': 'Review Decision',
     'dashboard.rev.detail.form.decision.pending': 'Pending Decision',
     'dashboard.rev.detail.form.decision.accept': 'Accept',
     'dashboard.rev.detail.form.decision.revision': 'Minor Revision',
     'dashboard.rev.detail.form.decision.reject': 'Reject',
     'dashboard.rev.detail.form.comments': 'Review Comments',
-    'dashboard.rev.detail.form.comments.plh': 'Enter detailed comments and revision suggestions here. If selecting "Minor Revision", please explain what needs modifying; if "Reject", please explain the reason.',
+    'dashboard.rev.detail.form.comments.plh':
+      'Enter detailed comments and revision suggestions here. If selecting "Minor Revision", please explain what needs modifying; if "Reject", please explain the reason.',
     'dashboard.rev.detail.form.saving': 'Saving...',
     'dashboard.rev.detail.form.save': 'Save Review Decision',
     'dashboard.rev.detail.form.saveSuccess': 'Review decision saved successfully',
@@ -568,8 +628,10 @@ const translations: Record<Language, Record<string, string>> = {
     // Full Paper section
     'abstract.submit.step7': '7. Full Paper (Optional)',
     'abstract.submit.fullPaper.label': 'Full Paper PDF',
-    'abstract.submit.fullPaper.hint': 'Optional upload. You can also submit the full paper anytime from "My Submissions". PDF only, max 20MB.',
-    'abstract.submit.fullPaper.award.alert': '⚠️ You have selected the Student Paper Award. A full paper is required before the deadline to be eligible. You can upload it anytime from "My Submissions".',
+    'abstract.submit.fullPaper.hint':
+      'Optional upload. You can also submit the full paper anytime from "My Submissions". PDF only, max 20MB.',
+    'abstract.submit.fullPaper.award.alert':
+      'You have selected the Student Paper Award. A full paper is required before the deadline to be eligible. You can upload it anytime from "My Submissions".',
     'abstract.submit.fullPaper.award.deadline': 'Deadline: ',
     'abstract.submit.fullPaper.change': 'Change File',
     'abstract.submit.fullPaper.selected': 'Selected: ',
@@ -580,7 +642,8 @@ const translations: Record<Language, Record<string, string>> = {
     'dashboard.sub.fullPaper.label': 'Full Paper',
     'dashboard.sub.fullPaper.uploaded': 'Uploaded',
     'dashboard.sub.fullPaper.none': 'Not uploaded (optional)',
-    'dashboard.sub.fullPaper.awardAlert': 'A full paper is required to compete for the Student Paper Award!',
+    'dashboard.sub.fullPaper.awardAlert':
+      'Uploading the full paper is required for the Student Paper Award',
     'dashboard.sub.fullPaper.upload': 'Upload Full Paper',
     'dashboard.sub.fullPaper.replace': 'Replace Full Paper',
     'dashboard.sub.fullPaper.view': 'View Full Paper',
@@ -588,16 +651,20 @@ const translations: Record<Language, Record<string, string>> = {
     'dashboard.sub.fullPaper.uploadFail': 'Upload failed, please retry',
     'dashboard.notif.empty': 'No new notifications.',
     'dashboard.notif.regPaid.title': 'Payment Verified',
-    'dashboard.notif.regPaid.desc': 'Your conference registration and payment have been confirmed. Abstract submission is now unlocked.',
+    'dashboard.notif.regPaid.desc':
+      'Your conference registration and payment have been confirmed. Abstract submission is now unlocked.',
     'dashboard.notif.regFailed.title': 'Payment Verification Failed',
-    'dashboard.notif.regFailed.desc': 'We could not verify your payment. Please check "My Registrations" for details or contact us.',
+    'dashboard.notif.regFailed.desc':
+      'We could not verify your payment. Please check "My Registrations" for details or contact us.',
     'dashboard.notif.absAccept.title': 'Abstract Accepted',
     'dashboard.notif.absAccept.desc': 'Your abstract "{title}" has been accepted!',
     'dashboard.notif.absRevision.title': 'Abstract Accepted with Minor Revision',
-    'dashboard.notif.absRevision.desc': 'Your abstract "{title}" has been accepted with minor revisions required.',
+    'dashboard.notif.absRevision.desc':
+      'Your abstract "{title}" has been accepted with minor revisions required.',
     'dashboard.notif.absReject.title': 'Abstract Rejected',
-    'dashboard.notif.absReject.desc': 'Your abstract "{title}" was not accepted. Thank you for your submission.',
-    'dashboard.notif.btn.view': 'View Details'
+    'dashboard.notif.absReject.desc':
+      'Your abstract "{title}" was not accepted. Thank you for your submission.',
+    'dashboard.notif.btn.view': 'View Details',
   },
 }
 
@@ -615,9 +682,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <LanguageContext.Provider value={{ lang, setLang, t }}>
-      {children}
-    </LanguageContext.Provider>
+    <LanguageContext.Provider value={{ lang, setLang, t }}>{children}</LanguageContext.Provider>
   )
 }
 

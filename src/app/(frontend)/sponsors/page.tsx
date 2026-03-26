@@ -9,33 +9,23 @@ import { ExternalLink } from 'lucide-react'
 // 你可以隨時回來這裡新增或修改
 const SPONSOR_GROUPS = [
   {
-    title: '指導單位',
-    subtitle: 'Advisors',
-    items: [
-      {
-        name: '教育部',
-        logo: '/sponsors_logo/moe.png', // 記得去 public 放入對應圖片
-        url: 'https://www.edu.tw/',
-      },
-      {
-        name: '國家科學及技術委員會',
-        logo: '/sponsors_logo/nstc.png',
-        url: 'https://www.nstc.gov.tw/',
-      },
-    ],
-  },
-  {
     title: '主辦單位',
-    subtitle: 'Organizers',
+    subtitle: 'Organizer',
     items: [
       {
         name: '國立政治大學 地政學系',
         logo: '/sponsors_logo/nccu-land.png',
         url: 'https://land.nccu.edu.tw/',
       },
+    ],
+  },
+  {
+    title: '共同主辦單位',
+    subtitle: 'Co-organizers',
+    items: [
       {
         name: '國立政治大學 社會科學學院',
-        logo: '/sponsors_logo/nccu-css.png', // 假設的路徑
+        logo: '/sponsors_logo/nccu-css.png',
         url: 'https://css.nccu.edu.tw/',
       },
     ],
@@ -83,10 +73,7 @@ export default function SponsorsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* 頁面大標題 */}
           <div className="mb-16 text-center">
-            <SectionTitle
-              title="協辦與贊助單位"
-              subtitle="Sponsors & Partners"
-            />
+            <SectionTitle title="協辦與贊助單位" subtitle="Sponsors & Partners" />
             <p className="mt-4 text-stone-500 max-w-2xl mx-auto">
               感謝以下單位對 SG44 的熱情支持與協助，共同推動學術交流與發展。
             </p>
@@ -98,7 +85,9 @@ export default function SponsorsPage() {
               <section key={groupIndex} className="animate-fade-in-up">
                 {/* 分組標題 */}
                 <div className="flex items-end gap-3 mb-8 border-b border-stone-100 pb-4">
-                  <h2 className="text-2xl font-semibold tracking-wide text-stone-800">{group.title}</h2>
+                  <h2 className="text-2xl font-semibold tracking-wide text-stone-800">
+                    {group.title}
+                  </h2>
                   <span className="text-stone-400 font-serif italic text-lg">{group.subtitle}</span>
                 </div>
 
@@ -143,13 +132,15 @@ export default function SponsorsPage() {
 
           {/* 底部招商區塊 (Optional) */}
           <div className="mt-24 p-8 bg-stone-50 rounded-md border border-stone-100 text-center">
-            <h3 className="text-xl font-semibold tracking-wide text-stone-800 mb-2">有意成為贊助夥伴？</h3>
+            <h3 className="text-xl font-semibold tracking-wide text-stone-800 mb-2">
+              有意成為贊助夥伴？
+            </h3>
             <p className="text-stone-600 mb-6">歡迎聯絡我們洽談合作方案，共同參與這場學術盛會。</p>
             <Link
               href="/contact"
               className="inline-flex items-center px-6 py-3 bg-[#4d4c9d] text-white rounded-sm hover:bg-[#3a3977] transition-colors font-medium"
             >
-              聯絡大會籌備處
+              聯絡大會籌備會
             </Link>
           </div>
         </div>

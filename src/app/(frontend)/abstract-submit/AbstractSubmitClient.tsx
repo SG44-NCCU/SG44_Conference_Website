@@ -593,12 +593,12 @@ export default function AbstractSubmitClient() {
 
                     {/* Award warning banner */}
                     {applyStudentAward && (
-                      <div className="mb-5 p-4 border-l-4 border-amber-400 bg-amber-50">
-                        <p className="text-sm font-semibold text-amber-800">
+                      <div className="mb-5 p-4 border-l-[3px] border-[#4d4c9d] bg-stone-50">
+                        <p className="text-sm font-medium tracking-wide text-stone-800">
                           {t('abstract.submit.fullPaper.award.alert')}
                         </p>
                         {fullPaperDeadline && (
-                          <p className="text-xs text-amber-700 mt-1">
+                          <p className="text-xs text-stone-500 mt-1.5">
                             {t('abstract.submit.fullPaper.award.deadline')}{fullPaperDeadline}
                           </p>
                         )}
@@ -632,7 +632,7 @@ export default function AbstractSubmitClient() {
                       <button
                         type="button"
                         onClick={() => fullPaperInputRef.current?.click()}
-                        className="flex items-center gap-2 px-4 py-2 border border-[#4d4c9d] text-[#4d4c9d] text-sm hover:bg-stone-50 transition-colors"
+                        className="flex items-center gap-2 px-4 py-2 border border-stone-300 text-stone-600 hover:border-[#4d4c9d] hover:text-[#4d4c9d] hover:bg-stone-50 transition-colors text-sm font-medium"
                       >
                         <Upload size={15} />
                         {fullPaperFile

@@ -1,9 +1,11 @@
 'use client'
 import SectionTitle from '@/components/ui/SectionTitle'
 import { TIMELINE_DATA } from '@/lib/constants'
+import { useLanguage } from '@/contexts/LanguageContext'
 import React, { useEffect, useRef, useState, useCallback } from 'react'
 
 const TimelineSection: React.FC = () => {
+  const { lang, t } = useLanguage()
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const scrollbarRef = useRef<HTMLDivElement>(null)
 
@@ -234,7 +236,7 @@ const TimelineSection: React.FC = () => {
                         }`}
                       >
                         <h4 className="text-sm font-semibold tracking-wide text-stone-800 leading-tight">
-                          {formatTitle(event.title)}
+                          {lang === 'zh' ? formatTitle(event.title) : (event.titleEn || event.title)}
                         </h4>
                       </div>
                     </div>
@@ -318,7 +320,7 @@ const TimelineSection: React.FC = () => {
                           event.isPast ? 'text-stone-500 font-semibold tracking-wide' : 'text-stone-800'
                         }`}
                       >
-                        {formatTitle(event.title)}
+                        {lang === 'zh' ? formatTitle(event.title) : (event.titleEn || event.title)}
                       </h4>
                     </div>
                   </div>
