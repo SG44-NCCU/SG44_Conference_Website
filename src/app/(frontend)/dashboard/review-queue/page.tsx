@@ -6,18 +6,7 @@ import Link from 'next/link'
 import { Loader2, ArrowRight } from 'lucide-react'
 import { useLanguage } from '@/contexts/LanguageContext'
 
-const SUB_TOPIC_LABELS: Record<string, string> = {
-  'topic-1': '大地測量與導航技術',
-  'topic-2': '車載測繪與室內定位',
-  'topic-3': '無人載具與災害調查',
-  'topic-4': '攝影測量與測繪管理',
-  'topic-5': '智慧科技與跨域應用',
-  'topic-6': '數位城市與資訊服務',
-  'topic-7': '環境永續與韌性防災',
-  'topic-8': '衛星科技與海洋測繪',
-  'topic-9': '國土政策與規劃治理',
-  'topic-10': '跨國交流專題',
-}
+// ─── Types ────────────────────────────────────────────────────────────
 
 type AbstractDoc = {
   id: number
@@ -118,11 +107,6 @@ export default function ReviewQueuePage() {
           {abstracts.map((doc, idx) => {
             const statusLabel = REVIEW_STATUS_LABELS[doc.reviewStatus] ?? doc.reviewStatus
             const isDone = doc.reviewStatus !== 'pending'
-            const category = doc.specialSession
-              ? SPECIAL_SESSION_LABELS[doc.specialSession] ?? doc.specialSession
-              : doc.subTopic
-                ? SUB_TOPIC_LABELS[doc.subTopic] ?? doc.subTopic
-                : '—'
 
             return (
               <Link
@@ -140,7 +124,16 @@ export default function ReviewQueuePage() {
                   <p className="font-semibold tracking-wide text-stone-800 group-hover:text-[#4d4c9d] transition-colors leading-snug truncate">
                     {doc.title}
                   </p>
-                  <p className="text-xs text-stone-400 mt-0.5">{category}</p>
+                  <p className="text-xs text-stone-400 mt-0.5">
+                    {doc.specialSession
+                      ? SPECIAL_SESSION_LABELS[doc.specialSession] ?? doc.specialSession
+                      : doc.subTopic
+                        ? (() => {
+                            const topicId = doc.subTopic.split('-')[1]
+                            return `${t(`sub.topics.${topicId}.zh`)} (${t(`sub.topics.${topicId}.en`)})`
+                          })()
+                        : '—'}
+                  </p>
                 </div>
 
                 {/* 狀態 + 箭頭 */}

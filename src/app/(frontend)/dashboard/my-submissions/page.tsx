@@ -7,18 +7,6 @@ import { Loader2, Plus, Edit, ArrowRight, Upload, FileText, ExternalLink } from 
 import { useLanguage } from '@/contexts/LanguageContext'
 
 // ─── Label maps ────────────────────────────────────────────────────────────
-const SUB_TOPIC_LABELS: Record<string, string> = {
-  'topic-1': '大地測量與導航技術',
-  'topic-2': '車載測繪與室內定位',
-  'topic-3': '無人載具與災害調查',
-  'topic-4': '攝影測量與測繪管理',
-  'topic-5': '智慧科技與跨域應用',
-  'topic-6': '數位城市與資訊服務',
-  'topic-7': '環境永續與韌性防災',
-  'topic-8': '衛星科技與海洋測繪',
-  'topic-9': '國土政策與規劃治理',
-  'topic-10': '跨國交流專題',
-}
 
 type FullPaperDoc = {
   id: number
@@ -83,9 +71,13 @@ export default function MySubmissionsPage() {
     const fetchAll = async () => {
       try {
         const [abstractsRes, settingsRes, regRes] = await Promise.all([
-          fetch(`/api/abstracts?where[submitter][equals]=${user.id}&sort=-createdAt&limit=100&depth=1`),
+          fetch(
+            `/api/abstracts?where[submitter][equals]=${user.id}&sort=-createdAt&limit=100&depth=1`,
+          ),
           fetch('/api/globals/abstracts-settings'),
-          fetch(`/api/registrations?where[user][equals]=${user.id}&where[paymentStatus][equals]=paid&limit=1`),
+          fetch(
+            `/api/registrations?where[user][equals]=${user.id}&where[paymentStatus][equals]=paid&limit=1`,
+          ),
         ])
 
         if (abstractsRes.ok) {
@@ -101,8 +93,10 @@ export default function MySubmissionsPage() {
           if (settings?.fullPaperDeadline) {
             setFullPaperDeadline(
               new Date(settings.fullPaperDeadline).toLocaleDateString('zh-TW', {
-                year: 'numeric', month: '2-digit', day: '2-digit',
-              })
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+              }),
             )
           }
         }
@@ -151,10 +145,8 @@ export default function MySubmissionsPage() {
       // Update local state
       setAbstracts((prev) =>
         prev.map((a) =>
-          a.id === abstractId
-            ? { ...a, fullPaper: patchData?.doc?.fullPaper ?? null }
-            : a
-        )
+          a.id === abstractId ? { ...a, fullPaper: patchData?.doc?.fullPaper ?? null } : a,
+        ),
       )
     } catch (err) {
       setUploadError((prev) => ({
@@ -181,7 +173,9 @@ export default function MySubmissionsPage() {
       return (
         <div className="max-w-3xl mx-auto py-12">
           <div className="text-center border border-stone-200 p-12 space-y-5">
-            <h1 className="text-2xl font-semibold tracking-wide text-stone-800">{t('dashboard.sub.notPaid.title')}</h1>
+            <h1 className="text-2xl font-semibold tracking-wide text-stone-800">
+              {t('dashboard.sub.notPaid.title')}
+            </h1>
             <p className="text-stone-500 leading-relaxed max-w-md mx-auto">
               {t('dashboard.sub.notPaid.desc')}
             </p>
@@ -201,7 +195,9 @@ export default function MySubmissionsPage() {
     return (
       <div className="max-w-3xl mx-auto py-12">
         <div className="text-center mb-12 border-b border-stone-200 pb-12">
-          <h1 className="text-3xl font-semibold tracking-wide text-stone-800 mb-4">{t('dashboard.sub.empty.title')}</h1>
+          <h1 className="text-3xl font-semibold tracking-wide text-stone-800 mb-4">
+            {t('dashboard.sub.empty.title')}
+          </h1>
           <p className="text-stone-600 text-lg max-w-lg mx-auto leading-relaxed mb-8">
             {t('dashboard.sub.empty.desc')}
           </p>
@@ -243,8 +239,12 @@ export default function MySubmissionsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b-2 border-stone-800 pb-4 gap-4">
         <div className="flex items-center gap-4">
-          <h1 className="text-2xl font-semibold tracking-wide text-stone-800">{t('dashboard.sub.title')}</h1>
-          <span className="text-stone-400 text-sm">{abstracts.length} {t('dashboard.sub.count')}</span>
+          <h1 className="text-2xl font-semibold tracking-wide text-stone-800">
+            {t('dashboard.sub.title')}
+          </h1>
+          <span className="text-stone-400 text-sm">
+            {abstracts.length} {t('dashboard.sub.count')}
+          </span>
         </div>
         {submissionOpen ? (
           <Link
@@ -263,7 +263,9 @@ export default function MySubmissionsPage() {
       {/* 審查結果發布通知 */}
       {reviewPublished && (
         <div className="bg-stone-50 p-5 border border-stone-200 text-sm text-stone-700">
-          <p className="font-semibold tracking-wide text-stone-800 mb-1">{t('dashboard.sub.pub.title')}</p>
+          <p className="font-semibold tracking-wide text-stone-800 mb-1">
+            {t('dashboard.sub.pub.title')}
+          </p>
           <p>{t('dashboard.sub.pub.desc')}</p>
         </div>
       )}
@@ -283,7 +285,9 @@ export default function MySubmissionsPage() {
               {/* 標題列 */}
               <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 border-b border-stone-200 pb-5 mb-6">
                 <div className="flex-1 min-w-0">
-                  <h2 className="text-lg font-semibold tracking-wide text-stone-900 leading-snug">{doc.title}</h2>
+                  <h2 className="text-lg font-semibold tracking-wide text-stone-900 leading-snug">
+                    {doc.title}
+                  </h2>
                   <p className="text-stone-400 text-xs mt-1.5">
                     {t('dashboard.sub.item.time')}
                     {new Date(doc.createdAt).toLocaleString('zh-TW', {
@@ -335,14 +339,24 @@ export default function MySubmissionsPage() {
                     </p>
                   </div>
                 ) : doc.subTopic ? (
-                  <div className="flex flex-col gap-1">
-                    <p className="text-stone-500 text-xs font-semibold tracking-wide uppercase tracking-widest">
-                      {t('dashboard.sub.item.label.topic')}
-                    </p>
-                    <p className="font-medium text-stone-800 border-b border-stone-100 pb-2">
-                      {SUB_TOPIC_LABELS[doc.subTopic] ?? doc.subTopic}
-                    </p>
-                  </div>
+                  (() => {
+                    const topicId = doc.subTopic.split('-')[1]
+                    const zh = t(`sub.topics.${topicId}.zh`)
+                    const en = t(`sub.topics.${topicId}.en`)
+
+                    return (
+                      <div className="flex flex-col gap-1">
+                        <p className="text-stone-500 text-xs font-semibold tracking-wide uppercase tracking-widest">
+                          {t('dashboard.sub.item.label.topic')}
+                        </p>
+                        <div className="font-medium text-stone-800 border-b border-stone-100 pb-2">
+                          <p>
+                            {zh} ({en})
+                          </p>
+                        </div>
+                      </div>
+                    )
+                  })()
                 ) : null}
 
                 {doc.presentationPreference && (
@@ -363,7 +377,9 @@ export default function MySubmissionsPage() {
                       {t('dashboard.sub.item.label.student')}
                     </p>
                     <p className="font-medium text-stone-800 border-b border-stone-100 pb-2">
-                      {doc.applyStudentAward ? t('dashboard.sub.item.student.award') : t('dashboard.sub.item.student.normal')}
+                      {doc.applyStudentAward
+                        ? t('dashboard.sub.item.student.award')
+                        : t('dashboard.sub.item.student.normal')}
                     </p>
                   </div>
                 )}
@@ -384,7 +400,8 @@ export default function MySubmissionsPage() {
                       </p>
                       {fullPaperDeadline && (
                         <p className="text-xs text-stone-500 mt-1.5">
-                          {t('abstract.submit.fullPaper.award.deadline')}{fullPaperDeadline}
+                          {t('abstract.submit.fullPaper.award.deadline')}
+                          {fullPaperDeadline}
                         </p>
                       )}
                     </div>
@@ -420,16 +437,23 @@ export default function MySubmissionsPage() {
                         className="flex items-center gap-1.5 text-xs font-medium px-4 py-2 border border-stone-300 text-stone-600 hover:bg-stone-50 hover:border-[#4d4c9d] hover:text-[#4d4c9d] transition-colors disabled:opacity-50"
                       >
                         {isUploading ? (
-                          <><Loader2 size={13} className="animate-spin" /> {t('dashboard.sub.fullPaper.uploading')}</>
+                          <>
+                            <Loader2 size={13} className="animate-spin" />{' '}
+                            {t('dashboard.sub.fullPaper.uploading')}
+                          </>
                         ) : (
-                          <><Upload size={13} /> {t('dashboard.sub.fullPaper.replace')}</>
+                          <>
+                            <Upload size={13} /> {t('dashboard.sub.fullPaper.replace')}
+                          </>
                         )}
                       </button>
                     </div>
                   ) : (
                     /* 未上傳 */
                     <div className="flex flex-wrap items-center gap-3">
-                      <span className="text-sm text-stone-500">{t('dashboard.sub.fullPaper.none')}</span>
+                      <span className="text-sm text-stone-500">
+                        {t('dashboard.sub.fullPaper.none')}
+                      </span>
                       <button
                         type="button"
                         disabled={isUploading}
@@ -440,9 +464,14 @@ export default function MySubmissionsPage() {
                         className="flex items-center gap-1.5 text-sm font-medium px-4 py-2 border border-stone-300 text-stone-600 hover:bg-stone-50 hover:border-[#4d4c9d] hover:text-[#4d4c9d] transition-colors disabled:opacity-50"
                       >
                         {isUploading ? (
-                          <><Loader2 size={15} className="animate-spin" /> {t('dashboard.sub.fullPaper.uploading')}</>
+                          <>
+                            <Loader2 size={15} className="animate-spin" />{' '}
+                            {t('dashboard.sub.fullPaper.uploading')}
+                          </>
                         ) : (
-                          <><Upload size={15} /> {t('dashboard.sub.fullPaper.upload')}</>
+                          <>
+                            <Upload size={15} /> {t('dashboard.sub.fullPaper.upload')}
+                          </>
                         )}
                       </button>
                     </div>
@@ -464,9 +493,7 @@ export default function MySubmissionsPage() {
                     className="p-5 border-l-4"
                     style={{
                       borderLeftColor: isAccepted ? '#4d4c9d' : '#9ca3af',
-                      backgroundColor: isAccepted
-                        ? 'rgba(95,113,97,0.04)'
-                        : 'rgba(0,0,0,0.02)',
+                      backgroundColor: isAccepted ? 'rgba(95,113,97,0.04)' : 'rgba(0,0,0,0.02)',
                     }}
                   >
                     <p
@@ -481,19 +508,21 @@ export default function MySubmissionsPage() {
                       </p>
                     )}
                     {!doc.reviewComments && (
-                      <p className="text-sm text-stone-400">{t('dashboard.sub.review.noComment')}</p>
+                      <p className="text-sm text-stone-400">
+                        {t('dashboard.sub.review.noComment')}
+                      </p>
                     )}
                   </div>
 
                   {/* 學生論文獎 — 通過後才顯示 */}
-                  {isAccepted && doc.isStudent && doc.applyStudentAward && (
+                  {/* {isAccepted && doc.isStudent && doc.applyStudentAward && (
                     <div className="mt-3 p-4 bg-stone-50 border border-stone-200 text-sm text-stone-700">
                       <p className="font-semibold tracking-wide text-stone-800 mb-1">{t('dashboard.sub.award.title')}</p>
                       <p>
                         {t('dashboard.sub.award.desc')}
                       </p>
                     </div>
-                  )}
+                  )} */}
                 </div>
               )}
             </div>

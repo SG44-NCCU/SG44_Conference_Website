@@ -12,19 +12,7 @@ import {
 import Link from 'next/link'
 import { useLanguage } from '@/contexts/LanguageContext'
 
-// ─── Label maps ────────────────────────────────────────────────────────────
-const SUB_TOPIC_LABELS: Record<string, string> = {
-  'topic-1': '1. 大地測量與導航技術 (Geodetic Science and Navigation Techniques)',
-  'topic-2': '2. 車載測繪與室內定位 (Mobile Mapping System and Indoor Positioning Techniques)',
-  'topic-3': '3. 無人載具與災害調查 (Unmanned Vehicle Systems and Disaster Investigation)',
-  'topic-4': '4. 攝影測量與測繪管理 (Photogrammetry and Surveying Management)',
-  'topic-5': '5. 智慧科技與跨域應用 (Intelligent Techniques and Cross-Disciplinary Applications)',
-  'topic-6': '6. 數位城市與資訊服務 (Smart City and Geoinformation Services)',
-  'topic-7': '7. 環境永續與韌性防災 (Environmental Sustainability and Disaster Resilience)',
-  'topic-8': '8. 衛星科技與海洋測繪 (Satellite Technology and Marine Surveying)',
-  'topic-9': '9. 國土政策與規劃治理 (Land Policy and Planning Governance)',
-  'topic-10': '10. 跨國交流專題 (Cross-Cutting International Session)',
-}
+// ─── Types ────────────────────────────────────────────────────────────
 
 type Author = {
   id?: string
@@ -240,7 +228,12 @@ export default function ReviewDetailPage() {
           {doc.subTopic && (
             <div>
               <span className="text-stone-400 text-xs font-semibold tracking-wide uppercase tracking-widest mr-2">{t('dashboard.sub.item.label.topic')}</span>
-              <span className="text-stone-700">{SUB_TOPIC_LABELS[doc.subTopic] || doc.subTopic}</span>
+              <span className="text-stone-700">
+                {(() => {
+                  const topicId = doc.subTopic.split('-')[1]
+                  return `${t(`sub.topics.${topicId}.zh`)} (${t(`sub.topics.${topicId}.en`)})`
+                })()}
+              </span>
             </div>
           )}
           {doc.specialSession && (

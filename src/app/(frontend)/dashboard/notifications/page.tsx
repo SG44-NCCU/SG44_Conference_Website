@@ -129,10 +129,14 @@ export default function NotificationsPage() {
 
   return (
     <div className="max-w-4xl mx-auto space-y-8">
-      <div>
-        <h1 className="text-2xl font-semibold tracking-wide text-stone-800 mb-2 font-sans">
+      {/* Header */}
+      <div className="flex items-center gap-4 border-b-2 border-stone-800 pb-4">
+        <h1 className="text-2xl font-semibold tracking-wide text-stone-800">
           {t('dashboard.sidebar.notifications')}
         </h1>
+        <span className="text-stone-400 text-sm">
+          {notifications.length} {t('dashboard.notif.count')}
+        </span>
       </div>
 
       {notifications.length === 0 ? (
