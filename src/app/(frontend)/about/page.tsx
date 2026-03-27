@@ -1,24 +1,18 @@
-import React from 'react'
-import type { Metadata } from 'next'
+'use client'
 
-export const metadata: Metadata = {
-  title: '會議介紹 | SG44',
-  description:
-    '第 44 屆測量及空間資訊研討會會議介紹，主題「智測國土 × 韌啟未來」，由國立政治大學地政學系承辦，2026 年 8 月 20–21 日於臺北木柵政大校本部舉行。',
-}
+import React from 'react'
+import { useLanguage } from '@/contexts/LanguageContext'
+import SectionTitle from '@/components/ui/SectionTitle'
 
 export default function AboutPage() {
+  const { t } = useLanguage()
+
   return (
     <div className="min-h-screen bg-white pt-16">
       <main className="max-w-4xl mx-auto px-6 sm:px-10 py-20">
         {/* Title */}
-        <div className="text-center mb-16">
-          <p className="text-sm font-medium text-[#4d4c9d] tracking-widest uppercase mb-3">SG44</p>
-          <h1 className="text-3xl sm:text-4xl font-semibold tracking-wide text-stone-900 mb-4">
-            第 44 屆測量及空間資訊研討會
-          </h1>
-          <p className="text-lg text-stone-500 font-medium mt-2">── 智測國土 × 韌啟未來 ──</p>
-          <div className="mx-auto w-12 h-0.5 bg-[#4d4c9d] mt-6" />
+        <div className="mb-16">
+          <SectionTitle title={t('page.about.title')} subtitle={t('page.about.subtitle')} />
         </div>
 
         {/* Body */}

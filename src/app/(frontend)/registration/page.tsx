@@ -3,6 +3,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { useLanguage } from '@/contexts/LanguageContext'
+import SectionTitle from '@/components/ui/SectionTitle'
 
 const RegistrationPage = () => {
   const { lang, t } = useLanguage()
@@ -87,11 +88,8 @@ const RegistrationPage = () => {
     <div className="min-h-screen bg-white pt-16">
       <main className="max-w-5xl mx-auto px-6 sm:px-10 py-20">
         {/* Title Section */}
-        <div className="text-center mb-16">
-          <h1 className="text-3xl sm:text-4xl font-semibold tracking-wide text-stone-900 mb-4">
-            {lang === 'zh' ? '報名資訊' : 'Registration Information'}
-          </h1>
-          <div className="mx-auto w-12 h-0.5 bg-[#4d4c9d]" />
+        <div className="mb-16">
+          <SectionTitle title={t('page.registration.title')} subtitle={t('page.registration.subtitle')} />
         </div>
 
         {/* Body Content */}

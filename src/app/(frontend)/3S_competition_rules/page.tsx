@@ -1,23 +1,19 @@
+'use client'
+
 import React from 'react'
 import Link from 'next/link'
-import type { Metadata } from 'next'
-
-export const metadata: Metadata = {
-  title: '2026 年 3S 創客競賽細則 | SG44',
-  description:
-    '中華民國航空測量及遙感探測學會 2026 年 3S 創客競賽細則，包含參賽資格、報名方式、評審規則、獎勵方式與其他規定。',
-}
+import { useLanguage } from '@/contexts/LanguageContext'
+import SectionTitle from '@/components/ui/SectionTitle'
 
 export default function CompetitionRulesPage() {
+  const { t } = useLanguage()
+
   return (
     <div className="min-h-screen bg-white pt-16">
       <main className="max-w-5xl mx-auto px-6 sm:px-10 py-20">
         {/* Title */}
-        <div className="text-center mb-16">
-          <h1 className="text-3xl sm:text-4xl font-semibold tracking-wide text-stone-900 mb-4">
-            2026 年 3S 創客競賽細則
-          </h1>
-          <div className="mx-auto w-12 h-0.5 bg-[#4d4c9d]" />
+        <div className="mb-16">
+          <SectionTitle title={t('page.3s-rules.title')} subtitle={t('page.3s-rules.subtitle')} />
         </div>
 
         {/* Body */}

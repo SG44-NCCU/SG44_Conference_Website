@@ -371,7 +371,8 @@ const translations: Record<Language, Record<string, string>> = {
     'trans.mrt.wenhu.zoo.desc':
       '轉搭 羅斯福路幹線（原236）、236區、237、611、282、295、棕3、棕6、棕18、南環幹線、1503 至「政大站」下車。（上車站點：1號出口過馬路右方公車亭）',
     'trans.mrt.bannan.cityhall': '搭乘捷運板南線（藍線）至市政府站',
-    'trans.mrt.bannan.cityhall.desc': '轉搭 棕18、南環幹線 至「政大站」下車。（上車站點：市政府站3號出口）',
+    'trans.mrt.bannan.cityhall.desc':
+      '轉搭 棕18、南環幹線 至「政大站」下車。（上車站點：市政府站3號出口）',
     'trans.mrt.xinyi.101': '搭乘捷運信義淡水線（紅線）到台北101／世貿站',
     'trans.mrt.xinyi.101.desc':
       '轉搭 棕18、南環幹線 至「政大站」下車。（上車站點：台北101／世貿站5號出口）',
@@ -454,13 +455,16 @@ const translations: Record<Language, Record<string, string>> = {
     'sub.topics.10.en': 'Cross-Cutting International Session',
 
     'sub.studentAward.1.label': '資格',
-    'sub.studentAward.1.content': '限大專校院在學或應屆畢業生，參加者需為全文投稿論文之第一作者，並親自於指定場次口頭發表。',
+    'sub.studentAward.1.content':
+      '限大專校院在學或應屆畢業生，參加者需為全文投稿論文之第一作者，並親自於指定場次口頭發表。',
     'sub.studentAward.2.label': '稿件格式',
     'sub.studentAward.2.content': '須依本研討會之全文投稿格式撰寫，不符規定者不予納入評選。',
     'sub.studentAward.3.label': '評選',
-    'sub.studentAward.3.content': '本研討會技術委員會，將聘請專家學者組成評審小組，審核投稿論文內容（70%）與口頭發表完整度（30%）。',
+    'sub.studentAward.3.content':
+      '本研討會技術委員會，將聘請專家學者組成評審小組，審核投稿論文內容（70%）與口頭發表完整度（30%）。',
     'sub.studentAward.4.label': '名額',
-    'sub.studentAward.4.content': '由論文評審小組評選最佳論文，以 8 篇（含英文發表至少一名）為原則。',
+    'sub.studentAward.4.content':
+      '由論文評審小組評選最佳論文，以 8 篇（含英文發表至少一名）為原則。',
     'sub.studentAward.5.label': '獎勵方式',
     'sub.studentAward.5.content': '每位得獎者將獲頒獎狀及獎金。',
     'sub.studentAward.6.label': '頒獎',
@@ -477,20 +481,27 @@ const translations: Record<Language, Record<string, string>> = {
     'sub.posterAward.5.label': '頒獎',
     'sub.posterAward.5.content': '閉幕式宣佈評選結果並頒獎，獲獎人需親自現場領獎。',
 
-    'guide.rules.1': '所有投稿之第一作者，請於徵稿截止前（臺灣時間 6 月 29 日 23:59），完成註冊及投稿。',
+    'guide.rules.1':
+      '所有投稿之第一作者，請於徵稿截止前（臺灣時間 6 月 29 日 23:59），完成註冊及投稿。',
     'guide.rules.2': '相同第一作者最多得投稿三篇稿件，但僅可選擇其中一篇參與學生論文獎。',
-    'guide.rules.3': 'SG44 論文審查委員會保留拒絕稿件之權利，包含但不限於稿件並未以中文或英文撰寫、不符合徵稿主題或子題、未達研究品質標準等。',
-    'guide.rules.4': '論文發表形式（口頭、海報），將由 SG44 論文審查委員會確認。投稿審查結果（包含接受並以口頭發表、接受並以海報發表、不予發表），將於 7 月 10 日公告。',
+    'guide.rules.3':
+      'SG44 論文審查委員會保留拒絕稿件之權利，包含但不限於稿件並未以中文或英文撰寫、不符合徵稿主題或子題、未達研究品質標準等。',
+    'guide.rules.4':
+      '論文發表形式（口頭、海報），將由 SG44 論文審查委員會確認。投稿審查結果（包含接受並以口頭發表、接受並以海報發表、不予發表），將於 7 月 10 日公告。',
     'guide.rules.5': '若有未盡事宜或其他投稿相關問題，請洽詢大會信箱 sg44@nccu.edu.tw。',
 
     'guide.format.oral.abstract': '摘要',
     'guide.format.oral.abstract.desc': '至多 500 字，中文或英文。',
     'guide.format.oral.full': '全文',
-    'guide.format.oral.full.desc': '（學生論文獎） 包含中英文摘要，不限頁數，以中文或英文撰寫，Microsoft Word 格式，小於 25 MB。',
-    'guide.format.poster.desc.1': '海報板最大可容納直式「A0：84.1 cm（寬）× 118.9 cm（高）」海報，建議以直式 A0 版面輸出。',
-    'guide.format.poster.desc.2': '發表人應於 8/20（四）10:00 前，自行張貼海報至大會指定位置，大會服務台備有張貼工具。',
+    'guide.format.oral.full.desc':
+      '（學生論文獎） 包含中英文摘要，不限頁數，以中文或英文撰寫，Microsoft Word 格式，小於 25 MB。',
+    'guide.format.poster.desc.1':
+      '海報板最大可容納直式「A0：84.1 cm（寬）× 118.9 cm（高）」海報，建議以直式 A0 版面輸出。',
+    'guide.format.poster.desc.2':
+      '發表人應於 8/20（四）10:00 前，自行張貼海報至大會指定位置，大會服務台備有張貼工具。',
     'guide.format.poster.desc.3': '海報發表證明，大會將在指定發表時段頒發。',
-    'guide.format.poster.desc.4': '海報發表人應於 8/21（五）16:00 前完成海報撤收，其後海報將由主辦單位回收，發表人不得要求取回。',
+    'guide.format.poster.desc.4':
+      '海報發表人應於 8/21（五）16:00 前完成海報撤收，其後海報將由主辦單位回收，發表人不得要求取回。',
 
     // --- 3S Rules ---
     '3s.rules.1.title': '一、競賽目的',
@@ -505,16 +516,22 @@ const translations: Record<Language, Record<string, string>> = {
     '3s.rules.10.title': '十、其他規定',
     '3s.rules.btn.go': '前往 3S 創客報名',
 
-    '3s.rules.1.content': '由國立政治大學地政學系主辦之「2026年3S創客競賽」(以下簡稱本競賽)，旨在鼓勵大專校院學生結合理論與實務，運用 3S 技術（GNSS、GIS、RS）進行創新研發，提升跨領域整合與口頭表達能力。',
-    '3s.rules.2.content': '國內外大專校院在學學生（含研究生），以組為單位報名，每組 1 至 5 人，可跨系所、跨校組隊。每組需設指導老師 1 名。',
-    '3s.rules.3.content': '請於 2026 年 6 月 15 日前，至大會網站完成預約報名，並於 6 月 29 日前上傳競賽構想書（PDF格式，至多 10 頁）。',
+    '3s.rules.1.content':
+      '由國立政治大學地政學系主辦之「2026年3S創客競賽」(以下簡稱本競賽)，旨在鼓勵大專校院學生結合理論與實務，運用 3S 技術（GNSS、GIS、RS）進行創新研發，提升跨領域整合與口頭表達能力。',
+    '3s.rules.2.content':
+      '國內外大專校院在學學生（含研究生），以組為單位報名，每組 1 至 5 人，可跨系所、跨校組隊。每組需設指導老師 1 名。',
+    '3s.rules.3.content':
+      '請於 2026 年 6 月 15 日前，至大會網站完成預約報名，並於 6 月 29 日前上傳競賽構想書（PDF格式，至多 10 頁）。',
     '3s.rules.4.content': '競賽與 SG44 研討會同步於國立政治大學校本部舉行。',
-    '3s.rules.5.content': '報名截止：6/15；構想書上傳截止：6/29；決賽名額公告：7/10；決賽日期：8/20。',
+    '3s.rules.5.content':
+      '報名截止：6/15；構想書上傳截止：6/29；決賽名額公告：7/10；決賽日期：8/20。',
     '3s.rules.6.content': '聘請產資政學界專家學者擔任評審委員。',
     '3s.rules.7.content': '分兩階段：(1) 初賽：書面審查；(2) 決賽：現場口頭發表與作品 展示。',
     '3s.rules.8.content': '創新性 (30%)、技術實踐 (30%)、應用價值 (20%)、口頭發表 (20%)。',
-    '3s.rules.9.content': '冠軍：獎金 10,000 元及獎狀；亞軍：獎項 5,000 元及獎狀；季軍：獎項 3,000 元及獎狀；優選若干名。',
-    '3s.rules.10.content': '報名參賽即視為同意本競賽各項規定。主辦單位保留隨時修正、調整、暫停或終止本競賽之權利。',
+    '3s.rules.9.content':
+      '冠軍：獎金 10,000 元及獎狀；亞軍：獎項 5,000 元及獎狀；季軍：獎項 3,000 元及獎狀；優選若干名。',
+    '3s.rules.10.content':
+      '報名參賽即視為同意本競賽各項規定。主辦單位保留隨時修正、調整、暫停或終止本競賽之權利。',
 
     // --- About ---
     'about.motto': '── 智測國土 × 韌啟未來 ──',
@@ -546,7 +563,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Page Titles
     'page.news.title': '最新消息',
     'page.news.subtitle': 'News & Announcements',
-    'page.registration.title': 'Registration Info',
+    'page.registration.title': '報名資訊',
     'page.registration.subtitle': 'Registration Information',
     'page.submission.title': '投稿說明',
     'page.submission.subtitle': 'Submission Guide',
@@ -901,7 +918,8 @@ const translations: Record<Language, Record<string, string>> = {
     'trans.mrt.bannan.cityhall': 'Take Bannan Line (Blue Line) to Taipei City Hall Station',
     'trans.mrt.bannan.cityhall.desc':
       'Transfer to Brown 18 or South Loop Main Line to "NCCU Station". (Boarding point: Taipei City Hall Station Exit 3)',
-    'trans.mrt.xinyi.101': 'Take Xinyi Anping Line (Red Line) to Taipei 101/World Trade Center Station',
+    'trans.mrt.xinyi.101':
+      'Take Xinyi Anping Line (Red Line) to Taipei 101/World Trade Center Station',
     'trans.mrt.xinyi.101.desc':
       'Transfer to Brown 18 or South Loop Main Line to "NCCU Station". (Boarding point: Taipei 101/World Trade Center Station Exit 5)',
     'trans.car.title': 'III. Car',
@@ -956,7 +974,8 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.phone.label': 'Phone Number: ',
     'contact.phone.ext': 'Ext. 50641 (TA Hsiao)',
     'contact.org': 'Department of Land Economics, National Chengchi University',
-    'contact.addr': '6F, General Building, No. 64, Sec. 2, Zhinan Rd., Wenshan Dist., Taipei City 116011',
+    'contact.addr':
+      '6F, General Building, No. 64, Sec. 2, Zhinan Rd., Wenshan Dist., Taipei City 116011',
     'contact.person.1': 'Yang-Ru Li, PhD Student',
     'contact.person.2': 'Wen-Pin Hsiao, Administrative Specialist (Teaching Assistant)',
 
@@ -983,43 +1002,61 @@ const translations: Record<Language, Record<string, string>> = {
     'sub.topics.10.en': 'Cross-Cutting International Session',
 
     'sub.studentAward.1.label': 'Eligibility',
-    'sub.studentAward.1.content': 'Restricted to current students or fresh graduates of colleges and universities. The participant must be the first author of the full paper and must personally present orally at the designated session.',
+    'sub.studentAward.1.content':
+      'Restricted to current students or fresh graduates of colleges and universities. The participant must be the first author of the full paper and must personally present orally at the designated session.',
     'sub.studentAward.2.label': 'Manuscript Format',
-    'sub.studentAward.2.content': 'Must be written according to the full paper submission format of this conference. Those that do not comply will not be included in the selection.',
+    'sub.studentAward.2.content':
+      'Must be written according to the full paper submission format of this conference. Those that do not comply will not be included in the selection.',
     'sub.studentAward.3.label': 'Selection',
-    'sub.studentAward.3.content': 'The technical committee of this conference will invite experts and scholars to form a judging panel to review the content of the submitted papers (70%) and the completeness of the oral presentation (30%).',
+    'sub.studentAward.3.content':
+      'The technical committee of this conference will invite experts and scholars to form a judging panel to review the content of the submitted papers (70%) and the completeness of the oral presentation (30%).',
     'sub.studentAward.4.label': 'Quota',
-    'sub.studentAward.4.content': 'The best papers will be selected by the paper judging panel, in principle 8 papers (including at least one English presentation).',
+    'sub.studentAward.4.content':
+      'The best papers will be selected by the paper judging panel, in principle 8 papers (including at least one English presentation).',
     'sub.studentAward.5.label': 'Rewards',
     'sub.studentAward.5.content': 'Each winner will be awarded a certificate and a prize money.',
     'sub.studentAward.6.label': 'Award Ceremony',
-    'sub.studentAward.6.content': 'The selection results will be announced and prizes awarded at the closing ceremony. Winners must receive the prizes in person on site.',
+    'sub.studentAward.6.content':
+      'The selection results will be announced and prizes awarded at the closing ceremony. Winners must receive the prizes in person on site.',
 
     'sub.posterAward.1.label': 'Eligibility',
-    'sub.posterAward.1.content': 'One of the authors of the paper must personally attend the designated poster presentation period and participate in research discussions on-site.',
+    'sub.posterAward.1.content':
+      'One of the authors of the paper must personally attend the designated poster presentation period and participate in research discussions on-site.',
     'sub.posterAward.2.label': 'Selection',
-    'sub.posterAward.2.content': 'All guests and participants will vote. Each person can select up to 3 candidate posters.',
+    'sub.posterAward.2.content':
+      'All guests and participants will vote. Each person can select up to 3 candidate posters.',
     'sub.posterAward.3.label': 'Quota',
     'sub.posterAward.3.content': 'In principle, 3 posters.',
     'sub.posterAward.4.label': 'Rewards',
     'sub.posterAward.4.content': 'Each winner will be awarded a certificate and a prize money.',
     'sub.posterAward.5.label': 'Award Ceremony',
-    'sub.posterAward.5.content': 'The selection results will be announced and prizes awarded at the closing ceremony. Winners must receive the prizes in person on site.',
+    'sub.posterAward.5.content':
+      'The selection results will be announced and prizes awarded at the closing ceremony. Winners must receive the prizes in person on site.',
 
-    'guide.rules.1': 'All first authors of submitted papers must complete registration and submission before the submission deadline (June 29, 23:59 Taiwan time).',
-    'guide.rules.2': 'The same first author can submit at most three manuscripts, but can only choose one of them to participate in the Student Paper Award.',
-    'guide.rules.3': 'The SG44 Paper Review Committee reserves the right to reject manuscripts, including but not limited to manuscripts not written in Chinese or English, not conforming to the theme or sub-topics of the call for papers, or failing to meet research quality standards.',
-    'guide.rules.4': 'The form of paper presentation (oral, poster) will be confirmed by the SG44 Paper Review Committee. The results of the submission review (including acceptance for oral presentation, acceptance for poster presentation, and non-acceptance) will be announced on July 10.',
-    'guide.rules.5': 'If there are any outstanding matters or other questions related to submission, please contact the conference email sg44@nccu.edu.tw.',
+    'guide.rules.1':
+      'All first authors of submitted papers must complete registration and submission before the submission deadline (June 29, 23:59 Taiwan time).',
+    'guide.rules.2':
+      'The same first author can submit at most three manuscripts, but can only choose one of them to participate in the Student Paper Award.',
+    'guide.rules.3':
+      'The SG44 Paper Review Committee reserves the right to reject manuscripts, including but not limited to manuscripts not written in Chinese or English, not conforming to the theme or sub-topics of the call for papers, or failing to meet research quality standards.',
+    'guide.rules.4':
+      'The form of paper presentation (oral, poster) will be confirmed by the SG44 Paper Review Committee. The results of the submission review (including acceptance for oral presentation, acceptance for poster presentation, and non-acceptance) will be announced on July 10.',
+    'guide.rules.5':
+      'If there are any outstanding matters or other questions related to submission, please contact the conference email sg44@nccu.edu.tw.',
 
     'guide.format.oral.abstract': 'Abstract',
     'guide.format.oral.abstract.desc': 'Maximum 500 words, in Chinese or English.',
     'guide.format.oral.full': 'Full Paper',
-    'guide.format.oral.full.desc': '(Student Paper Award) Including Chinese and English abstracts, no limit on the number of pages, written in Chinese or English, Microsoft Word format, less than 25 MB.',
-    'guide.format.poster.desc.1': 'The poster board can accommodate a vertical "A0: 84.1 cm (W) × 118.9 cm (H)" poster. It is recommended to output in vertical A0 layout.',
-    'guide.format.poster.desc.2': 'Presenters should post their posters to the designated location by 10:00 on 8/20 (Thursday). Posting tools are available at the conference service desk.',
-    'guide.format.poster.desc.3': 'Poster presentation certificates will be issued by the conference during the designated presentation period.',
-    'guide.format.poster.desc.4': 'Poster presenters should complete the removal of posters by 16:00 on 8/21 (Friday). After that, the posters will be recycled by the organizer, and presenters cannot request to take them back.',
+    'guide.format.oral.full.desc':
+      '(Student Paper Award) Including Chinese and English abstracts, no limit on the number of pages, written in Chinese or English, Microsoft Word format, less than 25 MB.',
+    'guide.format.poster.desc.1':
+      'The poster board can accommodate a vertical "A0: 84.1 cm (W) × 118.9 cm (H)" poster. It is recommended to output in vertical A0 layout.',
+    'guide.format.poster.desc.2':
+      'Presenters should post their posters to the designated location by 10:00 on 8/20 (Thursday). Posting tools are available at the conference service desk.',
+    'guide.format.poster.desc.3':
+      'Poster presentation certificates will be issued by the conference during the designated presentation period.',
+    'guide.format.poster.desc.4':
+      'Poster presenters should complete the removal of posters by 16:00 on 8/21 (Friday). After that, the posters will be recycled by the organizer, and presenters cannot request to take them back.',
 
     // --- 3S Rules ---
     '3s.rules.1.title': 'I. Purpose',
@@ -1034,16 +1071,26 @@ const translations: Record<Language, Record<string, string>> = {
     '3s.rules.10.title': 'X. Other Provisions',
     '3s.rules.btn.go': 'Go to 3S Maker Registration',
 
-    '3s.rules.1.content': 'The "2026 3S Maker Competition" (hereinafter referred to as this competition), hosted by the Department of Land Economics, National Chengchi University, aims to encourage college students to combine theory and practice, use 3S technologies (GNSS, GIS, RS) for innovative research and development, and enhance cross-disciplinary integration and oral presentation skills.',
-    '3s.rules.2.content': 'Students (including graduate students) currently enrolled in domestic and foreign colleges and universities can register in groups of 1 to 5 people. Groups can cross departments and schools. Each group must have 1 advisor.',
-    '3s.rules.3.content': 'Please complete the reservation registration on the conference website before June 15, 2026, and upload the competition concept proposal (PDF format, maximum 10 pages) before June 29.',
-    '3s.rules.4.content': 'The competition will be held at the NCCU Main Campus concurrently with the SG44 conference.',
-    '3s.rules.5.content': 'Registration deadline: 6/15; Proposal upload deadline: 6/29; Finalist announcement: 7/10; Final date: 8/20.',
-    '3s.rules.6.content': 'Experts and scholars from industry, government, and academia are invited to serve as judges.',
-    '3s.rules.7.content': 'Two stages: (1) Preliminary: Document review; (2) Final: On-site oral presentation and work exhibition.',
-    '3s.rules.8.content': 'Innovation (30%), Technical Practice (30%), Application Value (20%), Oral Presentation (20%).',
-    '3s.rules.9.content': 'Champion: NT$10,000 and certificate; Runner-up: NT$5,000 and certificate; Third Place: NT$3,000 and certificate; Several Excellence Awards.',
-    '3s.rules.10.content': 'Registering for the competition is deemed as agreeing to the provisions of this competition. The organizer reserves the right to amend, adjust, suspend or terminate this competition at any time.',
+    '3s.rules.1.content':
+      'The "2026 3S Maker Competition" (hereinafter referred to as this competition), hosted by the Department of Land Economics, National Chengchi University, aims to encourage college students to combine theory and practice, use 3S technologies (GNSS, GIS, RS) for innovative research and development, and enhance cross-disciplinary integration and oral presentation skills.',
+    '3s.rules.2.content':
+      'Students (including graduate students) currently enrolled in domestic and foreign colleges and universities can register in groups of 1 to 5 people. Groups can cross departments and schools. Each group must have 1 advisor.',
+    '3s.rules.3.content':
+      'Please complete the reservation registration on the conference website before June 15, 2026, and upload the competition concept proposal (PDF format, maximum 10 pages) before June 29.',
+    '3s.rules.4.content':
+      'The competition will be held at the NCCU Main Campus concurrently with the SG44 conference.',
+    '3s.rules.5.content':
+      'Registration deadline: 6/15; Proposal upload deadline: 6/29; Finalist announcement: 7/10; Final date: 8/20.',
+    '3s.rules.6.content':
+      'Experts and scholars from industry, government, and academia are invited to serve as judges.',
+    '3s.rules.7.content':
+      'Two stages: (1) Preliminary: Document review; (2) Final: On-site oral presentation and work exhibition.',
+    '3s.rules.8.content':
+      'Innovation (30%), Technical Practice (30%), Application Value (20%), Oral Presentation (20%).',
+    '3s.rules.9.content':
+      'Champion: NT$10,000 and certificate; Runner-up: NT$5,000 and certificate; Third Place: NT$3,000 and certificate; Several Excellence Awards.',
+    '3s.rules.10.content':
+      'Registering for the competition is deemed as agreeing to the provisions of this competition. The organizer reserves the right to amend, adjust, suspend or terminate this competition at any time.',
 
     // --- About ---
     'about.motto': '── Smart Surveying × Resilient Future ──',
