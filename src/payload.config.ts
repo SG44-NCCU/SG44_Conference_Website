@@ -80,9 +80,10 @@ export default buildConfig({
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URI,
-      // 在生產環境中強制使用 SSL（rejectUnauthorized: false 適用於大部分代管資料庫服務）
-      ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
-      max: 10, // 限制連線池大小以避免耗盡資料庫資源
+      // Use DATABASE_SSL environment variable to control SSL. 
+      // Set to 'true' in Zeabur if your database provider requires SSL.
+      ssl: process.env.DATABASE_SSL === 'true' ? { rejectUnauthorized: false } : false,
+      max: 10, // Limit connections to avoid exhausting database resources
     },
   }),
   sharp,
