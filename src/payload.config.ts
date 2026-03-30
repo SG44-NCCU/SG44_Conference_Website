@@ -18,6 +18,14 @@ import { FullPapers } from './collections/FullPapers'
 // 2. 引入 Globals
 import { AbstractsSettings } from './globals/AbstractsSettings'
 
+if (!process.env.PAYLOAD_SECRET) {
+  throw new Error('PAYLOAD_SECRET is required')
+}
+
+if (!process.env.DATABASE_URI) {
+  throw new Error('DATABASE_URI is required')
+}
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -71,7 +79,10 @@ export default buildConfig({
   },
   db: postgresAdapter({
     pool: {
-      connectionString: process.env.DATABASE_URI || '',
+      connectionString: process.env.DATABASE_URI,
+      // 在生產環境中強制使用 SSL（rejectUnauthorized: false 適用於大部分代管資料庫服務）
+      ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+      max: 10, // 限制連線池大小以避免耗盡資料庫資源
     },
   }),
   sharp,

@@ -27,6 +27,8 @@ import { RegistrationDashboard as RegistrationDashboard_697486db6d1896280fd66b05
 import { ReviewStatusCell as ReviewStatusCell_e9f17f6ced1004fb7a07b9bda6fc5ceb } from '@/components/payload/ReviewStatusCell'
 import { AbstractReviewerCell as AbstractReviewerCell_956f07433ce6a89e8c9395285c82b706 } from '@/components/payload/AbstractReviewerCell'
 import { AbstractDashboard as AbstractDashboard_927960ba8aa1955645a5d4ab680f0149 } from '@/components/payload/AbstractDashboard'
+import { default as default_6f14b747d7d9d385f91171711bbf7132 } from '@/components/payload/Icon'
+import { default as default_e34c28bdc97e3fecf976b23b26d64cc9 } from '@/components/payload/Logo'
 
 export const importMap = {
   "@/components/payload/RoleSelectCell#RoleSelectCell": RoleSelectCell_6da8043352b16d707f40d660f8ae1ab2,
@@ -57,5 +59,7 @@ export const importMap = {
   "@/components/payload/RegistrationDashboard#RegistrationDashboard": RegistrationDashboard_697486db6d1896280fd66b056a0a3c2b,
   "@/components/payload/ReviewStatusCell#ReviewStatusCell": ReviewStatusCell_e9f17f6ced1004fb7a07b9bda6fc5ceb,
   "@/components/payload/AbstractReviewerCell#AbstractReviewerCell": AbstractReviewerCell_956f07433ce6a89e8c9395285c82b706,
-  "@/components/payload/AbstractDashboard#AbstractDashboard": AbstractDashboard_927960ba8aa1955645a5d4ab680f0149
+  "@/components/payload/AbstractDashboard#AbstractDashboard": AbstractDashboard_927960ba8aa1955645a5d4ab680f0149,
+  "@/components/payload/Icon#default": default_6f14b747d7d9d385f91171711bbf7132,
+  "@/components/payload/Logo#default": default_e34c28bdc97e3fecf976b23b26d64cc9
 }
