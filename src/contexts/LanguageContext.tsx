@@ -463,8 +463,7 @@ const translations: Record<Language, Record<string, string>> = {
     'sub.studentAward.3.content':
       '本研討會技術委員會，將聘請專家學者組成評審小組，審核投稿論文內容（70%）與口頭發表完整度（30%）。',
     'sub.studentAward.4.label': '名額',
-    'sub.studentAward.4.content':
-      '由論文評審小組評選最佳論文，以 8 篇（含英文發表至少一名）為原則。',
+    'sub.studentAward.4.content': '由論文評審小組評選最佳論文（含英文發表）。',
     'sub.studentAward.5.label': '獎勵方式',
     'sub.studentAward.5.content': '每位得獎者將獲頒獎狀及獎金。',
     'sub.studentAward.6.label': '頒獎',
@@ -473,7 +472,7 @@ const translations: Record<Language, Record<string, string>> = {
     'sub.posterAward.1.label': '資格',
     'sub.posterAward.1.content': '論文作者（擇一）需親自出席指定之海報發表時段，現場參與研究討論。',
     'sub.posterAward.2.label': '評選',
-    'sub.posterAward.2.content': '全體與會貴賓共同投票，每人至多圈選 3 篇候選海報。',
+    'sub.posterAward.2.content': '由評審小組評選最佳海報。',
     'sub.posterAward.3.label': '名額',
     'sub.posterAward.3.content': '以 3 篇為原則。',
     'sub.posterAward.4.label': '獎勵方式',
@@ -1012,7 +1011,7 @@ const translations: Record<Language, Record<string, string>> = {
       'The technical committee of this conference will invite experts and scholars to form a judging panel to review the content of the submitted papers (70%) and the completeness of the oral presentation (30%).',
     'sub.studentAward.4.label': 'Quota',
     'sub.studentAward.4.content':
-      'The best papers will be selected by the paper judging panel, in principle 8 papers (including at least one English presentation).',
+      'The best papers will be selected by the paper judging panel (including English presentation).',
     'sub.studentAward.5.label': 'Rewards',
     'sub.studentAward.5.content': 'Each winner will be awarded a certificate and a prize money.',
     'sub.studentAward.6.label': 'Award Ceremony',
@@ -1023,8 +1022,7 @@ const translations: Record<Language, Record<string, string>> = {
     'sub.posterAward.1.content':
       'One of the authors of the paper must personally attend the designated poster presentation period and participate in research discussions on-site.',
     'sub.posterAward.2.label': 'Selection',
-    'sub.posterAward.2.content':
-      'All guests and participants will vote. Each person can select up to 3 candidate posters.',
+    'sub.posterAward.2.content': 'The best posters will be selected by the judging panel.',
     'sub.posterAward.3.label': 'Quota',
     'sub.posterAward.3.content': 'In principle, 3 posters.',
     'sub.posterAward.4.label': 'Rewards',

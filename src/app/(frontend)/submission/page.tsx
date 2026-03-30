@@ -58,10 +58,6 @@ export default function SubmissionPage() {
       content: t('sub.posterAward.2.content'),
     },
     {
-      label: t('sub.posterAward.3.label'),
-      content: t('sub.posterAward.3.content'),
-    },
-    {
       label: t('sub.posterAward.4.label'),
       content: t('sub.posterAward.4.content'),
     },

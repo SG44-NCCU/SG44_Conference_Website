@@ -71,10 +71,6 @@ const RegistrationPage = () => {
       en: 'Participants of the Student Paper Award and Poster Competition must complete enrollment and payment by June 29, 2026.',
     },
     {
-      zh: '報名費用包含：研討會手冊、袋子、會議期間午餐、茶點、晚宴(現場報名不包含)。',
-      en: 'Registration fee includes: Conference proceedings, bag, lunches, refreshments, and banquet (Not included for on-site registration).',
-    },
-    {
       zh: '完成繳費後，若需辦理退費，請於2026年8月11日前提出申請，需扣除行政處理費500元。',
       en: 'Refund requests must be submitted by August 11, 2026. A NTD 500 administrative fee will be deducted.',
     },
