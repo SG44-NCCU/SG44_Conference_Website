@@ -13,31 +13,36 @@ export default function SG44RegisterPage() {
   const { t, lang } = useLanguage()
   const router = useRouter()
 
-  // --- 票種定義 (內部定義以支援語系) ---
+  const now = new Date()
+
   const TICKET_OPTIONS = [
     {
       id: 'early-bird-student',
       title: lang === 'zh' ? '早鳥報名 - 學生 (Student)' : 'Early Bird - Student',
       price: 1500,
       period: lang === 'zh' ? '2026.04.01 ~ 2026.06.15' : '2026.04.01 ~ 2026.06.15',
+      isActive: now < new Date('2026-06-16T00:00:00'),
     },
     {
       id: 'early-bird-regular',
       title: lang === 'zh' ? '早鳥報名 - 一般人士 (Regular)' : 'Early Bird - Regular',
       price: 2000,
       period: lang === 'zh' ? '2026.04.01 ~ 2026.06.15' : '2026.04.01 ~ 2026.06.15',
+      isActive: now < new Date('2026-06-16T00:00:00'),
     },
     {
       id: 'standard-student',
       title: lang === 'zh' ? '一般報名 - 學生 (Student)' : 'Standard - Student',
       price: 2200,
-      period: lang === 'zh' ? '2026.06.16 起' : 'From 2026.06.16',
+      period: lang === 'zh' ? '2026.06.16 ~ 2026.08.11' : '2026.06.16 ~ 2026.08.11',
+      isActive: now >= new Date('2026-06-16T00:00:00') && now < new Date('2026-08-12T00:00:00'),
     },
     {
       id: 'standard-regular',
       title: lang === 'zh' ? '一般報名 - 一般人士 (Regular)' : 'Standard - Regular',
       price: 2700,
-      period: lang === 'zh' ? '2026.06.16 起' : 'From 2026.06.16',
+      period: lang === 'zh' ? '2026.06.16 ~ 2026.08.11' : '2026.06.16 ~ 2026.08.11',
+      isActive: now >= new Date('2026-06-16T00:00:00') && now < new Date('2026-08-12T00:00:00'),
     },
   ]
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -144,14 +149,38 @@ export default function SG44RegisterPage() {
         participantRoleOther: data.participantRole === 'other' ? data.participantRoleOther : null,
         needsCertification: data.needsCertification,
         certificationType: data.needsCertification === 'yes' ? data.certificationType : null,
-        certName: data.needsCertification === 'yes' && data.certificationType === 'civilServant' ? data.certName : null,
-        certIdNumber: data.needsCertification === 'yes' && data.certificationType === 'civilServant' ? data.certIdNumber : null,
-        certDob: data.needsCertification === 'yes' && data.certificationType === 'civilServant' ? data.certDob : null,
-        certOrganization: data.needsCertification === 'yes' && data.certificationType === 'civilServant' ? data.certOrganization : null,
-        certPhone: data.needsCertification === 'yes' && data.certificationType === 'civilServant' ? data.certPhone : null,
-        techName: data.needsCertification === 'yes' && data.certificationType === 'technician' ? data.techName : null,
-        techIdNumber: data.needsCertification === 'yes' && data.certificationType === 'technician' ? data.techIdNumber : null,
-        techSpecialty: data.needsCertification === 'yes' && data.certificationType === 'technician' ? data.techSpecialty : null,
+        certName:
+          data.needsCertification === 'yes' && data.certificationType === 'civilServant'
+            ? data.certName
+            : null,
+        certIdNumber:
+          data.needsCertification === 'yes' && data.certificationType === 'civilServant'
+            ? data.certIdNumber
+            : null,
+        certDob:
+          data.needsCertification === 'yes' && data.certificationType === 'civilServant'
+            ? data.certDob
+            : null,
+        certOrganization:
+          data.needsCertification === 'yes' && data.certificationType === 'civilServant'
+            ? data.certOrganization
+            : null,
+        certPhone:
+          data.needsCertification === 'yes' && data.certificationType === 'civilServant'
+            ? data.certPhone
+            : null,
+        techName:
+          data.needsCertification === 'yes' && data.certificationType === 'technician'
+            ? data.techName
+            : null,
+        techIdNumber:
+          data.needsCertification === 'yes' && data.certificationType === 'technician'
+            ? data.techIdNumber
+            : null,
+        techSpecialty:
+          data.needsCertification === 'yes' && data.certificationType === 'technician'
+            ? data.techSpecialty
+            : null,
       }
 
       // 只有在「建立」時才需要帶入 user，更新時帶入 user 反而會因為 Registrations 內對 user 欄位的 update access 限制 (只有 admin 可改) 而造成一般使用者 403 報錯
@@ -172,7 +201,11 @@ export default function SG44RegisterPage() {
 
       if (!res.ok) {
         let msg = result.errors?.[0]?.message || '報名送出失敗。'
-        if (msg.toLowerCase().includes('already exists') || msg.toLowerCase().includes('validation') || msg.toLowerCase().includes('exist')) {
+        if (
+          msg.toLowerCase().includes('already exists') ||
+          msg.toLowerCase().includes('validation') ||
+          msg.toLowerCase().includes('exist')
+        ) {
           msg = '部分資料格式驗證失敗或您已報名過，請檢查輸入內容。'
         }
         throw new Error(msg)
@@ -203,9 +236,7 @@ export default function SG44RegisterPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-16 text-center">
             <SectionTitle title={t('sg44.title')} subtitle={t('sg44.subtitle')} />
-            <p className="mt-4 text-stone-600 max-w-2xl mx-auto text-lg">
-              {t('sg44.desc')}
-            </p>
+            <p className="mt-4 text-stone-600 max-w-2xl mx-auto text-lg">{t('sg44.desc')}</p>
           </div>
 
           {error && (
@@ -250,7 +281,11 @@ export default function SG44RegisterPage() {
                 {TICKET_OPTIONS.map((ticket) => (
                   <label
                     key={ticket.id}
-                    className={`flex items-center justify-between p-4 border cursor-pointer hover:bg-stone-50 transition-colors ${
+                    className={`flex items-center justify-between p-4 border transition-colors ${
+                      !ticket.isActive
+                        ? 'opacity-50 bg-stone-100 cursor-not-allowed'
+                        : 'cursor-pointer hover:bg-stone-50'
+                    } ${
                       watchTicketType === ticket.id
                         ? 'border-[#4d4c9d] bg-stone-50'
                         : 'border-stone-200'
@@ -261,10 +296,14 @@ export default function SG44RegisterPage() {
                         type="radio"
                         {...register('ticketType', { required: '請選取您要報名的票種' })}
                         value={ticket.id}
-                        className="w-4 h-4 accent-[#4d4c9d]"
+                        disabled={!ticket.isActive}
+                        className="w-4 h-4 accent-[#4d4c9d] disabled:opacity-50"
                       />
                       <div>
-                        <span className="block font-medium text-stone-800">{ticket.title}</span>
+                        <span className="block font-medium text-stone-800">
+                          {ticket.title}
+                          {!ticket.isActive}
+                        </span>
                         <span className="text-sm text-stone-500">報名期間：{ticket.period}</span>
                       </div>
                     </div>
@@ -621,7 +660,8 @@ export default function SG44RegisterPage() {
               <div className="flex flex-col gap-6">
                 <div>
                   <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">
-                    是否需要認證 (Do you need certification?) <span className="text-red-500">*</span>
+                    是否需要認證 (Do you need certification?){' '}
+                    <span className="text-red-500">*</span>
                   </label>
                   <div className="flex gap-4">
                     <label className="flex items-center gap-2 cursor-pointer text-sm hover:text-stone-900 text-stone-700">
@@ -644,7 +684,9 @@ export default function SG44RegisterPage() {
                     </label>
                   </div>
                   {errors.needsCertification && (
-                    <p className="text-red-600 text-sm mt-2">{errors.needsCertification.message as string}</p>
+                    <p className="text-red-600 text-sm mt-2">
+                      {errors.needsCertification.message as string}
+                    </p>
                   )}
                 </div>
 
@@ -674,57 +716,146 @@ export default function SG44RegisterPage() {
                       </label>
                     </div>
                     {errors.certificationType && (
-                      <p className="text-red-600 text-sm mt-2">{errors.certificationType.message as string}</p>
+                      <p className="text-red-600 text-sm mt-2">
+                        {errors.certificationType.message as string}
+                      </p>
                     )}
 
                     {watchCertificationType === 'civilServant' && (
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-stone-50 p-6 border border-stone-200">
-                        <h4 className="col-span-full font-semibold text-stone-800 mb-2">公務人員時數認證資料填寫</h4>
+                        <h4 className="col-span-full font-semibold text-stone-800 mb-2">
+                          公務人員時數認證資料填寫
+                        </h4>
                         <div>
-                          <label className="block text-sm text-stone-600 mb-1">姓名 <span className="text-red-500">*</span></label>
-                          <input type="text" {...register('certName', { required: '請填寫姓名' })} className="w-full px-4 py-2 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none rounded-none text-sm transition-colors" />
-                          {errors.certName && <p className="text-red-600 text-sm mt-1">{errors.certName.message as string}</p>}
+                          <label className="block text-sm text-stone-600 mb-1">
+                            姓名 <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            {...register('certName', { required: '請填寫姓名' })}
+                            className="w-full px-4 py-2 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none rounded-none text-sm transition-colors"
+                          />
+                          {errors.certName && (
+                            <p className="text-red-600 text-sm mt-1">
+                              {errors.certName.message as string}
+                            </p>
+                          )}
                         </div>
                         <div>
-                          <label className="block text-sm text-stone-600 mb-1">身分證字號 <span className="text-red-500">*</span></label>
-                          <input type="text" {...register('certIdNumber', { required: '請填寫身分證字號' })} className="w-full px-4 py-2 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none rounded-none text-sm transition-colors" />
-                          {errors.certIdNumber && <p className="text-red-600 text-sm mt-1">{errors.certIdNumber.message as string}</p>}
+                          <label className="block text-sm text-stone-600 mb-1">
+                            身分證字號 <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            {...register('certIdNumber', { required: '請填寫身分證字號' })}
+                            className="w-full px-4 py-2 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none rounded-none text-sm transition-colors"
+                          />
+                          {errors.certIdNumber && (
+                            <p className="text-red-600 text-sm mt-1">
+                              {errors.certIdNumber.message as string}
+                            </p>
+                          )}
                         </div>
                         <div>
-                          <label className="block text-sm text-stone-600 mb-1">出生年月日 <span className="text-red-500">*</span></label>
-                          <input type="date" {...register('certDob', { required: '請選擇出生年月日' })} className="w-full px-4 py-2 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none rounded-none text-sm transition-colors cursor-text" />
-                          {errors.certDob && <p className="text-red-600 text-sm mt-1">{errors.certDob.message as string}</p>}
+                          <label className="block text-sm text-stone-600 mb-1">
+                            出生年月日 <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="date"
+                            {...register('certDob', { required: '請選擇出生年月日' })}
+                            className="w-full px-4 py-2 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none rounded-none text-sm transition-colors cursor-text"
+                          />
+                          {errors.certDob && (
+                            <p className="text-red-600 text-sm mt-1">
+                              {errors.certDob.message as string}
+                            </p>
+                          )}
                         </div>
                         <div>
-                          <label className="block text-sm text-stone-600 mb-1">服務單位 <span className="text-red-500">*</span></label>
-                          <input type="text" {...register('certOrganization', { required: '請填寫服務單位' })} className="w-full px-4 py-2 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none rounded-none text-sm transition-colors" />
-                          {errors.certOrganization && <p className="text-red-600 text-sm mt-1">{errors.certOrganization.message as string}</p>}
+                          <label className="block text-sm text-stone-600 mb-1">
+                            服務單位 <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            {...register('certOrganization', { required: '請填寫服務單位' })}
+                            className="w-full px-4 py-2 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none rounded-none text-sm transition-colors"
+                          />
+                          {errors.certOrganization && (
+                            <p className="text-red-600 text-sm mt-1">
+                              {errors.certOrganization.message as string}
+                            </p>
+                          )}
                         </div>
                         <div>
-                          <label className="block text-sm text-stone-600 mb-1">聯絡電話 <span className="text-red-500">*</span></label>
-                          <input type="text" {...register('certPhone', { required: '請填寫聯絡電話' })} className="w-full px-4 py-2 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none rounded-none text-sm transition-colors" />
-                          {errors.certPhone && <p className="text-red-600 text-sm mt-1">{errors.certPhone.message as string}</p>}
+                          <label className="block text-sm text-stone-600 mb-1">
+                            聯絡電話 <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            {...register('certPhone', { required: '請填寫聯絡電話' })}
+                            className="w-full px-4 py-2 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none rounded-none text-sm transition-colors"
+                          />
+                          {errors.certPhone && (
+                            <p className="text-red-600 text-sm mt-1">
+                              {errors.certPhone.message as string}
+                            </p>
+                          )}
                         </div>
                       </div>
                     )}
 
                     {watchCertificationType === 'technician' && (
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-stone-50 p-6 border border-stone-200">
-                        <h4 className="col-span-full font-semibold text-stone-800 mb-2">技師訓練積分資料填寫</h4>
+                        <h4 className="col-span-full font-semibold text-stone-800 mb-2">
+                          技師訓練積分資料填寫
+                        </h4>
                         <div>
-                          <label className="block text-sm text-stone-600 mb-1">姓名 <span className="text-red-500">*</span></label>
-                          <input type="text" {...register('techName', { required: '請填寫姓名' })} className="w-full px-4 py-2 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none rounded-none text-sm transition-colors" />
-                          {errors.techName && <p className="text-red-600 text-sm mt-1">{errors.techName.message as string}</p>}
+                          <label className="block text-sm text-stone-600 mb-1">
+                            姓名 <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            {...register('techName', { required: '請填寫姓名' })}
+                            className="w-full px-4 py-2 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none rounded-none text-sm transition-colors"
+                          />
+                          {errors.techName && (
+                            <p className="text-red-600 text-sm mt-1">
+                              {errors.techName.message as string}
+                            </p>
+                          )}
                         </div>
                         <div>
-                          <label className="block text-sm text-stone-600 mb-1">身分證字號 <span className="text-red-500">*</span></label>
-                          <input type="text" {...register('techIdNumber', { required: '請填寫身分證字號' })} className="w-full px-4 py-2 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none rounded-none text-sm transition-colors" />
-                          {errors.techIdNumber && <p className="text-red-600 text-sm mt-1">{errors.techIdNumber.message as string}</p>}
+                          <label className="block text-sm text-stone-600 mb-1">
+                            身分證字號 <span className="text-red-500">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            {...register('techIdNumber', { required: '請填寫身分證字號' })}
+                            className="w-full px-4 py-2 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none rounded-none text-sm transition-colors"
+                          />
+                          {errors.techIdNumber && (
+                            <p className="text-red-600 text-sm mt-1">
+                              {errors.techIdNumber.message as string}
+                            </p>
+                          )}
                         </div>
                         <div>
-                          <label className="block text-sm text-stone-600 mb-1">科別 <span className="text-red-500">*</span> <span className="text-xs text-stone-400 font-normal">(例如: 土木工程)</span></label>
-                          <input type="text" {...register('techSpecialty', { required: '請填寫科別' })} className="w-full px-4 py-2 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none rounded-none text-sm transition-colors" />
-                          {errors.techSpecialty && <p className="text-red-600 text-sm mt-1">{errors.techSpecialty.message as string}</p>}
+                          <label className="block text-sm text-stone-600 mb-1">
+                            科別 <span className="text-red-500">*</span>{' '}
+                            <span className="text-xs text-stone-400 font-normal">
+                              (例如: 土木工程)
+                            </span>
+                          </label>
+                          <input
+                            type="text"
+                            {...register('techSpecialty', { required: '請填寫科別' })}
+                            className="w-full px-4 py-2 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none rounded-none text-sm transition-colors"
+                          />
+                          {errors.techSpecialty && (
+                            <p className="text-red-600 text-sm mt-1">
+                              {errors.techSpecialty.message as string}
+                            </p>
+                          )}
                         </div>
                       </div>
                     )}

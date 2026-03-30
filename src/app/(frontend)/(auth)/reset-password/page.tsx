@@ -3,10 +3,11 @@
 import React, { useState, Suspense } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter, useSearchParams } from 'next/navigation'
-import Link from 'next/link'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 function ResetPasswordContent() {
   const router = useRouter()
+  const { t } = useLanguage()
   const searchParams = useSearchParams()
   const token = searchParams.get('token')
 
@@ -23,7 +24,7 @@ function ResetPasswordContent() {
 
   const onSubmit = async (data: any) => {
     if (!token) {
-      setError('無效的重設連結 (缺少 Token)')
+      setError(t('reset.error.noToken'))
       return
     }
 
@@ -39,9 +40,22 @@ function ResetPasswordContent() {
 
       if (!res.ok) {
         const json = await res.json()
-        let msg = json.errors?.[0]?.message || '重設失敗，連結可能已過期'
-        if (msg.toLowerCase().includes('token') || msg.toLowerCase().includes('expired') || msg.toLowerCase().includes('invalid')) {
-          msg = '無效的驗證碼或重設連結已過期，請重新發送忘記密碼信件。'
+        const msgOrigin = json.errors?.[0]?.message || ''
+        const lowerMsg = msgOrigin.toLowerCase()
+        let msg = t('reset.error.token')
+        
+        if (
+          lowerMsg.includes('token') ||
+          lowerMsg.includes('expired') ||
+          lowerMsg.includes('invalid')
+        ) {
+          msg = t('reset.error.token')
+        } else if (
+          lowerMsg.includes('password') ||
+          lowerMsg.includes('short') ||
+          lowerMsg.includes('length')
+        ) {
+          msg = t('validation.passwordLength')
         }
         throw new Error(msg)
       }
@@ -55,26 +69,24 @@ function ResetPasswordContent() {
   }
 
   if (!token) {
-    return <div className="text-center text-red-600">錯誤：此頁面需要透過 Email 中的連結進入。</div>
+    return <div className="text-center text-red-600 p-8">{t('reset.error.noToken')}</div>
   }
 
   if (success) {
     return (
       <div className="text-center">
-        <h3 className="text-2xl font-semibold tracking-wide text-primary mb-4 tracking-tight">密碼重設成功！</h3>
-        <p className="text-stone-600 mb-6">
-          您現在可以使用新密碼登入了。
-          <br />
-          正在為您跳轉至登入頁面...
-        </p>
+        <h3 className="text-2xl font-semibold tracking-wide text-[#4d4c9d] mb-4 tracking-tight">
+          {t('reset.success.title')}
+        </h3>
+        <p className="text-stone-600 mb-6 leading-relaxed">{t('reset.success.msg')}</p>
       </div>
     )
   }
 
   return (
     <div>
-      <h3 className="text-2xl font-semibold tracking-wide text-primary mb-6 text-center tracking-tight">
-        重設密碼
+      <h3 className="text-2xl font-semibold tracking-wide text-[#4d4c9d] mb-6 text-center tracking-tight">
+        {t('reset.title')}
       </h3>
 
       {error && (
@@ -85,14 +97,17 @@ function ResetPasswordContent() {
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         <div>
-          <label className="block text-sm font-medium text-stone-700 mb-1">新密碼</label>
+          <label className="block text-sm font-medium text-stone-700 mb-1">
+            {t('reset.password')}
+          </label>
           <input
             {...register('password', {
-              required: '請輸入新密碼',
-              minLength: { value: 6, message: '至少 6 碼' },
+              required: t('validation.required'),
+              minLength: { value: 6, message: t('register.password.hint') },
             })}
             type="password"
-            className="appearance-none block w-full px-3 py-2 border border-stone-300 rounded-md shadow-sm placeholder-stone-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm transition-colors"
+            placeholder={t('reset.password.plh')}
+            className="appearance-none block w-full px-3 py-2 border border-stone-300 rounded-sm shadow-sm placeholder-stone-400 focus:outline-none focus:ring-[#53b2e5] focus:border-[#53b2e5] sm:text-sm transition-colors"
           />
           {errors.password && (
             <p className="text-red-500 text-xs mt-1">{errors.password.message as string}</p>
@@ -100,17 +115,22 @@ function ResetPasswordContent() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-stone-700 mb-1">確認新密碼</label>
+          <label className="block text-sm font-medium text-stone-700 mb-1">
+            {t('reset.confirmPassword')}
+          </label>
           <input
             {...register('confirmPassword', {
-              required: '請再次輸入密碼',
-              validate: (value) => value === password || '兩次密碼不一致',
+              required: t('validation.required'),
+              validate: (value) => value === password || t('validation.passwordMatch'),
             })}
             type="password"
-            className="appearance-none block w-full px-3 py-2 border border-stone-300 rounded-md shadow-sm placeholder-stone-400 focus:outline-none focus:ring-secondary focus:border-secondary sm:text-sm transition-colors"
+            placeholder={t('reset.confirmPassword.plh')}
+            className="appearance-none block w-full px-3 py-2 border border-stone-300 rounded-sm shadow-sm placeholder-stone-400 focus:outline-none focus:ring-[#53b2e5] focus:border-[#53b2e5] sm:text-sm transition-colors"
           />
           {errors.confirmPassword && (
-            <p className="text-red-500 text-xs mt-1">{errors.confirmPassword.message as string}</p>
+            <p className="text-red-500 text-xs mt-1 text-right">
+              {errors.confirmPassword.message as string}
+            </p>
           )}
         </div>
 
@@ -119,7 +139,7 @@ function ResetPasswordContent() {
           disabled={isSubmitting}
           className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-sm shadow-md text-sm font-semibold tracking-wide text-white bg-secondary hover:bg-[#4098c7] hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary disabled:bg-stone-300 disabled:shadow-none transition-all duration-200 mt-4"
         >
-          {isSubmitting ? '重設中...' : '確認重設'}
+          {isSubmitting ? t('reset.submitting') : t('reset.submit')}
         </button>
       </form>
     </div>
@@ -128,7 +148,7 @@ function ResetPasswordContent() {
 
 export default function ResetPasswordPage() {
   return (
-    <Suspense fallback={<div className="text-center">載入中...</div>}>
+    <Suspense fallback={<div className="text-center p-10">Loading...</div>}>
       <ResetPasswordContent />
     </Suspense>
   )

@@ -88,7 +88,7 @@ export default function NotificationsPage() {
               id: `abs-rec-${doc.id}`,
               type: 'info',
               title: '摘要投稿成功 (Abstract Submitted)',
-              description: `您的摘要「\${doc.title}」已成功提交，目前正在等待審查。`,
+              description: `您的摘要「${doc.title}」已成功提交，目前正在等待審查。`,
               date: new Date(doc.createdAt),
               link: '/dashboard/my-submissions',
               icon: Bell
@@ -139,7 +139,7 @@ export default function NotificationsPage() {
                 id: `rev-assign-${doc.id}`,
                 type: 'warning',
                 title: '待審查任務 (Review Task Assigned)',
-                description: `有新的摘要「\${doc.title}」指派給您，請於期限內完成審查。`,
+                description: `有新的摘要「${doc.title}」指派給您，請於期限內完成審查。`,
                 date: new Date(doc.updatedAt),
                 link: '/dashboard/review-queue',
                 icon: ClipboardList
@@ -226,10 +226,10 @@ export default function NotificationsPage() {
             return (
               <div 
                 key={notif.id} 
-                className={`p-5 rounded-lg border \${bgClass} \${borderClass} flex gap-4 transition-all`}
+                className={`p-5 rounded-lg border ${bgClass} ${borderClass} flex gap-4 transition-all`}
               >
                 <div className="mt-0.5">
-                  <Icon className={`w-6 h-6 \${iconColor}`} />
+                  <Icon className={`w-6 h-6 ${iconColor}`} />
                 </div>
                 <div className="flex-1">
                   <div className="flex justify-between items-start mb-1">

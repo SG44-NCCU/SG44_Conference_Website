@@ -38,12 +38,27 @@ export default function RegisterPage() {
       const json = await res.json()
 
       if (!res.ok) {
-        let msg = json.errors?.[0]?.message || t('register.error.validation')
-        if (msg.toLowerCase().includes('already exists') || msg.toLowerCase().includes('duplicate')) {
+        // 增強錯誤訊息解析
+        const errors = json.errors || []
+        const errorMsg = errors[0]?.message || ''
+        
+        let msg = t('register.error.validation')
+        
+        // 檢查是否為 Email 重複
+        if (
+          errorMsg.toLowerCase().includes('already exists') || 
+          errorMsg.toLowerCase().includes('duplicate') ||
+          errorMsg.toLowerCase().includes('invalid: email')
+        ) {
           msg = t('register.error.exists')
-        } else if (msg.toLowerCase().includes('validation')) {
+        } else if (errorMsg.toLowerCase().includes('validation')) {
           msg = t('register.error.validation')
+        } else if (errorMsg.toLowerCase().includes('password')) {
+          msg = t('validation.passwordLength')
+        } else if (errorMsg) {
+          msg = errorMsg
         }
+        
         throw new Error(msg)
       }
 
@@ -178,12 +193,17 @@ export default function RegisterPage() {
           {/* 生日 & 性別 */}
           <div className="grid grid-cols-2 gap-4 mt-4">
             <div>
-              <label className="block text-sm font-medium text-stone-700 mb-1">{t('register.birthday')}</label>
+              <label className="block text-sm font-medium text-stone-700 mb-1">
+                {t('register.birthday')}
+              </label>
               <input
-                {...register('birthday', { required: true })}
+                {...register('birthday', { required: t('validation.required') })}
                 type="date"
                 className="appearance-none block w-full px-3 py-2 border border-stone-300 rounded-sm placeholder-stone-400 focus:outline-none focus:ring-[#53b2e5] focus:border-[#53b2e5] sm:text-sm transition-colors text-stone-800"
               />
+              {errors.birthday && (
+                <p className="text-red-500 text-xs mt-1">{errors.birthday.message as string}</p>
+              )}
             </div>
             <div>
               <label className="block text-sm font-medium text-stone-700 mb-1">{t('register.gender')}</label>

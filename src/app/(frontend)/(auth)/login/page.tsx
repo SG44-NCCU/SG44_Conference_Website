@@ -32,8 +32,15 @@ export default function LoginPage() {
 
       if (!res.ok) {
         let msg = json.errors?.[0]?.message || t('login.error.default')
-        if (msg.toLowerCase().includes('login failed') || msg.toLowerCase().includes('credentials') || msg.toLowerCase().includes('incorrect')) {
+        const lowerMsg = msg.toLowerCase()
+        if (
+          lowerMsg.includes('login failed') ||
+          lowerMsg.includes('credentials') ||
+          lowerMsg.includes('incorrect')
+        ) {
           msg = t('login.error.credentials')
+        } else if (lowerMsg.includes('verify') || lowerMsg.includes('verified')) {
+          msg = t('login.error.unverified')
         }
         throw new Error(msg)
       }

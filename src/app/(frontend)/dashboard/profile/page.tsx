@@ -172,9 +172,10 @@ export default function ProfilePage() {
             {errors.phone && <p className="mt-2 text-xs text-red-600">{errors.phone.message}</p>}
           </div>
 
-          {/* 生日 */}
           <div>
-            <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">{t('dashboard.profile.birthday')}</label>
+            <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">
+              {t('dashboard.profile.birthday')}
+            </label>
             <input
               {...register('birthday', { required: t('dashboard.profile.birthdayReq') })}
               type="date"

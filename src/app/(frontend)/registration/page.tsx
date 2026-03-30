@@ -85,7 +85,10 @@ const RegistrationPage = () => {
       <main className="max-w-5xl mx-auto px-6 sm:px-10 py-20">
         {/* Title Section */}
         <div className="mb-16">
-          <SectionTitle title={t('page.registration.title')} subtitle={t('page.registration.subtitle')} />
+          <SectionTitle
+            title={t('page.registration.title')}
+            subtitle={t('page.registration.subtitle')}
+          />
         </div>
 
         {/* Body Content */}
@@ -116,15 +119,19 @@ const RegistrationPage = () => {
               {lang === 'zh' ? '二、報名費用' : 'II. Registration Fees'}
             </h2>
             <div className="space-y-3">
-              {fees.map((item, idx) => (
-                <div
-                  key={idx}
-                  className="flex justify-between items-center py-2 border-b border-stone-100"
-                >
-                  <span className="text-stone-700">{lang === 'zh' ? item.type : item.typeEn}</span>
-                  <span className="font-bold text-stone-900">{item.price}</span>
-                </div>
-              ))}
+              {fees.map((item, idx) => {
+                return (
+                  <div
+                    key={idx}
+                    className="flex justify-between items-center py-2 border-b border-stone-100"
+                  >
+                    <span className="text-stone-700">
+                      {lang === 'zh' ? item.type : item.typeEn}
+                    </span>
+                    <span className="font-bold text-stone-900">{item.price}</span>
+                  </div>
+                )
+              })}
               <div className="mt-4 bg-stone-50/50 p-4 rounded-lg flex gap-3 items-start">
                 <span className="text-[#4d4c9d] font-bold text-sm mt-0.5">*</span>
                 <p className="text-sm text-stone-500 leading-relaxed">

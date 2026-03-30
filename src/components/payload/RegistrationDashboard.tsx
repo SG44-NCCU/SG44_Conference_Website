@@ -7,6 +7,8 @@ type Stats = {
   day1Meals: number
   day2Meals: number
   banquetAttendance: number
+  presenterCount: number
+  certCount: number
 }
 
 export const RegistrationDashboard: React.FC = () => {
@@ -27,9 +29,18 @@ export const RegistrationDashboard: React.FC = () => {
               if (doc.mealDay1 === 'yes') acc.day1Meals++
               if (doc.mealDay2 === 'yes') acc.day2Meals++
               if (doc.banquet === 'yes') acc.banquetAttendance++
+              if (doc.participantRole === 'presenter') acc.presenterCount++
+              if (doc.needsCertification === 'yes') acc.certCount++
               return acc
             },
-            { totalPaid: 0, day1Meals: 0, day2Meals: 0, banquetAttendance: 0 },
+            {
+              totalPaid: 0,
+              day1Meals: 0,
+              day2Meals: 0,
+              banquetAttendance: 0,
+              presenterCount: 0,
+              certCount: 0,
+            },
           )
           setStats(calculatedStats)
         }
@@ -91,6 +102,18 @@ export const RegistrationDashboard: React.FC = () => {
               <p style={{ margin: 0, color: '#6b7280', fontSize: '0.875rem' }}>晚宴出席人數</p>
               <p style={{ margin: 0, color: '#111827', fontSize: '1.5rem', fontWeight: 'bold' }}>
                 {stats?.banquetAttendance}
+              </p>
+            </div>
+            <div>
+              <p style={{ margin: 0, color: '#6b7280', fontSize: '0.875rem' }}>論文發表人數</p>
+              <p style={{ margin: 0, color: '#111827', fontSize: '1.5rem', fontWeight: 'bold' }}>
+                {stats?.presenterCount}
+              </p>
+            </div>
+            <div>
+              <p style={{ margin: 0, color: '#6b7280', fontSize: '0.875rem' }}>需認證人數</p>
+              <p style={{ margin: 0, color: '#111827', fontSize: '1.5rem', fontWeight: 'bold' }}>
+                {stats?.certCount}
               </p>
             </div>
           </div>
