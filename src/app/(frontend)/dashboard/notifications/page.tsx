@@ -17,7 +17,7 @@ type Notification = {
 }
 
 export default function NotificationsPage() {
-  const { user } = useAuth()
+  const { user, refreshUser } = useAuth()
   const { t } = useLanguage()
   const [loading, setLoading] = useState(true)
   const [notifications, setNotifications] = useState<Notification[]>([])
@@ -109,6 +109,18 @@ export default function NotificationsPage() {
         newNotifications.sort((a, b) => b.date.getTime() - a.date.getTime())
         setNotifications(newNotifications)
 
+        // Mark as read by updating lastNotificationChecked
+        await fetch(`/api/users/${user.id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            lastNotificationChecked: new Date().toISOString()
+          })
+        })
+        
+        // Refresh local user state to clear badges elsewhere
+        if (refreshUser) refreshUser()
+
       } catch (err) {
         console.error('Failed to fetch notifications', err)
       } finally {
@@ -117,7 +129,7 @@ export default function NotificationsPage() {
     }
 
     fetchNotifications()
-  }, [user, t])
+  }, [user, t, refreshUser])
 
   if (loading) {
     return (

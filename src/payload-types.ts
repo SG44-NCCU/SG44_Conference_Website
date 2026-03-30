@@ -143,6 +143,7 @@ export interface User {
   organization: string;
   jobTitle: string;
   role: 'admin' | 'user' | 'reviewer';
+  lastNotificationChecked?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -520,6 +521,7 @@ export interface UsersSelect<T extends boolean = true> {
   organization?: T;
   jobTitle?: T;
   role?: T;
+  lastNotificationChecked?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;

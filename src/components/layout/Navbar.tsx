@@ -88,12 +88,16 @@ const NAV_ITEM_DEFS = [
   },
 ]
 
+import { useNotifications } from '@/hooks/useNotifications'
+
 const Navbar: React.FC = () => {
   const { user, loading, logout, refreshUser } = useAuth()
+  const { hasUnread } = useNotifications()
   const { lang, setLang, t } = useLanguage()
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [mobileSubMenuOpen, setMobileSubMenuOpen] = useState<number | null>(null)
+
 
   // Build nav items using translations
   const NAV_ITEMS = NAV_ITEM_DEFS.map((item) => ({
@@ -214,8 +218,11 @@ const Navbar: React.FC = () => {
               ) : user ? (
                 <div className="relative group">
                   <button className="flex items-center gap-2 text-stone-700 hover:text-[#4d4c9d] font-medium transition-colors">
-                    <div className="w-8 h-8 rounded-full bg-[#4d4c9d] text-white flex items-center justify-center text-sm font-semibold tracking-wide">
+                    <div className="relative w-8 h-8 rounded-full bg-[#4d4c9d] text-white flex items-center justify-center text-sm font-semibold tracking-wide">
                       {user.name?.charAt(0) || 'U'}
+                      {hasUnread && (
+                        <span className="absolute top-0 right-0 block h-2.5 w-2.5 rounded-full bg-red-500 ring-2 ring-white animate-pulse" />
+                      )}
                     </div>
                     <span className="text-sm max-w-[100px] truncate">{user.name}</span>
                     <ChevronDown size={14} />
@@ -328,8 +335,11 @@ const Navbar: React.FC = () => {
               {user ? (
                 <div className="space-y-3">
                   <div className="px-3 flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-[#4d4c9d] text-white flex items-center justify-center text-lg font-semibold tracking-wide">
+                    <div className="relative w-10 h-10 rounded-full bg-[#4d4c9d] text-white flex items-center justify-center text-lg font-semibold tracking-wide">
                       {user.name?.charAt(0) || 'U'}
+                      {hasUnread && (
+                        <span className="absolute top-0 right-0 block h-3 w-3 rounded-full bg-red-500 ring-2 ring-white animate-pulse" />
+                      )}
                     </div>
                     <div className="flex flex-col">
                       <span className="font-medium text-stone-900">{user.name}</span>

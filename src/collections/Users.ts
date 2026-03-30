@@ -189,11 +189,20 @@ export const Users: CollectionConfig = {
         update: ({ req: { user } }) => user?.role === 'admin',
       },
       admin: {
-        // 在後台側邊欄，非 Admin 其實也看不到（因為上面的 access.admin 擋住了），但加這行更保險
+        // 在後台側邊欄，非 Admin 其實也看不到（因為上面的 access.admin 擋住了），但加這行更保藝），但加這行更保險
         position: 'sidebar',
         components: {
           Cell: '@/components/payload/RoleSelectCell#RoleSelectCell',
         },
+      },
+    },
+    {
+      name: 'lastNotificationChecked',
+      type: 'date',
+      label: '最後查看通知時間',
+      admin: {
+        position: 'sidebar',
+        readOnly: true,
       },
     },
   ],

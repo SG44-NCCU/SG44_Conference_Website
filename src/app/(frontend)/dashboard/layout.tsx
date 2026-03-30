@@ -47,8 +47,11 @@ const SIDEBAR_ITEMS = [
   },
 ]
 
+import { useNotifications } from '@/hooks/useNotifications'
+
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const { user, loading, logout } = useAuth()
+  const { hasUnread } = useNotifications()
   const router = useRouter()
   const pathname = usePathname()
   const { t } = useLanguage()
@@ -100,8 +103,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               {/* User Info */}
               <div className="p-6 border-b border-stone-100 bg-stone-50/50">
                 <div className="flex items-center gap-3 mb-1">
-                  <div className="w-12 h-12 rounded-full bg-[#4d4c9d] text-white flex items-center justify-center text-xl font-semibold tracking-wide">
+                  <div className="relative w-12 h-12 rounded-full bg-[#4d4c9d] text-white flex items-center justify-center text-xl font-semibold tracking-wide">
                     {user.name?.charAt(0) || 'U'}
+                    {hasUnread && (
+                      <span className="absolute top-0 right-0 block h-3 w-3 rounded-full bg-red-500 ring-2 ring-white animate-pulse" />
+                    )}
                   </div>
                   <div>
                     <h3 className="font-semibold tracking-wide text-stone-800">{user.name}</h3>
@@ -132,8 +138,13 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                           : 'text-stone-600 hover:bg-stone-50 hover:text-[#4d4c9d]'
                       }`}
                     >
-                      <item.icon size={18} />
-                      {t(`dashboard.sidebar.${item.key}` as any)}
+                      <div className="relative flex items-center gap-3 w-full">
+                        <item.icon size={18} />
+                        <span className="flex-1">{t(`dashboard.sidebar.${item.key}` as any)}</span>
+                        {item.key === 'notifications' && hasUnread && (
+                          <span className="h-2 w-2 rounded-full bg-red-500 animate-pulse" />
+                        )}
+                      </div>
                     </Link>
                   )
                 })}
