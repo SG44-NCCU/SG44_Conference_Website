@@ -35,10 +35,6 @@ export default function SubmissionPage() {
       content: t('sub.studentAward.3.content'),
     },
     {
-      label: t('sub.studentAward.4.label'),
-      content: t('sub.studentAward.4.content'),
-    },
-    {
       label: t('sub.studentAward.5.label'),
       content: t('sub.studentAward.5.content'),
     },
