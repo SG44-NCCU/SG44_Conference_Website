@@ -13,6 +13,7 @@ export const exportCsvEndpoint = async (req: PayloadRequest) => {
     const registrations = await payload.find({
       collection: 'registrations',
       limit: 5000,
+      depth: 1, // Ensure user is populated
     })
 
     const docs = registrations.docs
@@ -35,12 +36,24 @@ export const exportCsvEndpoint = async (req: PayloadRequest) => {
       '晚宴出席',
       '飲食偏好',
       '特殊飲食說明',
+      '是否需要認證',
+      '認證類型',
+      '姓名(公務/技師)',
+      '身分證字號',
+      '出生日期',
+      '服務單位',
+      '聯絡電話',
+      '技師科別',
       '備註',
       '報名時間',
     ]
 
     // Create CSV rows
     const rows = docs.map((doc: any) => {
+      // 根據認證類型決定顯示哪些欄位
+      const isCivil = doc.certificationType === 'civilServant'
+      const isTech = doc.certificationType === 'technician'
+      
       return [
         doc.id,
         doc.user?.name || '',
@@ -58,6 +71,14 @@ export const exportCsvEndpoint = async (req: PayloadRequest) => {
         doc.banquet || '',
         doc.dietaryPreference || '',
         doc.dietaryOther || '',
+        doc.needsCertification || 'no',
+        doc.certificationType || '',
+        isCivil ? doc.certName : (isTech ? doc.techName : ''),
+        isCivil ? doc.certIdNumber : (isTech ? doc.techIdNumber : ''),
+        isCivil && doc.certDob ? new Date(doc.certDob).toISOString().split('T')[0] : '',
+        isCivil ? doc.certOrganization : '',
+        isCivil ? doc.certPhone : '',
+        isTech ? doc.techSpecialty : '',
         (doc.remarks || '').replace(/(\r\n|\n|\r)/gm, ' '), // sanitize newlines in remarks
         new Date(doc.createdAt).toLocaleString('zh-TW'),
       ]
