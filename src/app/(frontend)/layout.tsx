@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   title: 'SG44 | 第44屆測量及空間資訊研討會',
   description: '第44屆測量及空間資訊研討會官方網站',
   icons: {
-    icon: '/favicon.ico',
+    icon: '/LOGO.svg',
   },
 }
 

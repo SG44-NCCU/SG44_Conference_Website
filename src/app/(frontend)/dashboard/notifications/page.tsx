@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import { useAuth } from '@/providers/Auth'
 import { useLanguage } from '@/contexts/LanguageContext'
-import { Loader2, CheckCircle2, XCircle, FileEdit, AlertCircle, Bell } from 'lucide-react'
+import { Loader2, CheckCircle2, XCircle, FileEdit, AlertCircle, Bell, ClipboardList } from 'lucide-react'
 import Link from 'next/link'
 
 type Notification = {
@@ -27,10 +27,13 @@ export default function NotificationsPage() {
 
     const fetchNotifications = async () => {
       try {
-        const [regRes, absRes, settingsRes] = await Promise.all([
+        const [regRes, absRes, settingsRes, assignedRes] = await Promise.all([
           fetch(`/api/registrations?where[user][equals]=${user.id}&limit=10`),
           fetch(`/api/abstracts?where[submitter][equals]=${user.id}&limit=100`),
-          fetch('/api/globals/abstracts-settings')
+          fetch('/api/globals/abstracts-settings'),
+          user.role === 'reviewer' || user.role === 'admin' 
+            ? fetch(`/api/abstracts?where[assignedReviewer][equals]=${user.id}&limit=100`)
+            : Promise.resolve(null)
         ])
 
         const newNotifications: Notification[] = []
@@ -59,17 +62,39 @@ export default function NotificationsPage() {
                 link: '/dashboard/my-registrations',
                 icon: XCircle
               })
+            } else {
+              // 報名成功待繳費或審核
+              newNotifications.push({
+                id: `reg-rec-${reg.id}`,
+                type: 'info',
+                title: '報名資料已收到 (Registration Received)',
+                description: '我們已收到您的報名資料。如為付費票種，請儘速完成匯款並於系統填寫後五碼，我們將在 1-3 個工作天內完成審核。',
+                date: new Date(reg.createdAt),
+                link: '/dashboard/my-registrations',
+                icon: Bell
+              })
             }
           })
         }
 
-        // 2. Process Abstracts
-        if (absRes.ok && settingsRes.ok) {
+        // 2. Process Abstracts (as Submitter)
+        if (absRes.ok) {
           const absData = await absRes.json()
-          const settings = await settingsRes.json()
+          const settings = settingsRes.ok ? await settingsRes.json() : { reviewResultPublished: false }
           
-          if (settings.reviewResultPublished) {
-            absData.docs.forEach((doc: any) => {
+          absData.docs.forEach((doc: any) => {
+            // 無論是否公佈，投稿成功都應該顯示一則通知
+            newNotifications.push({
+              id: `abs-rec-${doc.id}`,
+              type: 'info',
+              title: '摘要投稿成功 (Abstract Submitted)',
+              description: `您的摘要「\${doc.title}」已成功提交，目前正在等待審查。`,
+              date: new Date(doc.createdAt),
+              link: '/dashboard/my-submissions',
+              icon: Bell
+            })
+
+            if (settings.reviewResultPublished) {
               if (doc.reviewStatus === 'accepted') {
                 newNotifications.push({
                   id: `abs-acc-${doc.id}`,
@@ -101,8 +126,26 @@ export default function NotificationsPage() {
                   icon: AlertCircle
                 })
               }
-            })
-          }
+            }
+          })
+        }
+
+        // 3. Process Abstracts (as Reviewer)
+        if (assignedRes && assignedRes.ok) {
+          const assignedData = await assignedRes.json()
+          assignedData.docs.forEach((doc: any) => {
+            if (doc.reviewStatus === 'pending') {
+              newNotifications.push({
+                id: `rev-assign-${doc.id}`,
+                type: 'warning',
+                title: '待審查任務 (Review Task Assigned)',
+                description: `有新的摘要「\${doc.title}」指派給您，請於期限內完成審查。`,
+                date: new Date(doc.updatedAt),
+                link: '/dashboard/review-queue',
+                icon: ClipboardList
+              })
+            }
+          })
         }
 
         // Sort by date descending

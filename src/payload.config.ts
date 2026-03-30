@@ -40,6 +40,10 @@ export default buildConfig({
     },
     components: {
       // actions: [UserMenu],
+      graphics: {
+        Logo: '@/components/payload/Logo',
+        Icon: '@/components/payload/Icon',
+      },
     },
   },
 

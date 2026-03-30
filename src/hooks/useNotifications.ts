@@ -21,28 +21,53 @@ export function useNotifications() {
           ? new Date(user.lastNotificationChecked).getTime() 
           : 0
 
-        // Fetch registrations and abstractsUpdatedAt to compare
-        const [regRes, absRes] = await Promise.all([
-          fetch(`/api/registrations?where[user][equals]=${user.id}&limit=1&sort=-updatedAt`),
-          fetch(`/api/abstracts?where[submitter][equals]=${user.id}&limit=1&sort=-updatedAt`)
+        // Fetch settings, registrations and abstracts to compare
+        const [regRes, absRes, settingsRes, assignedRes] = await Promise.all([
+          fetch(`/api/registrations?where[user][equals]=${user.id}&limit=10&sort=-updatedAt`),
+          fetch(`/api/abstracts?where[submitter][equals]=${user.id}&limit=100&sort=-updatedAt`),
+          fetch('/api/globals/abstracts-settings'),
+          user.role === 'reviewer' || user.role === 'admin'
+            ? fetch(`/api/abstracts?where[assignedReviewer][equals]=${user.id}&limit=100&sort=-updatedAt`)
+            : Promise.resolve(null)
         ])
 
         let latestUpdate = 0
 
+        // 1. Check Registrations (only paid/failed)
         if (regRes.ok) {
           const data = await regRes.json()
-          if (data.docs && data.docs.length > 0) {
-            const updatedAt = new Date(data.docs[0].updatedAt).getTime()
-            if (updatedAt > latestUpdate) latestUpdate = updatedAt
+          data.docs.forEach((reg: any) => {
+            if (reg.paymentStatus === 'paid' || reg.paymentStatus === 'failed') {
+              const updatedAt = new Date(reg.updatedAt).getTime()
+              if (updatedAt > latestUpdate) latestUpdate = updatedAt
+            }
+          })
+        }
+
+        // 2. Check Abstracts (only if published and matches status)
+        if (absRes.ok && settingsRes.ok) {
+          const absData = await absRes.json()
+          const settings = await settingsRes.json()
+          
+          if (settings.reviewResultPublished) {
+            absData.docs.forEach((doc: any) => {
+              if (['accepted', 'revision', 'rejected'].includes(doc.reviewStatus)) {
+                const updatedAt = new Date(doc.updatedAt).getTime()
+                if (updatedAt > latestUpdate) latestUpdate = updatedAt
+              }
+            })
           }
         }
 
-        if (absRes.ok) {
-          const data = await absRes.json()
-          if (data.docs && data.docs.length > 0) {
-            const updatedAt = new Date(data.docs[0].updatedAt).getTime()
-            if (updatedAt > latestUpdate) latestUpdate = updatedAt
-          }
+        // 3. Check Assigned Reviews (for reviewers)
+        if (assignedRes && assignedRes.ok) {
+          const assignedData = await assignedRes.json()
+          assignedData.docs.forEach((doc: any) => {
+            if (doc.reviewStatus === 'pending') {
+              const updatedAt = new Date(doc.updatedAt).getTime()
+              if (updatedAt > latestUpdate) latestUpdate = updatedAt
+            }
+          })
         }
 
         setHasUnread(latestUpdate > lastChecked)
