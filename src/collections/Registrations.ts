@@ -5,7 +5,7 @@ export const Registrations: CollectionConfig = {
   admin: {
     group: '報名管理',
     useAsTitle: 'id',
-    defaultColumns: ['user', 'ticketType', 'paymentStatus', 'amount', 'createdAt'],
+    defaultColumns: ['user', 'ticketType', 'paymentStatus', 'needsCertification', 'certificationType', 'createdAt'],
     components: {
       beforeListTable: ['@/components/payload/RegistrationDashboard#RegistrationDashboard'],
     },
@@ -22,6 +22,8 @@ export const Registrations: CollectionConfig = {
       return false
     },
     update: ({ req: { user } }) => {
+      console.log('--- DEBUG: Registrations Update Access ---')
+      console.log('User:', user?.id, 'Role:', user?.role)
       if (user?.role === 'admin') return true
       if (user) return { user: { equals: user.id } }
       return false
@@ -218,7 +220,103 @@ export const Registrations: CollectionConfig = {
       },
     },
 
-    // 五、 其他
+    // 五、 認證時數 / 積分需求 (Certification Needs)
+    {
+      name: 'needsCertification',
+      type: 'select',
+      label: '是否需要認證',
+      required: true,
+      defaultValue: 'no',
+      options: [
+        { label: '不需要 (No)', value: 'no' },
+        { label: '需要 (Yes)', value: 'yes' },
+      ],
+    },
+    {
+      name: 'certificationType',
+      type: 'select',
+      label: '認證身分',
+      options: [
+        { label: '公務人員時數認證', value: 'civilServant' },
+        { label: '技師訓練積分', value: 'technician' },
+      ],
+      admin: {
+        condition: (data) => data?.needsCertification === 'yes',
+      },
+    },
+    // 公務人員時數認證欄位
+    {
+      name: 'certName',
+      type: 'text',
+      label: '姓名 (公務人員)',
+      admin: {
+        condition: (data) => data?.needsCertification === 'yes' && data?.certificationType === 'civilServant',
+      },
+    },
+    {
+      name: 'certIdNumber',
+      type: 'text',
+      label: '身分證字號 (公務人員)',
+      admin: {
+        condition: (data) => data?.needsCertification === 'yes' && data?.certificationType === 'civilServant',
+      },
+    },
+    {
+      name: 'certDob',
+      type: 'date',
+      label: '出生年月日 (公務人員)',
+      admin: {
+        date: {
+          pickerAppearance: 'dayOnly',
+          displayFormat: 'yyyy-MM-dd',
+        },
+        condition: (data) => data?.needsCertification === 'yes' && data?.certificationType === 'civilServant',
+      },
+    },
+    {
+      name: 'certOrganization',
+      type: 'text',
+      label: '服務單位 (公務人員)',
+      admin: {
+        condition: (data) => data?.needsCertification === 'yes' && data?.certificationType === 'civilServant',
+      },
+    },
+    {
+      name: 'certPhone',
+      type: 'text',
+      label: '聯絡電話 (公務人員)',
+      admin: {
+        condition: (data) => data?.needsCertification === 'yes' && data?.certificationType === 'civilServant',
+      },
+    },
+    // 技師訓練積分欄位
+    {
+      name: 'techName',
+      type: 'text',
+      label: '姓名 (技師)',
+      admin: {
+        condition: (data) => data?.needsCertification === 'yes' && data?.certificationType === 'technician',
+      },
+    },
+    {
+      name: 'techIdNumber',
+      type: 'text',
+      label: '身分證字號 (技師)',
+      admin: {
+        condition: (data) => data?.needsCertification === 'yes' && data?.certificationType === 'technician',
+      },
+    },
+    {
+      name: 'techSpecialty',
+      type: 'text',
+      label: '科別 (技師)',
+      admin: {
+        condition: (data) => data?.needsCertification === 'yes' && data?.certificationType === 'technician',
+        description: '例如：土木工程',
+      },
+    },
+
+    // 六、 其他
     {
       name: 'remarks',
       type: 'textarea',

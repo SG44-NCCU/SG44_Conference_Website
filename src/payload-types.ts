@@ -258,6 +258,19 @@ export interface Registration {
   banquet: 'yes' | 'no';
   dietaryPreference?: ('regular' | 'vegetarian' | 'other') | null;
   dietaryOther?: string | null;
+  needsCertification: 'no' | 'yes';
+  certificationType?: ('civilServant' | 'technician') | null;
+  certName?: string | null;
+  certIdNumber?: string | null;
+  certDob?: string | null;
+  certOrganization?: string | null;
+  certPhone?: string | null;
+  techName?: string | null;
+  techIdNumber?: string | null;
+  /**
+   * 例如：土木工程
+   */
+  techSpecialty?: string | null;
   remarks?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -592,6 +605,16 @@ export interface RegistrationsSelect<T extends boolean = true> {
   banquet?: T;
   dietaryPreference?: T;
   dietaryOther?: T;
+  needsCertification?: T;
+  certificationType?: T;
+  certName?: T;
+  certIdNumber?: T;
+  certDob?: T;
+  certOrganization?: T;
+  certPhone?: T;
+  techName?: T;
+  techIdNumber?: T;
+  techSpecialty?: T;
   remarks?: T;
   updatedAt?: T;
   createdAt?: T;
