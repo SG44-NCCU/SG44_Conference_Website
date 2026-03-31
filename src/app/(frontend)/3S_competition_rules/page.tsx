@@ -45,24 +45,68 @@ export default function CompetitionRulesPage() {
             </h2>
             <div className="space-y-3">
               <p>
-                本競賽採網路報名，分為大專生組及研究生組，大專生組僅限大學部學生參加；研究生組以碩、博士研究生為主，並得視需要納入大學部學生，報名時應附文件如下：
+                本競賽採{' '}
+                <a
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSdPy1xZu1Wyhc2yGziiKKBZsC4ur744dWrGIYqML78iQMXmWg/viewform"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#4d4c9d] hover:underline font-medium"
+                >
+                  網路報名
+                </a>
+                ，報名時應附文件如下：
               </p>
               <ol className="space-y-2 pl-1">
                 <li className="flex gap-2.5">
                   <span className="text-[#4d4c9d] font-medium flex-shrink-0">1.</span>
                   <span>
-                    報名表 1 份（如附件），須經指導老師簽名同意推薦，每組至多兩名指導老師。
+                    <a
+                      href="https://drive.google.com/file/d/17MaIY7zQWcRBn6YzauYE28-WpxQw-BBN/view"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#4d4c9d] hover:underline"
+                    >
+                      3S 創客競賽報名表
+                    </a>{' '}
+                    1 份，須經指導老師簽名同意推薦，每組至多兩名指導老師。
                   </span>
                 </li>
                 <li className="flex gap-2.5">
                   <span className="text-[#4d4c9d] font-medium flex-shrink-0">2.</span>
                   <span>
-                    10 頁以內之書面報告 1 份，需詳述其實作成果、創意、目的、原理、使用材料、方法。
+                    <a
+                      href="https://drive.google.com/file/d/1TtbRgTbn-HQ9dkVg2ffKnTytNYkPxvZL/view"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#4d4c9d] hover:underline"
+                    >
+                      數位教材創用 CC 授權書
+                    </a>{' '}
+                    1 份。
                   </span>
                 </li>
                 <li className="flex gap-2.5">
                   <span className="text-[#4d4c9d] font-medium flex-shrink-0">3.</span>
+                  <span>
+                    10 頁以內之書面報告 1 份，需詳述其創意、目的、原理、使用材料、方法、成果。
+                  </span>
+                </li>
+                <li className="flex gap-2.5">
+                  <span className="text-[#4d4c9d] font-medium flex-shrink-0">4.</span>
                   <span>須製作 3 分鐘以內之展示影片 1 份，上傳至報名平台，供初審參考。</span>
+                </li>
+                <li className="flex gap-2.5">
+                  <span className="text-[#4d4c9d] font-medium flex-shrink-0">5.</span>
+                  <span>
+                    <a
+                      href="https://www.youtube.com/watch?v=iZAAue8opJ0"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#4d4c9d] hover:underline"
+                    >
+                      競賽流程影片
+                    </a>
+                  </span>
                 </li>
               </ol>
             </div>
@@ -181,7 +225,7 @@ export default function CompetitionRulesPage() {
         {/* CTA */}
         <div className="mt-16 pt-8 border-t border-stone-100 flex justify-center">
           <Link
-            href="https://forms.gle/LdHsNpwFTmMBmyxa6"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSdPy1xZu1Wyhc2yGziiKKBZsC4ur744dWrGIYqML78iQMXmWg/viewform"
             target="_blank"
             rel="noopener noreferrer"
             className="group inline-flex items-center gap-3 px-10 py-4 border-2 border-stone-800 text-stone-800 font-medium rounded-full hover:bg-stone-800 hover:text-white transition-all duration-200 text-base"
