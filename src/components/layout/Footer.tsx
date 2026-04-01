@@ -1,5 +1,5 @@
 'use client'
-import { CONFERENCE_INFO } from '@/lib/constants'
+import { CONFERENCE_INFO, ORGANIZERS } from '@/lib/constants'
 import { Mail, MapPin, Phone } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
@@ -28,16 +28,19 @@ const Footer: React.FC = () => {
             </div>
             <div className="space-y-4 text-sm text-stone-400 max-w-md leading-relaxed">
               <div className="flex flex-col gap-1">
-                <span className="text-[10px] uppercase tracking-widest text-[#53b2e5] font-bold">
+                <span className="text-xs uppercase tracking-widest text-[#53b2e5] font-bold">
                   主辦單位 / Organizer
                 </span>
-                <span className="text-stone-300">國立政治大學地政學系</span>
-              </div>
-              <div className="flex flex-col gap-1">
-                <span className="text-[10px] uppercase tracking-widest text-[#53b2e5] font-bold">
-                  共同主辦單位 / Co-organizers
-                </span>
-                <span className="text-stone-300">國立政治大學社會科學學院</span>
+                <div className="flex flex-wrap gap-x-2 gap-y-1 text-stone-300 text-sm">
+                  {ORGANIZERS.map((name, index) => (
+                    <React.Fragment key={name}>
+                      <span className="whitespace-nowrap">{name}</span>
+                      {index < ORGANIZERS.length - 1 && (
+                        <span className="text-stone-600">•</span>
+                      )}
+                    </React.Fragment>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
