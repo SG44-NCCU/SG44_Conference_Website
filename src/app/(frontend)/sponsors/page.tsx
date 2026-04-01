@@ -34,11 +34,6 @@ const SPONSOR_GROUPS = [
         url: 'https://www.nps.gov.tw/ch', // 50,000, 2026/03/03
       },
       {
-        name: '桃園市政府地政局',
-        logo: '/sponsors_logo/桃園市政府地政局.jpg',
-        url: 'https://land.tycg.gov.tw/', // 30,000, 2026/02/25
-      },
-      {
         name: '海洋委員會',
         logo: '/sponsors_logo/海洋委員會.png',
         url: 'https://www.oac.gov.tw/ch/index.jsp', // 50,000, 2026/02/10
@@ -47,6 +42,11 @@ const SPONSOR_GROUPS = [
         name: '高雄市政府地政局',
         logo: '/sponsors_logo/高雄市政府地政局.png',
         url: 'https://landp.kcg.gov.tw/', // 20,000, 2026/02/09
+      },
+      {
+        name: '桃園市政府地政局',
+        logo: '/sponsors_logo/桃園市政府地政局.jpg',
+        url: 'https://land.tycg.gov.tw/', // 30,000, 2026/02/25
       },
       {
         name: '國家太空中心',
@@ -64,14 +64,14 @@ const SPONSOR_GROUPS = [
         url: 'https://www.hccg.gov.tw/hccg/index', // 100,000, 2026/03/16
       },
       {
-        name: '經濟部地質調查<br>及礦業管理中心',
-        logo: '/sponsors_logo/經濟部地質調查及礦業管理中心.png',
-        url: 'https://www.gsmma.gov.tw/nss/p/index', // 20,000, 2026/02/10
-      },
-      {
         name: '農業部林業及自然保育署<br>航測及遙測分署',
         logo: '/sponsors_logo/農業部林業及自然保育署航測及遙測分署.png',
         url: 'https://www.asrs.gov.tw/', // 30,000, 2026/03/10
+      },
+      {
+        name: '經濟部地質調查<br>及礦業管理中心',
+        logo: '/sponsors_logo/經濟部地質調查及礦業管理中心.png',
+        url: 'https://www.gsmma.gov.tw/nss/p/index', // 20,000, 2026/02/10
       },
       {
         name: '臺中市政府地政局',
@@ -100,14 +100,14 @@ const SPONSOR_GROUPS = [
     subtitle: 'Sponsors',
     items: [
       {
-        name: '互動國際數位股份有限公司',
-        logo: '/sponsors_logo/互動國際數位股份有限公司.png',
-        url: 'https://www.idtech.com.tw/', // 30,000, 2026/03/27
-      },
-      {
         name: '日陞空間資訊股份有限公司',
         logo: '/sponsors_logo/日陞空間資訊股份有限公司.png',
         url: 'https://www.srgeo.com.tw/SunriseWeb/', // 30,000, 2026/03/04
+      },
+      {
+        name: '互動國際數位股份有限公司',
+        logo: '/sponsors_logo/互動國際數位股份有限公司.png',
+        url: 'https://www.idtech.com.tw/', // 30,000, 2026/03/27
       },
       {
         name: '台灣世曦工程顧問股份有公司',
@@ -155,14 +155,14 @@ const SPONSOR_GROUPS = [
         url: 'https://www.cytech.tw/', // 10,000, 2026/02/10
       },
       {
-        name: '瑞竣科技股份有限公司',
-        logo: '/sponsors_logo/瑞竣科技股份有限公司.png',
-        url: 'https://www.richitech.com.tw/', // 30,000, 2026/02/06
-      },
-      {
         name: '群立科技股份有限公司',
         logo: '/sponsors_logo/群立科技股份有限公司.png',
         url: 'https://www.geoforce.com.tw/', // 30,000, 2026/02/11
+      },
+      {
+        name: '瑞竣科技股份有限公司',
+        logo: '/sponsors_logo/瑞竣科技股份有限公司.png',
+        url: 'https://www.richitech.com.tw/', // 30,000, 2026/02/06
       },
       {
         name: '詮華國土測繪股份有限公司',
