@@ -287,6 +287,58 @@ export const Abstracts: CollectionConfig = {
       },
     },
 
+    // ─── 論文授權書 ────────────────────────────────────────────────────
+    {
+      name: 'authorizationAgreed',
+      type: 'checkbox',
+      label: '已同意論文授權 (Authorization Agreed)',
+      defaultValue: false,
+      required: true,
+      access: {
+        update: ({ req: { user } }) => Boolean(user),
+      },
+      admin: {
+        description: '投稿人已閱讀並同意論文授權書',
+      },
+    },
+    {
+      name: 'authorizationDate',
+      type: 'date',
+      label: '授權確認日期 (Authorization Date)',
+      admin: {
+        description: '投稿人確認授權的日期',
+        date: { displayFormat: 'yyyy/MM/dd HH:mm' },
+      },
+    },
+    {
+      name: 'authorizationIdNumber',
+      type: 'text',
+      label: '授權人身分證字號',
+      admin: { description: '投稿人填寫之身分證字號' },
+    },
+    {
+      name: 'authorizationAddress',
+      type: 'text',
+      label: '授權人戶籍地址',
+      admin: { description: '投稿人填寫之戶籍地址' },
+    },
+    {
+      name: 'authorizationPhone',
+      type: 'text',
+      label: '授權人聯絡電話',
+      admin: { description: '投稿人填寫之聯絡電話' },
+    },
+    {
+      name: 'authorizationDownload',
+      type: 'ui',
+      label: '下載論文授權書',
+      admin: {
+        components: {
+          Field: '@/components/admin/AuthorizationDownloadButton#AuthorizationDownloadButton',
+        },
+      },
+    },
+
     // ─── 審稿相關（管理員 / 審稿人才能看的欄位）──────────────────────────
     {
       name: 'reviewStatus',

@@ -333,6 +333,26 @@ export interface Abstract {
    * 實際發表形式由大會排程決定，此為偏好登記
    */
   presentationPreference?: ('oral' | 'poster' | 'either') | null;
+  /**
+   * 投稿人已閱讀並同意論文授權書
+   */
+  authorizationAgreed: boolean;
+  /**
+   * 投稿人確認授權的日期
+   */
+  authorizationDate?: string | null;
+  /**
+   * 投稿人填寫之身分證字號
+   */
+  authorizationIdNumber?: string | null;
+  /**
+   * 投稿人填寫之戶籍地址
+   */
+  authorizationAddress?: string | null;
+  /**
+   * 投稿人填寫之聯絡電話
+   */
+  authorizationPhone?: string | null;
   reviewStatus: 'pending' | 'accepted' | 'rejected' | 'revision';
   /**
    * 此評語在大會發布審查結果後，會顯示給投稿人
@@ -645,6 +665,11 @@ export interface AbstractsSelect<T extends boolean = true> {
   abstract?: T;
   keywords?: T;
   presentationPreference?: T;
+  authorizationAgreed?: T;
+  authorizationDate?: T;
+  authorizationIdNumber?: T;
+  authorizationAddress?: T;
+  authorizationPhone?: T;
   reviewStatus?: T;
   reviewComments?: T;
   assignedReviewer?: T;

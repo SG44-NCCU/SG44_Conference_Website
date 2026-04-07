@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useAuth } from '@/providers/Auth'
 import Link from 'next/link'
-import { Loader2, Plus, Edit, ArrowRight, Upload, FileText, ExternalLink } from 'lucide-react'
+import { Loader2, Plus, Edit, ArrowRight, Upload, FileText, ExternalLink, Download } from 'lucide-react'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 // ─── Label maps ────────────────────────────────────────────────────────────
@@ -25,6 +25,7 @@ type AbstractDoc = {
   isStudent?: boolean
   applyStudentAward?: boolean
   fullPaper?: FullPaperDoc | null
+  authorizationAgreed?: boolean
   createdAt: string
   updatedAt: string
 }
@@ -314,6 +315,18 @@ export default function MySubmissionsPage() {
                     <span className="px-3 py-1.5 bg-stone-50 border border-stone-400 text-stone-600 text-xs font-semibold tracking-wide">
                       {statusLabel}
                     </span>
+                  )}
+
+                  {/* 授權書下載按鈕 */}
+                  {doc.authorizationAgreed && (
+                    <a
+                      href={`/abstract-authorization/${doc.id}/print`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-1.5 border border-stone-300 text-stone-600 hover:bg-stone-50 transition-colors text-sm font-medium flex items-center gap-1.5"
+                    >
+                      <Download size={14} /> 授權書
+                    </a>
                   )}
 
                   {submissionOpen && (

@@ -4,7 +4,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useAuth } from '@/providers/Auth'
 import { useForm, useFieldArray } from 'react-hook-form'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { Loader2, Plus, Trash2, ArrowRight, Upload, FileText, X } from 'lucide-react'
+import { Loader2, Plus, Trash2, ArrowRight, Upload, FileText, X, ShieldCheck, AlertCircle } from 'lucide-react'
+import { AuthorizationModal } from '@/components/ui/AuthorizationModal'
 import Link from 'next/link'
 import SectionTitle from '@/components/ui/SectionTitle'
 import { useLanguage } from '@/contexts/LanguageContext'
@@ -44,6 +45,7 @@ type FormValues = {
   abstract: string
   keywords: string
   presentationPreference?: string
+  authorizationAgreed: boolean
 }
 
 export default function AbstractSubmitClient() {
@@ -61,6 +63,12 @@ export default function AbstractSubmitClient() {
   const [fullPaperSubmissionOpen, setFullPaperSubmissionOpen] = useState(true)
   const [fullPaperDeadline, setFullPaperDeadline] = useState<string | null>(null)
   const [fullPaperFile, setFullPaperFile] = useState<File | null>(null)
+  const [showAuthModal, setShowAuthModal] = useState(false)
+  const [authorizationAgreed, setAuthorizationAgreed] = useState(false)
+  const [authorizationDate, setAuthorizationDate] = useState<string | null>(null)
+  const [authorizationIdNumber, setAuthorizationIdNumber] = useState('')
+  const [authorizationAddress, setAuthorizationAddress] = useState('')
+  const [authorizationPhone, setAuthorizationPhone] = useState('')
   const fullPaperInputRef = useRef<HTMLInputElement>(null)
 
   const {
@@ -75,6 +83,7 @@ export default function AbstractSubmitClient() {
       authors: [{ name: '', affiliation: '', email: '', isCorresponding: true }],
       isStudent: false,
       applyStudentAward: false,
+      authorizationAgreed: false,
     },
   })
 
@@ -194,6 +203,11 @@ export default function AbstractSubmitClient() {
         applyStudentAward: data.isStudent ? data.applyStudentAward : false,
         specialSession: data.specialSession || null,
         presentationPreference: data.presentationPreference || null,
+        authorizationAgreed: authorizationAgreed,
+        authorizationDate: authorizationDate || null,
+        authorizationIdNumber: authorizationIdNumber || null,
+        authorizationAddress: authorizationAddress || null,
+        authorizationPhone: authorizationPhone || null,
         ...(fullPaperId ? { fullPaper: fullPaperId } : {}),
       }
 
@@ -655,12 +669,61 @@ export default function AbstractSubmitClient() {
                   </section>
                 )}
 
+                {/* ── Section 8: 論文授權書 ── */}
+                <section>
+                  <h3 className="text-lg font-semibold tracking-wide text-stone-800 border-b border-stone-300 pb-2 mb-6">
+                    8. 論文授權書 (Paper Authorization)
+                  </h3>
+                  <div className="space-y-4">
+                    {authorizationAgreed ? (
+                      <div className="flex items-center gap-3 p-4 border border-green-200 bg-green-50">
+                        <ShieldCheck size={20} className="text-green-600 flex-shrink-0" />
+                        <div>
+                          <p className="font-medium text-green-800">已完成論文授權 (Authorization Completed)</p>
+                          <p className="text-xs text-green-600 mt-0.5">授權日期：{authorizationDate ? new Date(authorizationDate).toLocaleDateString('zh-TW') : '今天'}</p>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => setShowAuthModal(true)}
+                          className="ml-auto text-xs text-stone-500 underline hover:text-stone-700"
+                        >
+                          再次檢視
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="space-y-3">
+                        <div className="flex items-start gap-3 p-4 border-l-[3px] border-amber-400 bg-amber-50">
+                          <AlertCircle size={18} className="text-amber-600 flex-shrink-0 mt-0.5" />
+                          <div className="text-sm text-amber-800">
+                            <p className="font-medium">需要完成授權才能提交</p>
+                            <p className="mt-0.5">請點擊下方按鈕閱讀多考公告及授權書，並完成申報人資料填寫。</p>
+                          </div>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => setShowAuthModal(true)}
+                          className="flex items-center gap-2 px-6 py-3 border-2 border-[#4d4c9d] text-[#4d4c9d] font-medium hover:bg-[#4d4c9d] hover:text-white transition-colors text-sm"
+                        >
+                          <ShieldCheck size={18} />
+                          開啟論文授權書
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </section>
+
                 {/* ── Submit ── */}
                 <div className="pt-10 border-t border-stone-300">
                   <div className="flex flex-col items-center gap-4">
+                    {!authorizationAgreed && (
+                      <div className="flex items-center gap-2 text-amber-600 text-sm">
+                        <AlertCircle size={16} />
+                        <span>請先完成第 8 項「論文授權書」才能提交</span>
+                      </div>
+                    )}
                     <button
                       type="submit"
-                      disabled={isSubmitting}
+                      disabled={isSubmitting || !authorizationAgreed}
                       className="px-12 py-3 bg-[#4d4c9d] text-white font-medium hover:bg-[#3a3977] transition-colors disabled:opacity-70 disabled:cursor-not-allowed rounded-none tracking-wide flex items-center gap-2"
                     >
                       {isSubmitting ? (
@@ -683,6 +746,24 @@ export default function AbstractSubmitClient() {
           )}
         </div>
       </main>
+
+      {/* Authorization Modal */}
+      <AuthorizationModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+        onAgree={(data) => {
+          setAuthorizationAgreed(true)
+          setAuthorizationDate(new Date().toISOString())
+          setAuthorizationIdNumber(data.idNumber)
+          setAuthorizationAddress(data.address)
+          setAuthorizationPhone(data.phone)
+        }}
+        paperTitle={watch('title')}
+        authors={watch('authors') || []}
+        subTopic={watch('subTopic')}
+        specialSession={watch('specialSession')}
+        submitterName={user?.name || ''}
+      />
     </div>
   )
 }
