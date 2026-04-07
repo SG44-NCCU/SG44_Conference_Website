@@ -16,15 +16,27 @@ const SUB_TOPICS_MAP: Record<string, string> = {
   'topic-10': '10. 跨國交流專題 (Cross-Cutting International Session)',
 }
 
+const TW_TZ = 'Asia/Taipei'
+
 function toROCDate(isoDate: string) {
-  const d = new Date(isoDate)
-  return `${d.getFullYear() - 1911} 年 ${d.getMonth() + 1} 月 ${d.getDate()} 日`
+  const fmt = new Intl.DateTimeFormat('zh-TW', { timeZone: TW_TZ, year: 'numeric', month: 'numeric', day: 'numeric' })
+  const parts = fmt.formatToParts(new Date(isoDate))
+  const get = (t: string) => parts.find((p) => p.type === t)?.value ?? ''
+  const year = Number(get('year')) - 1911
+  return `${year} 年 ${get('month')} 月 ${get('day')} 日`
 }
 
 function toROCDateTime(isoDate: string) {
-  const d = new Date(isoDate)
-  const pad = (n: number) => String(n).padStart(2, '0')
-  return `${d.getFullYear() - 1911} 年 ${d.getMonth() + 1} 月 ${d.getDate()} 日　${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`
+  const fmt = new Intl.DateTimeFormat('zh-TW', {
+    timeZone: TW_TZ,
+    year: 'numeric', month: 'numeric', day: 'numeric',
+    hour: '2-digit', minute: '2-digit', second: '2-digit',
+    hour12: false,
+  })
+  const parts = fmt.formatToParts(new Date(isoDate))
+  const get = (t: string) => parts.find((p) => p.type === t)?.value ?? ''
+  const year = Number(get('year')) - 1911
+  return `${year} 年 ${get('month')} 月 ${get('day')} 日　${get('hour')}:${get('minute')}:${get('second')}`
 }
 
 const FONT = "'標楷體', 'KaiTi', 'DFKai-SB', 'Times New Roman', serif"
