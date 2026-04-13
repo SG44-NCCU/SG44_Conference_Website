@@ -27,71 +27,88 @@ const SPONSOR_GROUPS = [
   {
     title: '共同主辦單位',
     subtitle: 'Co-organizers',
-    items: [
+    subGroups: [
       {
-        name: '內政部國家公園署',
-        logo: '/sponsors_logo/內政部國家公園署.png',
-        url: 'https://www.nps.gov.tw/ch', // 50,000, 2026/03/03
+        title: '政府及研究機關',
+        subtitle: 'Government & Research Institutions',
+        items: [
+          {
+            name: '內政部國家公園署',
+            logo: '/sponsors_logo/內政部國家公園署.png',
+            url: 'https://www.nps.gov.tw/ch',
+          },
+          {
+            name: '海洋委員會',
+            logo: '/sponsors_logo/海洋委員會.png',
+            url: 'https://www.oac.gov.tw/ch/index.jsp',
+          },
+          {
+            name: '高雄市政府地政局',
+            logo: '/sponsors_logo/高雄市政府地政局.png',
+            url: 'https://landp.kcg.gov.tw/',
+          },
+          {
+            name: '桃園市政府地政局',
+            logo: '/sponsors_logo/桃園市政府地政局.jpg',
+            url: 'https://land.tycg.gov.tw/',
+          },
+          {
+            name: '國家太空中心',
+            logo: '/sponsors_logo/國家太空中心.png',
+            url: 'https://www.tasa.org.tw/zh-TW',
+          },
+          {
+            name: '國家災害防救科技中心',
+            logo: '/sponsors_logo/國家災害防救科技中心.png',
+            url: 'https://www.ncdr.nat.gov.tw/',
+          },
+          {
+            name: '新竹市政府',
+            logo: '/sponsors_logo/新竹市政府.png',
+            url: 'https://www.hccg.gov.tw/hccg/index',
+          },
+          {
+            name: '農業部林業及自然保育署<br>航測及遙測分署',
+            logo: '/sponsors_logo/農業部林業及自然保育署航測及遙測分署.png',
+            url: 'https://www.asrs.gov.tw/',
+          },
+          {
+            name: '經濟部地質調查<br>及礦業管理中心',
+            logo: '/sponsors_logo/經濟部地質調查及礦業管理中心.png',
+            url: 'https://www.gsmma.gov.tw/nss/p/index',
+          },
+          {
+            name: '臺中市政府地政局',
+            logo: '/sponsors_logo/臺中市政府地政局.png',
+            url: 'https://www.land.taichung.gov.tw/',
+          },
+          {
+            name: '臺北市政府地政局',
+            logo: '/sponsors_logo/臺北市政府地政局.png',
+            url: 'https://land.gov.taipei/',
+          },
+          {
+            name: '臺北市政府地政局<br>土地開發總隊',
+            logo: '/sponsors_logo/臺北市政府地政局土地開發總隊.png',
+            url: 'https://lda.land.gov.taipei/',
+          },
+          {
+            name: '臺南市政府地政局',
+            logo: '/sponsors_logo/臺南市政府地政局.jpg',
+            url: 'https://land.tainan.gov.tw/',
+          },
+        ],
       },
       {
-        name: '海洋委員會',
-        logo: '/sponsors_logo/海洋委員會.png',
-        url: 'https://www.oac.gov.tw/ch/index.jsp', // 50,000, 2026/02/10
-      },
-      {
-        name: '高雄市政府地政局',
-        logo: '/sponsors_logo/高雄市政府地政局.png',
-        url: 'https://landp.kcg.gov.tw/', // 20,000, 2026/02/09
-      },
-      {
-        name: '桃園市政府地政局',
-        logo: '/sponsors_logo/桃園市政府地政局.jpg',
-        url: 'https://land.tycg.gov.tw/', // 30,000, 2026/02/25
-      },
-      {
-        name: '國家太空中心',
-        logo: '/sponsors_logo/國家太空中心.png',
-        url: 'https://www.tasa.org.tw/zh-TW', // 50,000, 2026/02/04
-      },
-      {
-        name: '國家災害防救科技中心',
-        logo: '/sponsors_logo/國家災害防救科技中心.png',
-        url: 'https://www.ncdr.nat.gov.tw/', // 20,000, 2026/02/06
-      },
-      {
-        name: '新竹市政府',
-        logo: '/sponsors_logo/新竹市政府.png',
-        url: 'https://www.hccg.gov.tw/hccg/index', // 100,000, 2026/03/16
-      },
-      {
-        name: '農業部林業及自然保育署<br>航測及遙測分署',
-        logo: '/sponsors_logo/農業部林業及自然保育署航測及遙測分署.png',
-        url: 'https://www.asrs.gov.tw/', // 30,000, 2026/03/10
-      },
-      {
-        name: '經濟部地質調查<br>及礦業管理中心',
-        logo: '/sponsors_logo/經濟部地質調查及礦業管理中心.png',
-        url: 'https://www.gsmma.gov.tw/nss/p/index', // 20,000, 2026/02/10
-      },
-      {
-        name: '臺中市政府地政局',
-        logo: '/sponsors_logo/臺中市政府地政局.png',
-        url: 'https://www.land.taichung.gov.tw/', // 15,000, 2026/02/11
-      },
-      {
-        name: '臺北市政府地政局',
-        logo: '/sponsors_logo/臺北市政府地政局.png',
-        url: 'https://land.gov.taipei/', // 30,000, 2026/02/26
-      },
-      {
-        name: '臺北市政府地政局<br>土地開發總隊',
-        logo: '/sponsors_logo/臺北市政府地政局土地開發總隊.png',
-        url: 'https://lda.land.gov.taipei/', // 15,000, 2026/02/09
-      },
-      {
-        name: '臺南市政府地政局',
-        logo: '/sponsors_logo/臺南市政府地政局.jpg',
-        url: 'https://land.tainan.gov.tw/', // 20,000, 2026/02/26
+        title: '學術組織與公學會',
+        subtitle: 'Academic Organizations & Societies',
+        items: [
+          {
+            name: '中華民國測地學會',
+            logo: '/sponsors_logo/中華民國測地學會.png',
+            url: 'https://www.gsroc.org.tw/',
+          },
+        ],
       },
     ],
   },
@@ -102,81 +119,94 @@ const SPONSOR_GROUPS = [
       {
         name: '日陞空間資訊股份有限公司',
         logo: '/sponsors_logo/日陞空間資訊股份有限公司.png',
-        url: 'https://www.srgeo.com.tw/SunriseWeb/', // 30,000, 2026/03/04
+        url: 'https://www.srgeo.com.tw/SunriseWeb/',
       },
       {
         name: '互動國際數位股份有限公司',
         logo: '/sponsors_logo/互動國際數位股份有限公司.png',
-        url: 'https://www.idtech.com.tw/', // 30,000, 2026/03/27
+        url: 'https://www.idtech.com.tw/',
       },
       {
         name: '台灣世曦工程顧問股份有公司',
         logo: '/sponsors_logo/台灣世曦工程顧問股份有公司.png',
-        url: 'https://www.ceci.com.tw/', // 30,000, 2026/03/21
+        url: 'https://www.ceci.com.tw/',
       },
       {
         name: '自強工程顧問有限公司',
         logo: '/sponsors_logo/自強工程顧問有限公司.png',
-        url: 'https://www.strongco.com.tw/', // 60,000, 2026/02/24
+        url: 'https://www.strongco.com.tw/',
       },
       {
         name: '宏遠儀器有限公司',
         logo: '/sponsors_logo/宏遠儀器有限公司.jpg',
-        url: 'https://www.control-signal.com.tw/', // 10,000, 2026/03/20
+        url: 'https://www.control-signal.com.tw/',
       },
       {
         name: '坤眾科技股份有限公司',
         logo: '/sponsors_logo/坤眾科技股份有限公司.png',
-        url: 'https://www.civilmap.com.tw/', // 10,000, 2026/02/10
+        url: 'https://www.civilmap.com.tw/',
+      },
+      {
+        name: '乾坤測繪科技有限公司',
+        logo: '/sponsors_logo/乾坤測繪科技有限公司.png',
+        url: '#',
+      },
+      {
+        name: '競豪國土測繪有限公司',
+        logo: '/sponsors_logo/競豪國土測繪有限公司.png',
+        url: '#',
       },
       {
         name: '岳達科技股份有限公司',
         logo: '/sponsors_logo/岳達科技股份有限公司.png',
-        url: '#', // 20,000, 2026/03/09
+        url: '#',
       },
       {
         name: '祐鴻空間資訊有限公司',
         logo: '/sponsors_logo/祐鴻空間資訊有限公司.png',
-        url: 'https://portaly.cc/YH_G_S', // 10,000, 2026/02/05
+        url: 'https://portaly.cc/YH_G_S',
       },
       {
         name: '祐鴻測繪科技有限公司',
         logo: '/sponsors_logo/祐鴻測繪科技有限公司.png',
-        url: 'https://portaly.cc/YH_G_S', // 40,000, 2026/02/05
+        url: 'https://portaly.cc/YH_G_S',
       },
       {
         name: '康鷹空間資訊有限公司',
         logo: '/sponsors_logo/康鷹空間資訊有限公司.png',
-        url: 'https://kangying.com.tw/', // 10,000, 2026/03/05
+        url: 'https://kangying.com.tw/',
       },
       {
         name: '程昱科技有限公司',
         logo: '/sponsors_logo/程昱科技有限公司.png',
-        url: 'https://www.cytech.tw/', // 10,000, 2026/02/10
+        url: 'https://www.cytech.tw/',
       },
       {
         name: '群立科技股份有限公司',
         logo: '/sponsors_logo/群立科技股份有限公司.png',
-        url: 'https://www.geoforce.com.tw/', // 30,000, 2026/02/11
+        url: 'https://www.geoforce.com.tw/',
       },
       {
         name: '瑞竣科技股份有限公司',
         logo: '/sponsors_logo/瑞竣科技股份有限公司.png',
-        url: 'https://www.richitech.com.tw/', // 30,000, 2026/02/06
+        url: 'https://www.richitech.com.tw/',
       },
       {
         name: '詮華國土測繪股份有限公司',
         logo: '/sponsors_logo/詮華國土測繪股份有限公司.png',
-        url: 'https://www.chuanhwa.com.tw/', // 30,000, 2026/02/05
+        url: 'https://www.chuanhwa.com.tw/',
       },
       {
         name: '綠環工程技術顧問有限公司',
         logo: '/sponsors_logo/綠環工程技術顧問有限公司.png',
-        url: 'http://www.geec.com.tw/', // 10,000, 2026/03/24
+        url: 'http://www.geec.com.tw/',
       },
     ],
   },
 ]
+
+// 筆畫排序器 (使用繁體中文筆畫順序)
+const strokeSorter = new Intl.Collator('zh-Hant-u-co-stroke').compare
 
 export default function SponsorsPage() {
   return (
@@ -206,46 +236,38 @@ export default function SponsorsPage() {
                   <span className="text-stone-400 font-serif text-lg">{group.subtitle}</span>
                 </div>
 
-                {/* Logo 網格 */}
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                  {group.items.map((item, index) => (
-                    <Link
-                      key={index}
-                      href={item.url}
-                      target="_blank" // 開新視窗
-                      rel="noopener noreferrer" // 安全性設定
-                      className="group relative flex flex-col items-center justify-center p-8 bg-white border border-stone-200 rounded-sm hover:border-[#4d4c9d] hover:shadow-sm transition-all duration-300 h-48"
-                    >
-                      {/* Logo 容器 */}
-                      <div className="relative w-full h-24 mb-4 flex items-center justify-center overflow-hidden">
-                        {/* 這裡使用 grayscale (灰階) -> hover 時 grayscale-0 (彩色) 的效果 */}
-                        {/* 記得把下面的 src 改成 item.logo */}
-                        <div className="relative w-full h-full opacity-80 group-hover:opacity-100 filter group-hover:grayscale-0 transition-all duration-500">
-                          {/* 為了防止還沒放圖報錯，我先寫個文字替代，等你放圖後把 Image 註解打開 */}
-                          <Image src={item.logo} alt={item.name} fill className="object-contain" />
-                          {/* <div className="w-full h-full bg-stone-100 flex items-center justify-center text-stone-300 text-xs">
-                            LOGO 預覽區
-                          </div> */}
+                {/* 判斷是否有子分類 (subGroups) */}
+                {group.subGroups ? (
+                  <div className="space-y-16">
+                    {group.subGroups.map((sub, subIndex) => (
+                      <div key={subIndex}>
+                        {/* 子分類標題 */}
+                        <div className="flex items-center gap-2 mb-6">
+                          <div className="w-1.5 h-1.5 rounded-full bg-[#4d4c9d]/50" />
+                          <h3 className="text-xl font-bold text-stone-700">{sub.title}</h3>
+                          <span className="text-stone-400 text-md font-serif">{sub.subtitle}</span>
+                        </div>
+
+                        {/* Logo 網格 */}
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                          {[...sub.items]
+                            .sort((a, b) => strokeSorter(a.name, b.name))
+                            .map((item, index) => (
+                              <SponsorLogo key={index} item={item} />
+                            ))}
                         </div>
                       </div>
-
-                      {/* 廠商名稱 */}
-                      <h3 className="text-stone-600 font-medium text-center group-hover:text-[#4d4c9d] transition-colors">
-                        {item.name.split('<br>').map((line, i) => (
-                          <React.Fragment key={i}>
-                            {line}
-                            {i < item.name.split('<br>').length - 1 && <br />}
-                          </React.Fragment>
-                        ))}
-                      </h3>
-
-                      {/* Hover 時出現的小圖示 */}
-                      <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity text-[#4d4c9d]">
-                        <ExternalLink size={16} />
-                      </div>
-                    </Link>
-                  ))}
-                </div>
+                    ))}
+                  </div>
+                ) : (
+                  /* 無子分類的情況 */
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    {group.items &&
+                      [...group.items]
+                        .sort((a, b) => strokeSorter(a.name, b.name))
+                        .map((item, index) => <SponsorLogo key={index} item={item} />)}
+                  </div>
+                )}
               </section>
             ))}
           </div>
@@ -267,4 +289,62 @@ export default function SponsorsPage() {
       </div>
     </div>
   )
+}
+
+function SponsorLogo({ item }: { item: { name: string; logo: string; url: string } }) {
+  const isLink = item.url && item.url !== '#'
+
+  const content = (
+    <>
+      {/* Logo 容器 */}
+      <div className="relative w-full h-24 mb-4 flex items-center justify-center overflow-hidden">
+        <div
+          className={`relative w-full h-full transition-all duration-500 ${
+            isLink ? 'opacity-80 group-hover:opacity-100 filter group-hover:grayscale-0' : 'opacity-100'
+          }`}
+        >
+          <Image src={item.logo} alt={item.name} fill className="object-contain" />
+        </div>
+      </div>
+
+      {/* 廠商名稱 */}
+      <h3
+        className={`font-medium text-center transition-colors ${
+          isLink ? 'text-stone-600 group-hover:text-[#4d4c9d]' : 'text-stone-800'
+        }`}
+      >
+        {item.name.split('<br>').map((line, i) => (
+          <React.Fragment key={i}>
+            {line}
+            {i < item.name.split('<br>').length - 1 && <br />}
+          </React.Fragment>
+        ))}
+      </h3>
+
+      {/* Hover 時出現的小圖示 (僅限有連結時) */}
+      {isLink && (
+        <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity text-[#4d4c9d]">
+          <ExternalLink size={16} />
+        </div>
+      )}
+    </>
+  )
+
+  const containerClassName =
+    'relative flex flex-col items-center justify-center p-8 bg-white border border-stone-200 rounded-sm h-48 transition-all duration-300'
+
+  if (isLink) {
+    return (
+      <Link
+        href={item.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`${containerClassName} group hover:border-[#4d4c9d] hover:shadow-sm`}
+      >
+        {content}
+      </Link>
+    )
+  }
+
+  return <div className={containerClassName}>{content}</div>
 }
