@@ -95,7 +95,7 @@ export const Users: CollectionConfig = {
   },
   admin: {
     group: '使用者資料',
-    useAsTitle: 'email',
+    useAsTitle: 'name',
     // 後台列表顯示這幾個重要欄位
     defaultColumns: ['name', 'organization', 'jobTitle', 'email', 'role'],
   },

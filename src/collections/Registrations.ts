@@ -5,7 +5,7 @@ export const Registrations: CollectionConfig = {
   admin: {
     group: '報名管理',
     useAsTitle: 'id',
-    defaultColumns: ['user', 'ticketType', 'paymentStatus', 'needsCertification', 'certificationType', 'createdAt'],
+    defaultColumns: ['user', 'ticketType', 'paymentAccountLast5', 'paymentStatus', 'needsCertification', 'createdAt'],
     components: {
       beforeListTable: ['@/components/payload/RegistrationDashboard#RegistrationDashboard'],
     },
