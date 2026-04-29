@@ -243,7 +243,7 @@ export interface News {
 export interface Registration {
   id: number;
   user?: (number | null) | User;
-  ticketType: 'early-bird-student' | 'early-bird-regular' | 'standard-student' | 'standard-regular';
+  ticketType: 'early-bird-student' | 'early-bird-regular' | 'standard-student' | 'standard-regular' | 'senior';
   amount: number;
   paymentStatus: 'pending' | 'paid' | 'failed';
   contactAddress: string;

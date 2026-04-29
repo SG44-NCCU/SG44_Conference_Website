@@ -44,6 +44,13 @@ export default function SG44RegisterPage() {
       period: lang === 'zh' ? '2026.06.16 ~ 2026.08.11' : '2026.06.16 ~ 2026.08.11',
       isActive: now >= new Date('2026-06-16T00:00:00') && now < new Date('2026-08-12T00:00:00'),
     },
+    {
+      id: 'senior',
+      title: lang === 'zh' ? '長青人士 (Senior)' : 'Senior',
+      price: 0,
+      period: lang === 'zh' ? '2026.04.01 ~ 2026.08.11' : '2026.04.01 ~ 2026.08.11',
+      isActive: now < new Date('2026-08-12T00:00:00'),
+    },
   ]
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -312,6 +319,12 @@ export default function SG44RegisterPage() {
                     </span>
                   </label>
                 ))}
+              </div>
+              <div className="mt-4 text-sm text-stone-600 bg-stone-50 p-4 border border-stone-200">
+                <span className="font-semibold text-stone-800 block mb-1">長青人士報名資格 (Senior Qualification)：</span>
+                {lang === 'zh' 
+                  ? '年滿 65 歲曾參與測量與空間資訊領域教學與工作之退休公教人員（得免註冊費，需事先註冊不接受現場報名，可參與研討會之所有活動及晚宴）。'
+                  : 'Retired public/teaching personnel in the surveying and spatial information field aged 65 and above. Free registration if registered in advance (on-site registration not allowed). Can participate in all conference activities and banquet.'}
               </div>
               {errors.ticketType && (
                 <p className="text-red-600 text-sm mt-3">{errors.ticketType.message as string}</p>

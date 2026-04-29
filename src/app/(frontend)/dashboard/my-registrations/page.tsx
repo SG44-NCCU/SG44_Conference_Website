@@ -13,6 +13,7 @@ const TICKET_OPTIONS = [
   { id: 'early-bird-regular', title: '早鳥報名 - 一般人士 (Regular)' },
   { id: 'standard-student', title: '一般報名 - 學生 (Student)' },
   { id: 'standard-regular', title: '一般報名 - 一般人士 (Regular)' },
+  { id: 'senior', title: '長青人士 (Senior)' },
 ]
 
 export default function MyRegistrationsPage() {

@@ -58,6 +58,7 @@ export const Registrations: CollectionConfig = {
         { label: '早鳥報名 - 一般人士 (Regular) NT$ 2,000', value: 'early-bird-regular' },
         { label: '一般報名 - 學生 (Student) NT$ 2,200', value: 'standard-student' },
         { label: '一般報名 - 一般人士 (Regular) NT$ 2,700', value: 'standard-regular' },
+        { label: '長青人士 (Senior) NT$ 0', value: 'senior' },
       ],
     },
     {

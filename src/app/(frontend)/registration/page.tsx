@@ -31,6 +31,7 @@ const RegistrationPage = () => {
     },
     { type: '學生 ( 8/11 以前 )', typeEn: 'Student (By 8/11)', price: 'NTD 2,200' },
     { type: '一般人士 ( 8/11 以前 )', typeEn: 'Regular (By 8/11)', price: 'NTD 2,700' },
+    { type: '長青人士 ( 8/11 以前 )', typeEn: 'Senior (By 8/11)', price: '免費 (Free)' },
     {
       type: '現場報名 ( 8/20 - 8/21 )',
       typeEn: 'On-site Registration (8/20-21)',
@@ -132,13 +133,23 @@ const RegistrationPage = () => {
                   </div>
                 )
               })}
-              <div className="mt-4 bg-stone-50/50 p-4 rounded-lg flex gap-3 items-start">
-                <span className="text-[#4d4c9d] font-bold text-sm mt-0.5">*</span>
-                <p className="text-sm text-stone-500 leading-relaxed">
-                  {lang === 'zh'
-                    ? '因場地限制，現場報名不包含晚宴。'
-                    : 'Due to venue limitations, on-site registration does not include the banquet.'}
-                </p>
+              <div className="mt-4 bg-stone-50/50 p-4 rounded-lg flex flex-col gap-2">
+                <div className="flex gap-3 items-start">
+                  <span className="text-[#4d4c9d] font-bold text-sm mt-0.5">*</span>
+                  <p className="text-sm text-stone-500 leading-relaxed">
+                    {lang === 'zh'
+                      ? '因場地限制，現場報名不包含晚宴。'
+                      : 'Due to venue limitations, on-site registration does not include the banquet.'}
+                  </p>
+                </div>
+                <div className="flex gap-3 items-start">
+                  <span className="text-[#4d4c9d] font-bold text-sm mt-0.5">*</span>
+                  <p className="text-sm text-stone-500 leading-relaxed">
+                    {lang === 'zh'
+                      ? '長青人士資格：年滿 65 歲曾參與測量與空間資訊領域教學與工作之退休公教人員（得免註冊費，需事先註冊不接受現場報名，可參與研討會之所有活動及晚宴）。'
+                      : 'Senior Qualification: Retired public/teaching personnel in the surveying and spatial information field aged 65 and above. Free registration if registered in advance (on-site registration not allowed). Can participate in all conference activities and banquet.'}
+                  </p>
+                </div>
               </div>
             </div>
           </section>
