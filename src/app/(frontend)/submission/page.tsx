@@ -18,7 +18,6 @@ export default function SubmissionPage() {
     { zh: t('sub.topics.7.zh'), en: t('sub.topics.7.en') },
     { zh: t('sub.topics.8.zh'), en: t('sub.topics.8.en') },
     { zh: t('sub.topics.9.zh'), en: t('sub.topics.9.en') },
-    { zh: t('sub.topics.10.zh'), en: t('sub.topics.10.en') },
   ]
 
   const studentAwardItems = [
@@ -88,18 +87,20 @@ export default function SubmissionPage() {
             <h2 className="text-base font-semibold tracking-wide text-stone-800 border-l-[3px] border-[#4d4c9d] pl-3 mb-6">
               {t('sub.topics.title')}
             </h2>
-            <div className="grid sm:grid-cols-2 gap-3">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
               {topics.map((topic, idx) => (
                 <div
                   key={idx}
-                  className="flex gap-3 items-start bg-stone-50 border border-stone-100 rounded-lg px-4 py-3"
+                  className={`flex gap-3 items-start bg-stone-50 border border-stone-100 rounded-lg px-4 py-3 ${
+                    idx === 8 ? 'sm:col-span-2 md:col-span-1' : ''
+                  }`}
                 >
-                  <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-[#4d4c9d]/10 text-[#4d4c9d] text-xs font-semibold flex items-center justify-center">
+                  <span className="mt-0.5 flex-shrink-0 w-6 h-6 rounded-full bg-[#4d4c9d]/10 text-[#4d4c9d] text-xs font-semibold flex items-center justify-center">
                     {idx + 1}
                   </span>
                   <div>
                     <p className="font-medium text-stone-800 text-[15px]">{topic.zh}</p>
-                    <p className="text-stone-400 text-[13px] mt-0.5">{topic.en}</p>
+                    <p className="text-stone-400 text-[13px] mt-0.5 leading-tight">{topic.en}</p>
                   </div>
                 </div>
               ))}

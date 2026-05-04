@@ -295,18 +295,7 @@ export interface Abstract {
    * 特別論壇投稿可留空
    */
   subTopic?:
-    | (
-        | 'topic-1'
-        | 'topic-2'
-        | 'topic-3'
-        | 'topic-4'
-        | 'topic-5'
-        | 'topic-6'
-        | 'topic-7'
-        | 'topic-8'
-        | 'topic-9'
-        | 'topic-10'
-      )
+    | ('topic-1' | 'topic-2' | 'topic-3' | 'topic-4' | 'topic-5' | 'topic-6' | 'topic-7' | 'topic-8' | 'topic-9')
     | null;
   /**
    * 如為特別論壇邀請文章，請在此選擇；一般投稿請留空

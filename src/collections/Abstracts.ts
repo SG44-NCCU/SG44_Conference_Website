@@ -38,10 +38,6 @@ export const SUB_TOPICS = [
     label: '9. 國土政策與規劃治理 (Land Policy and Planning Governance)',
     value: 'topic-9',
   },
-  {
-    label: '10. 跨國交流專題 (Cross-Cutting International Session)',
-    value: 'topic-10',
-  },
 ]
 
 // ─── 常數：特別論壇清單 ────────────────────────────────────────────────

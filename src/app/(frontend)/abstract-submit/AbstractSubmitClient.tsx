@@ -21,7 +21,6 @@ const SUB_TOPICS = [
   { value: 'topic-7', label: '7. 環境永續與韌性防災 (Environmental Sustainability and Disaster Resilience)' },
   { value: 'topic-8', label: '8. 衛星科技與海洋測繪 (Satellite Technology and Marine Surveying)' },
   { value: 'topic-9', label: '9. 國土政策與規劃治理 (Land Policy and Planning Governance)' },
-  { value: 'topic-10', label: '10. 跨國交流專題 (Cross-Cutting International Session)' },
 ]
 
 const SPECIAL_SESSIONS = [

@@ -18,7 +18,6 @@ const TOPICS_DATA: Topic[] = [
   { id: 7, titleZh: '環境永續與韌性防災', titleEn: 'Environmental Sustainability and Disaster Resilience' },
   { id: 8, titleZh: '衛星科技與海洋測繪', titleEn: 'Satellite Technology and Marine Surveying' },
   { id: 9, titleZh: '國土政策與規劃治理', titleEn: 'Land Policy and Planning Governance' },
-  { id: 10, titleZh: '跨國交流專題', titleEn: 'Cross-Cutting International Session' },
 ]
 
 const TopicGrid: React.FC = () => {

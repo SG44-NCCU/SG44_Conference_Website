@@ -453,8 +453,6 @@ const translations: Record<Language, Record<string, string>> = {
     'sub.topics.8.en': 'Satellite Technology and Marine Surveying',
     'sub.topics.9.zh': '國土政策與規劃治理',
     'sub.topics.9.en': 'Land Policy and Planning Governance',
-    'sub.topics.10.zh': 'CROSS-CUTTING INTERNATIONAL SESSION',
-    'sub.topics.10.en': 'CROSS-CUTTING INTERNATIONAL SESSION',
 
     'sub.studentAward.1.label': '資格',
     'sub.studentAward.1.content':

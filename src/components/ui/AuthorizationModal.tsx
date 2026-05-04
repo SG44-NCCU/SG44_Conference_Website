@@ -13,7 +13,6 @@ const SUB_TOPICS_MAP: Record<string, string> = {
   'topic-7': '環境永續與韌性防災 (Environmental Sustainability and Disaster Resilience)',
   'topic-8': '衛星科技與海洋測繪 (Satellite Technology and Marine Surveying)',
   'topic-9': '國土政策與規劃治理 (Land Policy and Planning Governance)',
-  'topic-10': '跨國交流專題 (Cross-Cutting International Session)',
 }
 
 type Author = {
@@ -149,7 +148,6 @@ export function AuthorizationModal({
                         <li>環境永續與韌性防災</li>
                         <li>衛星科技與海洋測繪</li>
                         <li>國土政策與規劃治理</li>
-                        <li>跨國交流專題</li>
                       </ol>
                     </td>
                   </tr>
@@ -208,7 +206,6 @@ export function AuthorizationModal({
                         <li>Environmental Sustainability and Disaster Resilience</li>
                         <li>Satellite Technology and Marine Surveying</li>
                         <li>Land Policy and Planning Governance</li>
-                        <li>Cross-Cutting International Session</li>
                       </ol>
                     </td>
                   </tr>

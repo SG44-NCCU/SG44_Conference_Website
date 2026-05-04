@@ -175,12 +175,6 @@ export const TOPICS_DATA: Topic[] = [
     description: '空間資訊支援國土計畫、城鄉發展與土地管理。',
     iconName: 'Map',
   },
-  {
-    id: 't10',
-    title: 'International Session',
-    description: 'Cross-Cutting International Research and Case Studies.',
-    iconName: 'Globe',
-  },
 ]
 
 // 5. 主辦單位 (Organizers)
