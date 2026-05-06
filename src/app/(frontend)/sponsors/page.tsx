@@ -133,12 +133,12 @@ const SPONSOR_GROUPS = [
     items: [
       {
         name: '中翰國際科技有限公司',
-        logo: '/sponsors_logo/中翰國際科技有限公司.png',
+        logo: '/sponsors_logo/中翰國際科技有限公司.jpg',
         url: 'https://www.zhinc.com.tw/',
       },
       {
         name: '中興測量有限公司',
-        logo: '/sponsors_logo/中興測量有限公司.png',
+        logo: '/sponsors_logo/中興測量有限公司.jpg',
         url: 'http://www.chsurvey.com.tw/',
       },
       {
@@ -218,7 +218,7 @@ const SPONSOR_GROUPS = [
       },
       {
         name: '維興科技股份有限公司',
-        logo: '/sponsors_logo/維興科技股份有限公司.png',
+        logo: '/sponsors_logo/維興科技股份有限公司.jpg',
         url: 'https://www.nstc.com.tw/',
       },
       {
@@ -344,19 +344,16 @@ function SponsorLogo({ item }: { item: { name: string; logo: string; url: string
     <>
       {/* Logo 容器 */}
       {hasLogo && (
-        <div className="relative w-full h-24 mb-4">
-          <Image
-            src={item.logo}
-            alt={item.name}
-            fill
-            sizes="(max-width: 768px) 50vw, 25vw"
-            style={{ objectFit: 'contain' }}
-            className={`transition-all duration-500 ${
+        <div className="relative w-full h-24 mb-4 flex items-center justify-center overflow-hidden">
+          <div
+            className={`relative w-full h-full transition-all duration-500 ${
               isLink
-                ? 'opacity-80 group-hover:opacity-100 grayscale group-hover:grayscale-0'
+                ? 'opacity-80 group-hover:opacity-100 filter group-hover:grayscale-0'
                 : 'opacity-100'
             }`}
-          />
+          >
+            <Image src={item.logo} alt={item.name} fill className="object-contain" />
+          </div>
         </div>
       )}
 
