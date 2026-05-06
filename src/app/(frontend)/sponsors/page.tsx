@@ -344,7 +344,7 @@ function SponsorLogo({ item }: { item: { name: string; logo: string; url: string
     <>
       {/* Logo 容器 */}
       {hasLogo && (
-        <div className="relative w-full h-28 mb-4 flex items-center justify-center overflow-hidden">
+        <div className="relative w-full h-24 mb-4 flex items-center justify-center overflow-hidden">
           <div
             className={`relative w-full h-full transition-all duration-500 ${
               isLink
