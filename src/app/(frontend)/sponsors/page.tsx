@@ -207,7 +207,7 @@ const SPONSOR_GROUPS = [
         url: 'https://kangying.com.tw/',
       },
       {
-        name: '創聚環境管理顧問股份有限公司',
+        name: '創聚環境管理顧問<br>股份有限公司',
         logo: '/sponsors_logo/創聚環境管理顧問股份有限公司.png',
         url: 'https://ifem.com.tw/',
       },
@@ -344,7 +344,7 @@ function SponsorLogo({ item }: { item: { name: string; logo: string; url: string
     <>
       {/* Logo 容器 */}
       {hasLogo && (
-        <div className="relative w-full h-24 mb-4 flex items-center justify-center overflow-hidden">
+        <div className="relative w-full h-28 mb-4 flex items-center justify-center overflow-hidden">
           <div
             className={`relative w-full h-full transition-all duration-500 ${
               isLink
