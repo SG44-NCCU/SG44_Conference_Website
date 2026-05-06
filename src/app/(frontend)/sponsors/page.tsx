@@ -104,9 +104,24 @@ const SPONSOR_GROUPS = [
         subtitle: 'Academic Organizations & Societies',
         items: [
           {
+            name: '中華民國地籍測量學會',
+            logo: '/sponsors_logo/中華民國地籍測量學會.png',
+            url: 'https://www.cadastralsurvey.org.tw/',
+          },
+          {
             name: '中華民國測地學會',
             logo: '/sponsors_logo/中華民國測地學會.png',
             url: 'https://www.gsroc.org.tw/',
+          },
+          {
+            name: '中國測量工程學會',
+            logo: '/sponsors_logo/中國測量工程學會.png',
+            url: 'https://www.survey.org.tw/',
+          },
+          {
+            name: '台北市測量技師公會',
+            logo: '',
+            url: '#',
           },
         ],
       },
@@ -116,6 +131,16 @@ const SPONSOR_GROUPS = [
     title: '贊助廠商',
     subtitle: 'Sponsors',
     items: [
+      {
+        name: '中翰國際科技有限公司',
+        logo: '/sponsors_logo/中翰國際科技有限公司.png',
+        url: 'https://www.zhinc.com.tw/',
+      },
+      {
+        name: '中興測量有限公司',
+        logo: '/sponsors_logo/中興測量有限公司.png',
+        url: 'http://www.chsurvey.com.tw/',
+      },
       {
         name: '日陞空間資訊股份有限公司',
         logo: '/sponsors_logo/日陞空間資訊股份有限公司.png',
@@ -162,6 +187,11 @@ const SPONSOR_GROUPS = [
         url: '#',
       },
       {
+        name: '昱展測繪股份有限公司',
+        logo: '/sponsors_logo/昱展測繪股份有限公司.png',
+        url: '#',
+      },
+      {
         name: '祐鴻空間資訊有限公司',
         logo: '/sponsors_logo/祐鴻空間資訊有限公司.png',
         url: 'https://portaly.cc/YH_G_S',
@@ -177,9 +207,19 @@ const SPONSOR_GROUPS = [
         url: 'https://kangying.com.tw/',
       },
       {
+        name: '創聚環境管理顧問股份有限公司',
+        logo: '/sponsors_logo/創聚環境管理顧問股份有限公司.png',
+        url: 'https://ifem.com.tw/',
+      },
+      {
         name: '程昱科技有限公司',
         logo: '/sponsors_logo/程昱科技有限公司.png',
         url: 'https://www.cytech.tw/',
+      },
+      {
+        name: '維興科技股份有限公司',
+        logo: '/sponsors_logo/維興科技股份有限公司.png',
+        url: 'https://www.nstc.com.tw/',
       },
       {
         name: '群立科技股份有限公司',
@@ -200,6 +240,11 @@ const SPONSOR_GROUPS = [
         name: '綠環工程技術顧問有限公司',
         logo: '/sponsors_logo/綠環工程技術顧問有限公司.png',
         url: 'http://www.geec.com.tw/',
+      },
+      {
+        name: '迅聯光電有限公司',
+        logo: '/sponsors_logo/迅聯光電有限公司.jpg',
+        url: 'https://www.linkfast.com.tw/',
       },
     ],
   },
@@ -293,25 +338,30 @@ export default function SponsorsPage() {
 
 function SponsorLogo({ item }: { item: { name: string; logo: string; url: string } }) {
   const isLink = item.url && item.url !== '#'
+  const hasLogo = item.logo && item.logo !== ''
 
   const content = (
     <>
       {/* Logo 容器 */}
-      <div className="relative w-full h-24 mb-4 flex items-center justify-center overflow-hidden">
-        <div
-          className={`relative w-full h-full transition-all duration-500 ${
-            isLink ? 'opacity-80 group-hover:opacity-100 filter group-hover:grayscale-0' : 'opacity-100'
-          }`}
-        >
-          <Image src={item.logo} alt={item.name} fill className="object-contain" />
+      {hasLogo && (
+        <div className="relative w-full h-24 mb-4 flex items-center justify-center overflow-hidden">
+          <div
+            className={`relative w-full h-full transition-all duration-500 ${
+              isLink
+                ? 'opacity-80 group-hover:opacity-100 filter group-hover:grayscale-0'
+                : 'opacity-100'
+            }`}
+          >
+            <Image src={item.logo} alt={item.name} fill className="object-contain" />
+          </div>
         </div>
-      </div>
+      )}
 
       {/* 廠商名稱 */}
       <h3
         className={`font-medium text-center transition-colors ${
           isLink ? 'text-stone-600 group-hover:text-[#4d4c9d]' : 'text-stone-800'
-        }`}
+        } ${!hasLogo ? 'text-lg px-2' : ''}`}
       >
         {item.name.split('<br>').map((line, i) => (
           <React.Fragment key={i}>
