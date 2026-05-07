@@ -33,6 +33,11 @@ const SPONSOR_GROUPS = [
         subtitle: 'Government & Research Institutions',
         items: [
           {
+            name: '內政部地政司',
+            logo: '/sponsors_logo/內政部地政司.png',
+            url: 'https://www.land.moi.gov.tw/',
+          },
+          {
             name: '內政部國家公園署',
             logo: '/sponsors_logo/內政部國家公園署.png',
             url: 'https://www.nps.gov.tw/ch',
@@ -172,16 +177,6 @@ const SPONSOR_GROUPS = [
         url: 'https://www.civilmap.com.tw/',
       },
       {
-        name: '乾坤測繪科技有限公司',
-        logo: '/sponsors_logo/乾坤測繪科技有限公司.png',
-        url: '#',
-      },
-      {
-        name: '競豪國土測繪有限公司',
-        logo: '/sponsors_logo/競豪國土測繪有限公司.png',
-        url: '#',
-      },
-      {
         name: '岳達科技股份有限公司',
         logo: '/sponsors_logo/岳達科技股份有限公司.png',
         url: '#',
@@ -192,6 +187,11 @@ const SPONSOR_GROUPS = [
         url: '#',
       },
       {
+        name: '迅聯光電有限公司',
+        logo: '/sponsors_logo/迅聯光電有限公司.jpg',
+        url: 'https://www.linkfast.com.tw/',
+      },
+      {
         name: '祐鴻空間資訊有限公司',
         logo: '/sponsors_logo/祐鴻空間資訊有限公司.png',
         url: 'https://portaly.cc/YH_G_S',
@@ -200,6 +200,11 @@ const SPONSOR_GROUPS = [
         name: '祐鴻測繪科技有限公司',
         logo: '/sponsors_logo/祐鴻測繪科技有限公司.png',
         url: 'https://portaly.cc/YH_G_S',
+      },
+      {
+        name: '乾坤測繪科技有限公司',
+        logo: '/sponsors_logo/乾坤測繪科技有限公司.png',
+        url: '#',
       },
       {
         name: '康鷹空間資訊有限公司',
@@ -217,11 +222,6 @@ const SPONSOR_GROUPS = [
         url: 'https://www.cytech.tw/',
       },
       {
-        name: '維興科技股份有限公司',
-        logo: '/sponsors_logo/維興科技股份有限公司.jpg',
-        url: 'https://www.nstc.com.tw/',
-      },
-      {
         name: '群立科技股份有限公司',
         logo: '/sponsors_logo/群立科技股份有限公司.png',
         url: 'https://www.geoforce.com.tw/',
@@ -237,14 +237,19 @@ const SPONSOR_GROUPS = [
         url: 'https://www.chuanhwa.com.tw/',
       },
       {
+        name: '維興科技股份有限公司',
+        logo: '/sponsors_logo/維興科技股份有限公司.jpg',
+        url: 'https://www.nstc.com.tw/',
+      },
+      {
         name: '綠環工程技術顧問有限公司',
         logo: '/sponsors_logo/綠環工程技術顧問有限公司.png',
         url: 'http://www.geec.com.tw/',
       },
       {
-        name: '迅聯光電有限公司',
-        logo: '/sponsors_logo/迅聯光電有限公司.jpg',
-        url: 'https://www.linkfast.com.tw/',
+        name: '競豪國土測繪有限公司',
+        logo: '/sponsors_logo/競豪國土測繪有限公司.png',
+        url: '#',
       },
     ],
   },
