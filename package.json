@@ -67,6 +67,7 @@
       "sharp",
       "esbuild",
       "unrs-resolver"
-    ]
+    ],
+    "ignoredBuiltDependencies": []
   }
 }
