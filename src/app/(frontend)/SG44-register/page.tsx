@@ -1,12 +1,12 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
-import { useAuth } from '@/providers/Auth'
-import { useForm } from 'react-hook-form'
-import { useRouter } from 'next/navigation'
-import { Loader2 } from 'lucide-react'
 import SectionTitle from '@/components/ui/SectionTitle'
 import { useLanguage } from '@/contexts/LanguageContext'
+import { useAuth } from '@/providers/Auth'
+import { Loader2 } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
 
 export default function SG44RegisterPage() {
   const { user, loading } = useAuth()
@@ -51,6 +51,27 @@ export default function SG44RegisterPage() {
       period: lang === 'zh' ? '2026.04.01 ~ 2026.08.11' : '2026.04.01 ~ 2026.08.11',
       isActive: now < new Date('2026-08-12T00:00:00'),
     },
+    {
+      id: 'vip',
+      title: lang === 'zh' ? '大會邀請貴賓 (VIP)' : 'VIP Guest',
+      price: 0,
+      period: lang === 'zh' ? '2026.04.01 ~ 2026.08.11' : '2026.04.01 ~ 2026.08.11',
+      isActive: now < new Date('2026-08-12T00:00:00'),
+    },
+    {
+      id: 'sponsor',
+      title: lang === 'zh' ? '贊助廠商代表 (Sponsor)' : 'Sponsor Representative',
+      price: 0,
+      period: lang === 'zh' ? '2026.04.01 ~ 2026.08.11' : '2026.04.01 ~ 2026.08.11',
+      isActive: now < new Date('2026-08-12T00:00:00'),
+    },
+    {
+      id: 'government',
+      title: lang === 'zh' ? '政府機關代表 (Government)' : 'Government Representative',
+      price: 0,
+      period: lang === 'zh' ? '2026.04.01 ~ 2026.08.11' : '2026.04.01 ~ 2026.08.11',
+      isActive: now < new Date('2026-08-12T00:00:00'),
+    },
   ]
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -66,6 +87,8 @@ export default function SG44RegisterPage() {
 
   const watchTicketType = watch('ticketType')
   const watchParticipantRole = watch('participantRole')
+  const selectedTicket = TICKET_OPTIONS.find((ticket) => ticket.id === watchTicketType)
+  const isPaidTicket = selectedTicket?.price > 0
 
   const watchMealDay1 = watch('mealDay1')
   const watchMealDay2 = watch('mealDay2')
@@ -257,7 +280,7 @@ export default function SG44RegisterPage() {
               {t('sg44.payment.info')} (Payment Instructions)
             </h3>
             <p className="text-sm text-stone-600 mb-4">
-              注意事項：系統於表單內強制要求填寫匯款對帳資訊（帳號末五碼與日期），因此請務必於所選時間完成匯款，我們將以此進行人工對帳審核。
+              注意事項：若您選擇免註冊費票種，則無需填寫匯款帳號末五碼與匯款日期；若您選擇付費票種，請務必填寫，以利大會對帳審核。
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-sm bg-stone-50 p-6 border border-stone-200">
               <div>
@@ -282,7 +305,7 @@ export default function SG44RegisterPage() {
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-12 pb-20">
             <section>
               <h3 className="text-lg font-semibold tracking-wide text-stone-800 border-b border-stone-300 pb-2 mb-6">
-                1. 報名費與票種選擇 (Ticketing)
+                1. 註冊/報名費與票種選擇 (Ticketing)
               </h3>
               <div className="space-y-3">
                 {TICKET_OPTIONS.map((ticket) => (
@@ -321,8 +344,10 @@ export default function SG44RegisterPage() {
                 ))}
               </div>
               <div className="mt-4 text-sm text-stone-600 bg-stone-50 p-4 border border-stone-200">
-                <span className="font-semibold text-stone-800 block mb-1">長青人士報名資格 (Senior Qualification)：</span>
-                {lang === 'zh' 
+                <span className="font-semibold text-stone-800 block mb-1">
+                  長青人士報名資格 (Senior Qualification)：
+                </span>
+                {lang === 'zh'
                   ? '年滿 65 歲曾參與測量與空間資訊領域教學與工作之退休公教人員（得免註冊費，需事先註冊不接受現場報名，可參與研討會之所有活動及晚宴）。'
                   : 'Retired public/teaching personnel in the surveying and spatial information field aged 65 and above. Free registration if registered in advance (on-site registration not allowed). Can participate in all conference activities and banquet.'}
               </div>
@@ -407,8 +432,13 @@ export default function SG44RegisterPage() {
                     <option value="attendee">一般與會者 (Attendee)</option>
                     <option value="staff">主/協辦單位同仁 (Staff)</option>
                     <option value="vip">大會邀請貴賓 (VIP)</option>
+                    <option value="sponsor">贊助廠商代表 (Sponsor)</option>
+                    <option value="government">政府機關代表 (Government)</option>
                     <option value="other">其他 (Other)</option>
                   </select>
+                  <p className="mt-2 text-sm text-stone-500">
+                    若您為大會邀請貴賓、贊助廠商代表或政府機關代表，請選擇對應身分並在票種選擇中選擇免註冊費票種。
+                  </p>
                   {errors.participantRole && (
                     <p className="text-red-600 text-sm mt-2">
                       {errors.participantRole.message as string}
@@ -456,16 +486,17 @@ export default function SG44RegisterPage() {
                   </label>
                   <input
                     {...register('paymentAccountLast5', {
-                      required: '請輸入匯款對帳用的帳號後五碼',
+                      required: isPaidTicket ? '請輸入匯款對帳用的帳號後五碼' : false,
                       pattern: {
                         value: /^\d{5}$/,
                         message: '格式錯誤，請輸入確切的「5位數字」',
                       },
                     })}
+                    disabled={!isPaidTicket}
                     type="text"
                     maxLength={5}
                     placeholder="例如: 12345"
-                    className="w-full px-4 py-2 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none font-mono tracking-widest rounded-none text-sm transition-colors"
+                    className="w-full px-4 py-2 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none font-mono tracking-widest rounded-none text-sm transition-colors disabled:cursor-not-allowed disabled:bg-stone-100"
                   />
                   {errors.paymentAccountLast5 && (
                     <p className="text-red-600 text-sm mt-2">
@@ -478,13 +509,21 @@ export default function SG44RegisterPage() {
                     匯款日期 (Payment Date) <span className="text-red-500">*</span>
                   </label>
                   <input
-                    {...register('paymentDate', { required: '請選取您實際操作匯款的日期' })}
+                    {...register('paymentDate', {
+                      required: isPaidTicket ? '請選取您實際操作匯款的日期' : false,
+                    })}
+                    disabled={!isPaidTicket}
                     type="date"
-                    className="w-full px-4 py-2 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none cursor-text rounded-none text-sm transition-colors text-stone-800"
+                    className="w-full px-4 py-2 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none cursor-text rounded-none text-sm transition-colors text-stone-800 disabled:cursor-not-allowed disabled:bg-stone-100"
                   />
                   {errors.paymentDate && (
                     <p className="text-red-600 text-sm mt-2">
                       {errors.paymentDate.message as string}
+                    </p>
+                  )}
+                  {!isPaidTicket && watchTicketType && (
+                    <p className="text-sm text-stone-500 mt-2">
+                      您所選擇的票種為免註冊費，匯款對帳資訊可留空。
                     </p>
                   )}
                 </div>
@@ -670,6 +709,23 @@ export default function SG44RegisterPage() {
               <h3 className="text-lg font-semibold tracking-wide text-stone-800 border-b border-stone-300 pb-2 mb-6">
                 6. 認證時數 / 積分需求 (Certification Needs)
               </h3>
+              <div className="bg-stone-50 p-4 border border-stone-200 text-sm text-stone-700 rounded-none mb-6">
+                <p className="font-semibold text-stone-800 mb-3">認證注意事項</p>
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>
+                    本次認證僅限完成本屆正式報名且符合付費、投稿或贊助資格之與會者，免註冊費名額不得作為認證資格之依據。
+                  </li>
+                  <li>
+                    申請認證之人員須為在職且執業中之公務人員或具有效技師資格者；如無相關身分或證照，請勿勾選認證需求。
+                  </li>
+                  <li>
+                    如所填資料不完整或不符合認證資格，致無法通過認證，主辦單位概不負責，亦不另行通知。
+                  </li>
+                  <li>
+                    技師科別請於下拉式選單中選擇；未列出之科別恕不接受其他別稱，本會不保證所有科別皆能適用認證資格。
+                  </li>
+                </ul>
+              </div>
               <div className="flex flex-col gap-6">
                 <div>
                   <label className="block text-sm font-semibold tracking-wide text-stone-800 mb-2">
@@ -731,6 +787,12 @@ export default function SG44RegisterPage() {
                     {errors.certificationType && (
                       <p className="text-red-600 text-sm mt-2">
                         {errors.certificationType.message as string}
+                      </p>
+                    )}
+
+                    {watchNeedsCertification === 'yes' && !isPaidTicket && (
+                      <p className="text-sm text-stone-600 mt-2 bg-yellow-50 border border-yellow-200 p-3 rounded-none">
+                        注意：您目前選擇的票種為免註冊費票種，如非正式繳費、投稿或贊助者，請勿勾選認證。若仍勾選，本會保留是否受理的權利。
                       </p>
                     )}
 
@@ -856,14 +918,24 @@ export default function SG44RegisterPage() {
                           <label className="block text-sm text-stone-600 mb-1">
                             科別 <span className="text-red-500">*</span>{' '}
                             <span className="text-xs text-stone-400 font-normal">
-                              (例如: 土木工程)
+                              (請從下拉選單選擇)
                             </span>
                           </label>
-                          <input
-                            type="text"
+                          <select
                             {...register('techSpecialty', { required: '請填寫科別' })}
                             className="w-full px-4 py-2 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none rounded-none text-sm transition-colors"
-                          />
+                          >
+                            <option value="">請選擇科別</option>
+                            <option value="civilEngineering">土木工程</option>
+                            <option value="surveying">測量工程</option>
+                            <option value="spatialInformation">空間資訊</option>
+                            <option value="landAdministration">地政</option>
+                            <option value="architecture">建築</option>
+                            <option value="environmentalEngineering">環境工程</option>
+                            <option value="waterResources">水利工程</option>
+                            <option value="transportationEngineering">交通工程</option>
+                            <option value="other">其他</option>
+                          </select>
                           {errors.techSpecialty && (
                             <p className="text-red-600 text-sm mt-1">
                               {errors.techSpecialty.message as string}

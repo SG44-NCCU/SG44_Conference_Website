@@ -243,11 +243,29 @@ export interface News {
 export interface Registration {
   id: number;
   user?: (number | null) | User;
-  ticketType: 'early-bird-student' | 'early-bird-regular' | 'standard-student' | 'standard-regular' | 'senior';
+  ticketType:
+    | 'early-bird-student'
+    | 'early-bird-regular'
+    | 'standard-student'
+    | 'standard-regular'
+    | 'senior'
+    | 'vip'
+    | 'sponsor'
+    | 'government';
   amount: number;
   paymentStatus: 'pending' | 'paid' | 'failed';
   contactAddress: string;
-  participantRole: 'presenter' | 'keynote' | 'host' | 'discussant' | 'attendee' | 'staff' | 'vip' | 'other';
+  participantRole:
+    | 'presenter'
+    | 'keynote'
+    | 'host'
+    | 'discussant'
+    | 'attendee'
+    | 'staff'
+    | 'vip'
+    | 'sponsor'
+    | 'government'
+    | 'other';
   participantRoleOther?: string | null;
   presentationType?: ('oral' | 'poster' | 'both' | 'none') | null;
   paymentAccountLast5: string;

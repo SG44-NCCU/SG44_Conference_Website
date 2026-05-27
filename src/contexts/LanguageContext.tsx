@@ -36,7 +36,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Page Titles
     'page.news.title': '最新消息',
     'page.news.subtitle': 'News & Announcements',
-    'page.registration.title': '報名資訊',
+    'page.registration.title': '註冊/報名資訊',
     'page.registration.subtitle': 'Registration Information',
     'page.submission.title': '投稿說明',
     'page.submission.subtitle': 'Submission Guide',
@@ -109,14 +109,14 @@ const translations: Record<Language, Record<string, string>> = {
     'validation.passwordMatch': '密碼與確認密碼不符',
     'validation.passwordLength': '密碼至少需 6 個字元',
     // SG44 Register form
-    'sg44.title': '研討會報名系統',
+    'sg44.title': '研討會註冊/報名系統',
     'sg44.subtitle': 'Conference Registration',
     'sg44.desc':
       '歡迎報名【第44屆測量及空間資訊研討會】。大會將於 2026.08.20 ~ 2026.08.21 假國立政治大學舉辦。',
     'sg44.payment.info': '繳費資訊',
     'sg44.payment.method': '繳費方式',
     'sg44.payment.bank': '銀行轉帳 (808 玉山銀行)',
-    'sg44.step1': '1. 報名費與票種選擇',
+    'sg44.step1': '1. 註冊/報名費與票種選擇',
     'sg44.step2': '2. 基本資料',
     'sg44.step3': '3. 會議參與資訊',
     'sg44.step4': '4. 繳費對帳資訊',
@@ -562,7 +562,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Page Titles
     'page.news.title': '最新消息',
     'page.news.subtitle': 'News & Announcements',
-    'page.registration.title': '報名資訊',
+    'page.registration.title': '註冊/報名資訊',
     'page.registration.subtitle': 'Registration Information',
     'page.submission.title': '投稿說明',
     'page.submission.subtitle': 'Submission Guide',
@@ -601,7 +601,8 @@ const translations: Record<Language, Record<string, string>> = {
     'login.registerNow': 'Register Now',
     'login.error.default': 'Login failed, please try again.',
     'login.error.credentials': 'Incorrect email or password, please check and try again.',
-    'login.error.unverified': 'Your account is not verified, please check your email for the activation link.',
+    'login.error.unverified':
+      'Your account is not verified, please check your email for the activation link.',
     // Register page
     'register.title': 'Create Member Account',
     'register.name': 'Full Name',
@@ -626,8 +627,10 @@ const translations: Record<Language, Record<string, string>> = {
     'register.haveAccount': 'Already have an account?',
     'register.login': 'Login',
     'register.success.title': 'Registration Successful!',
-    'register.success.msg': 'A verification email has been sent. Please check your inbox and click the link to activate your account.',
-    'register.error.exists': 'This Email has already been registered. Please login or use forgot password.',
+    'register.success.msg':
+      'A verification email has been sent. Please check your inbox and click the link to activate your account.',
+    'register.error.exists':
+      'This Email has already been registered. Please login or use forgot password.',
     'register.error.validation': 'Invalid data format, please check your input.',
     // Recover Password
     'recover.title': 'Forgot Password',

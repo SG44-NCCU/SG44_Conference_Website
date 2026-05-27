@@ -5,7 +5,14 @@ export const Registrations: CollectionConfig = {
   admin: {
     group: '報名管理',
     useAsTitle: 'id',
-    defaultColumns: ['user', 'ticketType', 'paymentAccountLast5', 'paymentStatus', 'needsCertification', 'createdAt'],
+    defaultColumns: [
+      'user',
+      'ticketType',
+      'paymentAccountLast5',
+      'paymentStatus',
+      'needsCertification',
+      'createdAt',
+    ],
     components: {
       beforeListTable: ['@/components/payload/RegistrationDashboard#RegistrationDashboard'],
     },
@@ -59,6 +66,9 @@ export const Registrations: CollectionConfig = {
         { label: '一般報名 - 學生 (Student) NT$ 2,200', value: 'standard-student' },
         { label: '一般報名 - 一般人士 (Regular) NT$ 2,700', value: 'standard-regular' },
         { label: '長青人士 (Senior) NT$ 0', value: 'senior' },
+        { label: '大會邀請貴賓 (VIP) NT$ 0', value: 'vip' },
+        { label: '贊助廠商代表 (Sponsor) NT$ 0', value: 'sponsor' },
+        { label: '政府機關代表 (Government) NT$ 0', value: 'government' },
       ],
     },
     {
@@ -113,6 +123,8 @@ export const Registrations: CollectionConfig = {
         { label: '一般與會者 (Attendee)', value: 'attendee' },
         { label: '主/協辦單位同仁 (Staff)', value: 'staff' },
         { label: '大會邀請貴賓 (VIP)', value: 'vip' },
+        { label: '贊助廠商代表 (Sponsor)', value: 'sponsor' },
+        { label: '政府機關代表 (Government)', value: 'government' },
         { label: '其他 (Other)', value: 'other' },
       ],
     },
@@ -251,7 +263,8 @@ export const Registrations: CollectionConfig = {
       type: 'text',
       label: '姓名 (公務人員)',
       admin: {
-        condition: (data) => data?.needsCertification === 'yes' && data?.certificationType === 'civilServant',
+        condition: (data) =>
+          data?.needsCertification === 'yes' && data?.certificationType === 'civilServant',
       },
     },
     {
@@ -259,7 +272,8 @@ export const Registrations: CollectionConfig = {
       type: 'text',
       label: '身分證字號 (公務人員)',
       admin: {
-        condition: (data) => data?.needsCertification === 'yes' && data?.certificationType === 'civilServant',
+        condition: (data) =>
+          data?.needsCertification === 'yes' && data?.certificationType === 'civilServant',
       },
     },
     {
@@ -271,7 +285,8 @@ export const Registrations: CollectionConfig = {
           pickerAppearance: 'dayOnly',
           displayFormat: 'yyyy-MM-dd',
         },
-        condition: (data) => data?.needsCertification === 'yes' && data?.certificationType === 'civilServant',
+        condition: (data) =>
+          data?.needsCertification === 'yes' && data?.certificationType === 'civilServant',
       },
     },
     {
@@ -279,7 +294,8 @@ export const Registrations: CollectionConfig = {
       type: 'text',
       label: '服務單位 (公務人員)',
       admin: {
-        condition: (data) => data?.needsCertification === 'yes' && data?.certificationType === 'civilServant',
+        condition: (data) =>
+          data?.needsCertification === 'yes' && data?.certificationType === 'civilServant',
       },
     },
     {
@@ -287,7 +303,8 @@ export const Registrations: CollectionConfig = {
       type: 'text',
       label: '聯絡電話 (公務人員)',
       admin: {
-        condition: (data) => data?.needsCertification === 'yes' && data?.certificationType === 'civilServant',
+        condition: (data) =>
+          data?.needsCertification === 'yes' && data?.certificationType === 'civilServant',
       },
     },
     // 技師訓練積分欄位
@@ -296,7 +313,8 @@ export const Registrations: CollectionConfig = {
       type: 'text',
       label: '姓名 (技師)',
       admin: {
-        condition: (data) => data?.needsCertification === 'yes' && data?.certificationType === 'technician',
+        condition: (data) =>
+          data?.needsCertification === 'yes' && data?.certificationType === 'technician',
       },
     },
     {
@@ -304,7 +322,8 @@ export const Registrations: CollectionConfig = {
       type: 'text',
       label: '身分證字號 (技師)',
       admin: {
-        condition: (data) => data?.needsCertification === 'yes' && data?.certificationType === 'technician',
+        condition: (data) =>
+          data?.needsCertification === 'yes' && data?.certificationType === 'technician',
       },
     },
     {
@@ -312,7 +331,8 @@ export const Registrations: CollectionConfig = {
       type: 'text',
       label: '科別 (技師)',
       admin: {
-        condition: (data) => data?.needsCertification === 'yes' && data?.certificationType === 'technician',
+        condition: (data) =>
+          data?.needsCertification === 'yes' && data?.certificationType === 'technician',
         description: '例如：土木工程',
       },
     },

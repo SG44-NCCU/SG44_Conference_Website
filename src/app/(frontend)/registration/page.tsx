@@ -1,9 +1,8 @@
 'use client'
 
-import React from 'react'
-import Link from 'next/link'
-import { useLanguage } from '@/contexts/LanguageContext'
 import SectionTitle from '@/components/ui/SectionTitle'
+import { useLanguage } from '@/contexts/LanguageContext'
+import Link from 'next/link'
 
 const RegistrationPage = () => {
   const { lang, t } = useLanguage()
@@ -117,7 +116,7 @@ const RegistrationPage = () => {
           {/* 2. Registration Fees */}
           <section id="fees">
             <h2 className="text-base font-semibold tracking-wide text-stone-800 border-l-[3px] border-[#4d4c9d] pl-3 mb-6">
-              {lang === 'zh' ? '二、報名費用' : 'II. Registration Fees'}
+              {lang === 'zh' ? '二、註冊/報名費用' : 'II. Registration / Ticket Fees'}
             </h2>
             <div className="space-y-3">
               {fees.map((item, idx) => {
