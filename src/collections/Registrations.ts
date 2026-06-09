@@ -154,13 +154,13 @@ export const Registrations: CollectionConfig = {
       name: 'paymentAccountLast5',
       type: 'text',
       label: '匯款帳號末五碼',
-      required: true,
+      // required 由前端依票種動態驗證（免費票種不需填）
     },
     {
       name: 'paymentDate',
       type: 'date',
       label: '匯款日期',
-      required: true,
+      // required 由前端依票種動態驗證（免費票種不需填）
       admin: {
         date: {
           pickerAppearance: 'dayOnly',
