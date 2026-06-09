@@ -22,7 +22,10 @@ export const exportCsvEndpoint = async (req: PayloadRequest) => {
     const headers = [
       '報名編號',
       '使用者姓名',
+      '性別',
+      '出生年月日',
       '使用者信箱',
+      '手機號碼',
       '所屬單位',
       '職稱',
       '聯絡地址',
@@ -44,24 +47,29 @@ export const exportCsvEndpoint = async (req: PayloadRequest) => {
       '認證類型',
       '姓名(公務/技師)',
       '身分證字號',
-      '出生日期',
-      '服務單位',
-      '聯絡電話',
+      '出生日期(認證)',
+      '服務單位(認證)',
+      '聯絡電話(認證)',
       '技師科別',
       '備註',
       '報名時間',
     ]
+
+    const genderMap: Record<string, string> = { male: '男', female: '女', other: '不透露/其他' }
 
     // Create CSV rows
     const rows = docs.map((doc: any) => {
       // 根據認證類型決定顯示哪些欄位
       const isCivil = doc.certificationType === 'civilServant'
       const isTech = doc.certificationType === 'technician'
-      
+
       return [
         doc.id,
         doc.user?.name || '',
+        genderMap[doc.user?.gender] || '',
+        doc.user?.birthday ? new Date(doc.user.birthday).toISOString().split('T')[0] : '',
         doc.user?.email || '',
+        doc.user?.phone || '',
         doc.user?.organization || '',
         doc.user?.jobTitle || '',
         doc.contactAddress || '',
@@ -87,7 +95,7 @@ export const exportCsvEndpoint = async (req: PayloadRequest) => {
         isCivil ? doc.certOrganization : '',
         isCivil ? doc.certPhone : '',
         isTech ? doc.techSpecialty : '',
-        (doc.remarks || '').replace(/(\r\n|\n|\r)/gm, ' '), // sanitize newlines in remarks
+        (doc.remarks || '').replace(/(\r\n|\n|\r)/gm, ' '),
         new Date(doc.createdAt).toLocaleString('zh-TW'),
       ]
     })

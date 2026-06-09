@@ -46,11 +46,124 @@ export const Registrations: CollectionConfig = {
       required: true,
       hasMany: false,
       admin: {
-        condition: () => true, // Let it be assigned, but in frontend we default to the logged in user
+        condition: () => true,
       },
       access: {
-        // Prevent users from changing the user assignment after creation (unless admin)
         update: ({ req: { user } }) => user?.role === 'admin',
+      },
+    },
+
+    // === 使用者基本資料（唯讀展示，由 afterRead hook 填入）===
+    {
+      name: '_userName',
+      type: 'text',
+      label: '姓名 (來自會員資料)',
+      virtual: true,
+      admin: {
+        readOnly: true,
+        description: '此欄位自動從關聯的使用者帳號讀取，不可編輯。',
+      },
+      hooks: {
+        afterRead: [
+          ({ siblingData }) => {
+            const u = siblingData?.user
+            if (!u || typeof u === 'string' || typeof u === 'number') return undefined
+            return (u as any).name || undefined
+          },
+        ],
+      },
+    },
+    {
+      name: '_userPhone',
+      type: 'text',
+      label: '手機 (來自會員資料)',
+      virtual: true,
+      admin: {
+        readOnly: true,
+      },
+      hooks: {
+        afterRead: [
+          ({ siblingData }) => {
+            const u = siblingData?.user
+            if (!u || typeof u === 'string' || typeof u === 'number') return undefined
+            return (u as any).phone || undefined
+          },
+        ],
+      },
+    },
+    {
+      name: '_userOrganization',
+      type: 'text',
+      label: '所屬單位 (來自會員資料)',
+      virtual: true,
+      admin: {
+        readOnly: true,
+      },
+      hooks: {
+        afterRead: [
+          ({ siblingData }) => {
+            const u = siblingData?.user
+            if (!u || typeof u === 'string' || typeof u === 'number') return undefined
+            return (u as any).organization || undefined
+          },
+        ],
+      },
+    },
+    {
+      name: '_userJobTitle',
+      type: 'text',
+      label: '職稱 (來自會員資料)',
+      virtual: true,
+      admin: {
+        readOnly: true,
+      },
+      hooks: {
+        afterRead: [
+          ({ siblingData }) => {
+            const u = siblingData?.user
+            if (!u || typeof u === 'string' || typeof u === 'number') return undefined
+            return (u as any).jobTitle || undefined
+          },
+        ],
+      },
+    },
+    {
+      name: '_userGender',
+      type: 'text',
+      label: '性別 (來自會員資料)',
+      virtual: true,
+      admin: {
+        readOnly: true,
+      },
+      hooks: {
+        afterRead: [
+          ({ siblingData }) => {
+            const u = siblingData?.user
+            if (!u || typeof u === 'string' || typeof u === 'number') return undefined
+            const map: Record<string, string> = { male: '男', female: '女', other: '不透露/其他' }
+            return map[(u as any).gender] || undefined
+          },
+        ],
+      },
+    },
+    {
+      name: '_userBirthday',
+      type: 'text',
+      label: '出生年月日 (來自會員資料)',
+      virtual: true,
+      admin: {
+        readOnly: true,
+      },
+      hooks: {
+        afterRead: [
+          ({ siblingData }) => {
+            const u = siblingData?.user
+            if (!u || typeof u === 'string' || typeof u === 'number') return undefined
+            const dob = (u as any).birthday
+            if (!dob) return undefined
+            return new Date(dob).toISOString().split('T')[0]
+          },
+        ],
       },
     },
 

@@ -243,6 +243,15 @@ export interface News {
 export interface Registration {
   id: number;
   user?: (number | null) | User;
+  /**
+   * 此欄位自動從關聯的使用者帳號讀取，不可編輯。
+   */
+  _userName?: string | null;
+  _userPhone?: string | null;
+  _userOrganization?: string | null;
+  _userJobTitle?: string | null;
+  _userGender?: string | null;
+  _userBirthday?: string | null;
   ticketType:
     | 'early-bird-student'
     | 'early-bird-regular'
@@ -268,8 +277,8 @@ export interface Registration {
     | 'other';
   participantRoleOther?: string | null;
   presentationType?: ('oral' | 'poster' | 'both' | 'none') | null;
-  paymentAccountLast5: string;
-  paymentDate: string;
+  paymentAccountLast5?: string | null;
+  paymentDate?: string | null;
   invoiceTitle?: string | null;
   invoiceTaxId?: string | null;
   mealDay1: 'yes' | 'no';
@@ -618,6 +627,12 @@ export interface NewsSelect<T extends boolean = true> {
  */
 export interface RegistrationsSelect<T extends boolean = true> {
   user?: T;
+  _userName?: T;
+  _userPhone?: T;
+  _userOrganization?: T;
+  _userJobTitle?: T;
+  _userGender?: T;
+  _userBirthday?: T;
   ticketType?: T;
   amount?: T;
   paymentStatus?: T;

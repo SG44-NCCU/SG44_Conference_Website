@@ -88,7 +88,7 @@ export default function SG44RegisterPage() {
   const watchTicketType = watch('ticketType')
   const watchParticipantRole = watch('participantRole')
   const selectedTicket = TICKET_OPTIONS.find((ticket) => ticket.id === watchTicketType)
-  const isPaidTicket = selectedTicket?.price > 0
+  const isPaidTicket = (selectedTicket?.price ?? 0) > 0
 
   const watchMealDay1 = watch('mealDay1')
   const watchMealDay2 = watch('mealDay2')
@@ -174,6 +174,9 @@ export default function SG44RegisterPage() {
       const payloadData: any = {
         ...data,
         amount,
+        // 免費票種時，disabled 欄位送出空字串會讓 PostgreSQL timestamp 解析炸掉，須明確轉 null
+        paymentAccountLast5: isPaidTicket ? data.paymentAccountLast5 : null,
+        paymentDate: isPaidTicket && data.paymentDate ? data.paymentDate : null,
         dietaryPreference: showDietary ? data.dietaryPreference : null,
         dietaryOther: showDietary && data.dietaryPreference === 'other' ? data.dietaryOther : null,
         participantRoleOther: data.participantRole === 'other' ? data.participantRoleOther : null,
