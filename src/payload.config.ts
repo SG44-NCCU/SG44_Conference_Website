@@ -39,6 +39,7 @@ import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 // })
 
 import { exportCsvEndpoint } from './endpoints/exportCsvEndpoint'
+import { exportAbstractsCsvEndpoint } from './endpoints/exportAbstractsCsvEndpoint'
 
 export default buildConfig({
   admin: {
@@ -64,6 +65,11 @@ export default buildConfig({
       path: '/export-csv',
       method: 'get',
       handler: exportCsvEndpoint as any,
+    },
+    {
+      path: '/export-abstracts-csv',
+      method: 'get',
+      handler: exportAbstractsCsvEndpoint as any,
     },
   ],
 

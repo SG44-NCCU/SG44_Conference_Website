@@ -29,6 +29,7 @@ export const AbstractDashboard: React.FC = () => {
   const [bulkReviewer, setBulkReviewer] = useState<string>('')
   const [bulkAssigning, setBulkAssigning] = useState(false)
   const [bulkMsg, setBulkMsg] = useState<string | null>(null)
+  const [exporting, setExporting] = useState(false)
 
   // Fetch all abstracts
   useEffect(() => {
@@ -138,6 +139,32 @@ export const AbstractDashboard: React.FC = () => {
     }
   }
 
+  const handleExportCsv = async () => {
+    setExporting(true)
+    try {
+      const idsParam =
+        selectedIds.size > 0 ? `?ids=${Array.from(selectedIds).join(',')}` : ''
+      const res = await fetch(`/api/export-abstracts-csv${idsParam}`)
+      if (!res.ok) throw new Error('Export failed')
+      const blob = await res.blob()
+      const url = URL.createObjectURL(blob)
+      const a = document.createElement('a')
+      a.href = url
+      a.download =
+        selectedIds.size > 0
+          ? `abstracts_selected_${selectedIds.size}.csv`
+          : 'abstracts_all.csv'
+      document.body.appendChild(a)
+      a.click()
+      a.remove()
+      URL.revokeObjectURL(url)
+    } catch {
+      alert('匯出 CSV 時發生錯誤，請重試')
+    } finally {
+      setExporting(false)
+    }
+  }
+
   if (loading) return null
 
   return (
@@ -151,9 +178,31 @@ export const AbstractDashboard: React.FC = () => {
       }}
     >
       {/* ── 統計概況 ── */}
-      <h2 style={{ margin: '0 0 1rem 0', color: '#1f2937', fontSize: '1.25rem' }}>
-        摘要投稿統計
-      </h2>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+        <h2 style={{ margin: 0, color: '#1f2937', fontSize: '1.25rem' }}>
+          摘要投稿統計
+        </h2>
+        <button
+          onClick={handleExportCsv}
+          disabled={exporting}
+          title={selectedIds.size > 0 ? `匯出已選 ${selectedIds.size} 篇` : '匯出全部摘要'}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.35rem',
+            padding: '5px 14px',
+            fontSize: '0.8rem',
+            backgroundColor: exporting ? '#9ca3af' : '#166534',
+            color: 'white',
+            border: 'none',
+            borderRadius: 4,
+            cursor: exporting ? 'not-allowed' : 'pointer',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          {exporting ? '匯出中...' : selectedIds.size > 0 ? `⬇ 匯出已選 ${selectedIds.size} 篇 CSV` : '⬇ 匯出全部摘要 CSV'}
+        </button>
+      </div>
       <div style={{ display: 'flex', gap: '2rem', flexWrap: 'wrap', marginBottom: '1.5rem' }}>
         {[
           { label: '總投稿數', val: stats.total, color: '#374151' },

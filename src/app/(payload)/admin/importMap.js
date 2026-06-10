@@ -28,6 +28,7 @@ import { AuthorizationDownloadButton as AuthorizationDownloadButton_00f4f06e82bb
 import { ReviewStatusCell as ReviewStatusCell_e9f17f6ced1004fb7a07b9bda6fc5ceb } from '@/components/payload/ReviewStatusCell'
 import { AbstractReviewerCell as AbstractReviewerCell_956f07433ce6a89e8c9395285c82b706 } from '@/components/payload/AbstractReviewerCell'
 import { AbstractDashboard as AbstractDashboard_927960ba8aa1955645a5d4ab680f0149 } from '@/components/payload/AbstractDashboard'
+import { FullPapersDownloadButton as FullPapersDownloadButton_e6982211aae996596a06c5b470891115 } from '@/components/payload/FullPapersDownloadButton'
 import { default as default_6f14b747d7d9d385f91171711bbf7132 } from '@/components/payload/Icon'
 import { default as default_e34c28bdc97e3fecf976b23b26d64cc9 } from '@/components/payload/Logo'
 
@@ -62,6 +63,7 @@ export const importMap = {
   "@/components/payload/ReviewStatusCell#ReviewStatusCell": ReviewStatusCell_e9f17f6ced1004fb7a07b9bda6fc5ceb,
   "@/components/payload/AbstractReviewerCell#AbstractReviewerCell": AbstractReviewerCell_956f07433ce6a89e8c9395285c82b706,
   "@/components/payload/AbstractDashboard#AbstractDashboard": AbstractDashboard_927960ba8aa1955645a5d4ab680f0149,
+  "@/components/payload/FullPapersDownloadButton#FullPapersDownloadButton": FullPapersDownloadButton_e6982211aae996596a06c5b470891115,
   "@/components/payload/Icon#default": default_6f14b747d7d9d385f91171711bbf7132,
   "@/components/payload/Logo#default": default_e34c28bdc97e3fecf976b23b26d64cc9
 }
