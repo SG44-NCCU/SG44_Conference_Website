@@ -4,13 +4,10 @@ import React, { useState } from 'react'
 import { useSelection } from '@payloadcms/ui'
 
 export const FullPapersDownloadButton: React.FC = () => {
-  const { selected, selectAll } = useSelection()
+  const { selectedIDs } = useSelection()
   const [downloading, setDownloading] = useState(false)
 
-  // selected is a Map<string, boolean> of checked document IDs
-  const selectedIds = Array.from(selected.entries())
-    .filter(([, checked]) => checked)
-    .map(([id]) => id)
+  const selectedIds = selectedIDs
 
   const handleDownload = async () => {
     if (selectedIds.length === 0) return
