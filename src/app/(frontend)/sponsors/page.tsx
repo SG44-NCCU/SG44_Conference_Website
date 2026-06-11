@@ -102,6 +102,11 @@ const SPONSOR_GROUPS = [
             logo: '/sponsors_logo/臺南市政府地政局.jpg',
             url: 'https://land.tainan.gov.tw/',
           },
+          {
+            name: '地球科學研究推動中心',
+            logo: '/sponsors_logo/地球科學研究推動中心.png',
+            url: 'https://esrpc.ncu.edu.tw/public/tw',
+          },
         ],
       },
       {
