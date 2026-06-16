@@ -11,21 +11,57 @@ const RegistrationPage = () => {
     {
       label: '早鳥報名及繳費時間',
       labelEn: 'Early Bird Registration & Payment',
-      date: '04/01 ~ 06/15',
+      date: (
+        <>
+          04/01 ~ <span className="line-through text-stone-400 font-normal opacity-70">06/15</span>{' '}
+          <span className="text-red-600">06/25</span>
+        </>
+      ),
     },
     {
       label: '一般報名及繳費時間',
       labelEn: 'Regular Registration & Payment',
-      date: '06/16 ~ 08/11',
+      date: (
+        <>
+          <span className="line-through text-stone-400 font-normal opacity-70">06/16</span>{' '}
+          <span className="text-red-600">06/26</span> ~ 08/11
+        </>
+      ),
     },
     { label: '論文投稿時間', labelEn: 'Paper Submission Period', date: '04/01 ~ 06/29' },
   ]
 
   const fees = [
-    { type: '學生早鳥 ( 6/15 以前 )', typeEn: 'Student Early Bird (By 6/15)', price: 'NTD 1,500' },
     {
-      type: '一般人士早鳥 ( 6/15 以前 )',
-      typeEn: 'Regular Early Bird (By 6/15)',
+      type: (
+        <>
+          學生早鳥 ( <span className="line-through text-stone-400 opacity-70">6/15</span>{' '}
+          <span className="text-red-600">6/25</span> 以前 )
+        </>
+      ),
+      typeEn: (
+        <>
+          Student Early Bird (By{' '}
+          <span className="line-through text-stone-400 opacity-70">6/15</span>{' '}
+          <span className="text-red-600">6/25</span>)
+        </>
+      ),
+      price: 'NTD 1,500',
+    },
+    {
+      type: (
+        <>
+          一般人士早鳥 ( <span className="line-through text-stone-400 opacity-70">6/15</span>{' '}
+          <span className="text-red-600">6/25</span> 以前 )
+        </>
+      ),
+      typeEn: (
+        <>
+          Regular Early Bird (By{' '}
+          <span className="line-through text-stone-400 opacity-70">6/15</span>{' '}
+          <span className="text-red-600">6/25</span>)
+        </>
+      ),
       price: 'NTD 2,000',
     },
     { type: '學生 ( 8/11 以前 )', typeEn: 'Student (By 8/11)', price: 'NTD 2,200' },

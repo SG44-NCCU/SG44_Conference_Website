@@ -6,7 +6,7 @@ import { useLanguage } from '@/contexts/LanguageContext'
 import SectionTitle from '@/components/ui/SectionTitle'
 
 export default function SubmissionPage() {
-  const { t } = useLanguage()
+  const { t, lang } = useLanguage()
 
   const topics = [
     { zh: t('sub.topics.1.zh'), en: t('sub.topics.1.en') },
@@ -107,21 +107,61 @@ export default function SubmissionPage() {
             </div>
           </section>
 
+          {/* Types of Presentation */}
+          <section>
+            <h2 className="text-base font-semibold tracking-wide text-stone-800 border-l-[3px] border-[#4d4c9d] pl-3 mb-6">
+              {lang === 'zh' ? '投稿與發表種類' : 'Submission & Presentation Types'}
+            </h2>
+            <ol className="space-y-4">
+              <li className="flex gap-3">
+                <span className="text-[#4d4c9d] font-semibold flex-shrink-0 w-6">1.</span>
+                <span><strong className="text-stone-700">摘要口頭發表：</strong>僅繳交至多500字之中文或英文摘要，並經主辦單位審查通過後安排口頭發表。</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-[#4d4c9d] font-semibold flex-shrink-0 w-6">2.</span>
+                <span><strong className="text-stone-700">全文口頭發表：</strong>除應繳交中英文摘要外，需於期限內繳交論文全文（可以中文或英文撰寫），經主辦單位審查通過後，安排口頭發表；並評選當中資格符合且表現優異者，頒發「學生論文獎」。</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-[#4d4c9d] font-semibold flex-shrink-0 w-6">3.</span>
+                <span><strong className="text-stone-700">海報發表：</strong>將擬發表之論文，經設計編印後以海報展覽方式定時、定點發表；並評選其中優異者，頒發海報發表獎。</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-[#4d4c9d] font-semibold flex-shrink-0 w-6">4.</span>
+                <span>評選相關規定與投稿重點，請參閱「學生論文獎」、「海報發表獎」以及「發表注意事項」。</span>
+              </li>
+            </ol>
+          </section>
+
           {/* Student Paper Award */}
           <section>
             <h2 className="text-base font-semibold tracking-wide text-stone-800 border-l-[3px] border-[#4d4c9d] pl-3 mb-6">
               {t('sub.award.student.title')}
             </h2>
             <ol className="space-y-4">
-              {studentAwardItems.map((item, idx) => (
-                <li key={idx} className="flex gap-3">
-                  <span className="text-[#4d4c9d] font-semibold flex-shrink-0 w-6">{idx + 1}.</span>
-                  <span>
-                    <strong className="text-stone-700">{item.label}：</strong>
-                    {item.content}
-                  </span>
-                </li>
-              ))}
+              <li className="flex gap-3">
+                <span className="text-[#4d4c9d] font-semibold flex-shrink-0 w-6">1.</span>
+                <span><strong className="text-stone-700">參與資格：</strong>角逐本獎項之發表人，應為投稿論文之第一作者，且需以「全文口頭發表」方式報名投稿；發表人於大會舉辦期間（2026年8月），應具有大專院校在學資格（含註冊、休學、保留學籍）之在籍生或為應屆（114學年度第1學期至115學年度第1學期）畢業生身分者。</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-[#4d4c9d] font-semibold flex-shrink-0 w-6">2.</span>
+                <span><strong className="text-stone-700">稿件格式：</strong>須依本研討會公告之「全文範本」稿件格式撰寫，不符規定者不納入評選之列。</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-[#4d4c9d] font-semibold flex-shrink-0 w-6">3.</span>
+                <span><strong className="text-stone-700">評選方式：</strong>由大會遴聘專家學者擔任評審委員，並由大會召集人召開評審會議或組織評審小組評選出獲獎者。</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-[#4d4c9d] font-semibold flex-shrink-0 w-6">4.</span>
+                <span><strong className="text-stone-700">評分依據：</strong>將以投稿論文內容之完成度、貢獻度與口頭發表之臨場表現與完整度做為評分參考，其配分比重則以投稿論文內容佔70%，口頭發表完整度佔30%為原則。</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-[#4d4c9d] font-semibold flex-shrink-0 w-6">5.</span>
+                <span><strong className="text-stone-700">獎勵方式：</strong>每位得獎者將獲頒獎狀及獎金。</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-[#4d4c9d] font-semibold flex-shrink-0 w-6">6.</span>
+                <span><strong className="text-stone-700">頒獎儀式：</strong>訂於閉幕式公佈評選結果並頒發獎項，惟獎項須獲獎人親至現場領取。</span>
+              </li>
             </ol>
           </section>
 
@@ -131,15 +171,30 @@ export default function SubmissionPage() {
               {t('sub.award.poster.title')}
             </h2>
             <ol className="space-y-4">
-              {posterAwardItems.map((item, idx) => (
-                <li key={idx} className="flex gap-3">
-                  <span className="text-[#4d4c9d] font-semibold flex-shrink-0 w-6">{idx + 1}.</span>
-                  <span>
-                    <strong className="text-stone-700">{item.label}：</strong>
-                    {item.content}
-                  </span>
-                </li>
-              ))}
+              <li className="flex gap-3">
+                <span className="text-[#4d4c9d] font-semibold flex-shrink-0 w-6">1.</span>
+                <span><strong className="text-stone-700">參與資格：</strong>角逐本獎項之發表人，需至少一位共同作者出席主辦單位排定之發表時段，並參與現場研究討論。</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-[#4d4c9d] font-semibold flex-shrink-0 w-6">2.</span>
+                <span><strong className="text-stone-700">稿件格式：</strong>須依本研討會公告之「海報發表」稿件格式編排印製，不符規定者不納入評選之列。</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-[#4d4c9d] font-semibold flex-shrink-0 w-6">3.</span>
+                <span><strong className="text-stone-700">評選方式：</strong>由大會遴聘專家學者擔任評審委員，並由大會召集人召開評審會議或組織評審小組評選出最佳海報。</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-[#4d4c9d] font-semibold flex-shrink-0 w-6">4.</span>
+                <span><strong className="text-stone-700">評分依據：</strong>將綜合參考海報設計展現研究主題的明確度與傳達力、布展與撤展準時度與效率性、現場討論的掌握度與應變能力。</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-[#4d4c9d] font-semibold flex-shrink-0 w-6">5.</span>
+                <span><strong className="text-stone-700">獎勵方式：</strong>每位得獎者將獲頒獎狀及獎金。</span>
+              </li>
+              <li className="flex gap-3">
+                <span className="text-[#4d4c9d] font-semibold flex-shrink-0 w-6">6.</span>
+                <span><strong className="text-stone-700">頒獎儀式：</strong>訂於閉幕式公佈評選結果並頒發獎項，惟獎項須獲獎人親至現場領取。</span>
+              </li>
             </ol>
           </section>
         </div>

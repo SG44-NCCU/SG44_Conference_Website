@@ -20,29 +20,49 @@ export default function SG44RegisterPage() {
       id: 'early-bird-student',
       title: lang === 'zh' ? '早鳥報名 - 學生 (Student)' : 'Early Bird - Student',
       price: 1500,
-      period: lang === 'zh' ? '2026.04.01 ~ 2026.06.15' : '2026.04.01 ~ 2026.06.15',
-      isActive: now < new Date('2026-06-16T00:00:00'),
+      period: (
+        <>
+          2026.04.01 ~ <span className="line-through opacity-70">2026.06.15</span>{' '}
+          <span className="text-red-600">2026.06.25</span>
+        </>
+      ),
+      isActive: now < new Date('2026-06-26T00:00:00'),
     },
     {
       id: 'early-bird-regular',
       title: lang === 'zh' ? '早鳥報名 - 一般人士 (Regular)' : 'Early Bird - Regular',
       price: 2000,
-      period: lang === 'zh' ? '2026.04.01 ~ 2026.06.15' : '2026.04.01 ~ 2026.06.15',
-      isActive: now < new Date('2026-06-16T00:00:00'),
+      period: (
+        <>
+          2026.04.01 ~ <span className="line-through opacity-70">2026.06.15</span>{' '}
+          <span className="text-red-600">2026.06.25</span>
+        </>
+      ),
+      isActive: now < new Date('2026-06-26T00:00:00'),
     },
     {
       id: 'standard-student',
       title: lang === 'zh' ? '一般報名 - 學生 (Student)' : 'Standard - Student',
       price: 2200,
-      period: lang === 'zh' ? '2026.06.16 ~ 2026.08.11' : '2026.06.16 ~ 2026.08.11',
-      isActive: now >= new Date('2026-06-16T00:00:00') && now < new Date('2026-08-12T00:00:00'),
+      period: (
+        <>
+          <span className="line-through opacity-70">2026.06.16</span>{' '}
+          <span className="text-red-600">2026.06.26</span> ~ 2026.08.11
+        </>
+      ),
+      isActive: now >= new Date('2026-06-26T00:00:00') && now < new Date('2026-08-12T00:00:00'),
     },
     {
       id: 'standard-regular',
       title: lang === 'zh' ? '一般報名 - 一般人士 (Regular)' : 'Standard - Regular',
       price: 2700,
-      period: lang === 'zh' ? '2026.06.16 ~ 2026.08.11' : '2026.06.16 ~ 2026.08.11',
-      isActive: now >= new Date('2026-06-16T00:00:00') && now < new Date('2026-08-12T00:00:00'),
+      period: (
+        <>
+          <span className="line-through opacity-70">2026.06.16</span>{' '}
+          <span className="text-red-600">2026.06.26</span> ~ 2026.08.11
+        </>
+      ),
+      isActive: now >= new Date('2026-06-26T00:00:00') && now < new Date('2026-08-12T00:00:00'),
     },
     {
       id: 'senior',
