@@ -16,6 +16,7 @@ export interface Topic {
 
 export interface TimelineEvent {
   date: string;
+  oldDate?: string;
   title: string;
   titleEn?: string;
   description?: string;

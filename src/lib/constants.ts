@@ -88,13 +88,15 @@ export const TIMELINE_DATA: TimelineEvent[] = serverData?.timeline || [
     isPast: false,
   },
   {
-    date: '06/15',
+    date: '06/25',
+    oldDate: '06/15',
     title: '早鳥報名截止',
     titleEn: 'Early Bird Registration Deadline',
     isPast: false,
   },
   {
-    date: '06/29',
+    date: '07/07',
+    oldDate: '06/29',
     title: '論文摘要投稿截止',
     titleEn: 'Paper Submission Deadline',
     isPast: false,

@@ -216,7 +216,12 @@ const TimelineSection: React.FC = () => {
                         }`}
                       >
                         <span className="text-lg font-mono font-bold tracking-wide tracking-widest text-stone-600 bg-white px-2 uppercase whitespace-nowrap">
-                          {event.date}
+                          {event.oldDate && (
+                            <span className="line-through text-stone-400 mr-2 text-sm tracking-normal">
+                              {event.oldDate}
+                            </span>
+                          )}
+                          <span className={event.oldDate ? 'text-red-500' : ''}>{event.date}</span>
                         </span>
                       </div>
 
@@ -236,7 +241,7 @@ const TimelineSection: React.FC = () => {
                         }`}
                       >
                         <h4 className="text-sm font-semibold tracking-wide text-stone-800 leading-tight">
-                          {lang === 'zh' ? formatTitle(event.title) : (event.titleEn || event.title)}
+                          {lang === 'zh' ? formatTitle(event.title) : event.titleEn || event.title}
                         </h4>
                       </div>
                     </div>
@@ -313,14 +318,21 @@ const TimelineSection: React.FC = () => {
                           event.isPast ? 'text-stone-600' : 'text-[#4d4c9d]'
                         }`}
                       >
-                        {event.date}
+                        {event.oldDate && (
+                          <span className="line-through text-stone-400 mr-2 text-sm tracking-normal">
+                            {event.oldDate}
+                          </span>
+                        )}
+                        <span className={event.oldDate ? 'text-red-500' : ''}>{event.date}</span>
                       </span>
                       <h4
                         className={`text-lg font-black tracking-tight ${
-                          event.isPast ? 'text-stone-500 font-semibold tracking-wide' : 'text-stone-800'
+                          event.isPast
+                            ? 'text-stone-500 font-semibold tracking-wide'
+                            : 'text-stone-800'
                         }`}
                       >
-                        {lang === 'zh' ? formatTitle(event.title) : (event.titleEn || event.title)}
+                        {lang === 'zh' ? formatTitle(event.title) : event.titleEn || event.title}
                       </h4>
                     </div>
                   </div>
