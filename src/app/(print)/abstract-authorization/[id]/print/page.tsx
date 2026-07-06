@@ -159,7 +159,7 @@ export default async function AuthorizationPrintPage({
                   <li><span className="num">一、</span><span>論文摘要截稿日期：2026年6月29日（星期一）</span></li>
                   <li><span className="num">二、</span><span>論文全文截稿日期：2026年7月6日（星期一）</span></li>
                   <li><span className="num">三、</span><span>論文審查公告日期：2026年7月10日（星期五），將公告於本系網站研討會專頁。</span></li>
-                  <li><span className="num">四、</span><span>研討會報名日期：2026年4月1日（星期三）至2026年8月21日（星期五）。</span></li>
+                  <li><span className="num">四、</span><span>研討會報名日期：2026年4月1日（星期三）至2026年8月11日（星期二）。</span></li>
                   <li><span className="num">五、</span><span>研討會舉辦日期：2026年8月20日（星期四）至2026年8月21日（星期五）。</span></li>
                 </ol>
               </section>
@@ -248,7 +248,7 @@ export default async function AuthorizationPrintPage({
                   <li><span className="num">1.</span><span>Abstract Submission Deadline: June 29, 2026 (Mon)</span></li>
                   <li><span className="num">2.</span><span>Full Paper Deadline: July 6, 2026 (Mon)</span></li>
                   <li><span className="num">3.</span><span>Review Announcement: July 10, 2026 (Fri)</span></li>
-                  <li><span className="num">4.</span><span>Conference Registration: April 1 - August 21, 2026</span></li>
+                  <li><span className="num">4.</span><span>Conference Registration: April 1 - August 11, 2026</span></li>
                   <li><span className="num">5.</span><span>Conference Dates: August 20-21, 2026</span></li>
                 </ol>
               </section>

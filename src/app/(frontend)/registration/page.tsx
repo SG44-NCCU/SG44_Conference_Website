@@ -103,10 +103,6 @@ const RegistrationPage = () => {
       en: 'Registration involves three stages: Website Registration, Event Enrollment, and Payment. Please register on this site and complete enrollment by August 11, 2026.',
     },
     {
-      zh: '學生論文獎及海報競賽參賽者，需於2026年6月29日前完成報名及繳費。',
-      en: 'Participants of the Student Paper Award and Poster Competition must complete enrollment and payment by June 29, 2026.',
-    },
-    {
       zh: '完成繳費後，若需辦理退費，請於2026年8月11日前提出申請，需扣除行政處理費500元。',
       en: 'Refund requests must be submitted by August 11, 2026. A NTD 500 administrative fee will be deducted.',
     },
