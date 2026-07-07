@@ -55,8 +55,9 @@ export function AuthorizationModal({
   const dateStrZH = `${today.getFullYear() - 1911} 年 ${today.getMonth() + 1} 月 ${today.getDate()} 日`
   const dateStrEN = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`
 
-  const coAuthors = authors.filter((a) => !a.isCorresponding).map((a) => a.name).join('、') || '—'
-  const correspondingAuthor = authors.find((a) => a.isCorresponding) || authors[0]
+  const mainPerson = submitterName || authors[0]?.name || '—'
+  const coAuthorsList = authors.filter((a) => a.name !== mainPerson).map((a) => a.name)
+  const coAuthors = coAuthorsList.length > 0 ? coAuthorsList.join('、') : '—'
   const topicLabel = subTopic ? SUB_TOPICS_MAP[subTopic] : (specialSession || '—')
 
   useEffect(() => {
@@ -242,7 +243,7 @@ export function AuthorizationModal({
               <div className="space-y-3">
                 <p className="font-semibold text-stone-800 text-sm border-l-2 border-[#4d4c9d] pl-2">第一部分：發表文章作者（發表人／投稿人）與發表論文資訊</p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <div><label className="block text-xs text-stone-500 mb-1">投稿人／發表人</label><div className="px-3 py-2 bg-stone-100 border border-stone-200 text-stone-800 text-sm">{submitterName || correspondingAuthor?.name || '—'}</div></div>
+                  <div><label className="block text-xs text-stone-500 mb-1">投稿人／發表人</label><div className="px-3 py-2 bg-stone-100 border border-stone-200 text-stone-800 text-sm">{mainPerson}</div></div>
                   <div><label className="block text-xs text-stone-500 mb-1">身分證字號 / Passport No. <span className="text-red-500">*</span></label><input type="text" value={idNumber} onChange={(e) => setIdNumber(e.target.value)} placeholder="請輸入身分證或護照號碼" className={INPUT_CLS} /></div>
                   <div className="md:col-span-2"><label className="block text-xs text-stone-500 mb-1">戶籍地址 / Address <span className="text-red-500">*</span></label><input type="text" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="請輸入戶籍或聯絡地址" className={INPUT_CLS} /></div>
                   <div><label className="block text-xs text-stone-500 mb-1">聯絡電話 / Phone <span className="text-red-500">*</span></label><input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="請輸入聯絡電話" className={INPUT_CLS} /></div>
@@ -271,7 +272,7 @@ export function AuthorizationModal({
               <div className="space-y-3">
                 <p className="font-semibold text-stone-800 text-sm border-l-2 border-[#4d4c9d] pl-2">Part I: Author & Paper Information</p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <div><label className="block text-xs text-stone-500 mb-1">Submitter / Presenter</label><div className="px-3 py-2 bg-stone-100 border border-stone-200 text-stone-800 text-sm">{submitterName || correspondingAuthor?.name || '—'}</div></div>
+                  <div><label className="block text-xs text-stone-500 mb-1">Submitter / Presenter</label><div className="px-3 py-2 bg-stone-100 border border-stone-200 text-stone-800 text-sm">{mainPerson}</div></div>
                   <div><label className="block text-xs text-stone-500 mb-1">ID Number / Passport No. <span className="text-red-500">*</span></label><input type="text" value={idNumber} onChange={(e) => setIdNumber(e.target.value)} placeholder="Enter ID or passport number" className={INPUT_CLS} /></div>
                   <div className="md:col-span-2"><label className="block text-xs text-stone-500 mb-1">Address <span className="text-red-500">*</span></label><input type="text" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Enter full address" className={INPUT_CLS} /></div>
                   <div><label className="block text-xs text-stone-500 mb-1">Phone Number <span className="text-red-500">*</span></label><input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Enter phone number" className={INPUT_CLS} /></div>

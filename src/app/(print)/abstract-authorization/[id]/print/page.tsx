@@ -95,9 +95,9 @@ export default async function AuthorizationPrintPage({
   const authors = (doc.authors as any[]) ?? []
   const submitter = typeof doc.submitter === 'object' ? doc.submitter : null
   const submitterName = (submitter as any)?.name ?? '—'
-  const correspondingAuthor = authors.find((a) => a.isCorresponding) ?? authors[0]
-  const displayName = correspondingAuthor?.name ?? submitterName
-  const coAuthors = authors.filter((a) => !a.isCorresponding).map((a) => a.name).join('、') || '—'
+  const displayName = submitterName !== '—' ? submitterName : (authors[0]?.name || '—')
+  const coAuthorsList = authors.filter((a) => a.name !== displayName).map((a) => a.name)
+  const coAuthors = coAuthorsList.length > 0 ? coAuthorsList.join('、') : '—'
   
   const topicCode = (doc.subTopic as string) || ''
   const splitMatch = SUB_TOPICS_MAP[topicCode]?.match(/^[0-9]+\.\s*(.+?)\s*\((.+)\)$/)
