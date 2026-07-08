@@ -106,7 +106,7 @@ export default function AbstractSubmitClient() {
 
         if (settingsRes.ok) {
           const data = await settingsRes.json()
-          setSubmissionOpen(data?.submissionOpen !== false)
+          setSubmissionOpen(false) // Forced close by user request
           setFullPaperSubmissionOpen(data?.fullPaperSubmissionOpen !== false)
           if (data?.fullPaperDeadline) {
             setFullPaperDeadline(

@@ -59,201 +59,199 @@ export type SupportedTimezones =
   | 'Pacific/Guam'
   | 'Pacific/Noumea'
   | 'Pacific/Auckland'
-  | 'Pacific/Fiji'
+  | 'Pacific/Fiji';
 
 export interface Config {
   auth: {
-    users: UserAuthOperations
-  }
-  blocks: {}
+    users: UserAuthOperations;
+  };
+  blocks: {};
   collections: {
-    users: User
-    media: Media
-    news: News
-    registrations: Registration
-    abstracts: Abstract
-    pages: Page
-    'full-papers': FullPaper
-    'payload-kv': PayloadKv
-    'payload-locked-documents': PayloadLockedDocument
-    'payload-preferences': PayloadPreference
-    'payload-migrations': PayloadMigration
-  }
-  collectionsJoins: {}
+    users: User;
+    media: Media;
+    news: News;
+    registrations: Registration;
+    abstracts: Abstract;
+    pages: Page;
+    'full-papers': FullPaper;
+    'payload-kv': PayloadKv;
+    'payload-locked-documents': PayloadLockedDocument;
+    'payload-preferences': PayloadPreference;
+    'payload-migrations': PayloadMigration;
+  };
+  collectionsJoins: {};
   collectionsSelect: {
-    users: UsersSelect<false> | UsersSelect<true>
-    media: MediaSelect<false> | MediaSelect<true>
-    news: NewsSelect<false> | NewsSelect<true>
-    registrations: RegistrationsSelect<false> | RegistrationsSelect<true>
-    abstracts: AbstractsSelect<false> | AbstractsSelect<true>
-    pages: PagesSelect<false> | PagesSelect<true>
-    'full-papers': FullPapersSelect<false> | FullPapersSelect<true>
-    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>
-    'payload-locked-documents':
-      | PayloadLockedDocumentsSelect<false>
-      | PayloadLockedDocumentsSelect<true>
-    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>
-    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>
-  }
+    users: UsersSelect<false> | UsersSelect<true>;
+    media: MediaSelect<false> | MediaSelect<true>;
+    news: NewsSelect<false> | NewsSelect<true>;
+    registrations: RegistrationsSelect<false> | RegistrationsSelect<true>;
+    abstracts: AbstractsSelect<false> | AbstractsSelect<true>;
+    pages: PagesSelect<false> | PagesSelect<true>;
+    'full-papers': FullPapersSelect<false> | FullPapersSelect<true>;
+    'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
+    'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
+    'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
+    'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
+  };
   db: {
-    defaultIDType: number
-  }
-  fallbackLocale: null
+    defaultIDType: number;
+  };
+  fallbackLocale: null;
   globals: {
-    'abstracts-settings': AbstractsSetting
-  }
+    'abstracts-settings': AbstractsSetting;
+  };
   globalsSelect: {
-    'abstracts-settings': AbstractsSettingsSelect<false> | AbstractsSettingsSelect<true>
-  }
-  locale: null
+    'abstracts-settings': AbstractsSettingsSelect<false> | AbstractsSettingsSelect<true>;
+  };
+  locale: null;
   user: User & {
-    collection: 'users'
-  }
+    collection: 'users';
+  };
   jobs: {
-    tasks: unknown
-    workflows: unknown
-  }
+    tasks: unknown;
+    workflows: unknown;
+  };
 }
 export interface UserAuthOperations {
   forgotPassword: {
-    email: string
-    password: string
-  }
+    email: string;
+    password: string;
+  };
   login: {
-    email: string
-    password: string
-  }
+    email: string;
+    password: string;
+  };
   registerFirstUser: {
-    email: string
-    password: string
-  }
+    email: string;
+    password: string;
+  };
   unlock: {
-    email: string
-    password: string
-  }
+    email: string;
+    password: string;
+  };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
-  id: number
-  name: string
-  gender?: ('male' | 'female' | 'other') | null
-  birthday: string
-  phone: string
-  organization: string
-  jobTitle: string
-  role: 'admin' | 'user' | 'reviewer'
-  lastNotificationChecked?: string | null
-  updatedAt: string
-  createdAt: string
-  email: string
-  resetPasswordToken?: string | null
-  resetPasswordExpiration?: string | null
-  salt?: string | null
-  hash?: string | null
-  _verified?: boolean | null
-  _verificationToken?: string | null
-  loginAttempts?: number | null
-  lockUntil?: string | null
+  id: number;
+  name: string;
+  gender?: ('male' | 'female' | 'other') | null;
+  birthday: string;
+  phone: string;
+  organization: string;
+  jobTitle: string;
+  role: 'admin' | 'user' | 'reviewer';
+  lastNotificationChecked?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  _verified?: boolean | null;
+  _verificationToken?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
   sessions?:
     | {
-        id: string
-        createdAt?: string | null
-        expiresAt: string
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
       }[]
-    | null
-  password?: string | null
+    | null;
+  password?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media".
  */
 export interface Media {
-  id: number
-  alt: string
-  updatedAt: string
-  createdAt: string
-  url?: string | null
-  thumbnailURL?: string | null
-  filename?: string | null
-  mimeType?: string | null
-  filesize?: number | null
-  width?: number | null
-  height?: number | null
-  focalX?: number | null
-  focalY?: number | null
+  id: number;
+  alt: string;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "news".
  */
 export interface News {
-  id: number
-  title: string
+  id: number;
+  title: string;
   /**
    * 這會變成網址的一部分,例如 /news/call-for-papers
    */
-  slug: string
+  slug: string;
   /**
    * 勾選後會顯示在首頁最新消息區(最多3則)
    */
-  showOnHomepage?: boolean | null
-  category: '重要公告' | '徵稿資訊' | '會議議程' | '註冊報名' | '榮譽榜單' | '一般消息'
-  publishedDate: string
+  showOnHomepage?: boolean | null;
+  category: '重要公告' | '徵稿資訊' | '會議議程' | '註冊報名' | '榮譽榜單' | '一般消息';
+  publishedDate: string;
   content: {
     root: {
-      type: string
+      type: string;
       children: {
-        type: any
-        version: number
-        [k: string]: unknown
-      }[]
-      direction: ('ltr' | 'rtl') | null
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | ''
-      indent: number
-      version: number
-    }
-    [k: string]: unknown
-  }
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
   /**
    * 可在此上傳 PDF、Word 檔或加入相關連結
    */
   relatedFiles?:
     | {
-        type?: ('file' | 'link') | null
-        label: string
-        file?: (number | null) | Media
-        url?: string | null
-        id?: string | null
+        type?: ('file' | 'link') | null;
+        label: string;
+        file?: (number | null) | Media;
+        url?: string | null;
+        id?: string | null;
       }[]
-    | null
+    | null;
   /**
    * 適合放最重要的行動呼籲,如「前往報名表單」
    */
-  actionLink?: string | null
-  actionText?: string | null
-  updatedAt: string
-  createdAt: string
-  _status?: ('draft' | 'published') | null
+  actionLink?: string | null;
+  actionText?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "registrations".
  */
 export interface Registration {
-  id: number
-  user?: (number | null) | User
+  id: number;
+  user?: (number | null) | User;
   /**
    * 此欄位自動從關聯的使用者帳號讀取，不可編輯。
    */
-  _userName?: string | null
-  _userPhone?: string | null
-  _userOrganization?: string | null
-  _userJobTitle?: string | null
-  _userGender?: string | null
-  _userBirthday?: string | null
+  _userName?: string | null;
+  _userPhone?: string | null;
+  _userOrganization?: string | null;
+  _userJobTitle?: string | null;
+  _userGender?: string | null;
+  _userBirthday?: string | null;
   ticketType:
     | 'early-bird-student'
     | 'early-bird-regular'
@@ -262,11 +260,10 @@ export interface Registration {
     | 'senior'
     | 'vip'
     | 'sponsor'
-    | 'government'
-    | 'staff'
-  amount: number
-  paymentStatus: 'pending' | 'paid' | 'failed'
-  contactAddress: string
+    | 'government';
+  amount: number;
+  paymentStatus: 'pending' | 'paid' | 'failed';
+  contactAddress: string;
   participantRole:
     | 'presenter'
     | 'keynote'
@@ -277,582 +274,571 @@ export interface Registration {
     | 'vip'
     | 'sponsor'
     | 'government'
-    | 'other'
-  participantRoleOther?: string | null
-  presentationType?: ('oral' | 'poster' | 'both' | 'none') | null
-  paymentAccountLast5?: string | null
-  paymentDate?: string | null
-  invoiceTitle?: string | null
-  invoiceTaxId?: string | null
-  mealDay1: 'yes' | 'no'
-  mealDay2: 'yes' | 'no'
-  banquet: 'yes' | 'no'
-  dietaryPreference?: ('regular' | 'vegetarian' | 'other') | null
-  dietaryOther?: string | null
-  needsCertification: 'no' | 'yes'
-  certificationType?: ('civilServant' | 'technician') | null
-  certName?: string | null
-  certIdNumber?: string | null
-  certDob?: string | null
-  certOrganization?: string | null
-  certPhone?: string | null
-  techName?: string | null
-  techIdNumber?: string | null
+    | 'other';
+  participantRoleOther?: string | null;
+  presentationType?: ('oral' | 'poster' | 'both' | 'none') | null;
+  paymentAccountLast5?: string | null;
+  paymentDate?: string | null;
+  invoiceTitle?: string | null;
+  invoiceTaxId?: string | null;
+  mealDay1: 'yes' | 'no';
+  mealDay2: 'yes' | 'no';
+  banquet: 'yes' | 'no';
+  dietaryPreference?: ('regular' | 'vegetarian' | 'other') | null;
+  dietaryOther?: string | null;
+  needsCertification: 'no' | 'yes';
+  certificationType?: ('civilServant' | 'technician') | null;
+  certName?: string | null;
+  certIdNumber?: string | null;
+  certDob?: string | null;
+  certOrganization?: string | null;
+  certPhone?: string | null;
+  techName?: string | null;
+  techIdNumber?: string | null;
   /**
    * 例如：土木工程
    */
-  techSpecialty?: string | null
-  remarks?: string | null
-  updatedAt: string
-  createdAt: string
+  techSpecialty?: string | null;
+  remarks?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "abstracts".
  */
 export interface Abstract {
-  id: number
-  submitter: number | User
-  title: string
+  id: number;
+  submitter: number | User;
+  title: string;
   authors: {
-    name: string
-    affiliation: string
-    email: string
-    isCorresponding?: boolean | null
-    id?: string | null
-  }[]
+    name: string;
+    affiliation: string;
+    email: string;
+    isCorresponding?: boolean | null;
+    id?: string | null;
+  }[];
   /**
    * 特別論壇投稿可留空
    */
   subTopic?:
-    | (
-        | 'topic-1'
-        | 'topic-2'
-        | 'topic-3'
-        | 'topic-4'
-        | 'topic-5'
-        | 'topic-6'
-        | 'topic-7'
-        | 'topic-8'
-        | 'topic-9'
-      )
-    | null
+    | ('topic-1' | 'topic-2' | 'topic-3' | 'topic-4' | 'topic-5' | 'topic-6' | 'topic-7' | 'topic-8' | 'topic-9')
+    | null;
   /**
    * 如為特別論壇邀請文章，請在此選擇；一般投稿請留空
    */
-  specialSession?:
-    | ('special-nstc' | 'special-nlsc' | 'special-land' | 'special-national-park')
-    | null
-  isStudent?: boolean | null
+  specialSession?: ('special-nstc' | 'special-nlsc' | 'special-land' | 'special-national-park') | null;
+  isStudent?: boolean | null;
   /**
    * 勾選後，請記得在截止日前透過「我的投稿」上傳全文 PDF，否則將無法參賽。
    */
-  applyStudentAward?: boolean | null
+  applyStudentAward?: boolean | null;
   /**
    * 選填。請上傳 PDF 格式，大小限 20MB 以內。可在摘要投稿後隨時從「我的投稿」補上傳。
    */
-  fullPaper?: (number | null) | FullPaper
+  fullPaper?: (number | null) | FullPaper;
   /**
    * 請輸入 250 字以內的中英文摘要
    */
-  abstract: string
+  abstract: string;
   /**
    * 請以逗號分隔，至少填寫 3 個關鍵字，例如：衛星定位, GNSS, 導航
    */
-  keywords: string
+  keywords: string;
   /**
    * 實際發表形式由大會排程決定，此為偏好登記
    */
-  presentationPreference?: ('oral' | 'poster' | 'either') | null
+  presentationPreference?: ('oral' | 'poster' | 'either') | null;
   /**
    * 投稿人已閱讀並同意論文授權書
    */
-  authorizationAgreed: boolean
+  authorizationAgreed: boolean;
   /**
    * 投稿人確認授權的日期
    */
-  authorizationDate?: string | null
+  authorizationDate?: string | null;
   /**
    * 投稿人填寫之身分證字號
    */
-  authorizationIdNumber?: string | null
+  authorizationIdNumber?: string | null;
   /**
    * 投稿人填寫之戶籍地址
    */
-  authorizationAddress?: string | null
+  authorizationAddress?: string | null;
   /**
    * 投稿人填寫之聯絡電話
    */
-  authorizationPhone?: string | null
-  reviewStatus: 'pending' | 'accepted' | 'rejected' | 'revision'
+  authorizationPhone?: string | null;
+  reviewStatus: 'pending' | 'accepted' | 'rejected' | 'revision';
   /**
    * 此評語在大會發布審查結果後，會顯示給投稿人
    */
-  reviewComments?: string | null
+  reviewComments?: string | null;
   /**
    * 只能選擇 role=reviewer 的使用者
    */
-  assignedReviewer?: (number | null) | User
-  updatedAt: string
-  createdAt: string
+  assignedReviewer?: (number | null) | User;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "full-papers".
  */
 export interface FullPaper {
-  id: number
-  uploadedBy?: (number | null) | User
-  updatedAt: string
-  createdAt: string
-  url?: string | null
-  thumbnailURL?: string | null
-  filename?: string | null
-  mimeType?: string | null
-  filesize?: number | null
-  width?: number | null
-  height?: number | null
-  focalX?: number | null
-  focalY?: number | null
+  id: number;
+  uploadedBy?: (number | null) | User;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  thumbnailURL?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pages".
  */
 export interface Page {
-  id: number
-  title: string
-  slug: string
+  id: number;
+  title: string;
+  slug: string;
   hero: {
-    type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact'
+    type: 'none' | 'highImpact' | 'mediumImpact' | 'lowImpact';
     richText?: {
       root: {
-        type: string
+        type: string;
         children: {
-          type: any
-          version: number
-          [k: string]: unknown
-        }[]
-        direction: ('ltr' | 'rtl') | null
-        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | ''
-        indent: number
-        version: number
-      }
-      [k: string]: unknown
-    } | null
-    media?: (number | null) | Media
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    media?: (number | null) | Media;
     links?:
       | {
           link: {
-            type?: ('custom' | 'reference') | null
+            type?: ('custom' | 'reference') | null;
             reference?:
               | ({
-                  relationTo: 'pages'
-                  value: number | Page
+                  relationTo: 'pages';
+                  value: number | Page;
                 } | null)
               | ({
-                  relationTo: 'news'
-                  value: number | News
-                } | null)
-            url?: string | null
-            label: string
-            appearance?: ('default' | 'primary' | 'secondary') | null
-          }
-          id?: string | null
+                  relationTo: 'news';
+                  value: number | News;
+                } | null);
+            url?: string | null;
+            label: string;
+            appearance?: ('default' | 'primary' | 'secondary') | null;
+          };
+          id?: string | null;
         }[]
-      | null
-  }
-  updatedAt: string
-  createdAt: string
-  _status?: ('draft' | 'published') | null
+      | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
-  id: number
-  key: string
+  id: number;
+  key: string;
   data:
     | {
-        [k: string]: unknown
+        [k: string]: unknown;
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null
+    | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
-  id: number
+  id: number;
   document?:
     | ({
-        relationTo: 'users'
-        value: number | User
+        relationTo: 'users';
+        value: number | User;
       } | null)
     | ({
-        relationTo: 'media'
-        value: number | Media
+        relationTo: 'media';
+        value: number | Media;
       } | null)
     | ({
-        relationTo: 'news'
-        value: number | News
+        relationTo: 'news';
+        value: number | News;
       } | null)
     | ({
-        relationTo: 'registrations'
-        value: number | Registration
+        relationTo: 'registrations';
+        value: number | Registration;
       } | null)
     | ({
-        relationTo: 'abstracts'
-        value: number | Abstract
+        relationTo: 'abstracts';
+        value: number | Abstract;
       } | null)
     | ({
-        relationTo: 'pages'
-        value: number | Page
+        relationTo: 'pages';
+        value: number | Page;
       } | null)
     | ({
-        relationTo: 'full-papers'
-        value: number | FullPaper
-      } | null)
-  globalSlug?: string | null
+        relationTo: 'full-papers';
+        value: number | FullPaper;
+      } | null);
+  globalSlug?: string | null;
   user: {
-    relationTo: 'users'
-    value: number | User
-  }
-  updatedAt: string
-  createdAt: string
+    relationTo: 'users';
+    value: number | User;
+  };
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-preferences".
  */
 export interface PayloadPreference {
-  id: number
+  id: number;
   user: {
-    relationTo: 'users'
-    value: number | User
-  }
-  key?: string | null
+    relationTo: 'users';
+    value: number | User;
+  };
+  key?: string | null;
   value?:
     | {
-        [k: string]: unknown
+        [k: string]: unknown;
       }
     | unknown[]
     | string
     | number
     | boolean
-    | null
-  updatedAt: string
-  createdAt: string
+    | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-migrations".
  */
 export interface PayloadMigration {
-  id: number
-  name?: string | null
-  batch?: number | null
-  updatedAt: string
-  createdAt: string
+  id: number;
+  name?: string | null;
+  batch?: number | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
-  name?: T
-  gender?: T
-  birthday?: T
-  phone?: T
-  organization?: T
-  jobTitle?: T
-  role?: T
-  lastNotificationChecked?: T
-  updatedAt?: T
-  createdAt?: T
-  email?: T
-  resetPasswordToken?: T
-  resetPasswordExpiration?: T
-  salt?: T
-  hash?: T
-  _verified?: T
-  _verificationToken?: T
-  loginAttempts?: T
-  lockUntil?: T
+  name?: T;
+  gender?: T;
+  birthday?: T;
+  phone?: T;
+  organization?: T;
+  jobTitle?: T;
+  role?: T;
+  lastNotificationChecked?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  _verified?: T;
+  _verificationToken?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
   sessions?:
     | T
     | {
-        id?: T
-        createdAt?: T
-        expiresAt?: T
-      }
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media_select".
  */
 export interface MediaSelect<T extends boolean = true> {
-  alt?: T
-  updatedAt?: T
-  createdAt?: T
-  url?: T
-  thumbnailURL?: T
-  filename?: T
-  mimeType?: T
-  filesize?: T
-  width?: T
-  height?: T
-  focalX?: T
-  focalY?: T
+  alt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "news_select".
  */
 export interface NewsSelect<T extends boolean = true> {
-  title?: T
-  slug?: T
-  showOnHomepage?: T
-  category?: T
-  publishedDate?: T
-  content?: T
+  title?: T;
+  slug?: T;
+  showOnHomepage?: T;
+  category?: T;
+  publishedDate?: T;
+  content?: T;
   relatedFiles?:
     | T
     | {
-        type?: T
-        label?: T
-        file?: T
-        url?: T
-        id?: T
-      }
-  actionLink?: T
-  actionText?: T
-  updatedAt?: T
-  createdAt?: T
-  _status?: T
+        type?: T;
+        label?: T;
+        file?: T;
+        url?: T;
+        id?: T;
+      };
+  actionLink?: T;
+  actionText?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "registrations_select".
  */
 export interface RegistrationsSelect<T extends boolean = true> {
-  user?: T
-  _userName?: T
-  _userPhone?: T
-  _userOrganization?: T
-  _userJobTitle?: T
-  _userGender?: T
-  _userBirthday?: T
-  ticketType?: T
-  amount?: T
-  paymentStatus?: T
-  contactAddress?: T
-  participantRole?: T
-  participantRoleOther?: T
-  presentationType?: T
-  paymentAccountLast5?: T
-  paymentDate?: T
-  invoiceTitle?: T
-  invoiceTaxId?: T
-  mealDay1?: T
-  mealDay2?: T
-  banquet?: T
-  dietaryPreference?: T
-  dietaryOther?: T
-  needsCertification?: T
-  certificationType?: T
-  certName?: T
-  certIdNumber?: T
-  certDob?: T
-  certOrganization?: T
-  certPhone?: T
-  techName?: T
-  techIdNumber?: T
-  techSpecialty?: T
-  remarks?: T
-  updatedAt?: T
-  createdAt?: T
+  user?: T;
+  _userName?: T;
+  _userPhone?: T;
+  _userOrganization?: T;
+  _userJobTitle?: T;
+  _userGender?: T;
+  _userBirthday?: T;
+  ticketType?: T;
+  amount?: T;
+  paymentStatus?: T;
+  contactAddress?: T;
+  participantRole?: T;
+  participantRoleOther?: T;
+  presentationType?: T;
+  paymentAccountLast5?: T;
+  paymentDate?: T;
+  invoiceTitle?: T;
+  invoiceTaxId?: T;
+  mealDay1?: T;
+  mealDay2?: T;
+  banquet?: T;
+  dietaryPreference?: T;
+  dietaryOther?: T;
+  needsCertification?: T;
+  certificationType?: T;
+  certName?: T;
+  certIdNumber?: T;
+  certDob?: T;
+  certOrganization?: T;
+  certPhone?: T;
+  techName?: T;
+  techIdNumber?: T;
+  techSpecialty?: T;
+  remarks?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "abstracts_select".
  */
 export interface AbstractsSelect<T extends boolean = true> {
-  submitter?: T
-  title?: T
+  submitter?: T;
+  title?: T;
   authors?:
     | T
     | {
-        name?: T
-        affiliation?: T
-        email?: T
-        isCorresponding?: T
-        id?: T
-      }
-  subTopic?: T
-  specialSession?: T
-  isStudent?: T
-  applyStudentAward?: T
-  fullPaper?: T
-  abstract?: T
-  keywords?: T
-  presentationPreference?: T
-  authorizationAgreed?: T
-  authorizationDate?: T
-  authorizationIdNumber?: T
-  authorizationAddress?: T
-  authorizationPhone?: T
-  reviewStatus?: T
-  reviewComments?: T
-  assignedReviewer?: T
-  updatedAt?: T
-  createdAt?: T
+        name?: T;
+        affiliation?: T;
+        email?: T;
+        isCorresponding?: T;
+        id?: T;
+      };
+  subTopic?: T;
+  specialSession?: T;
+  isStudent?: T;
+  applyStudentAward?: T;
+  fullPaper?: T;
+  abstract?: T;
+  keywords?: T;
+  presentationPreference?: T;
+  authorizationAgreed?: T;
+  authorizationDate?: T;
+  authorizationIdNumber?: T;
+  authorizationAddress?: T;
+  authorizationPhone?: T;
+  reviewStatus?: T;
+  reviewComments?: T;
+  assignedReviewer?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pages_select".
  */
 export interface PagesSelect<T extends boolean = true> {
-  title?: T
-  slug?: T
+  title?: T;
+  slug?: T;
   hero?:
     | T
     | {
-        type?: T
-        richText?: T
-        media?: T
+        type?: T;
+        richText?: T;
+        media?: T;
         links?:
           | T
           | {
               link?:
                 | T
                 | {
-                    type?: T
-                    reference?: T
-                    url?: T
-                    label?: T
-                    appearance?: T
-                  }
-              id?: T
-            }
-      }
-  updatedAt?: T
-  createdAt?: T
-  _status?: T
+                    type?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                    appearance?: T;
+                  };
+              id?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "full-papers_select".
  */
 export interface FullPapersSelect<T extends boolean = true> {
-  uploadedBy?: T
-  updatedAt?: T
-  createdAt?: T
-  url?: T
-  thumbnailURL?: T
-  filename?: T
-  mimeType?: T
-  filesize?: T
-  width?: T
-  height?: T
-  focalX?: T
-  focalY?: T
+  uploadedBy?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  url?: T;
+  thumbnailURL?: T;
+  filename?: T;
+  mimeType?: T;
+  filesize?: T;
+  width?: T;
+  height?: T;
+  focalX?: T;
+  focalY?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
-  key?: T
-  data?: T
+  key?: T;
+  data?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents_select".
  */
 export interface PayloadLockedDocumentsSelect<T extends boolean = true> {
-  document?: T
-  globalSlug?: T
-  user?: T
-  updatedAt?: T
-  createdAt?: T
+  document?: T;
+  globalSlug?: T;
+  user?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-preferences_select".
  */
 export interface PayloadPreferencesSelect<T extends boolean = true> {
-  user?: T
-  key?: T
-  value?: T
-  updatedAt?: T
-  createdAt?: T
+  user?: T;
+  key?: T;
+  value?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-migrations_select".
  */
 export interface PayloadMigrationsSelect<T extends boolean = true> {
-  name?: T
-  batch?: T
-  updatedAt?: T
-  createdAt?: T
+  name?: T;
+  batch?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "abstracts-settings".
  */
 export interface AbstractsSetting {
-  id: number
+  id: number;
   /**
    * 關閉後，前台投稿表單將顯示「投稿已截止」，使用者無法新增或修改投稿
    */
-  submissionOpen?: boolean | null
+  submissionOpen?: boolean | null;
   /**
    * 勾選後，投稿人在「我的投稿」頁面將看到真實的審查結果（通過/未通過）與評語。建議在所有文章都有審查結果後再發布。
    */
-  reviewResultPublished?: boolean | null
+  reviewResultPublished?: boolean | null;
   /**
    * 僅供顯示用，實際開關請用「開放摘要投稿」選項
    */
-  submissionDeadline?: string | null
+  submissionDeadline?: string | null;
   /**
    * 關閉後，投稿表單及 Dashboard 的全文上傳功能將隱藏。
    */
-  fullPaperSubmissionOpen?: boolean | null
+  fullPaperSubmissionOpen?: boolean | null;
   /**
    * 全文上傳截止日，顯示於前台提醒文字（若留空則不顯示日期）
    */
-  fullPaperDeadline?: string | null
-  updatedAt?: string | null
-  createdAt?: string | null
+  fullPaperDeadline?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "abstracts-settings_select".
  */
 export interface AbstractsSettingsSelect<T extends boolean = true> {
-  submissionOpen?: T
-  reviewResultPublished?: T
-  submissionDeadline?: T
-  fullPaperSubmissionOpen?: T
-  fullPaperDeadline?: T
-  updatedAt?: T
-  createdAt?: T
-  globalType?: T
+  submissionOpen?: T;
+  reviewResultPublished?: T;
+  submissionDeadline?: T;
+  fullPaperSubmissionOpen?: T;
+  fullPaperDeadline?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "auth".
  */
 export interface Auth {
-  [k: string]: unknown
+  [k: string]: unknown;
 }
+
 
 declare module 'payload' {
   export interface GeneratedTypes extends Config {}

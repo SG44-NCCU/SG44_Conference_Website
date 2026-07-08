@@ -340,7 +340,7 @@ export const Abstracts: CollectionConfig = {
       name: 'reviewStatus',
       type: 'select',
       label: '審查狀態 (Review Status)',
-      defaultValue: 'pending',
+      defaultValue: 'accepted',
       required: true,
       options: [
         { label: '待審中 (Pending)', value: 'pending' },

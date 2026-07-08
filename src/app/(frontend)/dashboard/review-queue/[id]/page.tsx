@@ -85,7 +85,7 @@ export default function ReviewDetailPage() {
         if (docRes.ok) {
           const data = await docRes.json()
           setDoc(data)
-          setReviewStatus(data.reviewStatus || 'pending')
+          setReviewStatus(data.reviewStatus === 'pending' || !data.reviewStatus ? 'accepted' : data.reviewStatus)
           setReviewComments(data.reviewComments || '')
         }
 
@@ -121,7 +121,7 @@ export default function ReviewDetailPage() {
       const res = await fetch(`/api/abstracts/${id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ reviewStatus, reviewComments }),
+        body: JSON.stringify({ reviewStatus }),
       })
 
       if (res.ok) {
@@ -311,9 +311,7 @@ export default function ReviewDetailPage() {
           </label>
           <div className="divide-y divide-stone-100 border border-stone-200">
             {[
-              { value: 'pending', label: t('dashboard.rev.detail.form.decision.pending') },
               { value: 'accepted', label: t('dashboard.rev.detail.form.decision.accept') },
-              { value: 'revision', label: t('dashboard.rev.detail.form.decision.revision') },
               { value: 'rejected', label: t('dashboard.rev.detail.form.decision.reject') },
             ].map((opt) => {
               const isSelected = reviewStatus === opt.value
@@ -349,20 +347,7 @@ export default function ReviewDetailPage() {
           </div>
         </div>
 
-        {/* Comments */}
-        <div>
-          <label className="block text-sm font-semibold tracking-wide text-stone-700 mb-2">
-            {t('dashboard.rev.detail.form.comments')}
-          </label>
-          <textarea
-            value={reviewComments}
-            onChange={(e) => setReviewComments(e.target.value)}
-            disabled={isPublished}
-            rows={6}
-            placeholder={t('dashboard.rev.detail.form.comments.plh')}
-            className="w-full px-4 py-3 border border-stone-300 focus:border-[#4d4c9d] focus:ring-1 focus:ring-[#4d4c9d] outline-none resize-y text-sm transition-colors bg-white text-stone-800 disabled:bg-stone-100 disabled:text-stone-500 disabled:cursor-not-allowed"
-          />
-        </div>
+
 
         {/* Save button */}
         <div className="flex items-center gap-4 pt-2">
