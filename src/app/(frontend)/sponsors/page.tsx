@@ -43,6 +43,11 @@ const SPONSOR_GROUPS = [
             url: 'https://www.nps.gov.tw/ch',
           },
           {
+            name: '內政部國土測繪中心',
+            logo: '/sponsors_logo/內政部國土測繪中心.gif',
+            url: 'https://www.nlsc.gov.tw/',
+          },
+          {
             name: '海洋委員會',
             logo: '/sponsors_logo/海洋委員會.png',
             url: 'https://www.oac.gov.tw/ch/index.jsp',
@@ -66,6 +71,11 @@ const SPONSOR_GROUPS = [
             name: '國家災害防救科技中心',
             logo: '/sponsors_logo/國家災害防救科技中心.png',
             url: 'https://www.ncdr.nat.gov.tw/',
+          },
+          {
+            name: '新北市政府地政局',
+            logo: '/sponsors_logo/新北市政府地政局.png',
+            url: 'https://www.land.ntpc.gov.tw/',
           },
           {
             name: '新竹市政府',
