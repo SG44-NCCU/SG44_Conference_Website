@@ -506,24 +506,24 @@ export default function MySubmissionsPage() {
                     className="p-5 border-l-4"
                     style={{
                       borderLeftColor: isAccepted ? '#4d4c9d' : '#9ca3af',
-                      backgroundColor: isAccepted ? 'rgba(95,113,97,0.04)' : 'rgba(0,0,0,0.02)',
+                      backgroundColor: isAccepted ? 'rgba(77, 76, 157, 0.04)' : 'rgba(0,0,0,0.02)',
                     }}
                   >
-                    <p
-                      className="font-semibold tracking-wide mb-2"
-                      style={{ color: isAccepted ? '#4d4c9d' : '#374151' }}
-                    >
-                      {statusLabel}
-                    </p>
+                    <div className="flex items-center gap-2">
+                      <span
+                        className={`text-base font-bold tracking-wide ${
+                          isAccepted ? 'text-[#4d4c9d]' : 'text-stone-600'
+                        }`}
+                      >
+                        {statusLabel}
+                      </span>
+                    </div>
                     {doc.reviewComments && (
-                      <p className="text-sm text-stone-700 leading-relaxed whitespace-pre-wrap">
-                        {doc.reviewComments}
-                      </p>
-                    )}
-                    {!doc.reviewComments && (
-                      <p className="text-sm text-stone-400">
-                        {t('dashboard.sub.review.noComment')}
-                      </p>
+                      <div className="mt-3">
+                        <p className="text-sm text-stone-700 leading-relaxed whitespace-pre-wrap">
+                          {doc.reviewComments}
+                        </p>
+                      </div>
                     )}
                   </div>
 
