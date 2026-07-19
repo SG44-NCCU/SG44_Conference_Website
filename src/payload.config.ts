@@ -14,6 +14,7 @@ import { Registrations } from './collections/Registrations'
 import { Abstracts } from './collections/Abstracts'
 import { Pages } from './collections/Pages'
 import { FullPapers } from './collections/FullPapers'
+import { Sessions } from './collections/Sessions'
 
 // 2. 引入 Globals
 import { AbstractsSettings } from './globals/AbstractsSettings'
@@ -40,6 +41,7 @@ import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 
 import { exportCsvEndpoint } from './endpoints/exportCsvEndpoint'
 import { exportAbstractsCsvEndpoint } from './endpoints/exportAbstractsCsvEndpoint'
+import { importSessionsEndpoint } from './endpoints/importSessionsEndpoint'
 
 export default buildConfig({
   admin: {
@@ -57,7 +59,7 @@ export default buildConfig({
   },
 
   // 3. 註冊所有的 Collections
-  collections: [Users, Media, News, Registrations, Abstracts, Pages, FullPapers],
+  collections: [Users, Media, News, Registrations, Abstracts, Pages, FullPapers, Sessions],
 
   // Register custom endpoints
   endpoints: [
@@ -70,6 +72,11 @@ export default buildConfig({
       path: '/export-abstracts-csv',
       method: 'get',
       handler: exportAbstractsCsvEndpoint as any,
+    },
+    {
+      path: '/import-sessions',
+      method: 'post',
+      handler: importSessionsEndpoint as any,
     },
   ],
 

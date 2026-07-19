@@ -74,6 +74,7 @@ export interface Config {
     abstracts: Abstract;
     pages: Page;
     'full-papers': FullPaper;
+    sessions: Session;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -88,6 +89,7 @@ export interface Config {
     abstracts: AbstractsSelect<false> | AbstractsSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     'full-papers': FullPapersSelect<false> | FullPapersSelect<true>;
+    sessions: SessionsSelect<false> | SessionsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -453,6 +455,58 @@ export interface Page {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sessions".
+ */
+export interface Session {
+  id: number;
+  /**
+   * 例如：1S.1、4S.2
+   */
+  sessionCode?: string | null;
+  title: string;
+  date: '2026-08-20' | '2026-08-21';
+  /**
+   * 格式：HH:MM，例如 09:00
+   */
+  startTime: string;
+  /**
+   * 格式：HH:MM，例如 10:15
+   */
+  endTime: string;
+  /**
+   * 例如：106、105、415、416、417、418、大禮堂
+   */
+  room: string;
+  chairName?: string | null;
+  type?: ('oral' | 'poster' | 'special' | 'keynote' | 'other') | null;
+  papers?:
+    | {
+        /**
+         * 該場次中的發表順序（1, 2, 3...）
+         */
+        presentationOrder: number;
+        /**
+         * 關聯到摘要資料庫中的論文
+         */
+        abstract?: (number | null) | Abstract;
+        /**
+         * 若無法找到對應摘要，可直接填入論文 ID
+         */
+        abstractIdOverride?: number | null;
+        /**
+         * 若摘要未入庫，可直接填入論文標題
+         */
+        titleOverride?: string | null;
+        presenterName?: string | null;
+        notes?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -502,6 +556,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'full-papers';
         value: number | FullPaper;
+      } | null)
+    | ({
+        relationTo: 'sessions';
+        value: number | Session;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -747,6 +805,33 @@ export interface FullPapersSelect<T extends boolean = true> {
   height?: T;
   focalX?: T;
   focalY?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "sessions_select".
+ */
+export interface SessionsSelect<T extends boolean = true> {
+  sessionCode?: T;
+  title?: T;
+  date?: T;
+  startTime?: T;
+  endTime?: T;
+  room?: T;
+  chairName?: T;
+  type?: T;
+  papers?:
+    | T
+    | {
+        presentationOrder?: T;
+        abstract?: T;
+        abstractIdOverride?: T;
+        titleOverride?: T;
+        presenterName?: T;
+        notes?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

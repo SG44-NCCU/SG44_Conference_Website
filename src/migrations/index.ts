@@ -2,6 +2,7 @@ import * as migration_20260326_152612_full_paper_feature from './20260326_152612
 import * as migration_20260330_135759_add_certification_fields from './20260330_135759_add_certification_fields';
 import * as migration_20260407_052715 from './20260407_052715';
 import * as migration_20260407_062249 from './20260407_062249';
+import * as migration_20260719_213004 from './20260719_213004';
 
 export const migrations = [
   {
@@ -22,6 +23,11 @@ export const migrations = [
   {
     up: migration_20260407_062249.up,
     down: migration_20260407_062249.down,
-    name: '20260407_062249'
+    name: '20260407_062249',
+  },
+  {
+    up: migration_20260719_213004.up,
+    down: migration_20260719_213004.down,
+    name: '20260719_213004'
   },
 ];
