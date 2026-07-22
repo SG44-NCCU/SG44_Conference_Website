@@ -63,5 +63,15 @@ export const AbstractsSettings: GlobalConfig = {
         description: '全文上傳截止日，顯示於前台提醒文字（若留空則不顯示日期）',
       },
     },
+    {
+      name: 'studentAwardReviewOpen',
+      type: 'checkbox',
+      label: '開放學生論文獎評審',
+      defaultValue: false,
+      admin: {
+        description:
+          '勾選後，評審老師可在前台「學生論文獎評審」頁面對被指派的論文進行評分。關閉後分數仍保留，但評審無法再修改。',
+      },
+    },
   ],
 }

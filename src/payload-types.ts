@@ -75,6 +75,7 @@ export interface Config {
     pages: Page;
     'full-papers': FullPaper;
     sessions: Session;
+    'student-award-reviews': StudentAwardReview;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -90,6 +91,7 @@ export interface Config {
     pages: PagesSelect<false> | PagesSelect<true>;
     'full-papers': FullPapersSelect<false> | FullPapersSelect<true>;
     sessions: SessionsSelect<false> | SessionsSelect<true>;
+    'student-award-reviews': StudentAwardReviewsSelect<false> | StudentAwardReviewsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -507,6 +509,35 @@ export interface Session {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "student-award-reviews".
+ */
+export interface StudentAwardReview {
+  id: number;
+  /**
+   * 必須是有申請學生論文獎且已上傳全文的摘要
+   */
+  abstract: number | Abstract;
+  /**
+   * 負責評分的評審老師
+   */
+  reviewer: number | User;
+  /**
+   * 請給予 1 至 10 分的評分（10 分最高）
+   */
+  score?: number | null;
+  /**
+   * 選填。可針對論文內容、研究方法、創新性等給予具體評語。
+   */
+  comments?: string | null;
+  /**
+   * 評審提交分數的時間
+   */
+  submittedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -560,6 +591,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'sessions';
         value: number | Session;
+      } | null)
+    | ({
+        relationTo: 'student-award-reviews';
+        value: number | StudentAwardReview;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -835,6 +870,19 @@ export interface SessionsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "student-award-reviews_select".
+ */
+export interface StudentAwardReviewsSelect<T extends boolean = true> {
+  abstract?: T;
+  reviewer?: T;
+  score?: T;
+  comments?: T;
+  submittedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -899,6 +947,10 @@ export interface AbstractsSetting {
    * 全文上傳截止日，顯示於前台提醒文字（若留空則不顯示日期）
    */
   fullPaperDeadline?: string | null;
+  /**
+   * 勾選後，評審老師可在前台「學生論文獎評審」頁面對被指派的論文進行評分。關閉後分數仍保留，但評審無法再修改。
+   */
+  studentAwardReviewOpen?: boolean | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -912,6 +964,7 @@ export interface AbstractsSettingsSelect<T extends boolean = true> {
   submissionDeadline?: T;
   fullPaperSubmissionOpen?: T;
   fullPaperDeadline?: T;
+  studentAwardReviewOpen?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

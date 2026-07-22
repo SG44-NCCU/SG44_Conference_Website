@@ -15,6 +15,7 @@ import { Abstracts } from './collections/Abstracts'
 import { Pages } from './collections/Pages'
 import { FullPapers } from './collections/FullPapers'
 import { Sessions } from './collections/Sessions'
+import { StudentAwardReviews } from './collections/StudentAwardReviews'
 
 // 2. 引入 Globals
 import { AbstractsSettings } from './globals/AbstractsSettings'
@@ -59,7 +60,7 @@ export default buildConfig({
   },
 
   // 3. 註冊所有的 Collections
-  collections: [Users, Media, News, Registrations, Abstracts, Pages, FullPapers, Sessions],
+  collections: [Users, Media, News, Registrations, Abstracts, Pages, FullPapers, Sessions, StudentAwardReviews],
 
   // Register custom endpoints
   endpoints: [

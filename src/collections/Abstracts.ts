@@ -63,18 +63,45 @@ export const Abstracts: CollectionConfig = {
     admin: ({ req: { user } }) => user?.role === 'admin',
     // 任何登入的人都可以投稿
     create: ({ req: { user } }) => Boolean(user),
-    // Admin 全部可讀；投稿人只能讀自己的；Reviewer 只能讀被指派的
-    read: ({ req: { user } }) => {
+    // Admin 全部可讀；投稿人只能讀自己的；Reviewer 只能讀被指派的（包含摘要審查及學生論文獎審查）
+    read: async ({ req }) => {
+      const { user, payload } = req
       if (!user) return false
       if (user.role === 'admin') return true
       // reviewer: show assigned; regular user: show own submissions
-      // reviewer: 可讀被指派的 + 自己投稿的
+      // reviewer: 可讀被指派的（摘要審查/學生論文獎審查） + 自己投稿的
       if (user.role === 'reviewer') {
+        let awardAbstractIds: (string | number)[] = []
+        try {
+          if (payload) {
+            const reviews = await payload.find({
+              collection: 'student-award-reviews',
+              where: { reviewer: { equals: user.id } },
+              pagination: false,
+              depth: 0,
+              overrideAccess: true,
+            })
+            awardAbstractIds = reviews.docs
+              .map((r) => (typeof r.abstract === 'object' ? r.abstract.id : r.abstract))
+              .filter(Boolean)
+          }
+        } catch (err) {
+          console.error('Error fetching student-award-reviews in Abstracts.read access:', err)
+        }
+
+        const orConditions: import('payload').Where[] = [
+          { assignedReviewer: { equals: user.id } } as import('payload').Where,
+          { submitter: { equals: user.id } } as import('payload').Where,
+        ]
+
+        if (awardAbstractIds.length > 0) {
+          orConditions.push({
+            id: { in: awardAbstractIds },
+          } as import('payload').Where)
+        }
+
         return {
-          or: [
-            { assignedReviewer: { equals: user.id } } as import('payload').Where,
-            { submitter: { equals: user.id } } as import('payload').Where,
-          ],
+          or: orConditions,
         }
       }
       // 一般使用者：只能讀自己的

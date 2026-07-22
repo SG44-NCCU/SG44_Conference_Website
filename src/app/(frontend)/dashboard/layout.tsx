@@ -40,6 +40,12 @@ const SIDEBAR_ITEMS = [
     roles: ['reviewer', 'admin'],
   },
   {
+    key: 'awardReview',
+    href: '/dashboard/award-review',
+    icon: Award,
+    roles: ['reviewer', 'admin'],
+  },
+  {
     key: 'notifications',
     href: '/dashboard/notifications',
     icon: Bell,
