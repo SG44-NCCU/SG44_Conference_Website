@@ -33,12 +33,12 @@ const SIDEBAR_ITEMS = [
   //   icon: Award,
   //   roles: ['admin', 'user', 'reviewer'],
   // },
-  {
-    key: 'reviewQueue',
-    href: '/dashboard/review-queue',
-    icon: ClipboardList,
-    roles: ['reviewer', 'admin'],
-  },
+  // {
+  //   key: 'reviewQueue',
+  //   href: '/dashboard/review-queue',
+  //   icon: ClipboardList,
+  //   roles: ['reviewer', 'admin'],
+  // },
   {
     key: 'awardReview',
     href: '/dashboard/award-review',
