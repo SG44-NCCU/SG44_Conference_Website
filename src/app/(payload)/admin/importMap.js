@@ -1,4 +1,5 @@
 import { RoleSelectCell as RoleSelectCell_6da8043352b16d707f40d660f8ae1ab2 } from '@/components/payload/RoleSelectCell'
+import { UserDashboard as UserDashboard_9b2b503beff4588bac1c282dc10bfed4 } from '@/components/payload/UserDashboard'
 import { RscEntryLexicalCell as RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { RscEntryLexicalField as RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
 import { LexicalDiffComponent as LexicalDiffComponent_44fe37237e0ebf4470c9990d8cb7b07e } from '@payloadcms/richtext-lexical/rsc'
@@ -35,6 +36,7 @@ import { default as default_e34c28bdc97e3fecf976b23b26d64cc9 } from '@/component
 
 export const importMap = {
   "@/components/payload/RoleSelectCell#RoleSelectCell": RoleSelectCell_6da8043352b16d707f40d660f8ae1ab2,
+  "@/components/payload/UserDashboard#UserDashboard": UserDashboard_9b2b503beff4588bac1c282dc10bfed4,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalCell": RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalField": RscEntryLexicalField_44fe37237e0ebf4470c9990d8cb7b07e,
   "@payloadcms/richtext-lexical/rsc#LexicalDiffComponent": LexicalDiffComponent_44fe37237e0ebf4470c9990d8cb7b07e,

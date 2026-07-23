@@ -98,15 +98,18 @@ export const Users: CollectionConfig = {
     useAsTitle: 'name',
     // 後台列表顯示這幾個重要欄位
     defaultColumns: ['name', 'organization', 'jobTitle', 'email', 'role'],
+    components: {
+      beforeListTable: ['@/components/payload/UserDashboard#UserDashboard'],
+    },
   },
   access: {
-    // 只有 Admin 能進後台
-    admin: ({ req: { user } }) => user?.role === 'admin',
+    // Admin 與 Staff 能進後台
+    admin: ({ req: { user } }) => user?.role === 'admin' || user?.role === 'staff',
     // 開放任何人註冊
     create: () => true,
-    // 使用者只能看/改自己的資料
+    // Admin 與 Staff 可查看所有使用者；一般使用者只能看自己的資料
     read: ({ req: { user } }) => {
-      if (user?.role === 'admin') return true
+      if (user?.role === 'admin' || user?.role === 'staff') return true
       if (user) return { id: { equals: user.id } }
       return false
     },
@@ -176,6 +179,7 @@ export const Users: CollectionConfig = {
       type: 'select',
       options: [
         { label: 'Admin', value: 'admin' },
+        { label: 'Staff (工作人員)', value: 'staff' },
         { label: 'User', value: 'user' },
         { label: 'Reviewer', value: 'reviewer' },
       ],

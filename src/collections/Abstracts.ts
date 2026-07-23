@@ -59,15 +59,15 @@ export const Abstracts: CollectionConfig = {
     },
   },
   access: {
-    // 只有 admin 能進後台
-    admin: ({ req: { user } }) => user?.role === 'admin',
+    // Admin 與 Staff 能進後台
+    admin: ({ req: { user } }) => user?.role === 'admin' || user?.role === 'staff',
     // 任何登入的人都可以投稿
     create: ({ req: { user } }) => Boolean(user),
-    // Admin 全部可讀；投稿人只能讀自己的；Reviewer 只能讀被指派的（包含摘要審查及學生論文獎審查）
+    // Admin 與 Staff 全部可讀；投稿人只能讀自己的；Reviewer 只能讀被指派的（包含摘要審查及學生論文獎審查）
     read: async ({ req }) => {
       const { user, payload } = req
       if (!user) return false
-      if (user.role === 'admin') return true
+      if (user.role === 'admin' || user.role === 'staff') return true
       // reviewer: show assigned; regular user: show own submissions
       // reviewer: 可讀被指派的（摘要審查/學生論文獎審查） + 自己投稿的
       if (user.role === 'reviewer') {

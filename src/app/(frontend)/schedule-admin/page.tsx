@@ -16,7 +16,7 @@ export default async function ScheduleAdminPage() {
   const headersList = await headers()
   const { user } = await payload.auth({ headers: headersList })
 
-  if (!user || user.role !== 'admin') {
+  if (!user || (user.role !== 'admin' && user.role !== 'staff')) {
     redirect('/login')
   }
 

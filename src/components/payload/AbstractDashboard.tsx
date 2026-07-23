@@ -2,6 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from 'react'
 import { SUB_TOPICS } from '@/collections/Abstracts'
+import { useAuth } from '@payloadcms/ui'
 
 type AbstractDoc = {
   id: number
@@ -21,6 +22,8 @@ const STATUS_LABELS: Record<string, string> = {
 }
 
 export const AbstractDashboard: React.FC = () => {
+  const { user } = useAuth()
+  const isAdmin = user?.role === 'admin'
   const [docs, setDocs] = useState<AbstractDoc[]>([])
   const [reviewers, setReviewers] = useState<ReviewerOption[]>([])
   const [loading, setLoading] = useState(true)
@@ -255,127 +258,129 @@ export const AbstractDashboard: React.FC = () => {
       </details>
 
       {/* ── 批量分配審稿人 ── */}
-      <div
-        style={{
-          borderTop: '1px solid #d1d5db',
-          paddingTop: '1rem',
-        }}
-      >
-        <h3 style={{ margin: '0 0 0.75rem 0', fontSize: '0.9rem', color: '#374151' }}>
-          批量指派審稿人
-        </h3>
-        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
-          {/* 子題篩選 */}
-          <select
-            value={filterTopic}
-            onChange={(e) => {
-              setFilterTopic(e.target.value)
-              setSelectedIds(new Set())
-            }}
-            style={{ padding: '4px 8px', fontSize: '0.8rem', border: '1px solid #d1d5db', borderRadius: 4 }}
-          >
-            <option value="">全部子題</option>
-            {SUB_TOPICS.map((t) => (
-              <option key={t.value} value={t.value}>
-                {t.label.split('(')[0].trim()} ({topicStats[t.value] || 0})
-              </option>
-            ))}
-          </select>
+      {isAdmin && (
+        <div
+          style={{
+            borderTop: '1px solid #d1d5db',
+            paddingTop: '1rem',
+          }}
+        >
+          <h3 style={{ margin: '0 0 0.75rem 0', fontSize: '0.9rem', color: '#374151' }}>
+            批量指派審稿人
+          </h3>
+          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
+            {/* 子題篩選 */}
+            <select
+              value={filterTopic}
+              onChange={(e) => {
+                setFilterTopic(e.target.value)
+                setSelectedIds(new Set())
+              }}
+              style={{ padding: '4px 8px', fontSize: '0.8rem', border: '1px solid #d1d5db', borderRadius: 4 }}
+            >
+              <option value="">全部子題</option>
+              {SUB_TOPICS.map((t) => (
+                <option key={t.value} value={t.value}>
+                  {t.label.split('(')[0].trim()} ({topicStats[t.value] || 0})
+                </option>
+              ))}
+            </select>
 
-          {/* 全選 */}
-          <label style={{ fontSize: '0.8rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.25rem', color: '#374151' }}>
-            <input
-              type="checkbox"
-              checked={selectedIds.size === filteredDocs.length && filteredDocs.length > 0}
-              onChange={toggleAll}
-            />
-            全選 ({filteredDocs.length} 篇)
-          </label>
+            {/* 全選 */}
+            <label style={{ fontSize: '0.8rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.25rem', color: '#374151' }}>
+              <input
+                type="checkbox"
+                checked={selectedIds.size === filteredDocs.length && filteredDocs.length > 0}
+                onChange={toggleAll}
+              />
+              全選 ({filteredDocs.length} 篇)
+            </label>
 
-          {/* 審稿人 */}
-          <select
-            value={bulkReviewer}
-            onChange={(e) => setBulkReviewer(e.target.value)}
-            style={{ padding: '4px 8px', fontSize: '0.8rem', border: '1px solid #d1d5db', borderRadius: 4 }}
-          >
-            <option value="">選擇審稿人...</option>
-            {reviewers.map((r) => (
-              <option key={r.id} value={r.id}>
-                {r.name}
-              </option>
-            ))}
-          </select>
+            {/* 審稿人 */}
+            <select
+              value={bulkReviewer}
+              onChange={(e) => setBulkReviewer(e.target.value)}
+              style={{ padding: '4px 8px', fontSize: '0.8rem', border: '1px solid #d1d5db', borderRadius: 4 }}
+            >
+              <option value="">選擇審稿人...</option>
+              {reviewers.map((r) => (
+                <option key={r.id} value={r.id}>
+                  {r.name}
+                </option>
+              ))}
+            </select>
 
-          {/* 執行按鈕 */}
-          <button
-            onClick={handleBulkAssign}
-            disabled={bulkAssigning || selectedIds.size === 0 || !bulkReviewer}
-            style={{
-              padding: '4px 12px',
-              fontSize: '0.8rem',
-              backgroundColor: selectedIds.size > 0 && bulkReviewer ? '#4d4c9d' : '#9ca3af',
-              color: 'white',
-              border: 'none',
-              borderRadius: 4,
-              cursor: selectedIds.size > 0 && bulkReviewer ? 'pointer' : 'not-allowed',
-            }}
-          >
-            {bulkAssigning
-              ? '指派中...'
-              : `指派已選 ${selectedIds.size} 篇`}
-          </button>
-        </div>
-
-        {/* 選擇列表 */}
-        {filteredDocs.length > 0 && (
-          <div
-            style={{
-              marginTop: '0.75rem',
-              maxHeight: 240,
-              overflowY: 'auto',
-              border: '1px solid #e5e7eb',
-              borderRadius: 4,
-              backgroundColor: 'white',
-            }}
-          >
-            {filteredDocs.map((doc) => (
-              <label
-                key={doc.id}
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.5rem',
-                  padding: '6px 10px',
-                  borderBottom: '1px solid #f3f4f6',
-                  fontSize: '0.8rem',
-                  cursor: 'pointer',
-                  backgroundColor: selectedIds.has(doc.id) ? '#f0fdf4' : 'transparent',
-                }}
-              >
-                <input
-                  type="checkbox"
-                  checked={selectedIds.has(doc.id)}
-                  onChange={() => toggleSelect(doc.id)}
-                />
-                <span style={{ flex: 1, color: '#111827' }}>{doc.title}</span>
-                <span style={{ color: '#6b7280' }}>
-                  {doc.assignedReviewer
-                    ? typeof doc.assignedReviewer === 'object'
-                      ? `已指派：${doc.assignedReviewer.name}`
-                      : '已指派'
-                    : '未指派'}
-                </span>
-              </label>
-            ))}
+            {/* 執行按鈕 */}
+            <button
+              onClick={handleBulkAssign}
+              disabled={bulkAssigning || selectedIds.size === 0 || !bulkReviewer}
+              style={{
+                padding: '4px 12px',
+                fontSize: '0.8rem',
+                backgroundColor: selectedIds.size > 0 && bulkReviewer ? '#4d4c9d' : '#9ca3af',
+                color: 'white',
+                border: 'none',
+                borderRadius: 4,
+                cursor: selectedIds.size > 0 && bulkReviewer ? 'pointer' : 'not-allowed',
+              }}
+            >
+              {bulkAssigning
+                ? '指派中...'
+                : `指派已選 ${selectedIds.size} 篇`}
+            </button>
           </div>
-        )}
 
-        {bulkMsg && (
-          <p style={{ marginTop: '0.5rem', fontSize: '0.8rem', color: bulkMsg.includes('錯誤') ? '#991b1b' : '#166534' }}>
-            {bulkMsg}
-          </p>
-        )}
-      </div>
+          {/* 選擇列表 */}
+          {filteredDocs.length > 0 && (
+            <div
+              style={{
+                marginTop: '0.75rem',
+                maxHeight: 240,
+                overflowY: 'auto',
+                border: '1px solid #e5e7eb',
+                borderRadius: 4,
+                backgroundColor: 'white',
+              }}
+            >
+              {filteredDocs.map((doc) => (
+                <label
+                  key={doc.id}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    padding: '6px 10px',
+                    borderBottom: '1px solid #f3f4f6',
+                    fontSize: '0.8rem',
+                    cursor: 'pointer',
+                    backgroundColor: selectedIds.has(doc.id) ? '#f0fdf4' : 'transparent',
+                  }}
+                >
+                  <input
+                    type="checkbox"
+                    checked={selectedIds.has(doc.id)}
+                    onChange={() => toggleSelect(doc.id)}
+                  />
+                  <span style={{ flex: 1, color: '#111827' }}>{doc.title}</span>
+                  <span style={{ color: '#6b7280' }}>
+                    {doc.assignedReviewer
+                      ? typeof doc.assignedReviewer === 'object'
+                        ? `已指派：${doc.assignedReviewer.name}`
+                        : '已指派'
+                      : '未指派'}
+                  </span>
+                </label>
+              ))}
+            </div>
+          )}
+
+          {bulkMsg && (
+            <p style={{ marginTop: '0.5rem', fontSize: '0.8rem', color: bulkMsg.includes('錯誤') ? '#991b1b' : '#166534' }}>
+              {bulkMsg}
+            </p>
+          )}
+        </div>
+      )}
     </div>
   )
 }

@@ -20,9 +20,9 @@ const REVIEW_STATUS_MAP: Record<string, string> = {
 export const exportAbstractsCsvEndpoint = async (req: PayloadRequest) => {
   const { payload, user } = req
 
-  // Ensure user is admin
-  if (!user || user.role !== 'admin') {
-    return Response.json({ error: 'Forbidden. Admin access required.' }, { status: 403 })
+  // Ensure user is admin or staff
+  if (!user || (user.role !== 'admin' && user.role !== 'staff')) {
+    return Response.json({ error: 'Forbidden. Admin or Staff access required.' }, { status: 403 })
   }
 
   try {

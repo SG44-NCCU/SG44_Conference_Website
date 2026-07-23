@@ -146,7 +146,7 @@ export interface User {
   phone: string;
   organization: string;
   jobTitle: string;
-  role: 'admin' | 'user' | 'reviewer';
+  role: 'admin' | 'staff' | 'user' | 'reviewer';
   lastNotificationChecked?: string | null;
   updatedAt: string;
   createdAt: string;

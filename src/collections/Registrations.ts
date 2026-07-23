@@ -18,13 +18,13 @@ export const Registrations: CollectionConfig = {
     },
   },
   access: {
-    // Admin can see/do all
-    admin: ({ req: { user } }) => user?.role === 'admin',
+    // Admin & Staff can see backend panel
+    admin: ({ req: { user } }) => user?.role === 'admin' || user?.role === 'staff',
     // Anyone logged in can create
     create: ({ req: { user } }) => Boolean(user),
-    // Users can read/update their own registrations
+    // Admin & Staff can read all registrations; users can read their own
     read: ({ req: { user } }) => {
-      if (user?.role === 'admin') return true
+      if (user?.role === 'admin' || user?.role === 'staff') return true
       if (user) return { user: { equals: user.id } }
       return false
     },

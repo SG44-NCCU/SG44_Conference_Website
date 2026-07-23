@@ -11,12 +11,12 @@ export const StudentAwardReviews: CollectionConfig = {
     },
   },
   access: {
-    // 只有 admin 能進後台
-    admin: ({ req: { user } }) => user?.role === 'admin',
-    // Admin 全部可讀；reviewer 只能讀自己的
+    // Admin 與 Staff 能進後台
+    admin: ({ req: { user } }) => user?.role === 'admin' || user?.role === 'staff',
+    // Admin 與 Staff 全部可讀；reviewer 只能讀自己的
     read: ({ req: { user } }) => {
       if (!user) return false
-      if (user.role === 'admin') return true
+      if (user.role === 'admin' || user.role === 'staff') return true
       if (user.role === 'reviewer') {
         return { reviewer: { equals: user.id } }
       }

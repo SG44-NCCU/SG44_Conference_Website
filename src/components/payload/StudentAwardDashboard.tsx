@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useMemo, useState } from 'react'
+import { useAuth } from '@payloadcms/ui'
 
 type AwardAbstract = {
   id: number
@@ -21,6 +22,8 @@ type ReviewRecord = {
 }
 
 export const StudentAwardDashboard: React.FC = () => {
+  const { user } = useAuth()
+  const isAdmin = user?.role === 'admin'
   const [eligibleAbstracts, setEligibleAbstracts] = useState<AwardAbstract[]>([])
   const [reviewers, setReviewers] = useState<ReviewerOption[]>([])
   const [reviews, setReviews] = useState<ReviewRecord[]>([])
@@ -194,75 +197,77 @@ export const StudentAwardDashboard: React.FC = () => {
       </div>
 
       {/* ── 批量分配評審 ── */}
-      <div
-        style={{
-          borderTop: '1px solid #d1d5db',
-          paddingTop: '1rem',
-          marginBottom: '1.5rem',
-        }}
-      >
-        <h3 style={{ margin: '0 0 0.75rem 0', fontSize: '0.9rem', color: '#374151' }}>
-          批量指派評審老師（對所有符合論文一次分配）
-        </h3>
-        <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
-          {[0, 1, 2].map((idx) => (
-            <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-              <span style={{ fontSize: '0.75rem', color: '#6b7280', whiteSpace: 'nowrap' }}>
-                評審 {idx + 1}：
-              </span>
-              <select
-                value={selectedReviewers[idx]}
-                onChange={(e) => handleReviewerSelect(idx, e.target.value)}
-                style={{
-                  padding: '4px 8px',
-                  fontSize: '0.8rem',
-                  border: '1px solid #d1d5db',
-                  borderRadius: 4,
-                }}
-              >
-                <option value="">選擇評審...</option>
-                {reviewers.map((r) => (
-                  <option key={r.id} value={r.id}>
-                    {r.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-          ))}
+      {isAdmin && (
+        <div
+          style={{
+            borderTop: '1px solid #d1d5db',
+            paddingTop: '1rem',
+            marginBottom: '1.5rem',
+          }}
+        >
+          <h3 style={{ margin: '0 0 0.75rem 0', fontSize: '0.9rem', color: '#374151' }}>
+            批量指派評審老師（對所有符合論文一次分配）
+          </h3>
+          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', alignItems: 'center' }}>
+            {[0, 1, 2].map((idx) => (
+              <div key={idx} style={{ display: 'flex', font: 'inherit', alignItems: 'center', gap: '0.35rem' }}>
+                <span style={{ fontSize: '0.75rem', color: '#6b7280', whiteSpace: 'nowrap' }}>
+                  評審 {idx + 1}：
+                </span>
+                <select
+                  value={selectedReviewers[idx]}
+                  onChange={(e) => handleReviewerSelect(idx, e.target.value)}
+                  style={{
+                    padding: '4px 8px',
+                    fontSize: '0.8rem',
+                    border: '1px solid #d1d5db',
+                    borderRadius: 4,
+                  }}
+                >
+                  <option value="">選擇評審...</option>
+                  {reviewers.map((r) => (
+                    <option key={r.id} value={r.id}>
+                      {r.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            ))}
 
-          <button
-            onClick={handleBatchAssign}
-            disabled={assigning || selectedReviewers.every((s) => !s)}
-            style={{
-              padding: '4px 14px',
-              fontSize: '0.8rem',
-              backgroundColor:
-                assigning || selectedReviewers.every((s) => !s) ? '#9ca3af' : '#4d4c9d',
-              color: 'white',
-              border: 'none',
-              borderRadius: 4,
-              cursor:
-                assigning || selectedReviewers.every((s) => !s) ? 'not-allowed' : 'pointer',
-            }}
-          >
-            {assigning ? '分配中...' : `一鍵分配給 ${eligibleAbstracts.length} 篇論文`}
-          </button>
-        </div>
-        <p style={{ fontSize: '0.75rem', color: '#6b7280', marginTop: '0.5rem' }}>
-          提示：若評審已被指派過同一篇論文，系統會自動跳過（不會重複建立）
-        </p>
-        {assignMsg && (
-          <p
-            style={{
-              marginTop: '0.5rem',
-              fontSize: '0.8rem',
-              color: assignMsg.includes('錯誤') ? '#991b1b' : '#166534',
-            }}
-          >
-            {assignMsg}
+            <button
+              onClick={handleBatchAssign}
+              disabled={assigning || selectedReviewers.every((s) => !s)}
+              style={{
+                padding: '4px 14px',
+                fontSize: '0.8rem',
+                backgroundColor:
+                  assigning || selectedReviewers.every((s) => !s) ? '#9ca3af' : '#4d4c9d',
+                color: 'white',
+                border: 'none',
+                borderRadius: 4,
+                cursor:
+                  assigning || selectedReviewers.every((s) => !s) ? 'not-allowed' : 'pointer',
+              }}
+            >
+              {assigning ? '分配中...' : `一鍵分配給 ${eligibleAbstracts.length} 篇論文`}
+            </button>
+          </div>
+          <p style={{ fontSize: '0.75rem', color: '#6b7280', marginTop: '0.5rem' }}>
+            提示：若評審已被指派過同一篇論文，系統會自動跳過（不會重複建立）
           </p>
-        )}
-      </div>
+          {assignMsg && (
+            <p
+              style={{
+                marginTop: '0.5rem',
+                fontSize: '0.8rem',
+                color: assignMsg.includes('錯誤') ? '#991b1b' : '#166534',
+              }}
+            >
+              {assignMsg}
+            </p>
+          )}
+        </div>
+      )}
 
       {/* ── 各論文評分統計 ── */}
       <div style={{ borderTop: '1px solid #d1d5db', paddingTop: '1rem' }}>

@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useCallback, useEffect, useState } from 'react'
-
+import { useAuth } from '@payloadcms/ui'
 
 type ReviewerOption = {
   id: number
@@ -17,6 +17,8 @@ type AbstractReviewerCellProps = {
 }
 
 export const AbstractReviewerCell: React.FC<AbstractReviewerCellProps> = ({ rowData }) => {
+  const { user } = useAuth()
+  const isAdmin = user?.role === 'admin'
   const [reviewers, setReviewers] = useState<ReviewerOption[]>([])
   const [selected, setSelected] = useState<number | ''>('')
   const [saving, setSaving] = useState(false)
@@ -49,6 +51,18 @@ export const AbstractReviewerCell: React.FC<AbstractReviewerCellProps> = ({ rowD
     }
     fetchReviewers()
   }, [])
+
+  if (!isAdmin) {
+    const reviewerObj =
+      rowData.assignedReviewer && typeof rowData.assignedReviewer === 'object'
+        ? rowData.assignedReviewer
+        : reviewers.find((r) => r.id === currentId)
+    return (
+      <span style={{ fontSize: '0.8rem', color: reviewerObj ? '#166534' : '#6b7280', fontWeight: reviewerObj ? 600 : 400 }}>
+        {reviewerObj ? reviewerObj.name : '— 未指派 —'}
+      </span>
+    )
+  }
 
   const handleChange = useCallback(
     async (e: React.ChangeEvent<HTMLSelectElement>) => {

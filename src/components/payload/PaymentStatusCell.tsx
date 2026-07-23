@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState, useTransition } from 'react'
+import { useAuth } from '@payloadcms/ui'
 
 const OPTIONS = [
   {
@@ -23,11 +24,32 @@ interface Props {
 }
 
 export function PaymentStatusCell({ cellData, rowData }: Props) {
+  const { user } = useAuth()
+  const isAdmin = user?.role === 'admin'
   const [value, setValue] = useState<StatusValue>(cellData ?? 'pending')
   const [saved, setSaved] = useState(true) // start as "clean"
   const [isPending, startTransition] = useTransition()
 
   const current = OPTIONS.find((o) => o.value === value) ?? OPTIONS[0]
+
+  if (!isAdmin) {
+    return (
+      <span
+        style={{
+          display: 'inline-block',
+          fontSize: '13px',
+          fontWeight: 600,
+          padding: '6px 14px',
+          borderRadius: '9999px',
+          border: `1px solid ${current.border}`,
+          color: current.color,
+          backgroundColor: current.bg,
+        }}
+      >
+        {current.label}
+      </span>
+    )
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setValue(e.target.value as StatusValue)

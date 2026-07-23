@@ -13,25 +13,25 @@ const SIDEBAR_ITEMS = [
     key: 'profile',
     href: '/dashboard/profile',
     icon: User,
-    roles: ['admin', 'user', 'reviewer'],
+    roles: ['admin', 'user', 'reviewer', 'staff'],
   },
   {
     key: 'myRegistrations',
     href: '/dashboard/my-registrations',
     icon: Calendar,
-    roles: ['admin', 'user', 'reviewer'],
+    roles: ['admin', 'user', 'reviewer', 'staff'],
   },
   {
     key: 'mySubmissions',
     href: '/dashboard/my-submissions',
     icon: FileText,
-    roles: ['admin', 'user', 'reviewer'],
+    roles: ['admin', 'user', 'reviewer', 'staff'],
   },
   // {
   //   key: 'competition',
   //   href: '/dashboard/my-competitions',
   //   icon: Award,
-  //   roles: ['admin', 'user', 'reviewer'],
+  //   roles: ['admin', 'user', 'reviewer', 'staff'],
   // },
   // {
   //   key: 'reviewQueue',
@@ -49,7 +49,7 @@ const SIDEBAR_ITEMS = [
     key: 'notifications',
     href: '/dashboard/notifications',
     icon: Bell,
-    roles: ['admin', 'user', 'reviewer'],
+    roles: ['admin', 'user', 'reviewer', 'staff'],
   },
 ]
 

@@ -2,9 +2,11 @@
 
 import React, { useState, useTransition } from 'react'
 import type { DefaultCellComponentProps } from 'payload'
+import { useAuth } from '@payloadcms/ui'
 
 const OPTIONS = [
   { label: 'Admin', value: 'admin', color: '#111827', bg: '#f3f4f6', border: '#d1d5db' },
+  { label: 'Staff', value: 'staff', color: '#854d0e', bg: '#fefce8', border: '#fde047' },
   { label: 'User', value: 'user', color: '#1e40af', bg: '#eff6ff', border: '#93c5fd' },
   { label: 'Reviewer', value: 'reviewer', color: '#166534', bg: '#f0fdf4', border: '#86efac' },
 ] as const
@@ -17,11 +19,32 @@ interface Props extends DefaultCellComponentProps {
 }
 
 export const RoleSelectCell: React.FC<Props> = ({ cellData, rowData }) => {
+  const { user } = useAuth()
+  const isAdmin = user?.role === 'admin'
   const [value, setValue] = useState<RoleValue>(cellData ?? 'user')
   const [saved, setSaved] = useState(true)
   const [isPending, startTransition] = useTransition()
 
-  const current = OPTIONS.find((o) => o.value === value) ?? OPTIONS[1] // Default to user
+  const current = OPTIONS.find((o) => o.value === value) ?? OPTIONS[2] // Default to user
+
+  if (!isAdmin) {
+    return (
+      <span
+        style={{
+          display: 'inline-block',
+          fontSize: '13px',
+          fontWeight: 600,
+          padding: '4px 12px',
+          borderRadius: '9999px',
+          border: `1px solid ${current.border}`,
+          color: current.color,
+          backgroundColor: current.bg,
+        }}
+      >
+        {current.label}
+      </span>
+    )
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setValue(e.target.value as RoleValue)
