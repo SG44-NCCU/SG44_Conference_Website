@@ -3,7 +3,16 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useAuth } from '@/providers/Auth'
 import Link from 'next/link'
-import { Loader2, Plus, Edit, ArrowRight, Upload, FileText, ExternalLink, Download } from 'lucide-react'
+import {
+  Loader2,
+  Plus,
+  Edit,
+  ArrowRight,
+  Upload,
+  FileText,
+  ExternalLink,
+  Download,
+} from 'lucide-react'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 // ─── Label maps ────────────────────────────────────────────────────────────
@@ -43,43 +52,7 @@ type SessionDoc = {
   }[]
 }
 
-const POSTERS = [
-  { id: "P-001", abstractId: 29 },
-  { id: "P-002", abstractId: 30 },
-  { id: "P-003", abstractId: 82 },
-  { id: "P-004", abstractId: 105 },
-  { id: "P-005", abstractId: 88 },
-  { id: "P-006", abstractId: 89 },
-  { id: "P-007", abstractId: 87 },
-  { id: "P-008", abstractId: 22 },
-  { id: "P-009", abstractId: 90 },
-  { id: "P-010", abstractId: 21 },
-  { id: "P-011", abstractId: 70 },
-  { id: "P-012", abstractId: 77 },
-  { id: "P-013", abstractId: 107 },
-  { id: "P-014", abstractId: 123 },
-  { id: "P-015", abstractId: 137 },
-  { id: "P-016", abstractId: 140 },
-  { id: "P-017", abstractId: 39 },
-  { id: "P-018", abstractId: 139 },
-  { id: "P-019", abstractId: 128 },
-  { id: "P-020", abstractId: 106 },
-  { id: "P-021", abstractId: 138 },
-  { id: "P-022", abstractId: 124 },
-  { id: "P-023", abstractId: 127 },
-  { id: "P-024", abstractId: 126 },
-  { id: "P-025", abstractId: 52 },
-  { id: "P-026", abstractId: 60 },
-  { id: "P-027", abstractId: 83 },
-  { id: "P-028", abstractId: 85 },
-  { id: "P-029", abstractId: 109 },
-  { id: "P-030", abstractId: 143 },
-  { id: "P-031", abstractId: 44 },
-  { id: "P-032", abstractId: 59 },
-  { id: "P-033", abstractId: 71 },
-  { id: "P-034", abstractId: 92 },
-  { id: "P-035", abstractId: 151 }
-]
+// Removed hardcoded POSTERS array
 
 const getRoomFullName = (roomCode: string) => {
   const map: Record<string, string> = {
@@ -91,10 +64,11 @@ const getRoomFullName = (roomCode: string) => {
     '313': '313信義講堂 (313教室)',
     '210': '芶壽生講堂 (210教室)',
     '410': '王文杰講堂 (410教室)',
-    'lobby': '一樓大廳',
+    lobby: '一樓大廳',
   }
   if (map[roomCode]) return map[roomCode]
-  if (roomCode.includes('教室') || roomCode.includes('講堂') || roomCode.includes('大廳')) return roomCode
+  if (roomCode.includes('教室') || roomCode.includes('講堂') || roomCode.includes('大廳'))
+    return roomCode
   return `${roomCode}教室`
 }
 
@@ -114,6 +88,7 @@ export default function MySubmissionsPage() {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [pendingUploadAbstractId, setPendingUploadAbstractId] = useState<number | null>(null)
   const [sessions, setSessions] = useState<SessionDoc[]>([])
+  const [posters, setPosters] = useState<any[]>([])
 
   const REVIEW_STATUS_LABELS: Record<string, string> = {
     pending: t('abstract.status.pending'),
@@ -140,7 +115,7 @@ export default function MySubmissionsPage() {
 
     const fetchAll = async () => {
       try {
-        const [abstractsRes, settingsRes, regRes, sessionsRes] = await Promise.all([
+        const [abstractsRes, settingsRes, regRes, sessionsRes, postersRes] = await Promise.all([
           fetch(
             `/api/abstracts?where[submitter][equals]=${user.id}&sort=-createdAt&limit=100&depth=1`,
           ),
@@ -149,6 +124,7 @@ export default function MySubmissionsPage() {
             `/api/registrations?where[user][equals]=${user.id}&where[paymentStatus][equals]=paid&limit=1`,
           ),
           fetch('/api/sessions?limit=200&depth=0'),
+          fetch('/api/posters?limit=1000&depth=0'),
         ])
 
         if (abstractsRes.ok) {
@@ -179,7 +155,12 @@ export default function MySubmissionsPage() {
 
         if (sessionsRes.ok) {
           const sessionsData = await sessionsRes.json()
-          setSessions(sessionsData.docs || [])
+          setSessions(sessionsData?.docs || [])
+        }
+
+        if (postersRes.ok) {
+          const postersData = await postersRes.json()
+          setPosters(postersData?.docs || [])
         }
       } catch (err) {
         console.error('Failed to load submissions', err)
@@ -355,9 +336,12 @@ export default function MySubmissionsPage() {
           const isUploading = uploadingId === doc.id
           const thisUploadError = uploadError[doc.id]
           const needsFullPaper = doc.isStudent && doc.applyStudentAward && !doc.fullPaper
-          
-          const poster = POSTERS.find(p => p.abstractId === doc.id)
-          const session = sessions.find(s => s.papers?.some(p => Number(p.abstract) === doc.id))
+
+          const poster = posters.find((p) => {
+            const absId = typeof p.abstract === 'object' ? p.abstract?.id : p.abstract
+            return absId === doc.id
+          })
+          const session = sessions.find((s) => s.papers?.some((p) => Number(p.abstract) === doc.id))
 
           return (
             <div key={doc.id} className="border border-stone-200 p-8">
@@ -580,25 +564,40 @@ export default function MySubmissionsPage() {
                   {isAccepted && (
                     <div>
                       <p className="text-stone-500 text-xs font-semibold tracking-wide uppercase tracking-widest mb-3">
-                        發表場次 / 海報編號
+                        {t('dashboard.sub.item.session')}
                       </p>
                       <div className="p-4 border border-stone-200 bg-stone-50">
                         {poster ? (
                           <div className="flex items-center gap-3">
-                            <span className="bg-[#4d4c9d] text-white px-3 py-1 font-bold tracking-wider">{poster.id}</span>
-                            <span className="text-stone-700 font-medium">海報發表</span>
+                            <span className="bg-[#4d4c9d] text-white px-3 py-1 font-bold tracking-wider">
+                              {poster.posterId}
+                            </span>
+                            <span className="text-stone-700 font-medium">
+                              {t('abstract.type.poster')}
+                            </span>
+                            <span className="text-stone-700 text-sm font-medium border-l border-stone-300 pl-3">
+                              地點：{getRoomFullName('313')}
+                            </span>
                           </div>
                         ) : session ? (
                           <div className="space-y-2">
                             <div className="flex flex-wrap gap-2 items-center">
-                              <span className="bg-[#4d4c9d]/10 text-[#4d4c9d] px-2 py-1 text-xs font-semibold tracking-widest">{session.date}</span>
-                              <span className="text-stone-700 text-sm font-medium">{session.startTime} - {session.endTime}</span>
-                              <span className="text-stone-700 text-sm font-medium border-l border-stone-300 pl-2">{getRoomFullName(session.room)}</span>
+                              <span className="bg-[#4d4c9d]/10 text-[#4d4c9d] px-2 py-1 text-xs font-semibold tracking-widest">
+                                {session.date.replace(/-/g, '/')}
+                              </span>
+                              <span className="text-stone-700 text-sm font-medium">
+                                {session.startTime} - {session.endTime}
+                              </span>
+                              <span className="text-stone-700 text-sm font-medium border-l border-stone-300 pl-2">
+                                {getRoomFullName(session.room)}
+                              </span>
                             </div>
                             <p className="font-bold text-stone-800">{session.title}</p>
                           </div>
                         ) : (
-                          <p className="text-stone-500 text-sm">議程安排中，請稍後</p>
+                          <div className="text-stone-500 font-medium">
+                            議程安排中，請稍後 (Scheduling in progress, please wait)
+                          </div>
                         )}
                       </div>
                     </div>

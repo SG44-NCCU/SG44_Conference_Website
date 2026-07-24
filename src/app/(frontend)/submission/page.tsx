@@ -20,47 +20,7 @@ export default function SubmissionPage() {
     { zh: t('sub.topics.9.zh'), en: t('sub.topics.9.en') },
   ]
 
-  const studentAwardItems = [
-    {
-      label: t('sub.studentAward.1.label'),
-      content: t('sub.studentAward.1.content'),
-    },
-    {
-      label: t('sub.studentAward.2.label'),
-      content: t('sub.studentAward.2.content'),
-    },
-    {
-      label: t('sub.studentAward.3.label'),
-      content: t('sub.studentAward.3.content'),
-    },
-    {
-      label: t('sub.studentAward.5.label'),
-      content: t('sub.studentAward.5.content'),
-    },
-    {
-      label: t('sub.studentAward.6.label'),
-      content: t('sub.studentAward.6.content'),
-    },
-  ]
 
-  const posterAwardItems = [
-    {
-      label: t('sub.posterAward.1.label'),
-      content: t('sub.posterAward.1.content'),
-    },
-    {
-      label: t('sub.posterAward.2.label'),
-      content: t('sub.posterAward.2.content'),
-    },
-    {
-      label: t('sub.posterAward.4.label'),
-      content: t('sub.posterAward.4.content'),
-    },
-    {
-      label: t('sub.posterAward.5.label'),
-      content: t('sub.posterAward.5.content'),
-    },
-  ]
 
   return (
     <div className="min-h-screen bg-white pt-16">

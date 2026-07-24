@@ -165,7 +165,7 @@ const Navbar: React.FC = () => {
               <div key={item.name} className="relative group px-3 py-2">
                 <Link
                   href={item.href}
-                  className="flex items-center gap-1 text-sm font-medium text-stone-600 hover:text-[#4d4c9d] transition-colors"
+                  className="flex items-center gap-1 text-sm font-medium text-stone-600 hover:text-[#4d4c9d] transition-colors whitespace-nowrap"
                 >
                   {item.name}
                   {item.items && (

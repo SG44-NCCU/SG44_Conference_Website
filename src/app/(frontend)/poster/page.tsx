@@ -17,7 +17,14 @@ export default async function PosterPage() {
     limit: 1000,
   })
 
+  const postersResult = await payload.find({
+    collection: 'posters',
+    depth: 0,
+    limit: 1000,
+    sort: 'posterId'
+  })
+
   return (
-    <PosterClient abstracts={abstractsResult.docs as any} />
+    <PosterClient abstracts={abstractsResult.docs as any} posters={postersResult.docs as any} />
   )
 }

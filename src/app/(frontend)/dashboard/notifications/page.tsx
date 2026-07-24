@@ -154,7 +154,7 @@ export default function NotificationsPage() {
                   id: `abs-session-${doc.id}`,
                   type: 'info',
                   title: '論文發表場次已安排',
-                  description: `您的論文「${doc.title}」已被安排至場次「${session.title}」，時間：${session.date} ${session.startTime}-${session.endTime}，地點：${getRoomFullName(session.room)}。`,
+                  description: `您的論文「${doc.title}」已被安排至場次「${session.title}」，時間：${session.date.replace(/-/g, '/')} ${session.startTime}-${session.endTime}，地點：${getRoomFullName(session.room)}。`,
                   date: new Date(session.updatedAt),
                   link: '/dashboard/my-submissions',
                   icon: Bell

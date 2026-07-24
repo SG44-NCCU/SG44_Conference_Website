@@ -34,7 +34,7 @@ export default function GuidelinesPage() {
           {/* General Rules */}
           <section>
             <h2 className="text-base font-semibold tracking-wide text-stone-800 border-l-[3px] border-[#4d4c9d] pl-3 mb-6">
-              一般規定
+              發表規定
             </h2>
             <ol className="space-y-4">
               {generalRules.map((rule, idx) => (
@@ -76,8 +76,10 @@ export default function GuidelinesPage() {
                 <div className="flex gap-3">
                   <span className="text-[#4d4c9d] font-medium flex-shrink-0 w-2" />
                   <span>
-                    <span className="text-stone-500">本項應包含中、英文摘要，不限發表論文之頁數，須以中文或英文撰寫，Microsoft Word 格式編輯，檔案應小於25 MB，論文格式</span>
-                    {' '}
+                    <span className="text-stone-500">
+                      本項應包含中、英文摘要，不限發表論文之頁數，須以中文或英文撰寫，Microsoft Word
+                      格式編輯，檔案應小於25 MB，論文格式
+                    </span>{' '}
                     <a
                       href="/全文範本.docx"
                       download
@@ -100,7 +102,10 @@ export default function GuidelinesPage() {
               <div className="space-y-4 pl-4 border-l border-stone-100">
                 <div className="flex gap-3">
                   <span className="text-[#4d4c9d] font-medium flex-shrink-0 w-2" />
-                  <span>海報發表之海報展覽立版規格為「直式A0」，其規格尺寸為84.1 cm（寬）× 118.9 cm（高），建議以本格式設計編排，並輸出印刷製作。</span>
+                  <span>
+                    海報發表之海報展覽立版規格為「直式A0」，其規格尺寸為84.1 cm（寬）× 118.9
+                    cm（高），建議以本格式設計編排，並輸出印刷製作。
+                  </span>
                 </div>
               </div>
             </div>
@@ -150,7 +155,7 @@ export default function GuidelinesPage() {
             href="/abstract-submit"
             className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#4d4c9d] text-white font-medium rounded-full hover:bg-[#3d3c8d] transition-all duration-200 text-base"
           >
-            {t('sub.btn.go')}
+            我要投稿
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="18"

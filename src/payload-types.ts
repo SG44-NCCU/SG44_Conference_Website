@@ -76,6 +76,7 @@ export interface Config {
     'full-papers': FullPaper;
     sessions: Session;
     'student-award-reviews': StudentAwardReview;
+    posters: Poster;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -92,6 +93,7 @@ export interface Config {
     'full-papers': FullPapersSelect<false> | FullPapersSelect<true>;
     sessions: SessionsSelect<false> | SessionsSelect<true>;
     'student-award-reviews': StudentAwardReviewsSelect<false> | StudentAwardReviewsSelect<true>;
+    posters: PostersSelect<false> | PostersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -538,6 +540,20 @@ export interface StudentAwardReview {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posters".
+ */
+export interface Poster {
+  id: number;
+  posterId: string;
+  abstract?: (number | null) | Abstract;
+  topic?: string | null;
+  title?: string | null;
+  author?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -595,6 +611,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'student-award-reviews';
         value: number | StudentAwardReview;
+      } | null)
+    | ({
+        relationTo: 'posters';
+        value: number | Poster;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -878,6 +898,19 @@ export interface StudentAwardReviewsSelect<T extends boolean = true> {
   score?: T;
   comments?: T;
   submittedAt?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "posters_select".
+ */
+export interface PostersSelect<T extends boolean = true> {
+  posterId?: T;
+  abstract?: T;
+  topic?: T;
+  title?: T;
+  author?: T;
   updatedAt?: T;
   createdAt?: T;
 }
