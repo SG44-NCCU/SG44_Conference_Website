@@ -1,0 +1,545 @@
+// ─── Coarse Schedule Data ─────────────────────────────────────────────────
+
+type CellType =
+  | 'ceremony'
+  | 'plenary'
+  | 'academic'
+  | 'special-nlsc'
+  | 'special-land'
+  | 'special-nstc'
+  | 'special'
+  | 'meal'
+  | 'break'
+  | 'competition'
+  | 'admin'
+  | 'empty'
+
+interface CoarseCell {
+  text: string
+  sub?: string
+  type: CellType
+  topic?: number
+  clickable?: boolean
+  dbFilter?: { date: string; room: string; chairName?: string }
+}
+
+type CellDef = CoarseCell | null
+
+// 14 rooms (skipping the empty stage col in original Excel)
+const ROOMS = [
+  { id: 'lobby', name: '法學院一樓', sub: '' },
+  { id: '409', name: '409 講堂', sub: '(238人/環形)' },
+  { id: '105', name: '105 教室', sub: '(139人/教室)' },
+  { id: '106', name: '106 教室', sub: '(139人/教室)' },
+  { id: '210', name: '210 教室', sub: '(47人/環形)' },
+  { id: '415', name: '415 教室', sub: '(62人/環形)' },
+  { id: '416', name: '416 教室', sub: '(108人/教室)' },
+  { id: '403', name: '403 教室', sub: '(31人/環形)' },
+  { id: '310', name: '310 教室', sub: '(106人/教室)' },
+  { id: '313', name: '313 教室', sub: '(106人/教室)' },
+  { id: '308', name: '308 教室', sub: '(12人)' },
+  { id: '304', name: '304 教室', sub: '(28人/環形)' },
+  { id: '303', name: '303 教室', sub: '(28人/環形)' },
+  { id: '312', name: '312 教室', sub: '(50人/教室)' },
+]
+
+// ── Day 1 ─────────────────────────────────────────────────────────────────
+
+const DAY1_SLOTS = [
+  '9:00–10:00',
+  '10:00–10:30',
+  '10:30–10:40',
+  '10:40–11:00',
+  '11:05–11:20',
+  '11:20–12:00',
+  '12:00–13:30',
+  '13:30–15:00',
+  '15:00–15:40',
+  '15:40–17:10',
+  '17:10–17:50',
+]
+
+// col indices: 0=法學院, 1=409, 2=105, 3=106, 4=210, 5=415, 6=416, 7=403, 8=310, 9=313, 10=308, 11=304, 12=303, 13=312
+const DAY1_GRID: CellDef[][] = [
+  // 9:00–10:00
+  [
+    { text: '報到及服務台', type: 'admin' },
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+  ],
+  // 10:00–10:30
+  [
+    { text: '報到及服務台', type: 'admin' },
+    { text: '開幕典禮', sub: '貴賓介紹、貴賓致詞\n主辦單位報告、全體大合照', type: 'ceremony' },
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+  ],
+  // 10:30–10:40
+  [
+    { text: '報到及服務台', type: 'admin' },
+    { text: '簽約儀式', type: 'ceremony' },
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+  ],
+  // 10:40–11:00
+  [
+    { text: '報到及服務台', type: 'admin' },
+    { text: '頒獎典禮', sub: '空間資訊永續應用獎', type: 'ceremony' },
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+  ],
+  // 11:05–11:20
+  [
+    { text: '報到及服務台', type: 'admin' },
+    { text: '地科中心介紹', sub: '吳祚任主任', type: 'plenary' },
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+  ],
+  // 11:20–12:00
+  [
+    { text: '報到及服務台', type: 'admin' },
+    { text: '專題演講', sub: '太空中心劉小菁處長', type: 'plenary' },
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+  ],
+  // 12:00–13:30 (Lunch)
+  [
+    { text: '報到及服務台', type: 'admin' },
+    null,
+    null,
+    null,
+    { text: '各校代表會議', type: 'special' },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '開放用餐區', type: 'meal' },
+    null,
+    { text: '工作人員休息室', type: 'admin' },
+    { text: '發放便當區', type: 'admin' },
+    { text: '開放用餐區', type: 'meal' },
+  ],
+  // 13:30–15:00
+  [
+    { text: '報到及服務台', type: 'admin' },
+    { text: '論文、海報發表', type: 'admin' },
+    {
+      text: '9. 國土政策與規劃治理',
+      sub: '賴宗裕',
+      type: 'academic',
+      topic: 9,
+      clickable: true,
+      dbFilter: { date: '2026-08-20', room: '105', chairName: '賴宗裕' },
+    },
+    {
+      text: '1. 大地測量與導航技術',
+      sub: '莊子毅',
+      type: 'academic',
+      topic: 1,
+      clickable: true,
+      dbFilter: { date: '2026-08-20', room: '106', chairName: '莊子毅' },
+    },
+    null,
+    {
+      text: '6. 數位城市與資訊服務',
+      sub: '邱景升',
+      type: 'academic',
+      topic: 6,
+      clickable: true,
+      dbFilter: { date: '2026-08-20', room: '415', chairName: '邱景升' },
+    },
+    {
+      text: '8. 衛星科技與海洋測繪',
+      sub: '曾子榜',
+      type: 'academic',
+      topic: 8,
+      clickable: true,
+      dbFilter: { date: '2026-08-20', room: '416', chairName: '曾子榜' },
+    },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '3S 創客競賽\n賽前布置', type: 'competition' },
+    { text: '海報發表', type: 'academic' },
+    null,
+    { text: '工作人員休息室', type: 'admin' },
+    { text: '發放便當區', type: 'admin' },
+    { text: '開放用餐區', type: 'meal' },
+  ],
+  // 15:00–15:40 (Break)
+  [
+    { text: '報到及服務台', type: 'admin' },
+    null,
+    null,
+    null,
+    null,
+    { text: '開放用餐區', type: 'meal' },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '3S 創客競賽\n賽前布置', type: 'competition' },
+    { text: '開放用餐區', type: 'meal' },
+    null,
+    { text: '工作人員休息室', type: 'admin' },
+    { text: '發放便當區', type: 'admin' },
+    { text: '開放用餐區', type: 'meal' },
+  ],
+  // 15:40–17:10
+  [
+    { text: '報到及服務台', type: 'admin' },
+    { text: '論文、海報發表', type: 'admin' },
+    null,
+    {
+      text: '1. 大地測量與導航技術',
+      sub: '儲豐宥',
+      type: 'academic',
+      topic: 1,
+      clickable: true,
+      dbFilter: { date: '2026-08-20', room: '106', chairName: '儲豐宥' },
+    },
+    null,
+    {
+      text: '7. 環境永續與韌性防災',
+      sub: '施亘昶',
+      type: 'academic',
+      topic: 7,
+      clickable: true,
+      dbFilter: { date: '2026-08-20', room: '415', chairName: '施亘昶' },
+    },
+    {
+      text: '8. 衛星科技與海洋測繪',
+      sub: '蔡亞倫',
+      type: 'academic',
+      topic: 8,
+      clickable: true,
+      dbFilter: { date: '2026-08-20', room: '416', chairName: '蔡亞倫' },
+    },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '3S 創客競賽\n賽前布置', type: 'competition' },
+    { text: '海報發表', type: 'academic' },
+    null,
+    { text: '工作人員休息室', type: 'admin' },
+    { text: '發放便當區', type: 'admin' },
+    { text: '開放用餐區', type: 'meal' },
+  ],
+  // 17:10–17:50
+  [
+    null,
+    null,
+    null,
+    null,
+    null,
+    { text: '開放用餐區', type: 'meal' },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '開放用餐區', type: 'meal' },
+    null,
+    { text: '中華空間資訊學會\n17:00–18:00', type: 'special' },
+    { text: '發放便當區', type: 'admin' },
+    { text: '開放用餐區', type: 'meal' },
+  ],
+]
+
+// ── Day 2 ─────────────────────────────────────────────────────────────────
+
+const DAY2_SLOTS = [
+  '9:00–10:15',
+  '10:15–10:45',
+  '10:45–12:00',
+  '12:00–13:00',
+  '13:00–14:30',
+  '14:15–14:45',
+  '14:45–16:00',
+  '16:20',
+]
+
+const DAY2_GRID: CellDef[][] = [
+  // 9:00–10:15
+  [
+    { text: '報到及服務台', type: 'admin' },
+    { text: '論文發表', type: 'admin' },
+    {
+      text: '國土測繪中心\n成果發表(I)',
+      sub: '葉大綱',
+      type: 'special-nlsc',
+      clickable: true,
+      dbFilter: { date: '2026-08-21', room: '105', chairName: '葉大綱' },
+    },
+    {
+      text: '地政司\n重力測量 — 論文發表',
+      sub: '黃金維',
+      type: 'special-land',
+      clickable: true,
+      dbFilter: { date: '2026-08-21', room: '106', chairName: '黃金維' },
+    },
+    null,
+    {
+      text: '4. 攝影測量與測繪管理',
+      sub: '朱洪杰',
+      type: 'academic',
+      topic: 4,
+      clickable: true,
+      dbFilter: { date: '2026-08-21', room: '415', chairName: '朱洪杰' },
+    },
+    {
+      text: '8. 衛星科技與海洋測繪',
+      sub: '張智安',
+      type: 'academic',
+      topic: 8,
+      clickable: true,
+      dbFilter: { date: '2026-08-21', room: '416', chairName: '張智安' },
+    },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '3S 創客競賽', type: 'competition' },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '3S 創客競賽\n評審討論室', type: 'competition' },
+    { text: '工作人員休息室', type: 'admin' },
+    { text: '發放便當區', type: 'admin' },
+    { text: '開放用餐區', type: 'meal' },
+  ],
+  // 10:15–10:45 (Break)
+  [
+    { text: '報到及服務台', type: 'admin' },
+    { text: '廠商參觀、休息交流', type: 'break' },
+    null,
+    null,
+    null,
+    { text: '開放用餐區', type: 'meal' },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '3S 創客競賽', type: 'competition' },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '3S 創客競賽\n評審討論室', type: 'competition' },
+    { text: '工作人員休息室', type: 'admin' },
+    { text: '發放便當區', type: 'admin' },
+    { text: '開放用餐區', type: 'meal' },
+  ],
+  // 10:45–12:00
+  [
+    { text: '報到及服務台', type: 'admin' },
+    { text: '論文發表', type: 'admin' },
+    {
+      text: '國土測繪中心\n成果發表(II)',
+      sub: '楊名',
+      type: 'special-nlsc',
+      clickable: true,
+      dbFilter: { date: '2026-08-21', room: '105', chairName: '楊名' },
+    },
+    {
+      text: '地政司\n專題報告 + 座談',
+      type: 'special-land',
+      clickable: true,
+      dbFilter: { date: '2026-08-21', room: '106', chairName: '黃金維' },
+    },
+    null,
+    {
+      text: '4. 攝影測量與測繪管理',
+      sub: '賴彥儒',
+      type: 'academic',
+      topic: 4,
+      clickable: true,
+      dbFilter: { date: '2026-08-21', room: '415', chairName: '賴彥儒' },
+    },
+    {
+      text: '8. 衛星科技與海洋測繪',
+      sub: '張立雨',
+      type: 'academic',
+      topic: 8,
+      clickable: true,
+      dbFilter: { date: '2026-08-21', room: '416', chairName: '張立雨' },
+    },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '3S 創客競賽', type: 'competition' },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '3S 創客競賽\n評審討論室', type: 'competition' },
+    { text: '工作人員休息室', type: 'admin' },
+    { text: '發放便當區', type: 'admin' },
+    { text: '開放用餐區', type: 'meal' },
+  ],
+  // 12:00–13:00 (Lunch)
+  [
+    { text: '報到及服務台', type: 'admin' },
+    { text: '午餐與交流', type: 'meal' },
+    null,
+    null,
+    { text: '女性論壇', type: 'special' },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '3S 創客競賽', type: 'competition' },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '3S 創客競賽\n評審討論室', type: 'competition' },
+    { text: '工作人員休息室', type: 'admin' },
+    { text: '發放便當區', type: 'admin' },
+    { text: '開放用餐區', type: 'meal' },
+  ],
+  // 13:00–14:30
+  [
+    { text: '報到及服務台', type: 'admin' },
+    { text: '論文發表', type: 'admin' },
+    {
+      text: '國科會 空間資訊科技學門\n計畫成果發表會',
+      sub: '曾國欣',
+      type: 'special-nstc',
+      clickable: true,
+      dbFilter: { date: '2026-08-21', room: '105', chairName: '曾國欣' },
+    },
+    {
+      text: '5. 智慧科技與跨域應用',
+      sub: '林玉菁',
+      type: 'academic',
+      topic: 5,
+      clickable: true,
+      dbFilter: { date: '2026-08-21', room: '106', chairName: '林玉菁' },
+    },
+    null,
+    {
+      text: '2. 車載測繪與室內定位\n3. 無人載具與災害調查',
+      sub: '呂學展',
+      type: 'academic',
+      topic: 2,
+      clickable: true,
+      dbFilter: { date: '2026-08-21', room: '415', chairName: '呂學展' },
+    },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '3S 創客競賽', type: 'competition' },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '3S 創客競賽\n評審討論室', type: 'competition' },
+    { text: '工作人員休息室', type: 'admin' },
+    { text: '發放便當區', type: 'admin' },
+    { text: '開放用餐區', type: 'meal' },
+  ],
+  // 14:15–14:45 (Break)
+  [
+    { text: '報到及服務台', type: 'admin' },
+    { text: '廠商參觀、休息交流', type: 'break' },
+    null,
+    null,
+    null,
+    { text: '開放用餐區', type: 'meal' },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '3S 創客競賽', type: 'competition' },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '3S 創客競賽\n評審討論室', type: 'competition' },
+    { text: '工作人員休息室', type: 'admin' },
+    { text: '發放便當區', type: 'admin' },
+    { text: '開放用餐區', type: 'meal' },
+  ],
+  // 14:45–16:00
+  [
+    { text: '報到及服務台', type: 'admin' },
+    { text: '論文發表', type: 'admin' },
+    {
+      text: '國科會 空間資訊科技學門\n計畫成果發表會',
+      sub: '蔡慧萍',
+      type: 'special-nstc',
+      clickable: true,
+      dbFilter: { date: '2026-08-21', room: '105', chairName: '蔡慧萍' },
+    },
+    {
+      text: '5. 智慧科技與跨域應用',
+      sub: '景國恩',
+      type: 'academic',
+      topic: 5,
+      clickable: true,
+      dbFilter: { date: '2026-08-21', room: '106', chairName: '景國恩' },
+    },
+    null,
+    {
+      text: '3. 無人載具與災害調查',
+      sub: '楊明德',
+      type: 'academic',
+      topic: 3,
+      clickable: true,
+      dbFilter: { date: '2026-08-21', room: '415', chairName: '楊明德' },
+    },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '3S 創客競賽', type: 'competition' },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '3S 創客競賽\n評審討論室', type: 'competition' },
+    { text: '工作人員休息室', type: 'admin' },
+    { text: '發放便當區', type: 'admin' },
+    { text: '開放用餐區', type: 'meal' },
+  ],
+  // 16:20
+  [
+    null,
+    { text: '閉幕典禮', type: 'ceremony' },
+    null,
+    null,
+    null,
+    { text: '開放用餐區', type: 'meal' },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '3S 創客競賽', type: 'competition' },
+    { text: '開放用餐區', type: 'meal' },
+    { text: '3S 創客競賽\n評審討論室', type: 'competition' },
+    { text: '工作人員休息室', type: 'admin' },
+    { text: '發放便當區', type: 'admin' },
+    { text: '開放用餐區', type: 'meal' },
+  ],
+]
+
+// ─── Helper: get cell CSS class ───

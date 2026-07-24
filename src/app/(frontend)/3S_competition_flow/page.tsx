@@ -30,6 +30,7 @@ export default function CompetitionFlowPage() {
           <h1 className="text-3xl sm:text-4xl font-semibold tracking-wide text-stone-900 mb-4">
             2026 年大專生 3S 創客競賽流程
           </h1>
+          <p className="text-stone-500 tracking-wider text-lg">2026 3S Maker Competition Flow</p>
           <div className="mx-auto w-12 h-0.5 bg-[#4d4c9d]" />
           <p className="mt-5 text-stone-400 text-sm">
             2026年08月20日（星期三）・國立政治大學

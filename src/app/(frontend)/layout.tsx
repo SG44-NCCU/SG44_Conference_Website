@@ -24,7 +24,7 @@ const notoSans = Noto_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'SG44 | 第44屆測量及空間資訊研討會',
+  title: '第44屆測量及空間資訊研討會 SG44 Conference on Surveying and Geomatics',
   description: '第44屆測量及空間資訊研討會官方網站',
   icons: {
     icon: '/LOGO.svg',

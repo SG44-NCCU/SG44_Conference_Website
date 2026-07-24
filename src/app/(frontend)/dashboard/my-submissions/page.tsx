@@ -30,6 +30,74 @@ type AbstractDoc = {
   updatedAt: string
 }
 
+type SessionDoc = {
+  id: number
+  title: string
+  date: string
+  startTime: string
+  endTime: string
+  room: string
+  papers?: {
+    abstract: number | string
+    presentationOrder: number
+  }[]
+}
+
+const POSTERS = [
+  { id: "P-001", abstractId: 29 },
+  { id: "P-002", abstractId: 30 },
+  { id: "P-003", abstractId: 82 },
+  { id: "P-004", abstractId: 105 },
+  { id: "P-005", abstractId: 88 },
+  { id: "P-006", abstractId: 89 },
+  { id: "P-007", abstractId: 87 },
+  { id: "P-008", abstractId: 22 },
+  { id: "P-009", abstractId: 90 },
+  { id: "P-010", abstractId: 21 },
+  { id: "P-011", abstractId: 70 },
+  { id: "P-012", abstractId: 77 },
+  { id: "P-013", abstractId: 107 },
+  { id: "P-014", abstractId: 123 },
+  { id: "P-015", abstractId: 137 },
+  { id: "P-016", abstractId: 140 },
+  { id: "P-017", abstractId: 39 },
+  { id: "P-018", abstractId: 139 },
+  { id: "P-019", abstractId: 128 },
+  { id: "P-020", abstractId: 106 },
+  { id: "P-021", abstractId: 138 },
+  { id: "P-022", abstractId: 124 },
+  { id: "P-023", abstractId: 127 },
+  { id: "P-024", abstractId: 126 },
+  { id: "P-025", abstractId: 52 },
+  { id: "P-026", abstractId: 60 },
+  { id: "P-027", abstractId: 83 },
+  { id: "P-028", abstractId: 85 },
+  { id: "P-029", abstractId: 109 },
+  { id: "P-030", abstractId: 143 },
+  { id: "P-031", abstractId: 44 },
+  { id: "P-032", abstractId: 59 },
+  { id: "P-033", abstractId: 71 },
+  { id: "P-034", abstractId: 92 },
+  { id: "P-035", abstractId: 151 }
+]
+
+const getRoomFullName = (roomCode: string) => {
+  const map: Record<string, string> = {
+    '105': '富邦法學講堂 (105教室)',
+    '106': '承恩講堂 (106教室)',
+    '415': '明達講堂 (415教室)',
+    '416': '416教室',
+    '310': '310教室',
+    '313': '313信義講堂 (313教室)',
+    '210': '芶壽生講堂 (210教室)',
+    '410': '王文杰講堂 (410教室)',
+    'lobby': '一樓大廳',
+  }
+  if (map[roomCode]) return map[roomCode]
+  if (roomCode.includes('教室') || roomCode.includes('講堂') || roomCode.includes('大廳')) return roomCode
+  return `${roomCode}教室`
+}
+
 export default function MySubmissionsPage() {
   const { user } = useAuth()
   const { t } = useLanguage()
@@ -45,6 +113,7 @@ export default function MySubmissionsPage() {
   const [uploadError, setUploadError] = useState<Record<number, string>>({})
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [pendingUploadAbstractId, setPendingUploadAbstractId] = useState<number | null>(null)
+  const [sessions, setSessions] = useState<SessionDoc[]>([])
 
   const REVIEW_STATUS_LABELS: Record<string, string> = {
     pending: t('abstract.status.pending'),
@@ -71,7 +140,7 @@ export default function MySubmissionsPage() {
 
     const fetchAll = async () => {
       try {
-        const [abstractsRes, settingsRes, regRes] = await Promise.all([
+        const [abstractsRes, settingsRes, regRes, sessionsRes] = await Promise.all([
           fetch(
             `/api/abstracts?where[submitter][equals]=${user.id}&sort=-createdAt&limit=100&depth=1`,
           ),
@@ -79,6 +148,7 @@ export default function MySubmissionsPage() {
           fetch(
             `/api/registrations?where[user][equals]=${user.id}&where[paymentStatus][equals]=paid&limit=1`,
           ),
+          fetch('/api/sessions?limit=200&depth=0'),
         ])
 
         if (abstractsRes.ok) {
@@ -105,6 +175,11 @@ export default function MySubmissionsPage() {
         if (regRes.ok) {
           const regData = await regRes.json()
           setHasRegistration((regData?.docs?.length ?? 0) > 0)
+        }
+
+        if (sessionsRes.ok) {
+          const sessionsData = await sessionsRes.json()
+          setSessions(sessionsData.docs || [])
         }
       } catch (err) {
         console.error('Failed to load submissions', err)
@@ -280,6 +355,9 @@ export default function MySubmissionsPage() {
           const isUploading = uploadingId === doc.id
           const thisUploadError = uploadError[doc.id]
           const needsFullPaper = doc.isStudent && doc.applyStudentAward && !doc.fullPaper
+          
+          const poster = POSTERS.find(p => p.abstractId === doc.id)
+          const session = sessions.find(s => s.papers?.some(p => Number(p.abstract) === doc.id))
 
           return (
             <div key={doc.id} className="border border-stone-200 p-8">
@@ -499,34 +577,32 @@ export default function MySubmissionsPage() {
               {/* 審查結果（發布後才顯示） */}
               {showResult && (
                 <div className="mt-6 pt-6 border-t border-stone-200">
-                  <p className="text-stone-500 text-xs font-semibold tracking-wide uppercase tracking-widest mb-3">
-                    {t('dashboard.sub.review.title')}
-                  </p>
-                  <div
-                    className="p-5 border-l-4"
-                    style={{
-                      borderLeftColor: isAccepted ? '#4d4c9d' : '#9ca3af',
-                      backgroundColor: isAccepted ? 'rgba(77, 76, 157, 0.04)' : 'rgba(0,0,0,0.02)',
-                    }}
-                  >
-                    <div className="flex items-center gap-2">
-                      <span
-                        className={`text-base font-bold tracking-wide ${
-                          isAccepted ? 'text-[#4d4c9d]' : 'text-stone-600'
-                        }`}
-                      >
-                        {statusLabel}
-                      </span>
-                    </div>
-                    {doc.reviewComments && (
-                      <div className="mt-3">
-                        <p className="text-sm text-stone-700 leading-relaxed whitespace-pre-wrap">
-                          {doc.reviewComments}
-                        </p>
+                  {isAccepted && (
+                    <div>
+                      <p className="text-stone-500 text-xs font-semibold tracking-wide uppercase tracking-widest mb-3">
+                        發表場次 / 海報編號
+                      </p>
+                      <div className="p-4 border border-stone-200 bg-stone-50">
+                        {poster ? (
+                          <div className="flex items-center gap-3">
+                            <span className="bg-[#4d4c9d] text-white px-3 py-1 font-bold tracking-wider">{poster.id}</span>
+                            <span className="text-stone-700 font-medium">海報發表</span>
+                          </div>
+                        ) : session ? (
+                          <div className="space-y-2">
+                            <div className="flex flex-wrap gap-2 items-center">
+                              <span className="bg-[#4d4c9d]/10 text-[#4d4c9d] px-2 py-1 text-xs font-semibold tracking-widest">{session.date}</span>
+                              <span className="text-stone-700 text-sm font-medium">{session.startTime} - {session.endTime}</span>
+                              <span className="text-stone-700 text-sm font-medium border-l border-stone-300 pl-2">{getRoomFullName(session.room)}</span>
+                            </div>
+                            <p className="font-bold text-stone-800">{session.title}</p>
+                          </div>
+                        ) : (
+                          <p className="text-stone-500 text-sm">議程安排中，請稍後</p>
+                        )}
                       </div>
-                    )}
-                  </div>
-
+                    </div>
+                  )}
                   {/* 學生論文獎 — 通過後才顯示 */}
                   {/* {isAccepted && doc.isStudent && doc.applyStudentAward && (
                     <div className="mt-3 p-4 bg-stone-50 border border-stone-200 text-sm text-stone-700">

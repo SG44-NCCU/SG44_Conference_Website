@@ -1,24 +1,14 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
-import { ScheduleAdminClient } from './ScheduleAdminClient'
-import { redirect } from 'next/navigation'
-import { headers } from 'next/headers'
+import { ScheduleClient } from './ScheduleClient'
 
 export const metadata = {
-  title: '議程管理 | SG44',
-  description: 'SG44 研討會議程管理工具',
+  title: '大會細部議程 Detailed Schedule | SG44',
+  description: 'SG44 研討會細部議程',
 }
 
-export default async function ScheduleAdminPage() {
+export default async function SchedulePage() {
   const payload = await getPayload({ config })
-
-  // Get current user from session
-  const headersList = await headers()
-  const { user } = await payload.auth({ headers: headersList })
-
-  if (!user || (user.role !== 'admin' && user.role !== 'staff')) {
-    redirect('/login')
-  }
 
   // Fetch all sessions with depth=2 to get abstract details
   const sessionsResult = await payload.find({
@@ -45,6 +35,6 @@ export default async function ScheduleAdminPage() {
   })
 
   return (
-    <ScheduleAdminClient />
+    <ScheduleClient />
   )
 }

@@ -29,20 +29,21 @@ const NAV_ITEM_DEFS = [
     nameKey: 'nav.news',
     href: '/news',
   },
-  
-  // {
-  //   name: '議程',
-  //   href: '/agenda',
-  //   items: [
-  //     { name: '議程大綱', href: '/agenda' },
-  //     { name: '專題演講', href: '/keynote' },
-  //     { name: '細部議程', href: '/schedule' },
-  //     { name: '分組論文發表', href: '/sessions' },
-  //     { name: '海報發表', href: '/poster' },
-  //     { name: '特別論壇', href: '/forum' },
-  //     { name: '空間資訊永續應用獎', href: '/award' },
-  //   ],
-  // },
+
+  {
+    nameKey: 'nav.agenda',
+    href: '/agenda',
+    items: [
+      { nameKey: 'nav.agenda.outline', href: '/agenda' },
+      { nameKey: 'nav.agenda.keynote', href: '/keynote' },
+      { nameKey: 'nav.agenda.schedule', href: '/schedule' },
+      { nameKey: 'nav.agenda.sessions', href: '/sessions' },
+      { nameKey: 'nav.agenda.poster', href: '/poster' },
+      // { nameKey: 'nav.agenda.forum', href: '/forum' },
+      // { nameKey: 'nav.agenda.award', href: '/award' },
+    ],
+  },
+
   {
     nameKey: 'nav.registration',
     href: '/registration',
@@ -66,9 +67,7 @@ const NAV_ITEM_DEFS = [
   {
     nameKey: 'nav.sponsors',
     href: '/sponsors',
-    items: [
-      { nameKey: 'nav.sponsors.units', href: '/sponsors' },
-    ],
+    items: [{ nameKey: 'nav.sponsors.units', href: '/sponsors' }],
   },
   {
     nameKey: 'nav.about',
@@ -82,9 +81,7 @@ const NAV_ITEM_DEFS = [
   {
     nameKey: 'nav.3s',
     href: '/3S_competition_rules',
-    items: [
-      { nameKey: 'nav.3s.rules', href: '/3S_competition_rules' },
-    ],
+    items: [{ nameKey: 'nav.3s.rules', href: '/3S_competition_rules' }],
   },
 ]
 
@@ -98,12 +95,11 @@ const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false)
   const [mobileSubMenuOpen, setMobileSubMenuOpen] = useState<number | null>(null)
 
-
   // Build nav items using translations
-  const NAV_ITEMS = NAV_ITEM_DEFS.map((item) => ({
+  const NAV_ITEMS = NAV_ITEM_DEFS.map((item: any) => ({
     ...item,
-    name: t(item.nameKey),
-    items: item.items?.map((sub) => ({ ...sub, name: t(sub.nameKey) })),
+    name: item.nameKey ? t(item.nameKey) : item.name,
+    items: item.items?.map((sub: any) => ({ ...sub, name: sub.nameKey ? t(sub.nameKey) : sub.name })),
   }))
 
   const toggleLang = () => setLang(lang === 'zh' ? 'en' : 'zh')
@@ -148,7 +144,11 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between items-center h-14">
           {/* Logo 區域 */}
           <Link href="/" className="flex-shrink-0 flex items-center gap-3 group">
-            <img src="/LOGO.svg" alt="SG44 Logo" className="h-10 w-auto object-contain transition-transform group-hover:scale-105" />
+            <img
+              src="/LOGO.svg"
+              alt="SG44 Logo"
+              className="h-10 w-auto object-contain transition-transform group-hover:scale-105"
+            />
             <div className="flex flex-col">
               <span className="font-semibold tracking-wide text-stone-800 text-lg leading-tight tracking-wide">
                 SG44
@@ -180,7 +180,7 @@ const Navbar: React.FC = () => {
                 {item.items && (
                   <div className="absolute left-0 top-full pt-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform group-hover:translate-y-0 translate-y-2">
                     <div className="bg-white rounded-md shadow-sm border border-stone-100 overflow-hidden py-1">
-                      {item.items.map((subItem) => (
+                      {item.items.map((subItem: any) => (
                         <Link
                           key={subItem.name}
                           href={subItem.href}
@@ -198,20 +198,23 @@ const Navbar: React.FC = () => {
             {/* Desktop Auth Buttons + Language Switcher */}
             <div className="flex items-center gap-3">
               {/* Desktop Language Switcher */}
-            <div className="hidden lg:flex items-center">
-              <button
-                onClick={toggleLang}
-                title={lang === 'zh' ? 'Switch to English' : '切換至中文'}
-                className="group flex items-center gap-2 px-3 py-1.5 rounded-full border border-stone-200 hover:border-[#4d4c9d] hover:bg-stone-50 transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer ml-4"
-              >
-                <Globe size={14} className="text-stone-400 group-hover:text-[#4d4c9d] transition-colors" />
-                <span className="text-[10px] font-black tracking-tighter text-stone-500 group-hover:text-[#4d4c9d]">
-                  {lang === 'zh' ? 'EN' : '中'}
-                </span>
-              </button>
-            </div>
+              <div className="hidden lg:flex items-center">
+                <button
+                  onClick={toggleLang}
+                  title={lang === 'zh' ? 'Switch to English' : '切換至中文'}
+                  className="group flex items-center gap-2 px-3 py-1.5 rounded-full border border-stone-200 hover:border-[#4d4c9d] hover:bg-stone-50 transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer ml-4"
+                >
+                  <Globe
+                    size={14}
+                    className="text-stone-400 group-hover:text-[#4d4c9d] transition-colors"
+                  />
+                  <span className="text-[10px] font-black tracking-tighter text-stone-500 group-hover:text-[#4d4c9d]">
+                    {lang === 'zh' ? 'EN' : '中'}
+                  </span>
+                </button>
+              </div>
 
-            {/* Login / Member Action */}
+              {/* Login / Member Action */}
               {loading ? (
                 // Loading Skeleton
                 <div className="w-24 h-9 bg-stone-100 animate-pulse rounded-md" />
@@ -233,7 +236,10 @@ const Navbar: React.FC = () => {
                     <div className="bg-white rounded-md shadow-sm border border-stone-100 overflow-hidden py-1">
                       <div className="px-4 py-2 border-b border-stone-100">
                         <p className="text-xs text-stone-500">{t('auth.loggedInAs')}</p>
-                        <p className="text-sm font-semibold tracking-wide text-stone-800 truncate" title={user.email}>
+                        <p
+                          className="text-sm font-semibold tracking-wide text-stone-800 truncate"
+                          title={user.email}
+                        >
                           {user.email}
                         </p>
                       </div>
@@ -272,7 +278,9 @@ const Navbar: React.FC = () => {
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-stone-200 text-stone-500 hover:text-[#4d4c9d] hover:border-[#4d4c9d] transition-all duration-300"
             >
               <Globe size={16} />
-              <span className="text-[10px] font-black tracking-tighter">{lang === 'zh' ? 'EN' : '中'}</span>
+              <span className="text-[10px] font-black tracking-tighter">
+                {lang === 'zh' ? 'EN' : '中'}
+              </span>
             </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -306,7 +314,7 @@ const Navbar: React.FC = () => {
                     </button>
                     {mobileSubMenuOpen === index && (
                       <div className="bg-stone-50 px-4 py-2 space-y-2">
-                        {item.items.map((subItem) => (
+                        {item.items.map((subItem: any) => (
                           <Link
                             key={subItem.name}
                             href={subItem.href}

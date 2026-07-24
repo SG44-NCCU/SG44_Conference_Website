@@ -16,6 +16,23 @@ type Notification = {
   icon: React.ElementType
 }
 
+const getRoomFullName = (roomCode: string) => {
+  const map: Record<string, string> = {
+    '105': '富邦法學講堂 (105教室)',
+    '106': '承恩講堂 (106教室)',
+    '415': '明達講堂 (415教室)',
+    '416': '416教室',
+    '310': '310教室',
+    '313': '313信義講堂 (313教室)',
+    '210': '芶壽生講堂 (210教室)',
+    '410': '王文杰講堂 (410教室)',
+    'lobby': '一樓大廳',
+  }
+  if (map[roomCode]) return map[roomCode]
+  if (roomCode.includes('教室') || roomCode.includes('講堂') || roomCode.includes('大廳')) return roomCode
+  return `${roomCode}教室`
+}
+
 export default function NotificationsPage() {
   const { user, refreshUser } = useAuth()
   const { t } = useLanguage()
@@ -27,13 +44,14 @@ export default function NotificationsPage() {
 
     const fetchNotifications = async () => {
       try {
-        const [regRes, absRes, settingsRes, assignedRes] = await Promise.all([
+        const [regRes, absRes, settingsRes, assignedRes, sessionsRes] = await Promise.all([
           fetch(`/api/registrations?where[user][equals]=${user.id}&limit=10`),
           fetch(`/api/abstracts?where[submitter][equals]=${user.id}&limit=100`),
           fetch('/api/globals/abstracts-settings'),
           user.role === 'reviewer' || user.role === 'admin' 
             ? fetch(`/api/abstracts?where[assignedReviewer][equals]=${user.id}&limit=100`)
-            : Promise.resolve(null)
+            : Promise.resolve(null),
+          fetch('/api/sessions?limit=200&depth=0')
         ])
 
         const newNotifications: Notification[] = []
@@ -81,6 +99,7 @@ export default function NotificationsPage() {
         if (absRes.ok) {
           const absData = await absRes.json()
           const settings = settingsRes.ok ? await settingsRes.json() : { reviewResultPublished: false }
+          const sessionsData = sessionsRes.ok ? await sessionsRes.json() : { docs: [] }
           
           absData.docs.forEach((doc: any) => {
             // 無論是否公佈，投稿成功都應該顯示一則通知
@@ -124,6 +143,21 @@ export default function NotificationsPage() {
                   date: new Date(doc.updatedAt),
                   link: '/dashboard/my-submissions',
                   icon: AlertCircle
+                })
+              }
+            }
+            
+            if (sessionsRes.ok) {
+              const session = sessionsData.docs.find((s: any) => s.papers?.some((p: any) => Number(p.abstract) === doc.id))
+              if (session) {
+                newNotifications.push({
+                  id: `abs-session-${doc.id}`,
+                  type: 'info',
+                  title: '論文發表場次已安排',
+                  description: `您的論文「${doc.title}」已被安排至場次「${session.title}」，時間：${session.date} ${session.startTime}-${session.endTime}，地點：${getRoomFullName(session.room)}。`,
+                  date: new Date(session.updatedAt),
+                  link: '/dashboard/my-submissions',
+                  icon: Bell
                 })
               }
             }

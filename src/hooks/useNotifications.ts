@@ -21,14 +21,15 @@ export function useNotifications() {
           ? new Date(user.lastNotificationChecked).getTime() 
           : 0
 
-        // Fetch settings, registrations and abstracts to compare
-        const [regRes, absRes, settingsRes, assignedRes] = await Promise.all([
+        // Fetch settings, registrations, abstracts and sessions to compare
+        const [regRes, absRes, settingsRes, assignedRes, sessionsRes] = await Promise.all([
           fetch(`/api/registrations?where[user][equals]=${user.id}&limit=10&sort=-updatedAt`),
           fetch(`/api/abstracts?where[submitter][equals]=${user.id}&limit=100&sort=-updatedAt`),
           fetch('/api/globals/abstracts-settings'),
           user.role === 'reviewer' || user.role === 'admin'
             ? fetch(`/api/abstracts?where[assignedReviewer][equals]=${user.id}&limit=100&sort=-updatedAt`)
-            : Promise.resolve(null)
+            : Promise.resolve(null),
+          fetch('/api/sessions?limit=200&depth=0')
         ])
 
         let latestUpdate = 0
@@ -53,6 +54,17 @@ export function useNotifications() {
             absData.docs.forEach((doc: any) => {
               if (['accepted', 'revision', 'rejected'].includes(doc.reviewStatus)) {
                 const updatedAt = new Date(doc.updatedAt).getTime()
+                if (updatedAt > latestUpdate) latestUpdate = updatedAt
+              }
+            })
+          }
+          
+          if (sessionsRes.ok) {
+            const sessionsData = await sessionsRes.json()
+            absData.docs.forEach((doc: any) => {
+              const session = sessionsData.docs.find((s: any) => s.papers?.some((p: any) => Number(p.abstract) === doc.id))
+              if (session) {
+                const updatedAt = new Date(session.updatedAt).getTime()
                 if (updatedAt > latestUpdate) latestUpdate = updatedAt
               }
             })
