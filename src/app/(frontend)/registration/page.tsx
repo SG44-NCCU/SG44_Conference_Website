@@ -118,8 +118,8 @@ const RegistrationPage = () => {
         {/* Title Section */}
         <div className="mb-16">
           <SectionTitle
-            title={t('page.registration.title')}
-            subtitle={t('page.registration.subtitle')}
+            title="會議報名"
+            subtitle="Registration"
           />
         </div>
 

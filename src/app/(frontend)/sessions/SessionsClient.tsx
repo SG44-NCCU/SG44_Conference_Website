@@ -1,6 +1,7 @@
 'use client'
 
 import SectionTitle from '@/components/ui/SectionTitle'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 import React, { useState, useEffect } from 'react'
 import { Search, X, Calendar, Clock, MapPin, User, ChevronDown, ChevronUp } from 'lucide-react'
@@ -102,9 +103,11 @@ const getRoomFullName = (roomCode: string) => {
 }
 
 export function SessionsClient({ sessions, abstracts }: SessionsClientProps) {
+  const { t } = useLanguage()
   const [activeDate, setActiveDate] = useState<string>('all')
   const [searchQuery, setSearchQuery] = useState<string>('')
   const [expandedAbstracts, setExpandedAbstracts] = useState<Record<string, boolean>>({})
+  const [collapsedSessions, setCollapsedSessions] = useState<Record<string, boolean>>({})
 
   const allSessionsCombined = [...sessions, ...nstcSessions]
 
@@ -262,8 +265,11 @@ export function SessionsClient({ sessions, abstracts }: SessionsClientProps) {
               className="bg-white border border-stone-200 shadow-sm rounded-xl overflow-hidden transition-all scroll-mt-24"
             >
               {/* Session Header */}
-              <div className="bg-stone-50/80 border-b border-stone-200 p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                <div>
+              <div 
+                className="bg-stone-50/80 border-b border-stone-200 p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 cursor-pointer hover:bg-stone-100 transition-colors"
+                onClick={() => setCollapsedSessions(prev => ({...prev, [session.id]: !prev[session.id]}))}
+              >
+                <div className="flex-1 w-full">
                   <div className="flex flex-wrap items-center gap-3 mb-2">
                     <span className="bg-[#4d4c9d] text-white px-3 py-0.5 text-xs font-bold rounded tracking-wider">
                       {session.date === '2026-08-20' ? '8/20 (四)' : session.date === '2026-08-21' ? '8/21 (五)' : session.date}
@@ -277,18 +283,26 @@ export function SessionsClient({ sessions, abstracts }: SessionsClientProps) {
                       {getRoomFullName(session.room)}
                     </span>
                   </div>
-                  <h2 className="text-2xl font-bold text-stone-800 tracking-wide">{session.title}</h2>
+                  <h2 className="text-2xl font-bold text-stone-800 tracking-wide flex items-center justify-between">
+                    <span>{session.title}</span>
+                  </h2>
                 </div>
 
-                {session.chairName && (
-                  <div className="bg-white border border-stone-200 px-4 py-2 rounded-lg text-sm shrink-0">
-                    <span className="text-stone-400 mr-2 font-medium">主持人</span>
-                    <span className="font-semibold text-[#4d4c9d]">{session.chairName}</span>
-                  </div>
-                )}
+                <div className="flex items-center gap-4">
+                  {session.chairName && (
+                    <div className="bg-white border border-stone-200 px-4 py-2 rounded-lg text-sm shrink-0">
+                      <span className="text-stone-400 mr-2 font-medium">主持人</span>
+                      <span className="font-semibold text-[#4d4c9d]">{session.chairName}</span>
+                    </div>
+                  )}
+                  <button className="text-stone-400 hover:text-[#4d4c9d] transition-colors p-2 shrink-0">
+                    {collapsedSessions[session.id] ? <ChevronDown size={24} /> : <ChevronUp size={24} />}
+                  </button>
+                </div>
               </div>
 
               {/* Papers List */}
+              {!collapsedSessions[session.id] && (
               <div className="p-6">
                 {matchedPapers && matchedPapers.length > 0 ? (
                   <div className="space-y-4">
@@ -379,6 +393,7 @@ export function SessionsClient({ sessions, abstracts }: SessionsClientProps) {
                   <div className="text-center py-8 text-stone-400 italic">本場次尚未安排論文或無符合的搜尋結果</div>
                 )}
               </div>
+              )}
             </div>
           )
         })}

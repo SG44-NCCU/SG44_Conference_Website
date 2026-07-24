@@ -14,7 +14,7 @@ export default function TransportationPage() {
       <main className="max-w-5xl mx-auto px-6 sm:px-10 py-20">
         {/* Title */}
         <div className="mb-16">
-          <SectionTitle title={t('page.transportation.title')} subtitle={t('page.transportation.subtitle')} />
+          <SectionTitle title="交通資訊" subtitle="Transportation & Accommodation" />
         </div>
 
         {/* Map Section */}

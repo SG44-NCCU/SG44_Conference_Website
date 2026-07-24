@@ -1,6 +1,7 @@
 'use client'
 
 import SectionTitle from '@/components/ui/SectionTitle'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 import React, { useState, useEffect } from 'react'
 import { MapPin, X, ExternalLink } from 'lucide-react'
@@ -691,6 +692,7 @@ function cellClass(cell: CellDef | null): string {
 }
 
 export function ScheduleClient() {
+  const { t } = useLanguage()
   const [activeDay, setActiveDay] = useState<1 | 2>(1)
   const [allSessions, setAllSessions] = useState<SessionDoc[]>([])
   const [selectedCell, setSelectedCell] = useState<CellDef>(null)

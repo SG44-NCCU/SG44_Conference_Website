@@ -26,7 +26,7 @@ export default function GuidelinesPage() {
       <main className="max-w-5xl mx-auto px-6 sm:px-10 py-20">
         {/* Title */}
         <div className="mb-16">
-          <SectionTitle title={t('page.guidelines.title')} subtitle={t('page.guidelines.subtitle')} />
+          <SectionTitle title="發表注意事項" subtitle="Presentation Guidelines" />
         </div>
 
         {/* Body */}
@@ -34,7 +34,7 @@ export default function GuidelinesPage() {
           {/* General Rules */}
           <section>
             <h2 className="text-base font-semibold tracking-wide text-stone-800 border-l-[3px] border-[#4d4c9d] pl-3 mb-6">
-              {t('guide.rules.title')}
+              一般規定
             </h2>
             <ol className="space-y-4">
               {generalRules.map((rule, idx) => (
@@ -49,7 +49,7 @@ export default function GuidelinesPage() {
           {/* Format */}
           <section>
             <h2 className="text-base font-semibold tracking-wide text-stone-800 border-l-[3px] border-[#4d4c9d] pl-3 mb-6">
-              {t('guide.format.title')}
+              稿件格式
             </h2>
 
             {/* Abstract Oral */}
@@ -83,7 +83,7 @@ export default function GuidelinesPage() {
                       download
                       className="text-[#4d4c9d] underline underline-offset-2 hover:text-[#3d3c8d] transition-colors"
                     >
-                      {t('guide.format.template')}
+                      請參考全文範本
                     </a>
                     。
                   </span>
@@ -109,10 +109,10 @@ export default function GuidelinesPage() {
           {/* Contact */}
           <section>
             <h2 className="text-base font-semibold tracking-wide text-stone-800 border-l-[3px] border-[#4d4c9d] pl-3 mb-6">
-              {t('sub.contact.title')}
+              聯絡資訊
             </h2>
             <p className="text-stone-600">
-              {t('sub.contact.desc')}
+              若有任何問題，歡迎來信大會信箱：
               <Link
                 href="mailto:sg44@nccu.edu.tw"
                 className="text-[#4d4c9d] font-bold hover:underline underline-offset-4 ml-1"
@@ -129,7 +129,7 @@ export default function GuidelinesPage() {
             href="/submission"
             className="group inline-flex items-center justify-center gap-3 px-8 py-4 border-2 border-stone-800 text-stone-800 font-medium rounded-full hover:bg-stone-800 hover:text-white transition-all duration-200 text-base"
           >
-            {t('guide.btn.back')}
+            回到投稿說明
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="18"

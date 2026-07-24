@@ -67,7 +67,7 @@ export default function SubmissionPage() {
       <main className="max-w-5xl mx-auto px-6 sm:px-10 py-20">
         {/* Title */}
         <div className="mb-16">
-          <SectionTitle title={t('page.submission.title')} subtitle={t('page.submission.subtitle')} />
+          <SectionTitle title="投稿說明" subtitle="Submission Guide" />
         </div>
 
         {/* Body */}
@@ -75,17 +75,17 @@ export default function SubmissionPage() {
           {/* Conference Theme */}
           <section>
             <h2 className="text-base font-semibold tracking-wide text-stone-800 border-l-[3px] border-[#4d4c9d] pl-3 mb-6">
-              {t('sub.theme.title')}
+              大會主題
             </h2>
             <p className="text-2xl font-semibold text-stone-800 text-center py-4">
-              {t('sub.theme.value')}
+              智慧測繪 × 韌性未來
             </p>
           </section>
 
           {/* Sub-topics */}
           <section>
             <h2 className="text-base font-semibold tracking-wide text-stone-800 border-l-[3px] border-[#4d4c9d] pl-3 mb-6">
-              {t('sub.topics.title')}
+              徵稿子題
             </h2>
             <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
               {topics.map((topic, idx) => (
@@ -110,7 +110,7 @@ export default function SubmissionPage() {
           {/* Types of Presentation */}
           <section>
             <h2 className="text-base font-semibold tracking-wide text-stone-800 border-l-[3px] border-[#4d4c9d] pl-3 mb-6">
-              {lang === 'zh' ? '投稿與發表種類' : 'Submission & Presentation Types'}
+              投稿與發表種類
             </h2>
             <ol className="space-y-4">
               <li className="flex gap-3">
@@ -135,7 +135,7 @@ export default function SubmissionPage() {
           {/* Student Paper Award */}
           <section>
             <h2 className="text-base font-semibold tracking-wide text-stone-800 border-l-[3px] border-[#4d4c9d] pl-3 mb-6">
-              {t('sub.award.student.title')}
+              學生論文獎
             </h2>
             <ol className="space-y-4">
               <li className="flex gap-3">
@@ -168,7 +168,7 @@ export default function SubmissionPage() {
           {/* Poster Award */}
           <section>
             <h2 className="text-base font-semibold tracking-wide text-stone-800 border-l-[3px] border-[#4d4c9d] pl-3 mb-6">
-              {t('sub.award.poster.title')}
+              海報發表獎
             </h2>
             <ol className="space-y-4">
               <li className="flex gap-3">
@@ -205,7 +205,7 @@ export default function SubmissionPage() {
             href="/guidelines"
             className="group inline-flex items-center justify-center gap-3 px-8 py-4 border-2 border-stone-800 text-stone-800 font-medium rounded-full hover:bg-stone-800 hover:text-white transition-all duration-200 text-base"
           >
-            {t('nav.submission.guidelines')}
+            發表注意事項
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="18"
@@ -226,7 +226,7 @@ export default function SubmissionPage() {
             href="/abstract-submit"
             className="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#4d4c9d] text-white font-medium rounded-full hover:bg-[#3d3c8d] transition-all duration-200 text-base"
           >
-            {t('sub.btn.goSubmission')}
+            我要投稿
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="18"
@@ -248,10 +248,10 @@ export default function SubmissionPage() {
         {/* Contact */}
         <div className="mt-20 pt-10 border-t border-stone-100 flex flex-col items-center">
           <h2 className="text-base font-semibold tracking-wide text-stone-800 border-l-[3px] border-[#4d4c9d] pl-3 mb-6 self-start">
-            {t('sub.contact.title')}
+            聯絡資訊
           </h2>
           <p className="text-stone-600 self-start">
-            {t('sub.contact.desc')}
+            若有任何問題，歡迎來信大會信箱：
             <Link
               href="mailto:sg44@nccu.edu.tw"
               className="text-[#4d4c9d] font-bold hover:underline underline-offset-4 ml-1"

@@ -12,7 +12,7 @@ export default function AboutPage() {
       <main className="max-w-4xl mx-auto px-6 sm:px-10 py-20">
         {/* Title */}
         <div className="mb-16">
-          <SectionTitle title={t('page.about.title')} subtitle={t('page.about.subtitle')} />
+          <SectionTitle title="大會簡介" subtitle="About" />
         </div>
 
         {/* Body */}

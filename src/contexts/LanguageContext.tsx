@@ -12,6 +12,10 @@ interface LanguageContextType {
 
 const translations: Record<Language, Record<string, string>> = {
   zh: {
+    'agenda.mixed.sessions_maker': '分組論文發表、機關成果發表、3S 創客競賽',
+    'agenda.mixed.loc_classrooms': '地點：各分組教室、310教室',
+    'agenda.mixed.loc_lobby': '地點：一樓大廳及各發表區',
+
     // Navbar sections
     'nav.home': '首頁',
     'nav.news': '最新消息',
@@ -25,7 +29,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.submission.guide': '投稿說明',
     'nav.submission.guidelines': '發表注意事項',
     'nav.submission.go': '前往投稿',
-    'nav.agenda': '議程',
+    'nav.agenda': '會議議程',
     'nav.agenda.outline': '議程大綱',
     'nav.agenda.keynote': '專題演講',
     'nav.agenda.schedule': '細部議程',
@@ -40,25 +44,6 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.3s': '3S創客競賽',
     'nav.3s.rules': '競賽細則',
     // Page Titles
-    'page.news.title': '最新消息',
-    'page.news.subtitle': 'News & Announcements',
-    'page.registration.title': '註冊/報名資訊',
-    'page.registration.subtitle': 'Registration Information',
-    'page.submission.title': '投稿說明',
-    'page.submission.subtitle': 'Submission Guide',
-    'page.guidelines.title': '發表注意事項',
-    'page.guidelines.subtitle': 'Presentation Guidelines',
-    'page.abstract-submit.title': '摘要投稿系統',
-    'page.abstract-submit.subtitle': 'Abstract Submission System',
-    'page.transportation.title': '交通資訊',
-    'page.transportation.subtitle': 'Transportation Information',
-    'page.contact.title': '聯絡我們',
-    'page.contact.subtitle': 'Contact Us',
-    'page.3s-rules.title': '2026 年 3S 創客競賽細則',
-    'page.3s-rules.subtitle': '2026 3S Maker Competition Rules',
-    'page.about.title': '第 44 屆測量及空間資訊研討會',
-    'page.about.subtitle': 'The 44th Conference on Surveying and Geomatics',
-    // Hero Info
     'hero.info.name': '會議名稱',
     'hero.info.date': '會議時間',
     'hero.info.location': '會議地點 / 場地',
@@ -396,7 +381,8 @@ const translations: Record<Language, Record<string, string>> = {
     'dashboard.award.detail.form.selected': '已選擇：',
     'dashboard.award.detail.form.comments': '評語',
     'dashboard.award.detail.form.commentsOptional': '（選填）',
-    'dashboard.award.detail.form.commentsPlh': '請針對論文內容、研究方法、創新性等給予具體評語（非必填）…',
+    'dashboard.award.detail.form.commentsPlh':
+      '請針對論文內容、研究方法、創新性等給予具體評語（非必填）…',
     'dashboard.award.detail.form.save': '儲存評分',
     'dashboard.award.detail.form.saveSuccess': '評分已成功儲存',
     'dashboard.award.detail.form.saveFail': '儲存失敗，請重試',
@@ -445,32 +431,6 @@ const translations: Record<Language, Record<string, string>> = {
       '羅斯福路四段向南走 ➔ 左轉興隆路 ➔ 左轉木柵路二段接秀明路過萬壽橋直行至萬壽路右轉',
 
     // --- Submission / Guidelines ---
-    'sub.theme.title': '會議主題',
-    'sub.theme.value': '智測國土 × 韌啟未來',
-    'sub.topics.title': '會議子題',
-    'sub.award.student.title': '學生論文獎',
-    'sub.award.poster.title': '海報發表獎',
-    'sub.award.criteria': '資格',
-    'sub.award.format': '稿件格式',
-    'sub.award.selection': '評選',
-    'sub.award.quota': '名額',
-    'sub.award.reward': '獎勵方式',
-    'sub.award.ceremony': '頒獎',
-    'sub.btn.guidelines': '發表注意事項',
-    'sub.btn.go': '前往投稿',
-    'sub.contact.title': '聯絡方式',
-    'sub.contact.desc': '如有任何疑問，歡迎來信至大會信箱：',
-    'guide.rules.title': '發表規定',
-    'guide.format.title': '稿件格式',
-    'guide.format.oral': '口頭發表',
-    'guide.format.poster': '海報發表',
-    'guide.format.abstract': '摘要',
-    'guide.format.full': '全文',
-    'guide.format.template': '請參考範本',
-    'guide.btn.back': '返回投稿說明',
-    'sub.btn.goSubmission': '前往投稿',
-
-    // --- Contact Page ---
     'contact.person.title': '一、研討會聯絡人',
     'contact.info.title': '二、聯絡資訊',
     'contact.addr.title': '三、聯絡地址',
@@ -484,109 +444,63 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.person.2': '蕭文斌 行政專員 (系所助教)',
 
     // Submission Details
-    'sub.topics.1.zh': '大地測量與導航技術',
-    'sub.topics.1.en': 'Geodetic Science and Navigation Techniques',
-    'sub.topics.2.zh': '車載測繪與室內定位',
-    'sub.topics.2.en': 'Mobile Mapping System and Indoor Positioning Techniques',
-    'sub.topics.3.zh': '無人載具與災害調查',
-    'sub.topics.3.en': 'Unmanned Vehicle Systems and Disaster Investigation',
-    'sub.topics.4.zh': '攝影測量與測繪管理',
-    'sub.topics.4.en': 'Photogrammetry and Surveying Management',
-    'sub.topics.5.zh': '智慧科技與跨域應用',
-    'sub.topics.5.en': 'Intelligent Techniques and Cross-Disciplinary Applications',
-    'sub.topics.6.zh': '數位城市與資訊服務',
-    'sub.topics.6.en': 'Smart City and Geoinformation Services',
-    'sub.topics.7.zh': '環境永續與韌性防災',
-    'sub.topics.7.en': 'Environmental Sustainability and Disaster Resilience',
-    'sub.topics.8.zh': '衛星科技與海洋測繪',
-    'sub.topics.8.en': 'Satellite Technology and Marine Surveying',
-    'sub.topics.9.zh': '國土政策與規劃治理',
-    'sub.topics.9.en': 'Land Policy and Planning Governance',
-
-    'sub.studentAward.1.label': '資格',
-    'sub.studentAward.1.content':
-      '限大專校院在學或應屆畢業生，參加者需為全文投稿論文之第一作者，並親自於指定場次口頭發表。',
-    'sub.studentAward.2.label': '稿件格式',
-    'sub.studentAward.2.content': '須依本研討會之全文投稿格式撰寫，不符規定者不予納入評選。',
-    'sub.studentAward.3.label': '評選',
-    'sub.studentAward.3.content':
-      '本研討會技術委員會，將聘請專家學者組成評審小組，審核投稿論文內容（70%）與口頭發表完整度（30%）。',
-    'sub.studentAward.4.label': '名額',
-    'sub.studentAward.4.content': '由論文評審小組評選最佳論文（含英文發表）。',
-    'sub.studentAward.5.label': '獎勵方式',
-    'sub.studentAward.5.content': '每位得獎者將獲頒獎狀及獎金。',
-    'sub.studentAward.6.label': '頒獎',
-    'sub.studentAward.6.content': '閉幕式宣佈評選結果並頒獎，獲獎人需親自現場領獎。',
-
-    'sub.posterAward.1.label': '資格',
-    'sub.posterAward.1.content': '論文作者（擇一）需親自出席指定之海報發表時段，現場參與研究討論。',
-    'sub.posterAward.2.label': '評選',
-    'sub.posterAward.2.content': '由評審小組評選最佳海報。',
-    'sub.posterAward.3.label': '名額',
-    'sub.posterAward.3.content': '以 3 篇為原則。',
-    'sub.posterAward.4.label': '獎勵方式',
-    'sub.posterAward.4.content': '每位得獎者將獲頒獎狀及獎金。',
-    'sub.posterAward.5.label': '頒獎',
-    'sub.posterAward.5.content': '閉幕式宣佈評選結果並頒獎，獲獎人需親自現場領獎。',
-
-    'guide.rules.1':
-      '所有投稿之第一作者，請於徵稿截止前（臺灣時間 6 月 29 日 23:59），完成註冊及投稿。',
-    'guide.rules.2': '相同第一作者最多得投稿三篇稿件，但僅可選擇其中一篇參與學生論文獎。',
-    'guide.rules.3':
-      'SG44 論文審查委員會保留拒絕稿件之權利，包含但不限於稿件並未以中文或英文撰寫、不符合徵稿主題或子題、未達研究品質標準等。',
-    'guide.rules.4':
-      '論文發表形式（口頭、海報），將由 SG44 論文審查委員會確認。投稿審查結果（包含接受並以口頭發表、接受並以海報發表、不予發表），將於 7 月 10 日公告。',
-    'guide.rules.5': '若有未盡事宜或其他投稿相關問題，請洽詢大會信箱 sg44@nccu.edu.tw。',
-
-    'guide.format.oral.abstract': '摘要',
-    'guide.format.oral.abstract.desc': '至多 500 字，中文或英文。',
-    'guide.format.oral.full': '全文',
-    'guide.format.oral.full.desc':
-      '（學生論文獎） 包含中英文摘要，不限頁數，以中文或英文撰寫，Microsoft Word 格式，小於 25 MB。',
-    'guide.format.poster.desc.1':
-      '海報板最大可容納直式「A0：84.1 cm（寬）× 118.9 cm（高）」海報，建議以直式 A0 版面輸出。',
-    'guide.format.poster.desc.2':
-      '發表人應於 8/20（四）10:00 前，自行張貼海報至大會指定位置，大會服務台備有張貼工具。',
-    'guide.format.poster.desc.3': '海報發表證明，大會將在指定發表時段頒發。',
-    'guide.format.poster.desc.4':
-      '海報發表人應於 8/21（五）16:00 前完成海報撤收，其後海報將由主辦單位回收，發表人不得要求取回。',
-
-    // --- 3S Rules ---
-    '3s.rules.1.title': '一、競賽目的',
-    '3s.rules.2.title': '二、參賽資格',
-    '3s.rules.3.title': '三、報名方式',
-    '3s.rules.4.title': '四、競賽場合與地點',
-    '3s.rules.5.title': '五、重要日期與時間',
-    '3s.rules.6.title': '六、評審委員',
-    '3s.rules.7.title': '七、競賽方式',
-    '3s.rules.8.title': '八、評審規則',
-    '3s.rules.9.title': '九、獎勵方式',
-    '3s.rules.10.title': '十、其他規定',
-    '3s.rules.btn.go': '前往 3S 創客報名',
-
-    '3s.rules.1.content':
-      '由國立政治大學地政學系主辦之「2026年3S創客競賽」(以下簡稱本競賽)，旨在鼓勵大專校院學生結合理論與實務，運用 3S 技術（GNSS、GIS、RS）進行創新研發，提升跨領域整合與口頭表達能力。',
-    '3s.rules.2.content':
-      '國內外大專校院在學學生（含研究生），以組為單位報名，每組 1 至 5 人，可跨系所、跨校組隊。每組需設指導老師 1 名。',
-    '3s.rules.3.content':
-      '請於 2026 年 6 月 15 日前，至大會網站完成預約報名，並於 6 月 29 日前上傳競賽構想書（PDF格式，至多 10 頁）。',
-    '3s.rules.4.content': '競賽與 SG44 研討會同步於國立政治大學校本部舉行。',
-    '3s.rules.5.content':
-      '報名截止：6/15；構想書上傳截止：6/29；決賽名額公告：7/10；決賽日期：8/20。',
-    '3s.rules.6.content': '聘請產資政學界專家學者擔任評審委員。',
-    '3s.rules.7.content': '分兩階段：(1) 初賽：書面審查；(2) 決賽：現場口頭發表與作品 展示。',
-    '3s.rules.8.content': '創新性 (30%)、技術實踐 (30%)、應用價值 (20%)、口頭發表 (20%)。',
-    '3s.rules.9.content':
-      '冠軍：獎金 10,000 元及獎狀；亞軍：獎項 5,000 元及獎狀；季軍：獎項 3,000 元及獎狀；優選若干名。',
-    '3s.rules.10.content':
-      '報名參賽即視為同意本競賽各項規定。主辦單位保留隨時修正、調整、暫停或終止本競賽之權利。',
-
-    // --- About ---
-    'about.motto': '── 智測國土 × 韌啟未來 ──',
-    'about.history.title': '壹、會議緣起',
-    'about.theme.title': '貳、會議主題',
+    'agenda.day1.date': '8月20日 (星期四)',
+    'agenda.day2.date': '8月21日 (星期五)',
+    'agenda.time': '時間',
+    'agenda.content': '活動內容',
+    'agenda.registration': '報到及服務台',
+    'agenda.loc.lobby': '地點：一樓大廳',
+    'agenda.opening': '開幕典禮',
+    'agenda.opening.desc': '貴賓介紹、致詞、主辦單位報告、全體大合照',
+    'agenda.loc.410': '地點：王文杰講堂 (410教室)',
+    'agenda.signing': '國科會自然處與地政司簽約儀式',
+    'agenda.awards': '頒獎典禮',
+    'agenda.awards.desc': '空間資訊永續應用獎',
+    'agenda.intro.earth': '地科中心介紹',
+    'agenda.intro.earth.speaker': '主講人：吳祚任 主任',
+    'agenda.keynote': '專題演講：福衛八號第二代衛星設計',
+    'agenda.keynote.desc': '超高解析度遙測、星上 AI 與智慧空間資訊的未來',
+    'agenda.keynote.speaker': '主講人：劉小菁 處長',
+    'agenda.lunch': '午餐及交流時間',
+    'agenda.loc.lunch': '地點：法學院各開放用餐區',
+    'agenda.sessions1': '分組論文發表、海報發表',
+    'agenda.sessions1.desc': '主題包含：國土政策、大地測量、數位城市、衛星科技與海洋測繪等',
+    'agenda.loc.sessions': '地點：各分組教室及海報展示區',
+    'agenda.break': '廠商參觀、休息交流',
+    'agenda.sessions2': '分組論文發表、海報發表',
+    'agenda.sessions2.desc': '主題包含：大地測量、環境永續與韌性防災、衛星科技與海洋測繪等',
+    'agenda.banquet': '大會晚宴',
+    'agenda.loc.banquet': '地點：四維堂',
+    'agenda.society': '學會活動時間',
+    'agenda.society.desc': '航測學會、地籍測量學會 理監事會議',
+    'agenda.loc.405': '地點：405教室',
+    'agenda.sessions3': '分組論文發表',
+    'agenda.sessions3.desc':
+      '主題包含：空間資訊與AI、數位城市、光達測繪技術、遙測與無人機技術應用等',
+    'agenda.loc.classrooms': '地點：各分組教室',
+    'agenda.loc.poster': '地點：海報展示區',
+    'agenda.3s': '3S 創客競賽',
+    'agenda.3s.desc': '第二階段公開競賽、作品展示',
+    'agenda.loc.414': '地點：414教室',
+    'agenda.general': '會員大會',
+    'agenda.general.desc': '航測學會第廿二屆第四次大會 / 地籍測量學會第十二屆第二次大會',
+    'agenda.closing': '閉幕典禮',
+    'agenda.closing.desc': '3S創客競賽頒獎、海報發表獎頒獎、學生論文發表獎頒獎、交接儀式',
+    'agenda.sessions1.desc2': '主題包含：智慧科技與跨域應用、車載測繪與室內定位等',
+    'agenda.sessions2.desc2':
+      '主題包含：國土測繪中心成果、地政司重力測量、攝影測量與測繪管理、衛星科技等',
+    'agenda.sessions3.desc2': '主題包含：智慧科技與跨域應用、無人載具與災害調查等',
+    'agenda.day2.morning': '國科會學門成果發表、分組論文發表、3S 創客競賽',
+    'agenda.closing.title': '頒獎與閉幕',
+    'agenda.lunch.time': '午餐及交流時間',
+    'agenda.view.full': '前往查看完整細部議程',
   },
   en: {
+    'agenda.mixed.sessions_maker':
+      'Parallel Sessions, Institutional Results Presentation, 3S Maker Competition',
+    'agenda.mixed.loc_classrooms': 'Location: Parallel Session Rooms, Room 310',
+    'agenda.mixed.loc_lobby': 'Location: 1F Lobby & Presentation Areas',
+
     // Navbar sections
     'nav.home': 'Home',
     'nav.news': 'News',
@@ -604,7 +518,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.agenda.outline': 'Agenda Outline',
     'nav.agenda.keynote': 'Keynote Speech',
     'nav.agenda.schedule': 'Detailed Schedule',
-    'nav.agenda.sessions': 'Parallel Sessions',
+    'nav.agenda.sessions': 'Parallel Sessions & Abstracts',
     'nav.agenda.poster': 'Poster Sessions',
     'nav.sponsors': 'Sponsors',
     'nav.sponsors.units': 'Exhibitors & Sponsors',
@@ -612,28 +526,9 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.about.intro': 'About',
     'nav.about.transport': 'Transportation',
     'nav.about.contact': 'Contact Us',
-    'nav.3s': '3S Maker',
+    'nav.3s': '3S Maker Competition',
     'nav.3s.rules': 'Competition Rules',
     // Page Titles
-    'page.news.title': '最新消息',
-    'page.news.subtitle': 'News & Announcements',
-    'page.registration.title': '註冊/報名資訊',
-    'page.registration.subtitle': 'Registration Information',
-    'page.submission.title': '投稿說明',
-    'page.submission.subtitle': 'Submission Guide',
-    'page.guidelines.title': '發表注意事項',
-    'page.guidelines.subtitle': 'Presentation Guidelines',
-    'page.abstract-submit.title': '摘要投稿系統',
-    'page.abstract-submit.subtitle': 'Abstract Submission System',
-    'page.transportation.title': '交通資訊',
-    'page.transportation.subtitle': 'Transportation Information',
-    'page.contact.title': '聯絡我們',
-    'page.contact.subtitle': 'Contact Us',
-    'page.3s-rules.title': '2026 年 3S 創客競賽細則',
-    'page.3s-rules.subtitle': '2026 3S Maker Competition Rules',
-    'page.about.title': '第 44 屆測量及空間資訊研討會',
-    'page.about.subtitle': 'The 44th Conference on Surveying and Geomatics',
-    // Hero Info
     'hero.info.name': 'Conference',
     'hero.info.date': 'Date',
     'hero.info.location': 'Location / Venue',
@@ -935,16 +830,18 @@ const translations: Record<Language, Record<string, string>> = {
     'dashboard.award.pts': 'pts',
     'dashboard.award.badge.scored': 'Scored',
     'dashboard.award.empty': 'You currently have no papers assigned for award review.',
-    'dashboard.award.closed.title': 'Scoring Not Yet Open',
-    'dashboard.award.closed.desc': 'The conference has not opened scoring yet. You may browse the full papers now and return to score when available.',
-    'dashboard.award.detail.form.title': 'Paper Scoring Form',
+    'dashboard.award.closed.title': 'Scoring System Closed',
+    'dashboard.award.closed.desc':
+      'The conference has not opened scoring yet. You may browse the full papers now and return to score when available.',
+    'dashboard.award.detail.form.title': 'Evaluation Form',
     'dashboard.award.detail.form.locked': 'Scoring is closed; you cannot modify scores.',
     'dashboard.award.detail.form.score': 'Score (1–10)',
     'dashboard.award.detail.form.scoreRequired': 'Please select a score before saving',
     'dashboard.award.detail.form.selected': 'Selected:',
     'dashboard.award.detail.form.comments': 'Comments',
     'dashboard.award.detail.form.commentsOptional': '(Optional)',
-    'dashboard.award.detail.form.commentsPlh': 'Please provide specific comments on content, methodology, innovation, etc. (optional)…',
+    'dashboard.award.detail.form.commentsPlh':
+      'Please provide specific comments on content, methodology, innovation, etc. (optional)…',
     'dashboard.award.detail.form.save': 'Save Score',
     'dashboard.award.detail.form.saveSuccess': 'Score saved successfully',
     'dashboard.award.detail.form.saveFail': 'Failed to save, please try again',
@@ -1039,32 +936,6 @@ const translations: Record<Language, Record<string, string>> = {
       'Go south on Roosevelt Rd. Sec. 4 ➔ Turn left on Xinglong Rd. ➔ Turn left on Muzha Rd. Sec. 2 to Xiuming Rd., cross Wanshou Bridge, keep straight to Wanshou Rd. and turn right',
 
     // --- Submission / Guidelines ---
-    'sub.theme.title': 'Conference Theme',
-    'sub.theme.value': 'Smart Surveying × Resilient Future',
-    'sub.topics.title': 'Sub-topics',
-    'sub.award.student.title': 'Student Paper Award',
-    'sub.award.poster.title': 'Poster Award',
-    'sub.award.criteria': 'Eligibility',
-    'sub.award.format': 'Manuscript Format',
-    'sub.award.selection': 'Selection',
-    'sub.award.quota': 'Quota',
-    'sub.award.reward': 'Rewards',
-    'sub.award.ceremony': 'Award Ceremony',
-    'sub.btn.guidelines': 'Presentation Guidelines',
-    'sub.btn.go': 'Submit Now',
-    'sub.contact.title': 'Contact Information',
-    'sub.contact.desc': 'If you have any questions, please feel free to email the conference at: ',
-    'guide.rules.title': 'General Rules',
-    'guide.format.title': 'Manuscript Format',
-    'guide.format.oral': 'Oral Presentation',
-    'guide.format.poster': 'Poster Presentation',
-    'guide.format.abstract': 'Abstract',
-    'guide.format.full': 'Full Paper',
-    'guide.format.template': 'Please refer to the template',
-    'guide.btn.back': 'Back to Submission Guide',
-    'sub.btn.goSubmission': 'Submit Now',
-
-    // --- Contact Page ---
     'contact.person.title': 'I. Conference Contact Persons',
     'contact.info.title': 'II. Contact Information',
     'contact.addr.title': 'III. Address',
@@ -1079,121 +950,62 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.person.2': 'Wen-Pin Hsiao, Administrative Specialist (Teaching Assistant)',
 
     // Submission Details
-    'sub.topics.1.zh': '大地測量與導航技術',
-    'sub.topics.1.en': 'Geodetic Science and Navigation Techniques',
-    'sub.topics.2.zh': '車載測繪與室內定位',
-    'sub.topics.2.en': 'Mobile Mapping System and Indoor Positioning Techniques',
-    'sub.topics.3.zh': '無人載具與災害調查',
-    'sub.topics.3.en': 'Unmanned Vehicle Systems and Disaster Investigation',
-    'sub.topics.4.zh': '攝影測量與測繪管理',
-    'sub.topics.4.en': 'Photogrammetry and Surveying Management',
-    'sub.topics.5.zh': '智慧科技與跨域應用',
-    'sub.topics.5.en': 'Intelligent Techniques and Cross-Disciplinary Applications',
-    'sub.topics.6.zh': '數位城市與資訊服務',
-    'sub.topics.6.en': 'Smart City and Geoinformation Services',
-    'sub.topics.7.zh': '環境永續與韌性防災',
-    'sub.topics.7.en': 'Environmental Sustainability and Disaster Resilience',
-    'sub.topics.8.zh': '衛星科技與海洋測繪',
-    'sub.topics.8.en': 'Satellite Technology and Marine Surveying',
-    'sub.topics.9.zh': '國土政策與規劃治理',
-    'sub.topics.9.en': 'Land Policy and Planning Governance',
-    'sub.topics.10.zh': 'CROSS-CUTTING INTERNATIONAL SESSION',
-    'sub.topics.10.en': 'CROSS-CUTTING INTERNATIONAL SESSION',
-
-    'sub.studentAward.1.label': 'Eligibility',
-    'sub.studentAward.1.content':
-      'Restricted to current students or fresh graduates of colleges and universities. The participant must be the first author of the full paper and must personally present orally at the designated session.',
-    'sub.studentAward.2.label': 'Manuscript Format',
-    'sub.studentAward.2.content':
-      'Must be written according to the full paper submission format of this conference. Those that do not comply will not be included in the selection.',
-    'sub.studentAward.3.label': 'Selection',
-    'sub.studentAward.3.content':
-      'The technical committee of this conference will invite experts and scholars to form a judging panel to review the content of the submitted papers (70%) and the completeness of the oral presentation (30%).',
-    'sub.studentAward.4.label': 'Quota',
-    'sub.studentAward.4.content':
-      'The best papers will be selected by the paper judging panel (including English presentation).',
-    'sub.studentAward.5.label': 'Rewards',
-    'sub.studentAward.5.content': 'Each winner will be awarded a certificate and a prize money.',
-    'sub.studentAward.6.label': 'Award Ceremony',
-    'sub.studentAward.6.content':
-      'The selection results will be announced and prizes awarded at the closing ceremony. Winners must receive the prizes in person on site.',
-
-    'sub.posterAward.1.label': 'Eligibility',
-    'sub.posterAward.1.content':
-      'One of the authors of the paper must personally attend the designated poster presentation period and participate in research discussions on-site.',
-    'sub.posterAward.2.label': 'Selection',
-    'sub.posterAward.2.content': 'The best posters will be selected by the judging panel.',
-    'sub.posterAward.3.label': 'Quota',
-    'sub.posterAward.3.content': 'In principle, 3 posters.',
-    'sub.posterAward.4.label': 'Rewards',
-    'sub.posterAward.4.content': 'Each winner will be awarded a certificate and a prize money.',
-    'sub.posterAward.5.label': 'Award Ceremony',
-    'sub.posterAward.5.content':
-      'The selection results will be announced and prizes awarded at the closing ceremony. Winners must receive the prizes in person on site.',
-
-    'guide.rules.1':
-      'All first authors of submitted papers must complete registration and submission before the submission deadline (June 29, 23:59 Taiwan time).',
-    'guide.rules.2':
-      'The same first author can submit at most three manuscripts, but can only choose one of them to participate in the Student Paper Award.',
-    'guide.rules.3':
-      'The SG44 Paper Review Committee reserves the right to reject manuscripts, including but not limited to manuscripts not written in Chinese or English, not conforming to the theme or sub-topics of the call for papers, or failing to meet research quality standards.',
-    'guide.rules.4':
-      'The form of paper presentation (oral, poster) will be confirmed by the SG44 Paper Review Committee. The results of the submission review (including acceptance for oral presentation, acceptance for poster presentation, and non-acceptance) will be announced on July 10.',
-    'guide.rules.5':
-      'If there are any outstanding matters or other questions related to submission, please contact the conference email sg44@nccu.edu.tw.',
-
-    'guide.format.oral.abstract': 'Abstract',
-    'guide.format.oral.abstract.desc': 'Maximum 500 words, in Chinese or English.',
-    'guide.format.oral.full': 'Full Paper',
-    'guide.format.oral.full.desc':
-      '(Student Paper Award) Including Chinese and English abstracts, no limit on the number of pages, written in Chinese or English, Microsoft Word format, less than 25 MB.',
-    'guide.format.poster.desc.1':
-      'The poster board can accommodate a vertical "A0: 84.1 cm (W) × 118.9 cm (H)" poster. It is recommended to output in vertical A0 layout.',
-    'guide.format.poster.desc.2':
-      'Presenters should post their posters to the designated location by 10:00 on 8/20 (Thursday). Posting tools are available at the conference service desk.',
-    'guide.format.poster.desc.3':
-      'Poster presentation certificates will be issued by the conference during the designated presentation period.',
-    'guide.format.poster.desc.4':
-      'Poster presenters should complete the removal of posters by 16:00 on 8/21 (Friday). After that, the posters will be recycled by the organizer, and presenters cannot request to take them back.',
-
-    // --- 3S Rules ---
-    '3s.rules.1.title': 'I. Purpose',
-    '3s.rules.2.title': 'II. Eligibility',
-    '3s.rules.3.title': 'III. Registration Method',
-    '3s.rules.4.title': 'IV. Occasion & Location',
-    '3s.rules.5.title': 'V. Important Dates & Time',
-    '3s.rules.6.title': 'VI. Judges',
-    '3s.rules.7.title': 'VII. Competition Format',
-    '3s.rules.8.title': 'VIII. Judging Rules',
-    '3s.rules.9.title': 'IX. Rewards',
-    '3s.rules.10.title': 'X. Other Provisions',
-    '3s.rules.btn.go': 'Go to 3S Maker Registration',
-
-    '3s.rules.1.content':
-      'The "2026 3S Maker Competition" (hereinafter referred to as this competition), hosted by the Department of Land Economics, National Chengchi University, aims to encourage college students to combine theory and practice, use 3S technologies (GNSS, GIS, RS) for innovative research and development, and enhance cross-disciplinary integration and oral presentation skills.',
-    '3s.rules.2.content':
-      'Students (including graduate students) currently enrolled in domestic and foreign colleges and universities can register in groups of 1 to 5 people. Groups can cross departments and schools. Each group must have 1 advisor.',
-    '3s.rules.3.content':
-      'Please complete the reservation registration on the conference website before June 15, 2026, and upload the competition concept proposal (PDF format, maximum 10 pages) before June 29.',
-    '3s.rules.4.content':
-      'The competition will be held at the NCCU Main Campus concurrently with the SG44 conference.',
-    '3s.rules.5.content':
-      'Registration deadline: 6/15; Proposal upload deadline: 6/29; Finalist announcement: 7/10; Final date: 8/20.',
-    '3s.rules.6.content':
-      'Experts and scholars from industry, government, and academia are invited to serve as judges.',
-    '3s.rules.7.content':
-      'Two stages: (1) Preliminary: Document review; (2) Final: On-site oral presentation and work exhibition.',
-    '3s.rules.8.content':
-      'Innovation (30%), Technical Practice (30%), Application Value (20%), Oral Presentation (20%).',
-    '3s.rules.9.content':
-      'Champion: NT$10,000 and certificate; Runner-up: NT$5,000 and certificate; Third Place: NT$3,000 and certificate; Several Excellence Awards.',
-    '3s.rules.10.content':
-      'Registering for the competition is deemed as agreeing to the provisions of this competition. The organizer reserves the right to amend, adjust, suspend or terminate this competition at any time.',
-
-    // --- About ---
-    'about.motto': '── Smart Surveying × Resilient Future ──',
-    'about.history.title': 'I. Meeting Origin',
-    'about.theme.title': 'II. Conference Theme',
+    'agenda.day1.date': 'Aug. 20th (Thu)',
+    'agenda.day2.date': 'Aug. 21st (Fri)',
+    'agenda.time': 'Time',
+    'agenda.content': 'Content',
+    'agenda.registration': 'Registration & Info Desk',
+    'agenda.loc.lobby': 'Location: 1F Lobby',
+    'agenda.opening': 'Opening Ceremony',
+    'agenda.opening.desc': 'Introduction, Remarks, Organizer Report, Group Photo',
+    'agenda.loc.410': 'Location: Wang Wen-Jie Lecture Hall (Room 410)',
+    'agenda.signing': 'NSTC & Dept. of Land Administration Signing Ceremony',
+    'agenda.awards': 'Awards Ceremony',
+    'agenda.awards.desc': 'Sustainable Application of Spatial Info Award',
+    'agenda.intro.earth': 'Earth Science Center Intro',
+    'agenda.intro.earth.speaker': 'Speaker: Director Tso-Ren Wu',
+    'agenda.keynote': 'Keynote: FS-8 Second Gen Satellite Design',
+    'agenda.keynote.desc':
+      'Ultra-High Res Remote Sensing, On-board AI & Future of Smart Spatial Info',
+    'agenda.keynote.speaker': 'Speaker: Director Hsiao-Ching Liu',
+    'agenda.lunch': 'Lunch & Networking',
+    'agenda.loc.lunch': 'Location: College of Law Open Dining Areas',
+    'agenda.sessions1': 'Parallel Sessions & Poster Sessions',
+    'agenda.sessions1.desc':
+      'Topics: National Land Policy, Geodesy, Digital City, Satellite Tech, Marine Mapping',
+    'agenda.loc.sessions': 'Location: Session Rooms & Poster Area',
+    'agenda.break': 'Exhibition & Coffee Break',
+    'agenda.sessions2': 'Parallel Sessions & Poster Sessions',
+    'agenda.sessions2.desc':
+      'Topics: Geodesy, Environmental Sustainability, Resilient Disaster Prevention, Satellite Tech',
+    'agenda.banquet': 'Conference Banquet',
+    'agenda.loc.banquet': 'Location: Siwei Hall',
+    'agenda.society': 'Society Activities',
+    'agenda.society.desc': 'Board Meetings of ASPRS & TCSS',
+    'agenda.loc.405': 'Location: Room 405',
+    'agenda.sessions3': 'Parallel Sessions',
+    'agenda.sessions3.desc':
+      'Topics: Spatial Info & AI, Digital City, LiDAR Tech, Remote Sensing & UAV Applications',
+    'agenda.loc.classrooms': 'Location: Session Rooms',
+    'agenda.loc.poster': 'Location: Poster Area',
+    'agenda.3s': '3S Maker Competition',
+    'agenda.3s.desc': 'Stage 2 Public Competition & Works Exhibition',
+    'agenda.loc.414': 'Location: Room 414',
+    'agenda.general': 'General Assembly',
+    'agenda.general.desc': 'ASPRS 22nd 4th Assembly / TCSS 12th 2nd Assembly',
+    'agenda.closing': 'Closing Ceremony',
+    'agenda.closing.desc':
+      '3S Maker Awards, Poster Awards, Student Paper Awards, Handover Ceremony',
+    'agenda.sessions1.desc2':
+      'Topics: Smart Tech & Cross-domain Apps, Mobile Mapping & Indoor Positioning',
+    'agenda.sessions2.desc2':
+      'Topics: NLSC Results, Dept. of Land Admin. Gravity Survey, Photogrammetry & Surveying Mgt., Satellite Tech',
+    'agenda.sessions3.desc2':
+      'Topics: Smart Tech & Cross-domain Apps, Unmanned Vehicles & Disaster Investigation',
+    'agenda.day2.morning': 'NSTC Discipline Results, Parallel Sessions, & 3S Maker Competition',
+    'agenda.closing.title': 'Awards & Closing Ceremony',
+    'agenda.lunch.time': 'Lunch & Networking',
+    'agenda.view.full': 'View Full Detailed Schedule',
   },
 }
 

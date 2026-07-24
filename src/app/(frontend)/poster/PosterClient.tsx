@@ -1,6 +1,7 @@
 'use client'
 
 import SectionTitle from '@/components/ui/SectionTitle'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 import React, { useState } from 'react'
 import { Search, X } from 'lucide-react'
@@ -282,6 +283,7 @@ const POSTERS = [
 ]
 
 export function PosterClient({ abstracts }: PosterClientProps) {
+  const { t } = useLanguage()
   const [selectedTopic, setSelectedTopic] = useState<string>('all')
   const [searchQuery, setSearchQuery] = useState<string>('')
 

@@ -23,7 +23,7 @@ const ContactPage = () => {
       <main className="max-w-4xl mx-auto px-6 sm:px-10 py-20">
         {/* Title Section */}
         <div className="mb-16">
-          <SectionTitle title={t('page.contact.title')} subtitle={t('page.contact.subtitle')} />
+          <SectionTitle title="聯絡資訊" subtitle="Contact" />
         </div>
 
         {/* Content Body */}

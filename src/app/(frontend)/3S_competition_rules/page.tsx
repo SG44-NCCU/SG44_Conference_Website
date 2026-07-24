@@ -13,7 +13,7 @@ export default function CompetitionRulesPage() {
       <main className="max-w-5xl mx-auto px-6 sm:px-10 py-20">
         {/* Title */}
         <div className="mb-16">
-          <SectionTitle title={t('page.3s-rules.title')} subtitle={t('page.3s-rules.subtitle')} />
+          <SectionTitle title="3S 創客競賽" subtitle="3S Maker Competition Rules" />
         </div>
 
         {/* Body */}
