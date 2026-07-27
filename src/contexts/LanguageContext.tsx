@@ -483,7 +483,7 @@ const translations: Record<Language, Record<string, string>> = {
     'agenda.lunch': '午餐及交流時間',
     'agenda.loc.lunch': '地點：法學院各開放用餐區',
     'agenda.sessions1': '分組論文發表、海報發表',
-    'agenda.sessions1.desc': '主題包含：國土政策、大地測量、數位城市、衛星科技與海洋測繪等',
+    'agenda.sessions1.desc': '主題包含：國土政策、大地測量、車載測繪與室內定位、衛星科技與海洋測繪等',
     'agenda.loc.sessions': '地點：各分組教室及海報展示區',
     'agenda.break': '廠商參觀、休息交流',
     'agenda.sessions2': '分組論文發表、海報發表',
@@ -505,7 +505,7 @@ const translations: Record<Language, Record<string, string>> = {
     'agenda.general.desc': '航測學會第廿二屆第四次大會 / 地籍測量學會第十二屆第二次大會',
     'agenda.closing': '閉幕典禮',
     'agenda.closing.desc': '3S創客競賽頒獎、海報發表獎頒獎、學生論文發表獎頒獎、交接儀式',
-    'agenda.sessions1.desc2': '主題包含：智慧科技與跨域應用、車載測繪與室內定位等',
+    'agenda.sessions1.desc2': '主題包含：智慧科技與跨域應用、數位城市等',
     'agenda.sessions2.desc2':
       '主題包含：國土測繪中心成果、地政司重力測量、攝影測量與測繪管理、衛星科技等',
     'agenda.sessions3.desc2': '主題包含：智慧科技與跨域應用、無人載具與災害調查等',
@@ -1010,7 +1010,7 @@ const translations: Record<Language, Record<string, string>> = {
     'agenda.loc.lunch': 'Location: College of Law Open Dining Areas',
     'agenda.sessions1': 'Parallel Sessions & Poster Sessions',
     'agenda.sessions1.desc':
-      'Topics: National Land Policy, Geodesy, Digital City, Satellite Tech, Marine Mapping',
+      'Topics: National Land Policy, Geodesy, Mobile Mapping & Indoor Positioning, Satellite Tech, Marine Mapping',
     'agenda.loc.sessions': 'Location: Session Rooms & Poster Area',
     'agenda.break': 'Exhibition & Coffee Break',
     'agenda.sessions2': 'Parallel Sessions & Poster Sessions',
@@ -1035,7 +1035,7 @@ const translations: Record<Language, Record<string, string>> = {
     'agenda.closing.desc':
       '3S Maker Awards, Poster Awards, Student Paper Awards, Handover Ceremony',
     'agenda.sessions1.desc2':
-      'Topics: Smart Tech & Cross-domain Apps, Mobile Mapping & Indoor Positioning',
+      'Topics: Smart Tech & Cross-domain Apps, Digital City',
     'agenda.sessions2.desc2':
       'Topics: NLSC Results, Dept. of Land Admin. Gravity Survey, Photogrammetry & Surveying Mgt., Satellite Tech',
     'agenda.sessions3.desc2':

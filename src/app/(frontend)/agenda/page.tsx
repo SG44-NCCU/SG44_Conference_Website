@@ -224,7 +224,7 @@ export default function AgendaPage() {
                   </tr>
 
                   <tr className="hover:bg-stone-50/50 transition-colors">
-                    <td className="py-4 px-6 font-medium whitespace-nowrap">13:00 - 14:30</td>
+                    <td className="py-4 px-6 font-medium whitespace-nowrap">13:00 - 14:15</td>
                     <td className="py-4 px-6 font-semibold text-stone-800">
                       {t('agenda.day2.morning')}
                       <div className="text-sm text-stone-500 font-normal mt-1">
@@ -237,7 +237,7 @@ export default function AgendaPage() {
                   </tr>
 
                   <tr className="hover:bg-stone-50/50 transition-colors">
-                    <td className="py-4 px-6 font-medium whitespace-nowrap">14:30 - 14:45</td>
+                    <td className="py-4 px-6 font-medium whitespace-nowrap">14:15 - 14:45</td>
                     <td className="py-4 px-6">
                       {t('agenda.break')}
                       <div className="text-sm text-stone-500 mt-1">{t('agenda.mixed.loc_lobby')}</div>
