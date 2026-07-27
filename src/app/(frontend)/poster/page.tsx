@@ -7,6 +7,8 @@ export const metadata = {
   description: 'SG44 研討會海報發表',
 }
 
+export const dynamic = 'force-dynamic'
+
 export default async function PosterPage() {
   const payload = await getPayload({ config })
 
