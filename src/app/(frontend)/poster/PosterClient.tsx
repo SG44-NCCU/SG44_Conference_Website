@@ -4,7 +4,7 @@ import SectionTitle from '@/components/ui/SectionTitle'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 import React, { useState } from 'react'
-import { Search, X } from 'lucide-react'
+import { Search, X, MapPin } from 'lucide-react'
 
 interface Author {
   name: string
@@ -63,7 +63,8 @@ export function PosterClient({ abstracts, posters }: PosterClientProps) {
 
       {/* Search and Topic Filters Container */}
       <div className="bg-white border border-stone-200 shadow-sm rounded-xl p-6 mb-10 space-y-6">
-        <div className="flex justify-center">
+        
+        <div className="flex flex-col md:flex-row justify-center items-center gap-4">
           <div className="relative w-full md:w-96">
             <Search
               className="absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400"
@@ -84,6 +85,11 @@ export function PosterClient({ abstracts, posters }: PosterClientProps) {
                 <X size={16} />
               </button>
             )}
+          </div>
+
+          <div className="flex items-center justify-center py-2.5 px-4 bg-[#4d4c9d]/5 rounded-lg border border-[#4d4c9d]/10 text-stone-700 text-sm gap-2 shrink-0">
+            <MapPin size={16} className="text-[#4d4c9d]" />
+            <span>發表地點：<strong className="font-semibold">信義講堂 (313教室)</strong></span>
           </div>
         </div>
 

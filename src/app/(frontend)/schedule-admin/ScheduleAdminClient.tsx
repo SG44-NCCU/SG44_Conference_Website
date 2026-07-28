@@ -82,7 +82,7 @@ const ROOMS = [
   { id: '415', name: '明達講堂', sub: '415教室' },
   { id: '416', name: '416教室', sub: '' },
   { id: '310', name: '310教室', sub: '' },
-  { id: '313', name: '313信義講堂', sub: '313教室' },
+  { id: '313', name: '信義講堂', sub: '313教室' },
   { id: '210', name: '芶壽生講堂', sub: '210教室' },
 ]
 
@@ -95,7 +95,7 @@ const getRoomFullName = (roomCode: string) => {
     '415': '明達講堂 (415教室)',
     '416': '416教室',
     '310': '310教室',
-    '313': '313信義講堂 (313教室)',
+    '313': '信義講堂 (313教室)',
     '210': '芶壽生講堂 (210教室)',
     '410': '王文杰講堂 (410教室)',
     'lobby': '一樓大廳',
@@ -179,11 +179,11 @@ const DAY1_SLOTS = [
 
 const DAY1_GRID: CellDef[][] = [
   [{ text: '報到及服務台', location: '一樓大廳', type: 'admin', isFullWidth: true }],
-  [{ text: '開幕典禮', sub: '貴賓介紹、貴賓致詞、主辦單位報告、全體大合照', location: '王文杰講堂 (410教室)', type: 'ceremony', isFullWidth: true }],
-  [{ text: '簽約儀式', location: '王文杰講堂 (410教室)', type: 'ceremony', isFullWidth: true }],
-  [{ text: '頒獎典禮', sub: '空間資訊永續應用獎', location: '王文杰講堂 (410教室)', type: 'ceremony', isFullWidth: true }],
-  [{ text: '地科中心介紹', sub: '主講人：吳祚任 主任', location: '王文杰講堂 (410教室)', type: 'plenary', isFullWidth: true }],
-  [{ text: '專題演講：福衛八號第二代衛星設計', sub: '主講人：劉小菁 處長 (TASA 國家太空中心)', location: '王文杰講堂 (410教室)', link: '/keynote', type: 'plenary', isFullWidth: true, clickable: true }],
+  [{ text: '開幕典禮', sub: '貴賓介紹、貴賓致詞、主辦單位報告、全體大合照。', location: '王文杰講堂 (410教室) / 富邦法學講堂 (105教室) 同步直播', type: 'ceremony', isFullWidth: true }],
+  [{ text: '簽約儀式', location: '王文杰講堂 (410教室) / 富邦法學講堂 (105教室) 同步直播', type: 'ceremony', isFullWidth: true }],
+  [{ text: '頒獎典禮', sub: '空間資訊永續應用獎。請「空間資訊永續應用獎」得獎者至王文杰講堂 (410教室) 參與受獎。', location: '王文杰講堂 (410教室) / 富邦法學講堂 (105教室) 同步直播', type: 'ceremony', isFullWidth: true }],
+  [{ text: '地科中心介紹', sub: '主講人：吳祚任 主任', location: '王文杰講堂 (410教室) / 富邦法學講堂 (105教室) 同步直播', type: 'plenary', isFullWidth: true }],
+  [{ text: '專題演講：福衛八號第二代衛星設計', sub: '主講人：劉小菁 處長 (TASA 國家太空中心)', location: '王文杰講堂 (410教室) / 富邦法學講堂 (105教室) 同步直播', link: '/keynote', type: 'plenary', isFullWidth: true, clickable: true }],
   [{ text: '午餐及交流時間', location: '法學院各開放用餐區', type: 'meal', spanCols: [0, 1, 2, 3, 4, 5, 6] }, { text: '各校代表會議', type: 'special' }],
   [
     baseLobby,
@@ -230,8 +230,8 @@ const DAY2_GRID: CellDef[][] = [
     baseLobby,
     { text: '11S.1 國土測繪中心成果發表（一）：大地基準、控制點、高程與地形圖成果', sub: '主持人：葉大綱', type: 'special-nlsc', clickable: true, dbFilter: { date: '2026-08-21', room: '105', startTime: '09:00' } },
     { text: '10S.1 地政司重力測量論文發表（一）：重力基準、儀器精度與垂直基準', sub: '主持人：黃金維', type: 'special-land', clickable: true, dbFilter: { date: '2026-08-21', room: '106', startTime: '09:00' } },
-    { text: '04S.1 攝影測量與測繪管理（一）：三維重建、3DGS、多源點雲與相機率定', sub: '主持人：朱洪杰', type: 'academic', topic: 4, clickable: true, dbFilter: { date: '2026-08-21', room: '415', startTime: '09:00' } },
-    { text: '08S.3 衛星科技與海洋測繪（三）：植被生態、森林碳儲量與光譜監測', sub: '主持人：張智安', type: 'academic', topic: 8, clickable: true, dbFilter: { date: '2026-08-21', room: '416', startTime: '09:00' } },
+    { text: '04S.1 攝影測量與測繪管理（一）：三維重建、3DGS、多源點雲與相機率定', sub: '主持人：朱宏杰', type: 'academic', topic: 4, clickable: true, dbFilter: { date: '2026-08-21', room: '415', startTime: '09:00' } },
+    { text: '08S.3 衛星科技與海洋測繪（三）：植被生態、森林碳儲量與光譜監測', sub: '主持人：郭重言', type: 'academic', topic: 8, clickable: true, dbFilter: { date: '2026-08-21', room: '416', startTime: '09:00' } },
     maker310_D2,
     null,
     null,
@@ -269,7 +269,7 @@ const DAY2_GRID: CellDef[][] = [
     null,
     meeting210,
   ],
-  [{ text: '頒獎與閉幕', location: '王文杰講堂 (410教室)', type: 'ceremony', isFullWidth: true }],
+  [{ text: '頒獎與閉幕', sub: '請「學生論文獎」、「海報發表獎」及「3S創客競賽」之參賽者至王文杰講堂 (410教室) 參與頒獎與閉幕典禮。', location: '王文杰講堂 (410教室) / 富邦法學講堂 (105教室) 同步直播', type: 'ceremony', isFullWidth: true }],
 ]
 
 function computeSpans(grid: CellDef[][]): ProcessedCell[][] {
