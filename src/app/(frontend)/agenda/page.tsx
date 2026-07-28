@@ -49,7 +49,7 @@ export default function AgendaPage() {
                         {t('agenda.opening.desc')}
                       </div>
                       <div className="text-sm text-stone-500 font-normal mt-1">
-                        {t('agenda.loc.410')} / 富邦法學講堂 (105教室) 同步直播
+                        {t('agenda.loc.410_105')}
                       </div>
                     </td>
                   </tr>
@@ -58,9 +58,7 @@ export default function AgendaPage() {
                     <td className="py-4 px-6 font-medium whitespace-nowrap">10:30 - 10:40</td>
                     <td className="py-4 px-6">
                       {t('agenda.signing')}
-                      <div className="text-sm text-stone-500 mt-1">
-                        {t('agenda.loc.410')} / 富邦法學講堂 (105教室) 同步直播
-                      </div>
+                      <div className="text-sm text-stone-500 mt-1">{t('agenda.loc.410_105')}</div>
                     </td>
                   </tr>
 
@@ -68,13 +66,8 @@ export default function AgendaPage() {
                     <td className="py-4 px-6 font-medium whitespace-nowrap">10:40 - 11:00</td>
                     <td className="py-4 px-6">
                       {t('agenda.awards')}
-                      <div className="text-sm text-stone-500 mt-1">
-                        頒發空間資訊永續應用獎。請「空間資訊永續應用獎」得獎者至王文杰講堂 (410教室)
-                        參與受獎。
-                      </div>
-                      <div className="text-sm text-stone-500 mt-1">
-                        {t('agenda.loc.410')} / 富邦法學講堂 (105教室) 同步直播
-                      </div>
+                      <div className="text-sm text-stone-500 mt-1">{t('agenda.awards.desc2')}</div>
+                      <div className="text-sm text-stone-500 mt-1">{t('agenda.loc.410_105')}</div>
                     </td>
                   </tr>
 
@@ -86,7 +79,7 @@ export default function AgendaPage() {
                         {t('agenda.intro.earth.speaker')}
                       </div>
                       <div className="text-sm text-stone-500 font-normal mt-1">
-                        {t('agenda.loc.410')} / 富邦法學講堂 (105教室) 同步直播
+                        {t('agenda.loc.410_105')}
                       </div>
                     </td>
                   </tr>
@@ -104,7 +97,7 @@ export default function AgendaPage() {
                         {t('agenda.keynote.speaker')}
                       </div>
                       <div className="text-sm text-stone-500 font-normal mt-1">
-                        {t('agenda.loc.410')} / 富邦法學講堂 (105教室) 同步直播
+                        {t('agenda.loc.410_105')}
                       </div>
                     </td>
                   </tr>
@@ -277,11 +270,10 @@ export default function AgendaPage() {
                     <td className="py-4 px-6 font-semibold text-[#4d4c9d]">
                       {t('agenda.closing.title')}
                       <div className="text-sm text-stone-500 font-normal mt-1">
-                        請「學生論文獎」、「海報發表獎」及「3S創客競賽」之參賽者至王文杰講堂
-                        (410教室) 參與頒獎與閉幕典禮。
+                        {t('agenda.closing.desc2')}
                       </div>
                       <div className="text-sm text-stone-500 font-normal mt-1">
-                        {t('agenda.loc.410')} / 富邦法學講堂 (105教室) 同步直播
+                        {t('agenda.loc.410_105')}
                       </div>
                     </td>
                   </tr>
