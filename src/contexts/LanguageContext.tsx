@@ -476,7 +476,8 @@ const translations: Record<Language, Record<string, string>> = {
     'agenda.signing': '國科會自然處與地政司簽約儀式',
     'agenda.awards': '頒獎典禮',
     'agenda.awards.desc': '空間資訊永續應用獎',
-    'agenda.awards.desc2': '頒發空間資訊永續應用獎。請「空間資訊永續應用獎」得獎者至王文杰講堂 (410教室) 參與受獎。',
+    'agenda.awards.desc2':
+      '頒發「測量及空間資訊傑出研究獎」以及「空間資訊永續應用獎」。請「測量及空間資訊傑出研究獎」以及「空間資訊永續應用獎」得獎者至王文杰講堂 (410教室) 參與受獎。',
     'agenda.intro.earth': '地科中心介紹',
     'agenda.intro.earth.speaker': '主講人：吳祚任 主任',
     'agenda.keynote': '專題演講：福衛八號第二代衛星設計',
@@ -485,7 +486,8 @@ const translations: Record<Language, Record<string, string>> = {
     'agenda.lunch': '午餐及交流時間',
     'agenda.loc.lunch': '地點：法學院各開放用餐區',
     'agenda.sessions1': '分組論文發表、海報發表',
-    'agenda.sessions1.desc': '主題包含：國土政策、大地測量、車載測繪與室內定位、衛星科技與海洋測繪等',
+    'agenda.sessions1.desc':
+      '主題包含：國土政策、大地測量、車載測繪與室內定位、衛星科技與海洋測繪等',
     'agenda.loc.sessions': '地點：各分組教室及海報展示區',
     'agenda.break': '廠商參觀、休息交流',
     'agenda.sessions2': '分組論文發表、海報發表',
@@ -507,7 +509,8 @@ const translations: Record<Language, Record<string, string>> = {
     'agenda.general.desc': '航測學會第廿二屆第四次大會 / 地籍測量學會第十二屆第二次大會',
     'agenda.closing': '閉幕典禮',
     'agenda.closing.desc': '3S創客競賽頒獎、海報發表獎頒獎、學生論文發表獎頒獎、交接儀式',
-    'agenda.closing.desc2': '請「學生論文獎」、「海報發表獎」及「3S創客競賽」之參賽者至王文杰講堂 (410教室) 參與頒獎與閉幕典禮。',
+    'agenda.closing.desc2':
+      '請「學生論文獎」、「海報發表獎」及「3S創客競賽」之參賽者至王文杰講堂 (410教室) 參與頒獎與閉幕典禮。',
     'agenda.sessions1.desc2': '主題包含：智慧科技與跨域應用、數位城市等',
     'agenda.sessions2.desc2':
       '主題包含：國土測繪中心成果、地政司重力測量、攝影測量與測繪管理、衛星科技等',
@@ -1000,11 +1003,13 @@ const translations: Record<Language, Record<string, string>> = {
     'agenda.opening': 'Opening Ceremony',
     'agenda.opening.desc': 'Introduction, Remarks, Organizer Report, Group Photo',
     'agenda.loc.410': 'Location: Wang Wen-Jie Lecture Hall (Room 410)',
-    'agenda.loc.410_105': 'Location: Wang Wen-Jie Lecture Hall (Room 410) / Fubon Law Lecture Hall (Room 105) Live Broadcast',
+    'agenda.loc.410_105':
+      'Location: Wang Wen-Jie Lecture Hall (Room 410) / Fubon Law Lecture Hall (Room 105) Live Broadcast',
     'agenda.signing': 'NSTC & Dept. of Land Administration Signing Ceremony',
     'agenda.awards': 'Awards Ceremony',
     'agenda.awards.desc': 'Sustainable Application of Spatial Info Award',
-    'agenda.awards.desc2': 'Sustainable Application of Spatial Info Award. Winners please proceed to Wang Wen-Jie Lecture Hall (Room 410) to receive your award.',
+    'agenda.awards.desc2':
+      'Sustainable Application of Spatial Info Award. Winners please proceed to Wang Wen-Jie Lecture Hall (Room 410) to receive your award.',
     'agenda.intro.earth': 'Earth Science Center Intro',
     'agenda.intro.earth.speaker': 'Speaker: Director Tso-Ren Wu',
     'agenda.keynote': 'Keynote: FS-8 Second Gen Satellite Design',
@@ -1041,8 +1046,7 @@ const translations: Record<Language, Record<string, string>> = {
       '3S Maker Awards, Poster Awards, Student Paper Awards, Handover Ceremony',
     'agenda.closing.desc2':
       'Participants of "Student Paper Award", "Poster Presentation Award" and "3S Maker Competition" please proceed to Wang Wen-Jie Lecture Hall (Room 410) for the awards and closing ceremony.',
-    'agenda.sessions1.desc2':
-      'Topics: Smart Tech & Cross-domain Apps, Digital City',
+    'agenda.sessions1.desc2': 'Topics: Smart Tech & Cross-domain Apps, Digital City',
     'agenda.sessions2.desc2':
       'Topics: NLSC Results, Dept. of Land Admin. Gravity Survey, Photogrammetry & Surveying Mgt., Satellite Tech',
     'agenda.sessions3.desc2':

@@ -134,6 +134,11 @@ const SPONSOR_GROUPS = [
             url: 'https://www.gsroc.org.tw/',
           },
           {
+            name: '中華民國航空測量及遙感探測學會',
+            logo: '/sponsors_logo/中華民國航空測量及遙感探測學會.png',
+            url: 'https://www.csprs.org.tw/',
+          },
+          {
             name: '中國測量工程學會',
             logo: '/sponsors_logo/中國測量工程學會.png',
             url: 'https://www.survey.org.tw/',
