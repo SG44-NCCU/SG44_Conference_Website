@@ -145,7 +145,7 @@ const SPONSOR_GROUPS = [
           },
           {
             name: '台北市測量技師公會',
-            logo: '',
+            logo: '/sponsors_logo/台北市測量技師公會.jpg',
             url: '#',
           },
         ],
@@ -177,9 +177,24 @@ const SPONSOR_GROUPS = [
         url: 'https://www.idtech.com.tw/',
       },
       {
+        name: '天思數位科技股份有限公司',
+        logo: '/sponsors_logo/天思數位科技股份有限公司.png',
+        url: 'https://www.geosense.tw/tw',
+      },
+      {
         name: '台灣世曦工程顧問股份有公司',
         logo: '/sponsors_logo/台灣世曦工程顧問股份有公司.png',
         url: 'https://www.ceci.com.tw/',
+      },
+      {
+        name: '台灣海克斯康測量儀器股份有限公司',
+        logo: '/sponsors_logo/台灣海克斯康測量儀器股份有限公司.png',
+        url: 'https://hexagon.com/company/divisions/geosystems',
+      },
+      {
+        name: '台灣儀器行股份有限公司',
+        logo: '/sponsors_logo/台灣儀器行股份有限公司.jpg',
+        url: 'https://www.ticgroup.com.tw/',
       },
       {
         name: '自強工程顧問有限公司',
