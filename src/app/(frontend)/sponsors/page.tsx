@@ -182,7 +182,7 @@ const SPONSOR_GROUPS = [
         url: 'https://www.geosense.tw/tw',
       },
       {
-        name: '台灣世曦工程顧問股份有公司',
+        name: '台灣世曦工程顧問股份有限公司',
         logo: '/sponsors_logo/台灣世曦工程顧問股份有公司.png',
         url: 'https://www.ceci.com.tw/',
       },
