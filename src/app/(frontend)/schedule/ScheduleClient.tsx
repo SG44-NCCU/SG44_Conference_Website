@@ -173,11 +173,12 @@ const maker310_D2_Afternoon: CellDef = {
   rowSpan: 3,
 }
 
-const landSeaMeeting210_D2: CellDef = {
-  text: '地政司海域專家學者會議\n(14:00–16:00)',
-  type: 'special',
-  rowSpan: 3,
-}
+// 調皮喔，偷偷來(來自東方神秘力量的制裁)
+// const landSeaMeeting210_D2: CellDef = {
+//   text: '地政司海域專家學者會議\n(14:00–16:00)',
+//   type: 'special',
+//   rowSpan: 3,
+// }
 
 const nstcSession1Projects = [
   { presenter: '任玄', title: '結合超解析與海洋參數改進人工智慧水深估計演算法' },
@@ -348,7 +349,8 @@ const POSTERS = [
   {
     id: 'P-023',
     topic: '7. 環境永續與韌性防災',
-    title: '雲林土庫地層下陷之多元監測與數值模擬/2026（五）：結合 InSAR 與 PLAXIS 進行雲林土庫地區地表變形初步分析',
+    title:
+      '雲林土庫地層下陷之多元監測與數值模擬/2026（五）：結合 InSAR 與 PLAXIS 進行雲林土庫地區地表變形初步分析',
     author: '李為庠',
   },
   {
@@ -710,7 +712,9 @@ const DAY2_GRID: CellDef[][] = [
     null,
     maker310_D2_Afternoon,
     null,
-    landSeaMeeting210_D2,
+    //在皮阿:)
+    // landSeaMeeting210_D2,
+    null,
   ],
   [
     {
