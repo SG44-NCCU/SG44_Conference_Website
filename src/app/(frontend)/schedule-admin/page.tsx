@@ -1,6 +1,10 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { ScheduleAdminClient } from './ScheduleAdminClient'
+
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 import { redirect } from 'next/navigation'
 import { headers } from 'next/headers'
 

@@ -2,6 +2,9 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import { ScheduleClient } from './ScheduleClient'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export const metadata = {
   title: '大會細部議程 Detailed Schedule | SG44',
   description: 'SG44 研討會細部議程',

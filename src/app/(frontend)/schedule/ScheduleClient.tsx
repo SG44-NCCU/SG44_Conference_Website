@@ -427,6 +427,12 @@ const POSTERS = [
     title: '韌性國土導向之地下空間地質探勘資料智慧治理架構初探',
     author: '謝亞璇',
   },
+  {
+    id: 'P-036',
+    topic: '4. 攝影測量與測繪管理',
+    title: '高光譜影像大氣改正方法之比較與分析',
+    author: '徐百輝',
+  },
 ]
 
 const DAY1_SLOTS = [

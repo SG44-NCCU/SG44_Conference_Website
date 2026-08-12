@@ -2,6 +2,9 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import { SessionsClient } from './SessionsClient'
 
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
 export const metadata = {
   title: '分組論文發表 Parallel Sessions | SG44',
   description: 'SG44 研討會分組論文發表',
