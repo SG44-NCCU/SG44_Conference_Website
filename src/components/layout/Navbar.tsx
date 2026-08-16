@@ -81,7 +81,10 @@ const NAV_ITEM_DEFS = [
   {
     nameKey: 'nav.3s',
     href: '/3S_competition_rules',
-    items: [{ nameKey: 'nav.3s.rules', href: '/3S_competition_rules' }],
+    items: [
+      { nameKey: 'nav.3s.rules', href: '/3S_competition_rules' },
+      { nameKey: 'nav.3s.agenda', href: '/3S_competition_agenda' },
+    ],
   },
 ]
 

@@ -61,6 +61,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.about.contact': '聯絡我們',
     'nav.3s': '3S創客競賽',
     'nav.3s.rules': '競賽細則',
+    'nav.3s.agenda': '競賽議程',
     // Page Titles
     'hero.info.name': '會議名稱',
     'hero.info.date': '會議時間',
@@ -571,6 +572,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.about.contact': 'Contact Us',
     'nav.3s': '3S Maker',
     'nav.3s.rules': 'Competition Rules',
+    'nav.3s.agenda': 'Competition Agenda',
     // Page Titles
     'hero.info.name': 'Conference',
     'hero.info.date': 'Date',
