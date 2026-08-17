@@ -155,7 +155,7 @@ const SPONSOR_GROUPS = [
           },
           {
             name: '國立中央大學太空及遙測研究中心',
-            logo: '/sponsors_logo/中華民國政治大學地政學系系友會.png',
+            logo: '/sponsors_logo/國立中央大學太空及遙測研究中心.png',
             url: 'https://www.csrsr.ncu.edu.tw/',
           },
         ],
