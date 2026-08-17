@@ -130,7 +130,7 @@ const SPONSOR_GROUPS = [
           },
           {
             name: '中華民國政治大學地政學系系友會',
-            logo: '/sponsors_logo/中華民國政治大學地政學系系友會.jpg',
+            logo: '/sponsors_logo/中華民國政治大學地政學系系友會.png',
             url: 'https://www.facebook.com/p/%E4%B8%AD%E8%8F%AF%E6%B0%91%E5%9C%8B%E6%94%BF%E6%B2%BB%E5%A4%A7%E5%AD%B8%E5%9C%B0%E6%94%BF%E5%AD%B8%E7%B3%BB%E7%B3%BB%E5%8F%8B%E6%9C%83-100086676290593/',
           },
           {
@@ -152,6 +152,11 @@ const SPONSOR_GROUPS = [
             name: '台北市測量技師公會',
             logo: '/sponsors_logo/台北市測量技師公會.jpg',
             url: '#',
+          },
+          {
+            name: '國立中央大學太空及遙測研究中心',
+            logo: '/sponsors_logo/中華民國政治大學地政學系系友會.png',
+            url: 'https://www.csrsr.ncu.edu.tw/',
           },
         ],
       },
