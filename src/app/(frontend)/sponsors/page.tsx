@@ -232,6 +232,11 @@ const SPONSOR_GROUPS = [
         url: 'https://www.linkfast.com.tw/',
       },
       {
+        name: '英宇工程顧問有限公司',
+        logo: '/sponsors_logo/英宇工程顧問有限公司.png',
+        url: 'https://www.facebook.com/p/%E8%8B%B1%E5%AE%87%E5%B7%A5%E7%A8%8B%E9%A1%A7%E5%95%8F%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8-100054251661812/',
+      },
+      {
         name: '祐鴻空間資訊有限公司',
         logo: '/sponsors_logo/祐鴻空間資訊有限公司.png',
         url: 'https://portaly.cc/YH_G_S',
